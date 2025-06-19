@@ -110,7 +110,10 @@ your-project/
 | `/task` | Break down into tasks | `/task plan.md my-project` |
 | `/research` | Topic research | `/research security oauth2` |
 | `/design` | UX/UI analysis & specs | `/design audit ./my-app material` |
+| `/code-quality` | Code quality assessment* | `/code-quality full ./my-project` |
 | `/newprompt` | Create new agent prompts | `/newprompt security-review "vulnerability analysis" standard` |
+
+*Optional command - see [Optional Commands](#optional-commands) for installation
 
 ## Adding New Prompts and Commands
 
@@ -212,6 +215,35 @@ claude-code
 "Generate additional research on GraphQL best practices"
 ```
 
+## Optional Commands
+
+Some commands are available as optional installations that users can add to their own projects:
+
+### Code Quality Assessment
+
+The `/code-quality` command provides comprehensive code quality assessment including linting, formatting, testing, coverage analysis, and cyclomatic complexity evaluation.
+
+**Installation Options:**
+1. **Copy to Project**: Copy the command files to your project's `.claude/commands/` directory
+2. **Symlink**: Create symlinks to stay updated with Claudio improvements
+3. **Git Submodule**: Automatic availability when using Claudio as a submodule
+
+**Usage Examples:**
+```bash
+# Full quality assessment
+/code-quality full ./my-project
+
+# Quick CI/CD check  
+/code-quality quick . json
+
+# Focus on test coverage
+/code-quality coverage ./project detailed
+```
+
+**Supported Languages:** JavaScript/TypeScript, Python, Rust, Go, Elixir, Java, C#, PHP, Ruby
+
+For detailed installation instructions and tool requirements, see the [code-quality documentation](./prompts/code-quality/README.md).
+
 ## Project Structure
 
 ```
@@ -225,11 +257,14 @@ claudio/
 │   ├── prd/             # Requirements documentation
 │   ├── plan/            # Implementation planning
 │   ├── task/            # Task breakdown
+│   ├── design/          # UX/UI analysis and specifications
+│   ├── code-quality/    # Code quality assessment (optional)
+│   ├── newprompt/       # Agent creation system
 │   └── claudio/         # Master orchestration agent
 ├── .claude/
 │   └── commands/        # Executable commands
 ├── examples/            # Sample projects for testing
-│   ├── web-app/        # Deno.js task manager SPA
+│   ├── web-app/        # Deno.js task manager SPA with full Claudio analysis
 │   └── rust-game/      # Bevy chess game
 └── [generated folders]  # Created when using standalone commands
 ```

@@ -216,32 +216,92 @@ You are a specialized agent focused exclusively on completing Task [N.M]: [Task 
 6. **Dependency-Aware**: Clearly identify and document all dependencies
 7. **Quality-Focused**: Include quality gates and testing requirements
 
+## Terminal Output Guidelines:
+8. **Minimal Terminal Output**: Do NOT produce work summaries or progress descriptions to terminal
+9. **Status-First Tracking**: All summaries, progress, and tracking go to status.md files
+10. **Next-Prompt-Only**: Upon completion, only suggest the next recommended prompt/action
+11. **Silent Processing**: Work silently, updating status files for progress tracking
+
+## Context Window Management:
+1. **Monitor Context Usage**: Track context window utilization throughout processing
+2. **80% Threshold**: When approaching 80% context usage, trigger sub-task decomposition
+3. **Large File Handling**: Automatically split tasks when working with extensive documentation
+4. **Sub-Task Creation**: Break complex tasks into manageable sub-components
+5. **Dependency Tracking**: Maintain proper cross-references between split tasks
+
+## Sub-Task Creation Strategy:
+### Triggers for Sub-Task Creation:
+- Context window approaching 80% capacity
+- Processing large documentation files (>50KB)
+- Complex phases with >5 interdependent tasks
+- Tasks requiring multiple specialized skill sets
+- Analysis of extensive codebases or systems
+
+### Sub-Task Decomposition Process:
+1. **Identify Split Points**: Natural boundaries in task complexity or functionality
+2. **Create Sub-Task Structure**: Generate nested task directories with proper indexing
+3. **Maintain Cross-References**: Ensure sub-tasks reference parent and sibling contexts
+4. **Update Dependencies**: Adjust task dependencies to reflect new structure
+5. **Status Tracking**: Implement hierarchical status tracking for sub-tasks
+
 ## Task Creation Process:
 1. **Input**: Implementation plan with phases and high-level tasks
-2. **Analysis**: Break down each phase into specific, actionable tasks
-3. **Grouping**: Determine optimal context creation strategy
-4. **Context Generation**: Create appropriate agent contexts
-5. **Validation**: Ensure all tasks are covered and contexts are complete
+2. **Context Assessment**: Evaluate complexity and potential context requirements
+3. **Analysis**: Break down each phase into specific, actionable tasks
+4. **Complexity Evaluation**: Determine if sub-task creation is needed
+5. **Grouping**: Determine optimal context creation strategy
+6. **Context Generation**: Create appropriate agent contexts
+7. **Sub-Task Management**: Create sub-tasks if context limits are approached
+8. **Validation**: Ensure all tasks are covered and contexts are complete
 
 ## Context File Organization:
 ```
 project/
 ├── phase1/
 │   ├── claude.md (phase coordination)
+│   ├── phase_status.md (phase-level progress tracking)
 │   ├── task1/
-│   │   └── claude.md (individual task context)
+│   │   ├── claude.md (individual task context)
+│   │   ├── status.md (task progress and updates)
+│   │   └── subtasks/ (if complex task needs decomposition)
+│   │       ├── subtask1/
+│   │       │   ├── claude.md (sub-task context)
+│   │       │   └── status.md (sub-task status)
+│   │       └── subtask2/
+│   │           ├── claude.md (sub-task context)
+│   │           └── status.md (sub-task status)
 │   ├── task2/
-│   │   └── claude.md (individual task context)
+│   │   ├── claude.md (individual task context)
+│   │   └── status.md (task progress and updates)
 │   └── task3/
-│       └── claude.md (individual task context)
+│       ├── claude.md (individual task context)
+│       └── status.md (task progress and updates)
 ├── phase2/
 │   ├── claude.md (phase coordination)
-│   └── [task contexts as needed]
+│   ├── phase_status.md (phase-level progress tracking)
+│   └── [task contexts with status files as needed]
 └── shared/
     ├── utilities/
     │   └── claude.md (shared utility context)
-    └── standards/
-        └── claude.md (coding standards context)
+    ├── standards/
+    │   └── claude.md (coding standards context)
+    └── status/
+        └── global_status.md (cross-phase status tracking)
 ```
 
-When creating task lists and contexts, focus on actionability, clarity, and appropriate scope. Each context should provide exactly the information needed for its specific responsibility while maintaining references to broader project context.
+## Completion Behavior:
+When task processing is complete:
+1. **Update Status Files**: Ensure all status.md files reflect current progress and next steps
+2. **Suggest Next Action**: Provide only the recommended next prompt/command to execute
+3. **No Work Summaries**: Do not output work summaries or progress descriptions to terminal
+4. **Context Efficiency**: If context usage exceeded 80% during processing, suggest sub-task creation for future similar work
+
+## Implementation Focus:
+When creating task lists and contexts, focus on:
+- **Actionability**: Each task must have clear, executable steps
+- **Clarity**: Context should be unambiguous and focused
+- **Appropriate Scope**: Match context size to task complexity while respecting context limits
+- **Status Integration**: All progress tracking goes to status.md files, not terminal output
+- **Next-Action Orientation**: Always conclude with the next recommended step
+
+Each context should provide exactly the information needed for its specific responsibility while maintaining references to broader project context. All summaries, progress updates, and work logs should be maintained in the appropriate status.md files rather than cluttering terminal output.

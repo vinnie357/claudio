@@ -14,13 +14,26 @@ Claudio is a collection of specialized AI agent prompts and commands that work t
 
 ## Quick Start
 
-### Option 1: Clone and Use Directly
+### Analyzing External Projects (Recommended)
+To analyze code outside the Claudio directory:
+
 ```bash
+# 1. Clone Claudio
 git clone <this-repo>
 cd claudio
+
+# 2. Start Claude with directory access
+claude --add-dir /path/to/my-code
+# or with relative paths:
+claude --add-dir ../my-code
+
+# 3. Analyze the external project
+/claudio /path/to/my-code
 ```
 
-### Option 2: The Claudio Workflow (Recommended for Teams)
+**Why use --add-dir?** This flag allows Claude Code to access and analyze projects outside the Claudio directory while keeping Claudio's system files separate from your project code.
+
+### Option 2: The Claudio Workflow (Alternative for Teams)
 Add Claudio to your existing project as a git submodule:
 ```bash
 cd your-existing-project
@@ -31,7 +44,7 @@ git submodule update --init --recursive
 Then start Claude Code from the submodule directory:
 ```bash
 cd .claudio-system
-claude-code
+claude
 ```
 
 **The Claudio Workflow** allows you to:
@@ -39,24 +52,6 @@ claude-code
 - Share the same analysis system with your team
 - Version control your Claudio setup alongside your project
 - Maintain consistency in project analysis across your organization
-
-### 2. Start a Claude Code Session
-Start Claude Code from this directory to access all Claudio prompts and commands:
-```bash
-claude-code
-```
-
-### 3. Analyze Any Project
-Once in a Claude Code session, tell Claudio to analyze any project:
-
-```
-Please use claudio on /path/to/my-project
-```
-
-Or use the command directly:
-```
-/claudio ../my-react-app
-```
 
 This will create a comprehensive `.claudio/` folder in your target project with:
 - **Discovery Report**: Technology stack and capability analysis
@@ -68,10 +63,11 @@ This will create a comprehensive `.claudio/` folder in your target project with:
 ## How New Users Can Get Started
 
 ### For Project Analysis
-1. **Start Claude Code** from the claudio directory
-2. **Point to your project**: "Please use claudio on /my/existing/project"
-3. **Review the analysis**: Check the generated `.claudio/` folder
-4. **Begin implementation**: Follow the task breakdown and phase plan
+1. **Clone and setup**: `git clone <repo> && cd claudio`
+2. **Start Claude with access**: `claude --add-dir /path/to/your/project`
+3. **Analyze your project**: "/claudio /path/to/your/project"
+4. **Review the analysis**: Check the generated `.claudio/` folder in your project
+5. **Begin implementation**: Follow the task breakdown and phase plan
 
 ### For Individual Tasks
 Use specific commands for focused work:
@@ -98,6 +94,38 @@ your-project/
     └── phase1/, phase2/   # Task breakdown with contexts
 ```
 
+## Task Execution Model
+
+### How Task Contexts Work
+Claudio's task system has been designed for efficient, focused execution:
+
+**Task Context Focus**: Each task context (`.claudio/phase*/task*/claude.md`) is designed to produce the next recommended prompt or action as output, rather than work summaries.
+
+**Silent Processing**: Task agents work silently, updating status files for progress tracking instead of producing verbose terminal output.
+
+**Status-First Tracking**: All progress information, work summaries, and updates are maintained in dedicated status files:
+
+```
+project/.claudio/
+├── status.md                    # Project-level progress
+├── phase1/
+│   ├── phase_status.md         # Phase-level progress
+│   ├── task1/
+│   │   ├── claude.md           # Task context (produces next action)
+│   │   └── status.md           # Task progress and updates
+│   └── task2/
+│       ├── claude.md           # Task context (produces next action)
+│       └── status.md           # Task progress and updates
+└── shared/status/
+    └── global_status.md        # Cross-phase status tracking
+```
+
+### Finding Progress Information
+- **Current Task Status**: Check `phase*/task*/status.md` for detailed progress
+- **Phase Overview**: Review `phase*/phase_status.md` for phase-level progress  
+- **Project Status**: View `.claudio/status.md` for overall project tracking
+- **Next Actions**: Task contexts suggest the next recommended prompt to execute
+
 ## Available Commands
 
 | Command | Purpose | Example |
@@ -107,11 +135,13 @@ your-project/
 | `/documentation` | Generate docs | `/documentation api ./my-api` |
 | `/prd` | Create requirements | `/prd feature chat-system` |
 | `/plan` | Implementation planning | `/plan project app "12 weeks"` |
-| `/task` | Break down into tasks | `/task plan.md my-project` |
+| `/task` | Break down into tasks* | `/task plan.md my-project` |
 | `/research` | Topic research | `/research security oauth2` |
 | `/design` | UX/UI analysis & specs | `/design audit ./my-app material` |
 | `/code-quality` | Code quality assessment* | `/code-quality full ./my-project` |
 | `/newprompt` | Create new agent prompts | `/newprompt security-review "vulnerability analysis" standard` |
+
+*Task command creates contexts that produce next actions and tracks progress in status.md files
 
 *Optional command - see [Optional Commands](#optional-commands) for installation
 
@@ -193,12 +223,20 @@ To integrate with the main Claudio workflow, update `prompts/claudio/claude.md` 
 ## Simple Usage Examples
 
 ### Just Starting Out
-```
-# Start Claude Code from claudio directory
-claude-code
+```bash
+# 1. Clone Claudio
+git clone <this-repo>
+cd claudio
 
-# In Claude Code session:
-"Please analyze my React project at /Users/me/my-react-app using claudio"
+# 2. Start Claude with directory access
+claude --add-dir ../my-react-app
+# or with absolute paths:
+claude --add-dir /Users/me/my-react-app
+
+# 3. In Claude Code session:
+/claudio ../my-react-app
+# or:
+/claudio /Users/me/my-react-app
 ```
 
 ### Specific Analysis
@@ -210,7 +248,12 @@ claude-code
 
 ### Following Up
 ```
-"Check the progress on the tasks in /my-project/.claudio/"
+# Check progress via status files
+"Show me the current status from /my-project/.claudio/status.md"
+"What's the progress on phase 1 tasks?"
+
+# Execute next recommended actions
+"What does the task context suggest as the next step?"
 "Update the implementation plan to include the new requirements"
 "Generate additional research on GraphQL best practices"
 ```

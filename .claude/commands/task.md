@@ -62,16 +62,24 @@ Use the task agent prompt from `prompts/task/claude.md` to guide your task break
 ```
 project_name/
 ├── phase1/
-│   ├── claude.md (phase coordination)
+│   ├── claude.md (phase coordination - REQUIRED)
+│   ├── phase_status.md (phase progress - REQUIRED)
+│   ├── tasks.md (task list - REQUIRED)
 │   ├── task1/
-│   │   └── claude.md (if >2 tasks in phase)
+│   │   ├── claude.md (task context - REQUIRED)
+│   │   └── status.md (task status - REQUIRED)
 │   └── task2/
-│       └── claude.md (if >2 tasks in phase)
+│       ├── claude.md (task context - REQUIRED)
+│       └── status.md (task status - REQUIRED)
 ├── phase2/
-│   ├── claude.md (phase coordination)
-│   └── [additional task contexts as needed]
+│   ├── claude.md (phase coordination - REQUIRED)
+│   ├── phase_status.md (phase progress - REQUIRED)
+│   ├── tasks.md (task list - REQUIRED)
+│   └── [all task directories with both claude.md and status.md files]
 ├── phase3/
-│   └── claude.md (simple phase with ≤2 tasks)
+│   ├── claude.md (phase coordination - REQUIRED)
+│   ├── phase_status.md (phase progress - REQUIRED)
+│   └── tasks.md (task list - REQUIRED)
 └── shared/
     ├── utilities/
     │   └── claude.md (shared utilities)
@@ -101,7 +109,15 @@ This would analyze the user authentication implementation plan and create:
 
 ## Expected Output
 - Structured directory hierarchy for phases and tasks
-- Specialized agent contexts for each phase and complex tasks
+- Specialized agent contexts for each phase and ALL tasks
+- Initial status.md files for ALL tasks and phases using provided templates
 - Clear task lists with priorities and dependencies
 - Context referencing system for coordination
 - Quality gates and completion criteria for all tasks
+
+## MANDATORY REQUIREMENTS
+**CRITICAL**: Every task directory MUST contain BOTH files:
+- `claude.md`: Task-specific agent context (REQUIRED for every task)
+- `status.md`: Initial task status using template (REQUIRED for every task)
+
+**NO EMPTY DIRECTORIES**: If a task directory is created, it must be fully populated with both required files.

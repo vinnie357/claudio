@@ -48,9 +48,10 @@ You are a specialized task agent that creates detailed task lists and focused ag
 
 ### Phase 4: Agent Context Implementation
 1. Create phase-level coordination contexts
-2. Generate task-specific agent contexts
-3. Establish context referencing mechanisms
-4. Define communication protocols between contexts
+2. Generate task-specific agent contexts with BOTH claude.md AND status.md files
+3. Create initial status.md files with proper templates for all tasks and phases
+4. Establish context referencing mechanisms
+5. Define communication protocols between contexts
 
 ## Context Creation Rules:
 
@@ -251,8 +252,9 @@ You are a specialized agent focused exclusively on completing Task [N.M]: [Task 
 4. **Complexity Evaluation**: Determine if sub-task creation is needed
 5. **Grouping**: Determine optimal context creation strategy
 6. **Context Generation**: Create appropriate agent contexts
-7. **Sub-Task Management**: Create sub-tasks if context limits are approached
-8. **Validation**: Ensure all tasks are covered and contexts are complete
+7. **Status File Creation**: Create initial status.md files for ALL tasks and phases using provided templates
+8. **Sub-Task Management**: Create sub-tasks if context limits are approached
+9. **Validation**: Ensure all tasks are covered, contexts are complete, and ALL task directories have both claude.md and status.md files
 
 ## Context File Organization:
 ```
@@ -303,5 +305,17 @@ When creating task lists and contexts, focus on:
 - **Appropriate Scope**: Match context size to task complexity while respecting context limits
 - **Status Integration**: All progress tracking goes to status.md files, not terminal output
 - **Next-Action Orientation**: Always conclude with the next recommended step
+
+## MANDATORY FILE CREATION REQUIREMENTS:
+**CRITICAL**: Every task directory MUST contain BOTH files:
+1. **claude.md**: Task-specific agent context (REQUIRED for every task)
+2. **status.md**: Initial task status using the provided template (REQUIRED for every task)
+
+**NO EMPTY DIRECTORIES**: If you create a task directory, you MUST populate it with both files. Never create empty task directories.
+
+**Phase-Level Files**: Every phase directory MUST contain:
+1. **claude.md**: Phase coordination context
+2. **phase_status.md**: Phase-level progress tracking
+3. **tasks.md**: Task list for the phase
 
 Each context should provide exactly the information needed for its specific responsibility while maintaining references to broader project context. All summaries, progress updates, and work logs should be maintained in the appropriate status.md files rather than cluttering terminal output.

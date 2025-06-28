@@ -28,7 +28,7 @@ Use the implementation plan agent prompt from `prompts/plan/claude.md` to guide 
 4. Identify dependencies and critical path
 5. Allocate resources and define skill requirements
 6. Include risk assessment and mitigation strategies
-7. **Direct Command**: Save to `plan/documents/<project_name>_implementation_plan.md`
+7. **Direct Command**: Save to `<target_project>/.claudio/reports/<project_name>_implementation_plan.md`
 8. **Within Claudio**: Save to `<target_project>/.claudio/plan.md`
 
 ## Plan Types

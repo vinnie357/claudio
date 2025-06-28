@@ -28,7 +28,7 @@ Use the PRD agent prompt from `prompts/prd/claude.md` to guide your requirements
 4. Create detailed user stories with acceptance criteria
 5. Plan implementation phases and dependencies
 6. Include risk analysis and mitigation strategies
-7. **Direct Command**: Save to `prd/documents/<project_name>_prd.md`
+7. **Direct Command**: Save to `<target_project>/.claudio/reports/<project_name>_prd.md`
 8. **Within Claudio**: Save to `<target_project>/.claudio/prd.md`
 
 ## PRD Types

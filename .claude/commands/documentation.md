@@ -26,7 +26,7 @@ Use the documentation agent prompt from `prompts/documentation/claude.md` to gui
 3. Create appropriate documentation based on the specified type
 4. Include practical examples and code snippets
 5. Add troubleshooting sections where relevant
-6. **Direct Command**: Save to `docs/` directory with appropriate filename
+6. **Direct Command**: Save to `<project_path>/.claudio/docs/` directory with appropriate filename
 7. **Within Claudio**: Save to `<target_project>/.claudio/docs/` directory
 
 ## Documentation Types

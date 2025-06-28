@@ -23,7 +23,7 @@ Use the task agent prompt from `prompts/task/claude.md` to guide your task break
    - **Simple phases (≤2 tasks)**: Single `phase*/claude.md`
    - **Complex phases (>2 tasks)**: Phase context + individual task contexts
 5. Establish proper context referencing and dependencies
-6. **Direct Command**: Create directory structure in current working directory
+6. **Direct Command**: Create directory structure in plan file's project directory
 7. **Within Claudio**: Create structure in `<target_project>/.claudio/phases/`
 
 ## Context Creation Strategy

@@ -358,6 +358,21 @@ sugguest an ordered script to run these tests that would run during continuious 
 the readme should reflect that the example projects were all generated and are not live projects
 
 
+review the current readme, the usage and commands have changed, update the read me with the new patterns and features add a development section if not already present that makes reference to the test folder and its patterns 
+
+
+# test upgrade command
+
+/claudio:upgrade examples/web-app
+
+
+# ci allow tool uses
+
+review test/readme.md when in the ci workflow for the test script to not fail it needs to 
+have the `--dangerously-skip-permissions` flag set for its test tasks
+
+
+
 #
 # todo:
 #

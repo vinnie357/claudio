@@ -4,7 +4,22 @@ A comprehensive project analysis, planning, and implementation system for Claude
 
 ## What is Claudio?
 
-Claudio is a collection of specialized AI agent prompts and commands that work together to **discover, plan, and implement** project solutions. The default workflow combines **discovery and planning** into a unified process, with **implementation as an optional separate phase**. It orchestrates project analysis, requirements documentation, implementation planning, and optional task execution through intelligent agents.
+Claudio is a comprehensive project analysis system built on specialized AI agents that work together to **discover, plan, and implement** project solutions. The system uses an **agent-based architecture** where different specialized agents handle discovery, requirements, planning, documentation, security analysis, and implementation. The default workflow combines **discovery and planning** into a unified process, with **implementation as an optional separate phase**.
+
+## Agent-Based Architecture
+
+Claudio employs specialized AI agents that orchestrate different aspects of project analysis:
+
+- **Discovery Agent**: Analyzes project structure, technology stack, and existing capabilities
+- **PRD Agent**: Transforms discovery findings into clear business requirements and success criteria
+- **Planning Agent**: Creates phased implementation roadmaps with time estimates and dependencies
+- **Task Agent**: Breaks down plans into executable tasks with specialized execution contexts
+- **Documentation Agent**: Generates comprehensive documentation (README, API docs, user guides)
+- **Security Agent**: Performs STRIDE-based security analysis with visual threat modeling
+- **Research Agent**: Conducts topic-specific research and creates expert knowledge bases
+- **Implementation Agent**: Executes plans through coordinated task processing
+
+Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans.
 
 ## Requirements
 
@@ -137,11 +152,11 @@ your-project/
 ### How Task Contexts Work
 Claudio's task system has been designed for efficient, focused execution:
 
-**Task Context Focus**: Each task context (`.claudio/phase*/task*/claude.md`) is designed to produce the next recommended prompt or action as output, rather than work summaries.
+**Agent-Driven Task Execution**: Each task context (`.claudio/phase*/task*/claude.md`) contains specialized agent instructions that produce actionable next steps rather than work summaries.
 
-**Silent Processing**: Task agents work silently, updating status files for progress tracking instead of producing verbose terminal output.
+**Coordinated Processing**: Task agents work through the Task orchestrator system, updating status files for progress tracking while maintaining focused execution.
 
-**Status-First Tracking**: All progress information, work summaries, and updates are maintained in dedicated status files:
+**Comprehensive Status Tracking**: All progress information, work summaries, and coordination updates are maintained in dedicated status files that provide visibility across the entire project:
 
 ```
 project/.claudio/

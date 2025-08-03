@@ -4,7 +4,16 @@ A comprehensive project analysis, planning, and implementation system for Claude
 
 ## What is Claudio?
 
-Claudio is a comprehensive project analysis system built on specialized AI agents that work together to **discover, plan, and implement** project solutions through intelligent localization. The system uses an **agent-based architecture** where specialized agents are **automatically customized for each project** based on discovery analysis of technology stack, architecture patterns, and project requirements. In project/path installation modes, components are localized rather than directly copied, ensuring project-specific optimization. In user mode, generic templates are provided that perform localization when executed on target projects. The default workflow combines **discovery and planning** into a unified process, with **implementation as an optional separate phase**.
+Claudio is a comprehensive project analysis system built on specialized AI agents that work together to **discover, plan, and implement** project solutions through intelligent localization and parallel workflow execution. The system uses an **agent-based architecture** where specialized agents are **automatically customized for each project** based on comprehensive discovery analysis of technology stack, architecture patterns, and project requirements. 
+
+**Key Features:**
+- **Parallel Execution**: Multiple agents work simultaneously for faster analysis
+- **Intelligent Localization**: Components adapt to your specific project context
+- **Discovery-Driven Customization**: System behavior changes based on what it finds in your codebase
+- **Flexible Installation**: Project-specific, global user, or direct analysis modes
+- **Comprehensive Output**: Creates complete `.claudio/` analysis structure
+
+The default workflow combines **discovery and planning** into a unified process with optional **parallel implementation execution**.
 
 ## Agent-Based Architecture
 
@@ -63,7 +72,7 @@ cd claudio
 claude
 
 # 3. Install localized Claudio to your project
-/install /path/to/your-project
+/claudio:install /path/to/your-project
 
 # 4. Navigate to your project and use localized Claudio
 cd /path/to/your-project
@@ -79,7 +88,7 @@ Install generic Claudio templates globally for system-wide access:
 
 ```bash
 # 1. From Claudio directory
-/install commands user
+/claudio:install commands user
 
 # 2. Use from any project directory (commands will localize for each project)
 cd /any/project
@@ -120,7 +129,7 @@ This will create a comprehensive `.claudio/` folder in your target project with:
 6. **Keep system updated**: `/claudio:upgrade --check` periodically
 
 ### Team/Organization Setup
-1. **Install localized system**: `/install /path/to/team/project` (runs discovery and localizes components)
+1. **Install localized system**: `/claudio:install /path/to/team/project` (runs discovery and localizes components)
 2. **Team members use**: Navigate to project, start Claude, use project-customized `/claudio:claudio`
 3. **Stay updated**: Use `/claudio:upgrade` to keep localized installation current
 4. **Version control**: Commit `.claude/` folder for team consistency with project-specific customizations
@@ -209,7 +218,7 @@ project/.claudio/
 ### System Management
 | Command | Purpose | Example | Localization |
 |---------|---------|---------|-------------|
-| `/install` | Install Claudio components | `/install` or `/install user` | Project/path modes: localization via discovery; User mode: direct template copying |
+| `/claudio:install` | Install Claudio components | `/claudio:install` or `/claudio:install commands user` | Project/path modes: localization via discovery; User mode: direct template copying |
 | `/claudio:upgrade` | Upgrade with re-localization | `/claudio:upgrade` or `/claudio:upgrade /path/to/project` | Re-localizes components based on current project state |
 
 ### Utilities
@@ -237,25 +246,25 @@ Claudio supports multiple installation modes to fit different workflows:
 **Project Mode** (Default - Recommended):
 ```bash
 # Install complete localized Claudio system in current project
-/install
+/claudio:install
 
 # Install localized commands only in current project  
-/install commands
+/claudio:install commands
 ```
 Creates `.claude/` folder in current directory with project-localized Claudio system based on discovery analysis.
 
 **User Mode** (Global Installation):
 ```bash
 # Install generic commands globally for user
-/install commands user
+/claudio:install commands user
 ```
 Installs generic Claudio templates to `~/.claude/` for system-wide access. Uses direct copying of templates - localization occurs when commands are executed on target projects.
 
 **Custom Path Mode**:
 ```bash
 # Install localized system to specific location
-/install /path/to/project
-/install commands /path/to/custom/location
+/claudio:install /path/to/project
+/claudio:install commands /path/to/custom/location
 ```
 Installs project-localized Claudio system to any specified directory after discovery analysis.
 
@@ -541,9 +550,9 @@ claude
 ### System Management
 ```bash
 # Installation management with mode-appropriate behavior
-/install                    # Install localized system to current project
-/install commands user      # Install generic templates globally (no localization)
-/install /custom/path      # Install localized system to specific location
+/claudio:install                    # Install localized system to current project
+/claudio:install commands user      # Install generic templates globally (no localization)
+/claudio:install /custom/path      # Install localized system to specific location
 
 # Upgrade management with re-localization
 /claudio:upgrade --check   # Preview available updates and re-localization needs
@@ -700,6 +709,113 @@ your-project/
     └── phase1/, phase2/   # Task breakdown with contexts
 ```
 
+## Development and Testing
+
+### Contributing to Claudio
+
+Claudio includes a comprehensive test suite to validate all workflows and ensure system reliability across different project types and complexity levels.
+
+#### Test Suite Structure
+
+The `test/` directory contains generated example projects specifically designed to test Claudio workflows:
+
+```
+test/
+├── README.md              # Comprehensive test documentation
+├── claudio-ci-test.sh     # Automated CI test script
+├── install/               # Tests claudio:install (full system)
+│   └── README.md         # E-commerce platform project
+├── install-commands/      # Tests claudio:install commands
+│   └── README.md         # DevOps automation project  
+├── upgrade/               # Tests claudio:upgrade workflow
+│   ├── README.md         # TaskFlow productivity app
+│   └── .claude/          # Mock existing installation
+├── discovery-readme/      # Tests claudio:discovery (simple)
+│   └── README.md         # FitTracker mobile app
+└── discovery-code/        # Tests claudio:discovery (complex)
+    ├── README.md         # WeatherAPI Elixir service
+    ├── mix.exs           # Phoenix project structure
+    ├── lib/              # Sample Elixir code
+    └── config/           # Configuration files
+```
+
+#### Test Project Characteristics
+
+Each test project represents different scenarios:
+
+- **Technology Diversity**: Node.js, Python, Elixir, mobile development
+- **Architecture Patterns**: Microservices, functional programming, real-time systems
+- **Complexity Levels**: Simple README-only to complex multi-service applications
+- **Domain Coverage**: E-commerce, DevOps, productivity, health, weather services
+
+#### Running Tests
+
+**Individual Workflow Testing:**
+```bash
+# Test commands-only installation
+cd test/install-commands && /claudio:install commands
+
+# Test discovery on simple project
+cd test/discovery-readme && /claudio:discovery
+
+# Test discovery on code project  
+cd test/discovery-code && /claudio:discovery
+
+# Test system upgrade
+cd test/upgrade && /claudio:upgrade
+
+# Test full installation
+cd test/install && /claudio:install
+```
+
+**Automated CI Testing:**
+```bash
+# Run complete test suite
+./test/claudio-ci-test.sh
+
+# Individual test validation
+cd test/install && /claudio:install
+# Verify .claudio/summary.md, .claudio/discovery.md, .claudio/prd.md exist
+```
+
+#### Development Workflow
+
+1. **Clone and Setup**: `git clone <repo> && cd claudio`
+2. **Test Changes**: Run `./test/claudio-ci-test.sh` to validate all workflows
+3. **Add New Features**: Update test projects if new capabilities are added
+4. **Validate Installation Modes**: Test project, user, and path installation modes
+5. **Check Localization**: Ensure components adapt correctly to different technology stacks
+
+#### CI/CD Integration
+
+The test suite is designed for continuous integration:
+
+```yaml
+# Example GitHub Actions integration
+- name: Test Claudio Workflows
+  run: |
+    chmod +x test/claudio-ci-test.sh
+    ./test/claudio-ci-test.sh
+```
+
+**Test Validation Criteria:**
+- Commands-only installation creates `.claude/commands/` and `.claude/agents/`
+- Discovery tests generate discovery reports in `discovery/reports/`
+- Upgrade tests create changelog and backup files
+- Full installation produces complete `.claudio/` structure
+- All tests complete without errors across different project types
+
+#### Adding New Test Scenarios
+
+When adding new Claudio features:
+
+1. **Create Test Project**: Add new directory in `test/` with representative project
+2. **Update CI Script**: Add validation steps to `claudio-ci-test.sh`
+3. **Document Test**: Update `test/README.md` with new test scenario
+4. **Validate Localization**: Ensure new features work across different technology stacks
+
+The test projects are **generated examples** designed specifically for validation - they are not live projects but carefully crafted scenarios that exercise all Claudio capabilities.
+
 ## Benefits
 
 - **Instant Project Understanding**: Get comprehensive discovery and analysis of any codebase
@@ -719,7 +835,7 @@ your-project/
 - **Sample Projects**: Explore `examples/` for sample projects to analyze
 - **Agent Contexts**: Check `.claude/agents/claudio/prompts/` to understand how agents work
 - **Available Commands**: Review `.claude/commands/claudio/` to see all available commands
-- **Installation Help**: Use `/install --help` or `/claudio:upgrade --help` for system management
+- **Installation Help**: Use `/claudio:install --help` or `/claudio:upgrade --help` for system management
 - **Status Checking**: Use `/claudio:upgrade --status` to verify your installation
 
 ### Quick Start Commands
@@ -732,7 +848,7 @@ your-project/
 /claudio:implement /path/to/my/project
 
 # System management
-/install                    # Install to current project
+/claudio:install                    # Install to current project
 /claudio:upgrade --check    # Check for updates
 /claudio:upgrade /path/to/project  # Upgrade specific project
 ```

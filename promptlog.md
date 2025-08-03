@@ -334,9 +334,6 @@ the commands and subagents are copied, and not localized, as there will be no pr
 
 review the current readme, the usage and commands have changed, update the read me with the new patterns and features
 
-#
-# todo:
-#
 
 # better testing
 
@@ -355,6 +352,16 @@ install-commands - just a readme
 upgrade - just a readme and an existing claudio install
 discovery-readme - just a readme
 discovery-code - a readme and sample code, can be basic elixir phoenix app no postgres
+
+add a readme to test/readme.md that explains all these example project and thier purpose and which commands execute these tests.
+sugguest an ordered script to run these tests that would run during continuious intergration testing
+the readme should reflect that the example projects were all generated and are not live projects
+
+
+#
+# todo:
+#
+
 
 
 # claudini command

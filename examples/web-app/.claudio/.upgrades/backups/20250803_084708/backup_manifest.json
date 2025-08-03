@@ -1,0 +1,29 @@
+{
+  "backup_timestamp": "20250803_084708",
+  "backup_date": "2025-08-03T08:47:08Z",
+  "source_path": "/Users/vinnie/github/claudio/examples/web-app/.claudio",
+  "backup_type": "pre_upgrade",
+  "installation_mode": "project_workflow",
+  "files_backed_up": 13,
+  "backup_integrity": "verified",
+  "previous_state": {
+    "discovery_date": "2025-06-18",
+    "installation_type": "claudio_workflow_output",
+    "components": [
+      "discovery.md",
+      "prd.md", 
+      "plan.md",
+      "summary.md",
+      "status.md",
+      "phase1/",
+      "phase2/",
+      "phase3/",
+      "shared/",
+      "design/",
+      "docs/",
+      "research/"
+    ]
+  },
+  "upgrade_reason": "comprehensive_re_localization",
+  "rollback_available": true
+}

@@ -1,0 +1,76 @@
+{
+  "installation_history": [
+    {
+      "version": "workflow_output_v1",
+      "date": "2025-06-18T22:36:00Z",
+      "type": "initial_workflow_installation",
+      "components": [
+        "discovery.md",
+        "prd.md",
+        "plan.md", 
+        "summary.md",
+        "status.md",
+        "phase1/",
+        "phase2/",
+        "phase3/",
+        "shared/",
+        "design/",
+        "docs/",
+        "research/"
+      ],
+      "file_count": 13,
+      "installation_mode": "claudio_workflow_output",
+      "notes": "Initial Claudio workflow execution for Task Manager SPA project"
+    },
+    {
+      "version": "full_system_v1",
+      "date": "2025-08-03T08:47:08Z",
+      "type": "comprehensive_upgrade_with_relocalization",
+      "previous_version": "workflow_output_v1",
+      "backup_location": ".upgrades/backups/20250803_084708",
+      "components_added": [
+        "commands/claudio/",
+        "agents/claudio/",
+        "settings.local.json"
+      ],
+      "components_updated": [
+        "discovery.md"
+      ],
+      "components_preserved": [
+        "prd.md",
+        "plan.md",
+        "summary.md", 
+        "status.md",
+        "phase1/",
+        "phase2/",
+        "phase3/",
+        "shared/",
+        "design/",
+        "docs/",
+        "research/"
+      ],
+      "file_count": 52,
+      "installation_mode": "full_claudio_system",
+      "localization_updates": {
+        "discovery_refresh": true,
+        "mcp_recommendations": "updated",
+        "technology_stack": "enhanced",
+        "project_context": "preserved"
+      },
+      "rollback_available": true,
+      "rollback_script": ".upgrades/rollback_scripts/rollback_20250803_084708.sh",
+      "changelog": ".upgrades/changelogs/upgrade_20250803_084708.md",
+      "notes": "Upgraded from workflow output to full system installation with comprehensive re-localization"
+    }
+  ],
+  "current_version": "full_system_v1",
+  "last_updated": "2025-08-03T08:47:08Z",
+  "upgrade_count": 1,
+  "installation_path": "/Users/vinnie/github/claudio/examples/web-app/.claudio",
+  "project_context": {
+    "name": "Task Manager SPA",
+    "technology": "Deno.js + Vanilla JavaScript",
+    "status": "specification_phase",
+    "discovery_current": true
+  }
+}

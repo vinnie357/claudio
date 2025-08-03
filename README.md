@@ -203,7 +203,7 @@ project/.claudio/
 | Command | Purpose | Example |
 |---------|---------|---------|
 | `/install` | Install Claudio components | `/install` or `/install user` |
-| `/claudio:upgrade` | Upgrade Claudio installation | `/claudio:upgrade --check` |
+| `/claudio:upgrade` | Upgrade Claudio installation | `/claudio:upgrade` or `/claudio:upgrade /path/to/project` |
 
 ### Utilities
 | Command | Purpose | Example |
@@ -263,8 +263,11 @@ Keep your Claudio installation current with the upgrade system:
 
 #### Check for Updates
 ```bash
-# Preview available upgrades without applying
+# Preview available upgrades for current directory
 /claudio:upgrade --check
+
+# Check specific project installation
+/claudio:upgrade /path/to/project --check
 
 # Show current installation status
 /claudio:upgrade --status
@@ -272,12 +275,15 @@ Keep your Claudio installation current with the upgrade system:
 
 #### Perform Upgrades
 ```bash
-# Upgrade entire installation
+# Upgrade current directory installation
 /claudio:upgrade
+
+# Upgrade specific project
+/claudio:upgrade /path/to/project
 
 # Upgrade specific components
 /claudio:upgrade --commands
-/claudio:upgrade --agents
+/claudio:upgrade /path/to/project --agents
 
 # Force complete refresh
 /claudio:upgrade --force
@@ -291,22 +297,31 @@ Keep your Claudio installation current with the upgrade system:
 
 #### Version Management
 ```bash
-# List upgrade history
+# List upgrade history for current directory
 /claudio:upgrade --list-versions
+
+# List versions for specific project
+/claudio:upgrade /path/to/project --list-versions
 
 # View specific changelog
 /claudio:upgrade --changelog 2025-08-02_14-30-15
 
-# Rollback to previous version
+# Rollback current directory to previous version
 /claudio:upgrade --rollback 2025-08-02_14-30-15
+
+# Rollback specific project
+/claudio:upgrade /path/to/project --rollback 2025-08-02_14-30-15
 ```
 
 ### System Maintenance
 
 #### Validation and Health Checks
 ```bash
-# Validate installation integrity
+# Validate current directory installation
 /claudio:upgrade --validate
+
+# Validate specific project installation
+/claudio:upgrade /path/to/project --validate
 
 # Show installation information
 /claudio:upgrade --status
@@ -515,7 +530,8 @@ claude
 
 # Upgrade management  
 /claudio:upgrade --check   # Preview available updates
-/claudio:upgrade           # Apply upgrades
+/claudio:upgrade           # Apply upgrades to current directory
+/claudio:upgrade /path/to/project  # Upgrade specific project
 /claudio:upgrade --rollback 2025-08-02_14-30-15  # Rollback if needed
 ```
 
@@ -696,6 +712,7 @@ your-project/
 # System management
 /install                    # Install to current project
 /claudio:upgrade --check    # Check for updates
+/claudio:upgrade /path/to/project  # Upgrade specific project
 ```
 
 Start by simply telling Claude: **"Please use claudio:claudio on /path/to/my/project"** and see what happens!

@@ -307,6 +307,11 @@ when used in the claudio workflow the analysis should review any project documen
 
 review the current readme, the usage and commands have changed, update the read me with the new patterns and features
 
+# extend upgrade
+
+review the claudio:upgrade command, it should by default run the process on the current working directory, but it should also      │
+│   accept a path like /claudio:upgrade /path/to/mycode update the command and the readme to support this.
+
 
 #
 # todo:

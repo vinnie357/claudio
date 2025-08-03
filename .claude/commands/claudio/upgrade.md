@@ -1,11 +1,16 @@
 ---
 description: "Upgrade existing Claudio installations with changelog tracking and rollback support"
-argument-hint: "[options]"
+argument-hint: "[target_path] [options]"
 ---
 
 Upgrade existing Claudio installations with comprehensive change tracking, backup management, and rollback capabilities. This command safely updates Claudio components while preserving user customizations and providing complete version history.
 
 Use the claudio:upgrade-orchestrator subagent to coordinate safe upgrade operations with detailed change analysis and backup management.
+
+**Path Resolution**: Supports multiple ways to specify upgrade target:
+- **Direct Path**: `/claudio:upgrade /path/to/project` (upgrades specified path)
+- **Current Directory**: `/claudio:upgrade` (upgrades current working directory)
+- **Flag Method**: `/claudio:upgrade --path /custom/path` (alternative syntax)
 
 **Installation Detection**: Automatically detects Claudio installation mode and location:
 - **User Mode**: `~/.claude/` (global user installation)
@@ -22,31 +27,37 @@ Use the claudio:upgrade-orchestrator subagent to coordinate safe upgrade operati
 
 ### Full Upgrade (Default)
 ```bash
-# Analyze and upgrade entire installation
+# Analyze and upgrade current directory installation
 /claudio:upgrade
 
-# Specify custom installation path
+# Upgrade specific project installation
+/claudio:upgrade /path/to/project
+
+# Alternative flag syntax for custom path
 /claudio:upgrade --path /custom/path
 ```
 Performs comprehensive analysis and updates all changed components with complete backup and changelog generation.
 
 ### Check Mode (Dry Run)
 ```bash
-# Show what would be upgraded without making changes
+# Show what would be upgraded in current directory
 /claudio:upgrade --check
 
-# Check specific installation location
+# Check specific project installation
+/claudio:upgrade /path/to/project --check
+
+# Alternative flag syntax
 /claudio:upgrade --check --path ~/.claude
 ```
 Analyzes current installation against latest version and displays detailed upgrade preview without applying changes.
 
 ### Selective Updates
 ```bash
-# Update only command files
+# Update only command files (current directory)
 /claudio:upgrade --commands
 
-# Update only agent files  
-/claudio:upgrade --agents
+# Update only agent files in specific project
+/claudio:upgrade /path/to/project --agents
 
 # Update only prompt contexts
 /claudio:upgrade --prompts
@@ -55,10 +66,13 @@ Target specific component types for focused updates while maintaining dependenci
 
 ### Force Update
 ```bash
-# Force complete refresh regardless of detected changes
+# Force complete refresh of current directory
 /claudio:upgrade --force
 
-# Force update with custom installation detection
+# Force update specific project
+/claudio:upgrade /path/to/project --force
+
+# Alternative flag syntax
 /claudio:upgrade --force --path /custom/path
 ```
 Override change detection and perform complete installation refresh, useful for corrupted installations.
@@ -67,11 +81,17 @@ Override change detection and perform complete installation refresh, useful for 
 
 ### Rollback Operations
 ```bash
-# List all available versions/timestamps
+# List all available versions for current directory
 /claudio:upgrade --list-versions
 
-# Rollback to specific version
+# List versions for specific project
+/claudio:upgrade /path/to/project --list-versions
+
+# Rollback current directory to specific version
 /claudio:upgrade --rollback 2025-08-02_14-30-15
+
+# Rollback specific project to version
+/claudio:upgrade /path/to/project --rollback 2025-08-02_14-30-15
 
 # Show changelog for specific version
 /claudio:upgrade --changelog 2025-08-02_14-30-15
@@ -79,23 +99,27 @@ Override change detection and perform complete installation refresh, useful for 
 
 ### History and Tracking
 ```bash
-# Display current installation version and status
+# Display current directory installation status
 /claudio:upgrade --status
+
+# Check status of specific project
+/claudio:upgrade /path/to/project --status
 
 # Show detailed upgrade history
 /claudio:upgrade --history
 
-# Validate current installation integrity
-/claudio:upgrade --validate
+# Validate specific installation integrity
+/claudio:upgrade /path/to/project --validate
 ```
 
 ## Parameters:
+- `target_path`: Optional path to project directory (defaults to current directory)
 - `--check`: Preview upgrade changes without applying (dry run mode)
 - `--commands`: Update command files only
 - `--agents`: Update agent files only  
 - `--prompts`: Update prompt contexts only
 - `--force`: Force complete refresh regardless of detected changes
-- `--path <path>`: Specify custom installation path
+- `--path <path>`: Alternative syntax for specifying installation path
 - `--rollback <timestamp>`: Rollback to specified version
 - `--list-versions`: Show available versions for rollback
 - `--changelog <timestamp>`: Display changelog for specific version

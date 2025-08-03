@@ -3,9 +3,9 @@ description: "Upgrade existing Claudio installations with changelog tracking and
 argument-hint: "[target_path] [options]"
 ---
 
-Upgrade existing Claudio installations with comprehensive change tracking, backup management, and rollback capabilities. This command safely updates Claudio components while preserving user customizations and providing complete version history.
+Upgrade existing Claudio installations through intelligent project localization with comprehensive change tracking, backup management, and rollback capabilities. This command safely updates Claudio components by re-localizing them based on current project discovery while preserving user customizations and providing complete version history.
 
-Use the claudio:upgrade-orchestrator subagent to coordinate safe upgrade operations with detailed change analysis and backup management.
+Use the claudio:upgrade-orchestrator subagent to coordinate safe upgrade operations with project discovery, localization, and backup management.
 
 **Path Resolution**: Supports multiple ways to specify upgrade target:
 - **Direct Path**: `/claudio:upgrade /path/to/project` (upgrades specified path)
@@ -27,16 +27,16 @@ Use the claudio:upgrade-orchestrator subagent to coordinate safe upgrade operati
 
 ### Full Upgrade (Default)
 ```bash
-# Analyze and upgrade current directory installation
+# Analyze and upgrade current directory installation with localization
 /claudio:upgrade
 
-# Upgrade specific project installation
+# Upgrade specific project installation with localization
 /claudio:upgrade /path/to/project
 
 # Alternative flag syntax for custom path
 /claudio:upgrade --path /custom/path
 ```
-Performs comprehensive analysis and updates all changed components with complete backup and changelog generation.
+Performs comprehensive project discovery, re-localizes all components based on current codebase, and updates with complete backup and changelog generation.
 
 ### Check Mode (Dry Run)
 ```bash
@@ -53,29 +53,29 @@ Analyzes current installation against latest version and displays detailed upgra
 
 ### Selective Updates
 ```bash
-# Update only command files (current directory)
+# Update only command files with localization (current directory)
 /claudio:upgrade --commands
 
-# Update only agent files in specific project
+# Update only agent files with localization in specific project
 /claudio:upgrade /path/to/project --agents
 
-# Update only prompt contexts
+# Update only prompt contexts with localization
 /claudio:upgrade --prompts
 ```
-Target specific component types for focused updates while maintaining dependencies and integration.
+Target specific component types for focused localized updates while maintaining dependencies and project-specific integration.
 
 ### Force Update
 ```bash
-# Force complete refresh of current directory
+# Force complete refresh with re-discovery and re-localization
 /claudio:upgrade --force
 
-# Force update specific project
+# Force update specific project with full re-localization
 /claudio:upgrade /path/to/project --force
 
 # Alternative flag syntax
 /claudio:upgrade --force --path /custom/path
 ```
-Override change detection and perform complete installation refresh, useful for corrupted installations.
+Override change detection, re-run project discovery, and perform complete localized installation refresh, useful for corrupted installations or significant project changes.
 
 ## Version Management:
 
@@ -115,10 +115,13 @@ Override change detection and perform complete installation refresh, useful for 
 ## Parameters:
 - `target_path`: Optional path to project directory (defaults to current directory)
 - `--check`: Preview upgrade changes without applying (dry run mode)
-- `--commands`: Update command files only
-- `--agents`: Update agent files only  
-- `--prompts`: Update prompt contexts only
-- `--force`: Force complete refresh regardless of detected changes
+- `--commands`: Update command files only with localization
+- `--agents`: Update agent files only with localization
+- `--prompts`: Update prompt contexts only with localization
+- `--force`: Force complete refresh with re-discovery and re-localization
+- `--force-discovery`: Re-run project discovery even if current
+- `--preserve-contexts`: Keep existing task/phase contexts during upgrade
+- `--localize-only`: Only update localization without system upgrades
 - `--path <path>`: Alternative syntax for specifying installation path
 - `--rollback <timestamp>`: Rollback to specified version
 - `--list-versions`: Show available versions for rollback
@@ -128,19 +131,21 @@ Override change detection and perform complete installation refresh, useful for 
 - `--validate`: Validate current installation integrity
 
 ## Integration Points:
-- **Input Sources**: Current `.claude/` installation structure, latest Claudio version files
-- **Output Targets**: Updated installation files, backup archives, changelogs, rollback scripts
-- **Coordination**: Works with install-coordinator patterns for installation detection
+- **Input Sources**: Current `.claude/` installation structure, latest Claudio version templates, project discovery outputs
+- **Output Targets**: Localized installation files, backup archives, changelogs, rollback scripts
+- **Coordination**: Works with discovery, install-coordinator, and localization patterns
 - **Safety**: Comprehensive backup and validation before any modifications
+- **Discovery Integration**: Automatic project analysis and component customization
 
-## Upgrade Process:
-1. **Discovery**: Detect installation mode and catalog current structure
-2. **Analysis**: Compare current files with latest version using content hashing
-3. **Backup**: Create timestamped backup in `.claude/.upgrades/backups/`
-4. **Changelog**: Generate detailed changelog in `.claude/.upgrades/changelogs/`
-5. **Update**: Apply changes only to files that have actually changed
-6. **Validation**: Verify upgrade success and file integrity
-7. **Reporting**: Provide completion summary and next steps
+## Localized Upgrade Process:
+1. **Discovery Analysis**: Run or validate project discovery to understand current codebase
+2. **Installation Detection**: Detect installation mode and catalog current structure
+3. **Localization Planning**: Compare current localized components with latest templates
+4. **Backup**: Create timestamped backup in `.claude/.upgrades/backups/`
+5. **Re-localization**: Generate new project-specific components based on discovery
+6. **Integration**: Merge updates while preserving existing project contexts
+7. **Validation**: Verify upgrade success and project-specific functionality
+8. **Reporting**: Provide completion summary with localization details
 
 ## File Organization:
 Creates organized upgrade tracking in `.claude/.upgrades/`:

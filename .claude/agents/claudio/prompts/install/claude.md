@@ -1,17 +1,19 @@
 # Claudio Install System - Extended Context and Templates
 
-This document provides detailed templates, patterns, and guidance for the Claudio installation system. It serves as extended context for install sub-agents and contains reference information for installation operations.
+This document provides detailed templates, patterns, and guidance for the Claudio installation system with intelligent project localization. It serves as extended context for install sub-agents and contains reference information for localized installation operations.
 
 ## Installation System Overview
 
-The Claudio install system deploys Claudio components to different target locations with flexible installation modes and comprehensive validation. It uses a coordinator pattern with parallel sub-agent execution for efficient installation and validation.
+The Claudio install system deploys project-localized Claudio components to different target locations with flexible installation modes and comprehensive validation. Components are customized based on project discovery rather than directly copied. It uses a coordinator pattern with parallel sub-agent execution for efficient localized installation and validation.
 
 ## Installation Modes
 
 ### User Mode (`user`)
 **Target Location**: `~/.claude/`
 **Use Case**: System-wide installation for individual user
+**Installation Method**: Direct copying of generic templates (no localization)
 **Limitations**: Commands-only installation (no full workflow)
+**Purpose**: Provides generic tools for initiating localization workflows on target projects
 
 **Directory Structure**:
 ```
@@ -71,10 +73,10 @@ The Claudio install system deploys Claudio components to different target locati
 ### Full Workflow Installation (`claudio`)
 **Availability**: Project and Path modes only
 **Components Installed**:
-- All command files including master claudio.md
-- All agent files including workflow coordinators
-- Complete prompt library
-- Full Claudio development environment
+- All command files including master claudio.md (localized for project)
+- All agent files including workflow coordinators (localized for project)
+- Complete prompt library (localized for project context)
+- Full Claudio development environment customized for project requirements
 
 **Command Files**:
 - claudio.md (master workflow orchestrator)
@@ -95,9 +97,12 @@ The Claudio install system deploys Claudio components to different target locati
 ### Commands-Only Installation (`commands`)
 **Availability**: All modes (user, project, path)
 **Components Installed**:
-- Essential command files only
-- Required agent files for commands
-- Essential prompt directories
+- **User Mode**: Generic template command files for cross-project use
+- **Project/Path Modes**: Essential command files localized for specific project
+- **User Mode**: Generic agent templates that can work with any project
+- **Project/Path Modes**: Required agent files localized for project context
+- **User Mode**: Generic prompt directories for universal applicability
+- **Project/Path Modes**: Essential prompt directories customized for project requirements
 
 **Command Files**:
 - Core commands: discovery.md, prd.md, plan.md, task.md
@@ -114,22 +119,21 @@ The Claudio install system deploys Claudio components to different target locati
 - Essential context documents
 - Minimal prompt library
 
-## File Placement Patterns
+## Installation Patterns by Mode
 
-### Command Files
-- **Source**: `.claude/commands/*.md`
-- **Target**: `<install-location>/.claude/commands/claudio/*.md`
+### User Mode - Direct Template Copying
+- **Template Source**: `.claude/commands/*.md`, `.claude/agents/*.md`, `prompts/*/`
+- **Target**: `~/.claude/commands/claudio/*.md`, `~/.claude/agents/claudio/*.md`, `~/.claude/agents/claudio/prompts/*/`
+- **Method**: Direct copying of generic templates
+- **Purpose**: Provides tools that can initiate localization workflows on any target project
 - **Namespace**: Commands reference agents as `claudio:<agent-name>`
 
-### Agent Files
-- **Source**: `.claude/agents/*.md`
-- **Target**: `<install-location>/.claude/agents/claudio/*.md`
-- **Namespace**: Agents maintain claudio namespace references
-
-### Prompt Files
-- **Source**: `prompts/*/`
-- **User Mode Target**: `~/.claude/agents/claudio/prompts/*/`
-- **Project/Path Target**: `<install-location>/.claude/agents/claudio/prompts/*/`
+### Project/Path Mode - Localized Component Generation
+- **Template Source**: `.claude/commands/*.md`, `.claude/agents/*.md`, `prompts/*/`
+- **Target**: `<install-location>/.claude/commands/claudio/*.md`, `<install-location>/.claude/agents/claudio/*.md`, `<install-location>/.claude/agents/claudio/prompts/*/`
+- **Method**: Project-specific component generation based on discovery analysis
+- **Localization**: Commands, agents, and prompts customized for project technology stack, architecture, and requirements
+- **Namespace**: Commands reference agents as `claudio:<agent-name>` with project-specific enhancements
 
 ## Dynamic Prompt Location Logic
 
@@ -153,12 +157,16 @@ When performing discovery analysis, reference:
 3. Use the first available location for extended context
 ```
 
-## Installation Process Templates
+## Mode-Specific Installation Process Templates
 
 ### Pre-Installation Checklist
 ```markdown
 ## Installation Checklist
 - [ ] Parse installation parameters (mode, type, path)
+- [ ] Conditional Discovery Analysis:
+  - [ ] **Project/Path Modes**: Run or validate project discovery for localization
+  - [ ] **User Mode**: Skip discovery (no project context)
+- [ ] **Project/Path Modes**: Analyze project structure and technology stack
 - [ ] Validate target directory permissions
 - [ ] Check available disk space
 - [ ] Identify any existing installations
@@ -178,42 +186,51 @@ mkdir -p <target>/.claude/agents/claudio
 mkdir -p <target>/.claude/prompts
 ```
 
-### File Copy Operations
+### Mode-Specific Component Operations
 ```bash
-# Copy commands with namespace organization
-cp source/.claude/commands/*.md <target>/.claude/commands/claudio/
+# User Mode Operations
+# Direct copying of generic templates
+cp source/.claude/commands/*.md ~/.claude/commands/claudio/
+cp source/.claude/agents/*.md ~/.claude/agents/claudio/
+cp -r source/prompts/* ~/.claude/agents/claudio/prompts/
 
-# Copy agents with namespace organization
-cp source/.claude/agents/*.md <target>/.claude/agents/claudio/
-
-# Copy prompts to appropriate location
-# User mode:
-cp -r source/prompts/* <target>/.claude/agents/claudio/prompts/
-# Project/Path mode:
-cp -r source/prompts/* <target>/.claude/agents/claudio/prompts/
+# Project/Path Mode Operations
+# Generate localized components based on project discovery
+generate_localized_commands(project_discovery, templates) -> <target>/.claude/commands/claudio/
+generate_localized_agents(project_discovery, templates) -> <target>/.claude/agents/claudio/
+generate_localized_prompts(project_discovery, templates) -> <target>/.claude/agents/claudio/prompts/
 ```
 
 ## Validation Templates
 
-### File Validation Checklist
+### Mode-Specific Component Validation Checklist
 ```markdown
-## File Validation Checklist
+## Component Validation Checklist
 - [ ] All required directories exist
-- [ ] All expected files are present
-- [ ] Files are readable and non-empty
-- [ ] File formats match expected patterns
+- [ ] All expected components are present
+- [ ] Components are readable and properly formatted
+- [ ] **Project/Path Modes**: Project-specific customizations are correctly applied
+- [ ] **User Mode**: Generic templates are properly copied
 - [ ] Namespace references are correct
 - [ ] Prompt location references are valid
+- [ ] **Project/Path Modes**: Discovery-based localization is accurate
+- [ ] **User Mode**: Templates are ready for cross-project use
+- [ ] **Project/Path Modes**: Components reflect project context and requirements
+- [ ] **User Mode**: Components can initiate localization on target projects
 ```
 
-### Integration Validation Tests
+### Mode-Specific Integration Validation Tests
 ```markdown
 ## Integration Tests
-- [ ] Commands can reference their agents
+- [ ] Commands can reference their agents (generic or localized)
 - [ ] Agents can find their prompt contexts
 - [ ] Cross-agent references work correctly
 - [ ] Dynamic prompt location logic functions
-- [ ] Installation is ready for use
+- [ ] **Project/Path Modes**: Project-specific customizations integrate properly
+- [ ] **User Mode**: Generic templates work across different project contexts
+- [ ] **Project/Path Modes**: Discovery-based features work correctly
+- [ ] **User Mode**: Commands can initiate localization workflows on target projects
+- [ ] Installation is ready for intended use (project-specific or cross-project)
 ```
 
 ## Error Handling Patterns
@@ -268,9 +285,12 @@ cp -r source/prompts/* <target>/.claude/agents/claudio/prompts/
 - **Status**: SUCCESS
 
 ## Components Installed
-- Commands: [count] files installed to commands/claudio/
-- Agents: [count] files installed to agents/claudio/
-- Prompts: [count] directories installed to [prompts location]
+- **Project/Path Modes**: [count] project-specific commands generated to commands/claudio/
+- **User Mode**: [count] generic template commands copied to commands/claudio/
+- **Project/Path Modes**: [count] localized agents generated to agents/claudio/
+- **User Mode**: [count] generic agent templates copied to agents/claudio/
+- **Project/Path Modes**: [count] customized prompt directories generated to [prompts location]
+- **User Mode**: [count] generic prompt templates copied to [prompts location]
 
 ## System Ready
 Your Claudio installation is complete and ready to use!
@@ -284,6 +304,10 @@ Your Claudio installation is complete and ready to use!
 - Commands reference agents using claudio:<agent-name> syntax
 - Prompt contexts are automatically resolved based on installation location
 - All components follow Claudio namespace conventions
+- **Project/Path Modes**: Components are customized for your specific project and technology stack
+- **User Mode**: Generic templates enable localization workflows on target projects
+- **Project/Path Modes**: Discovery-based features provide project-aware functionality
+- **User Mode**: Commands will perform discovery and localization when executed on target projects
 ```
 
 ### Failure Report Template

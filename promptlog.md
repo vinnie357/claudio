@@ -312,10 +312,50 @@ review the current readme, the usage and commands have changed, update the read 
 review the claudio:upgrade command, it should by default run the process on the current working directory, but it should also      │
 │   accept a path like /claudio:upgrade /path/to/mycode update the command and the readme to support this.
 
+# test upgrade
+
+/claudio:upgrade examples/web-app
+
+ when installing, the created agents and commands are localized to the project based off of the discovery, never just copied over.  │
+│   localization requires discovery outputs, so the new project specific commands and agents are tailored to the specific project.
+
+update the command claudio:update and its agents to reflect this localization process
+
+# test install
+
+ensure the install process follows the same localization process and doesn't simply copy commands and agents
+
+# update docs
+
+review the current readme, the usage and commands have changed, update the read me with the new patterns and features
+
+when running the install in user mode to ~/
+the commands and subagents are copied, and not localized, as there will be no project to discover. this allows the user to inital the localization workflow on a target project of their choice
+
+review the current readme, the usage and commands have changed, update the read me with the new patterns and features
 
 #
 # todo:
 #
+
+# better testing
+
+create a test folder, with multiple example projects
+one for each imporant workflow
+one for install - tests the default claudio:install command that installs the entire localized system
+one for upgrade - test the claudio:upgrade command that tests localized upgrade workflow
+one for install commands only - tests the claudio:install workflow that only installs the localized commands and subagents
+one for discovery - test the claudio:discovery command used directly
+
+each test project folder will have a readme.md related to a sample project
+
+each test project is a folder:
+install - just a readme
+install-commands - just a readme
+upgrade - just a readme and an existing claudio install
+discovery-readme - just a readme
+discovery-code - a readme and sample code, can be basic elixir phoenix app no postgres
+
 
 # claudini command
 

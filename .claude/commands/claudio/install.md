@@ -3,7 +3,7 @@ description: "Install Claudio system components with flexible path support and c
 argument-hint: "[commands] [user|<path>]"
 ---
 
-Install Claudio system components (commands, agents, prompts) to different target locations with flexible installation modes.
+Install Claudio system components through intelligent project localization to different target locations with flexible installation modes. Components are customized based on project discovery rather than directly copied.
 
 **Syntax:**
 - `/install` - defaults to project mode, full workflow
@@ -12,4 +12,4 @@ Install Claudio system components (commands, agents, prompts) to different targe
 - `/install /path/to/code` - path mode, full workflow
 - `/install commands /path/to/code` - path mode, commands only
 
-Use the claudio:install-coordinator subagent to orchestrate the installation process with parallel validation.
+Use the claudio:install-coordinator subagent to orchestrate the installation process with project discovery, component localization, and parallel validation.

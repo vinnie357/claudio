@@ -371,6 +371,10 @@ review the current readme, the usage and commands have changed, update the read 
 review test/readme.md when in the ci workflow for the test script to not fail it needs to 
 have the `--dangerously-skip-permissions` flag set for its test tasks
 
+the ci test would need to be able to use the claude-sdk through claude  -p "/claudio:install" --dangerously-skip-permissions
+
+the script should also check if claude is installed, and assumes the ci run or local run have an authenticated session with        │
+│   anthropic or an api token through environment varibles, in the github action it would use a github secret env
 
 
 #

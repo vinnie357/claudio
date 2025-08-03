@@ -52,6 +52,21 @@ This directory contains example projects specifically generated to test the comp
 
 ## Continuous Integration Test Script
 
+### CI Requirements
+
+**Prerequisites**:
+1. **Claude CLI Installation**: The test script requires the Claude CLI to be installed
+   - Install: `npm install -g @anthropic-ai/claude-cli`
+   - Or visit: https://github.com/anthropics/claude-cli
+
+2. **Authentication**: One of the following is required:
+   - `ANTHROPIC_API_KEY` environment variable (recommended for CI)
+   - Authenticated Claude CLI session (`claude auth`)
+
+3. **Permissions Flag**: All CI tests use the `--dangerously-skip-permissions` flag to avoid permission checks that can interfere with automated testing environments.
+
+**Command Format**: `claude -p "/claudio:command" --dangerously-skip-permissions`
+
 ### Automated Test Sequence
 
 The following script should be executed in order during CI/CD pipeline testing to validate all Claudio workflows:
@@ -65,10 +80,38 @@ set -e  # Exit on any error
 echo "🚀 Starting Claudio CI Test Suite"
 echo "=================================="
 
+# Prerequisites Check
+echo "🔍 Checking prerequisites..."
+
+# Check if Claude CLI is installed
+if ! command -v claude &> /dev/null; then
+    echo "❌ Claude CLI is not installed. Please install it first:"
+    echo "   npm install -g @anthropic-ai/claude-cli"
+    exit 1
+fi
+
+echo "✅ Claude CLI found: $(claude --version)"
+
+# Check authentication
+echo "🔐 Verifying authentication..."
+if [ -z "$ANTHROPIC_API_KEY" ] && [ ! -f "$HOME/.config/claude/config.json" ]; then
+    echo "❌ No authentication found. Please set ANTHROPIC_API_KEY or run 'claude auth'"
+    exit 1
+fi
+
+# Test authentication
+if ! claude -p "Hello" --timeout 10 &> /dev/null; then
+    echo "❌ Authentication test failed. Please check your API key"
+    exit 1
+fi
+
+echo "✅ Authentication verified"
+echo "=================================="
+
 # Test 1: Commands-Only Installation
 echo "📦 Test 1: Commands-Only Installation"
 cd test/install-commands
-claudio:install commands
+claude -p "/claudio:install commands" --dangerously-skip-permissions
 if [ -d ".claude/commands" ] && [ -d ".claude/agents" ]; then
     echo "✅ Commands-only installation successful"
 else
@@ -80,7 +123,7 @@ cd ../..
 # Test 2: Simple Discovery (README-only project)
 echo "🔍 Test 2: Simple Discovery Analysis"
 cd test/discovery-readme
-claudio:discovery
+claude -p "/claudio:discovery" --dangerously-skip-permissions
 if [ -f "discovery/reports/fittracker_discovery.md" ]; then
     echo "✅ Simple discovery analysis successful"
 else
@@ -92,7 +135,7 @@ cd ../..
 # Test 3: Complex Discovery (Code project)
 echo "🔍 Test 3: Complex Discovery Analysis"
 cd test/discovery-code
-claudio:discovery
+claude -p "/claudio:discovery" --dangerously-skip-permissions
 if [ -f "discovery/reports/weather_api_discovery.md" ]; then
     echo "✅ Complex discovery analysis successful"
 else
@@ -104,7 +147,7 @@ cd ../..
 # Test 4: System Upgrade
 echo "⬆️  Test 4: System Upgrade"
 cd test/upgrade
-claudio:upgrade
+claude -p "/claudio:upgrade" --dangerously-skip-permissions
 if [ -f ".claude/upgrade_changelog_$(date +%Y%m%d).md" ]; then
     echo "✅ System upgrade successful"
 else
@@ -116,7 +159,7 @@ cd ../..
 # Test 5: Full System Installation (Most comprehensive)
 echo "🏗️  Test 5: Full System Installation"
 cd test/install
-claudio:install
+claude -p "/claudio:install" --dangerously-skip-permissions
 if [ -f ".claudio/summary.md" ] && [ -f ".claudio/discovery.md" ] && [ -f ".claudio/prd.md" ]; then
     echo "✅ Full system installation successful"
 else
@@ -136,19 +179,19 @@ For manual testing or debugging specific workflows:
 
 ```bash
 # Test commands-only installation
-cd test/install-commands && claudio:install commands
+cd test/install-commands && claude -p "/claudio:install commands" --dangerously-skip-permissions
 
 # Test simple discovery
-cd test/discovery-readme && claudio:discovery
+cd test/discovery-readme && claude -p "/claudio:discovery" --dangerously-skip-permissions
 
 # Test complex discovery with code analysis
-cd test/discovery-code && claudio:discovery
+cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions
 
 # Test system upgrade workflow
-cd test/upgrade && claudio:upgrade
+cd test/upgrade && claude -p "/claudio:upgrade" --dangerously-skip-permissions
 
 # Test full system installation
-cd test/install && claudio:install
+cd test/install && claude -p "/claudio:install" --dangerously-skip-permissions
 ```
 
 ### Validation Checks
@@ -188,17 +231,63 @@ Each test should validate specific outputs:
 # Run individual test
 ./test/claudio-ci-test.sh
 
-# Test specific workflow
-cd test/discovery-code && claudio:discovery
+# Test specific workflow (with permissions flag for CI compatibility)
+cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions
 ```
 
 ### CI/CD Integration
+
+#### GitHub Actions Setup
+
 ```yaml
-# Example GitHub Actions step
-- name: Test Claudio Workflows
-  run: |
-    chmod +x test/claudio-ci-test.sh
-    ./test/claudio-ci-test.sh
+name: Claudio Workflow Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-claudio:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Claude CLI
+      run: npm install -g @anthropic-ai/claude-cli
+      
+    - name: Test Claudio Workflows
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        chmod +x test/claudio-ci-test.sh
+        ./test/claudio-ci-test.sh
+```
+
+#### Required GitHub Secrets
+
+To run the tests in GitHub Actions, add the following secret to your repository:
+
+1. Go to **Settings** → **Secrets and variables** → **Actions**
+2. Click **New repository secret**
+3. Name: `ANTHROPIC_API_KEY`
+4. Value: Your Anthropic API key from https://console.anthropic.com/
+
+#### Local Testing with Environment Variables
+
+```bash
+# Set your API key (replace with your actual key)
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Run the test suite
+./test/claudio-ci-test.sh
 ```
 
 ### Debugging Failed Tests

@@ -4,6 +4,8 @@ A comprehensive project analysis, planning, and implementation system for Claude
 
 ## What is Claudio?
 
+<img src="docs/images/claudio.png" alt="Claudio System" width="600" height="auto">
+
 Claudio is a comprehensive project analysis system built on specialized AI agents that work together to **discover, plan, and implement** project solutions through intelligent localization and parallel workflow execution. The system uses an **agent-based architecture** where specialized agents are **automatically customized for each project** based on comprehensive discovery analysis of technology stack, architecture patterns, and project requirements. 
 
 **Key Features:**

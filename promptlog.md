@@ -377,6 +377,10 @@ the script should also check if claude is installed, and assumes the ci run or l
 │   anthropic or an api token through environment varibles, in the github action it would use a github secret env
 
 
+# research 12factorapps
+
+/claudio:research software design https://12factor.net/
+
 #
 # todo:
 #

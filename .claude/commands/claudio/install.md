@@ -3,13 +3,24 @@ description: "Install Claudio system components with flexible path support and c
 argument-hint: "[commands] [user|<path>]"
 ---
 
-Install Claudio system components through intelligent project localization to different target locations with flexible installation modes. Components are customized based on project discovery rather than directly copied.
+Install complete Claudio system through intelligent project localization to different target locations with flexible installation modes. All components are customized based on project discovery rather than directly copied.
 
-**Syntax:**
-- `/install` - defaults to project mode, full workflow
-- `/install commands` - defaults to project mode, commands only
-- `/install commands user` - user mode, commands only
-- `/install /path/to/code` - path mode, full workflow
-- `/install commands /path/to/code` - path mode, commands only
+**IMPORTANT**: "Commands" installs complete functional system:
+- Commands files (`commands/claudio/`)
+- Required sub-agents (`agents/claudio/`) 
+- Extended context documents (`agents/claudio/prompts/`)
 
-Use the claudio:install-coordinator subagent to orchestrate the installation process with project discovery, component localization, and parallel validation.
+**Installation Workflows with Validation:**
+- `/install` - Full workflow → validate workflow → install → validate installation
+- `/install commands` - Discovery → validate discovery → install complete system → validate installation  
+- `/install commands user` - Install generic templates → validate installation
+- `/install /path/to/code` - Full workflow → validate workflow → install → validate installation
+- `/install commands /path/to/code` - Discovery → validate discovery → install complete system → validate installation
+
+Use the claudio:install-coordinator subagent to orchestrate the complete installation process with:
+- Project discovery and analysis
+- Complete system component generation (commands + agents + prompts)
+- Multi-point validation (workflow validation + installation validation)
+- Comprehensive quality assurance and reporting
+
+**All installations include automatic validation** to ensure complete functional system is properly installed.

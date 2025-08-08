@@ -304,10 +304,17 @@ target_project/
 6. **Update Management**: Support incremental updates and status tracking
 7. **Cross-Reference**: Link related documents and contexts appropriately
 
+## CRITICAL: Directory Filtering Rules
+**ALL CLAUDIO WORKFLOW AGENTS MUST FOLLOW THESE RULES:**
+
+- **COMPLETELY IGNORE `claudio/` directory** - This is the Claudio system source, NOT the target project
+- **ONLY CHECK `.claudio/` for existing installation** - Check for status preservation, NEVER analyze as project code  
+- **FOCUS ON TARGET PROJECT CODE ONLY** - Analysis should cover actual project files, architecture, dependencies
+
 ## Execution Workflow:
-1. **Input Processing**: Analyze target project path and existing `.claudio/` folder
-2. **Discovery Execution**: Run comprehensive project discovery
-3. **Requirements Generation**: Create PRD based on discovery findings
+1. **Input Processing**: Analyze target project path and check `.claudio/` for existing install status only
+2. **Discovery Execution**: Run comprehensive project discovery (excluding Claudio directories)
+3. **Requirements Generation**: Create PRD based on discovery findings from actual project
 4. **Plan Creation**: Generate implementation plan from requirements
 5. **Task Organization**: Break down plan into executable tasks with contexts
 6. **Structure Creation**: Build complete `.claudio/` folder with all artifacts
@@ -337,16 +344,20 @@ When running Claudio analysis, focus on creating a complete, actionable project 
 ### Parameters
 - `target_project_path`: Path to the project directory to analyze (e.g., `../mycode`, `./my-project`)
 
+**IMPORTANT**: Analysis excludes Claudio system directories:
+- Skip `claudio/` completely (Claudio source code)
+- Check `.claudio/` only for existing installation status
+
 ### Workflow Process
 
 #### Phase 1: Project Discovery
-1. Analyze target project structure, code, and documentation
+1. Analyze target project structure, code, and documentation (excluding `claudio/` and `.claudio/` content)
 2. Apply discovery agent context to identify:
-   - Technology stack and dependencies
-   - Current capabilities and architecture
+   - Technology stack and dependencies from actual project files
+   - Current capabilities and architecture of the target project
    - Development tools and workflows
    - Recommended MCPs and improvements
-3. Generate comprehensive `discovery.md` report
+3. Generate comprehensive `discovery.md` report focused on target project only
 
 #### Phase 2: Requirements Definition
 1. Use discovery report as input to PRD generation

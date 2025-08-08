@@ -21,6 +21,7 @@ The default workflow combines **discovery and planning** into a unified process 
 
 Claudio employs specialized AI agents that orchestrate different aspects of project analysis:
 
+### Core Workflow Agents
 - **Discovery Agent**: Analyzes project structure, technology stack, and existing capabilities
 - **PRD Agent**: Transforms discovery findings into clear business requirements and success criteria
 - **Planning Agent**: Creates phased implementation roadmaps with time estimates and dependencies
@@ -30,7 +31,23 @@ Claudio employs specialized AI agents that orchestrate different aspects of proj
 - **Research Agent**: Conducts topic-specific research and creates expert knowledge bases
 - **Implementation Agent**: Executes plans through coordinated task processing
 
-Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context.
+### Generation & Customization Agents
+- **Test Command Generator**: Creates project-specific test commands based on framework detection
+- **New Command Generator**: Generates custom commands from research sources with workflow integration
+- **Newprompt Agent Creator**: Creates comprehensive agent prompts following Claudio conventions
+
+### Quality Assurance Validators
+- **Discovery Validator**: Ensures discovery document quality and analysis depth
+- **Workflow Validator**: Validates complete workflow output and document completeness
+- **Install Validator**: Verifies installation completeness and functionality
+- **New Command Validator**: Validates custom command structure and integration
+
+### System Management Agents
+- **Install Coordinator**: Manages Claudio installation with namespace support and localization
+- **Upgrade Orchestrator**: Handles safe upgrades with backup, rollback, and re-localization
+- **Code Quality Analyzer**: Analyzes code quality with comprehensive reporting
+
+Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context through discovery-based customization.
 
 ## Requirements
 
@@ -127,8 +144,12 @@ This will create a comprehensive `.claudio/` folder in your target project with:
 2. **Start Claude with access**: `claude --add-dir /path/to/your/project`
 3. **Discovery & Planning**: `/claudio:claudio /path/to/your/project` (combines project analysis and implementation planning)
 4. **Review the plans**: Check the generated `.claudio/` folder in your project
-5. **Optional Implementation**: `/claudio:implement /path/to/your/project` (when ready to execute)
-6. **Keep system updated**: `/claudio:upgrade --check` periodically
+5. **Test your project**: Use auto-generated `/claudio:test` command for project-specific testing
+6. **Create custom tools**: `/claudio:new-command tool-name "purpose" source-url` for project-specific commands
+7. **Optional Implementation**: `/claudio:implement /path/to/your/project` (when ready to execute)
+8. **Keep system updated**: `/claudio:upgrade --check` periodically
+
+**Quality Assurance**: All outputs are automatically validated for completeness and quality through integrated validation loops.
 
 ### Team/Organization Setup
 1. **Install localized system**: `/claudio:install /path/to/team/project` (runs discovery and localizes components)
@@ -216,16 +237,20 @@ project/.claudio/
 | Command | Purpose | Example | Localization |
 |---------|---------|---------|-------------|
 | `/claudio:implement` | Execute implementation plans** | `/claudio:implement ../my-project` | Project-specific execution with localized contexts |
+| `/claudio:test`**** | Run project tests with analysis | `/claudio:test` or `/claudio:test --fix` | Auto-generated for each project's test framework |
+| `/claudio:test-g`**** | Gemini-integrated testing | `/claudio:test-g` | Project-specific test analysis with AI assistance |
 
 ### System Management
 | Command | Purpose | Example | Localization |
 |---------|---------|---------|-------------|
 | `/claudio:install` | Install Claudio components | `/claudio:install` or `/claudio:install commands user` | Project/path modes: localization via discovery; User mode: direct template copying |
 | `/claudio:upgrade` | Upgrade with re-localization | `/claudio:upgrade` or `/claudio:upgrade /path/to/project` | Re-localizes components based on current project state |
+| `/claudio:generate-test-commands`***** | Generate project test commands | System command - auto-called during install/upgrade | Creates project-specific test commands based on discovery |
 
 ### Utilities
 | Command | Purpose | Example | Localization |
 |---------|---------|---------|-------------|
+| `/claudio:new-command` | Generate custom commands from research | `/claudio:new-command my-tool "analyzes dependencies" https://docs.npmjs.com` | Research-driven command generation with workflow integration |
 | `/claudio:newprompt` | Create new agent prompts | `/claudio:newprompt security-review "vulnerability analysis" standard` | Template-based with project integration patterns |
 | `/claudio:test-review` | Analyze testing patterns and frameworks | `/claudio:test-review` | Technology stack-specific testing analysis |
 | `/claudio:gcms` | Generate conventional git commit messages | `/claudio:gcms` | Project convention-aware commit messages |
@@ -236,6 +261,162 @@ project/.claudio/
 **Implementation command is optional and invoked separately when ready to execute plans
 
 ***Optional command - see [Optional Commands](#optional-commands) for installation
+
+****Auto-generated project-specific test commands installed during `/claudio:install` or `/claudio:upgrade`
+
+*****System command that remains in Claudio source, automatically called during installation/upgrade workflows
+
+## Validation System
+
+Claudio includes a comprehensive quality assurance framework with specialized validators that ensure system reliability and output quality across all workflows.
+
+### Validation Components
+
+#### Discovery Validator
+- **Purpose**: Validates discovery document quality and analysis depth
+- **Checks**: Technology detection, architecture analysis, dependency mapping, improvement recommendations
+- **Success Criteria**: Minimum sections present, technical depth achieved, actionable insights provided
+- **Auto-runs**: After discovery phase in workflows
+
+#### Workflow Validator  
+- **Purpose**: Validates complete Claudio workflow output quality
+- **Checks**: Document completeness, phase structure, task breakdown, status tracking setup
+- **Success Criteria**: All required documents present, proper linking between phases, executable task contexts
+- **Auto-runs**: After `/claudio:claudio` workflow completion
+
+#### Install Validator
+- **Purpose**: Validates installation completeness and functionality
+- **Checks**: Command installation, agent setup, directory structure, file permissions
+- **Success Criteria**: All components installed, proper namespacing, test commands generated
+- **Auto-runs**: After `/claudio:install` operations
+
+#### New Command Validator
+- **Purpose**: Validates custom command generation quality
+- **Checks**: Command structure, sub-agent integration, context references, workflow compatibility
+- **Success Criteria**: Proper formatting, valid integration points, executable command structure
+- **Auto-runs**: After `/claudio:new-command` generation
+
+### Validation Integration
+
+Validators are integrated into workflows automatically:
+- **Discovery workflows**: Run discovery validator after analysis
+- **Installation workflows**: Run install validator after setup
+- **Custom command creation**: Run command validator after generation
+- **Complete workflows**: Run workflow validator at completion
+
+### Validation Reports
+
+Each validator generates detailed reports including:
+- **Pass/Fail Status**: Clear success or failure indication
+- **Detailed Findings**: Specific issues or confirmations
+- **Recommendations**: Actionable improvement suggestions
+- **Quality Metrics**: Quantitative assessment of output quality
+
+## Custom Command Generation
+
+Claudio enables you to create custom commands tailored to your specific needs through research-driven generation.
+
+### Using `/claudio:new-command`
+
+Generate complete command systems (command + sub-agent + context) from research sources:
+
+```bash
+# Create from URL research
+/claudio:new-command dependency-analyzer "analyzes project dependencies" https://docs.npmjs.com/cli/v8/commands/npm-audit
+
+# Create from local documentation
+/claudio:new-command api-validator "validates API endpoints" ./api-spec.md
+
+# Integrate with Claudio workflow
+/claudio:new-command security-scan "performs security analysis" https://owasp.org/www-project-top-ten/ --claudio "after discovery workflow"
+```
+
+### Generated Components
+
+Each custom command creates:
+
+1. **Command File** (`commands/claudio/{name}.md`)
+   - Usage documentation and examples
+   - Parameter definitions
+   - Integration instructions
+
+2. **Sub-Agent** (`agents/claudio/{name}-executor.md`)
+   - Specialized execution logic
+   - Tool selection and capabilities
+   - Error handling
+
+3. **Extended Context** (`agents/claudio/prompts/{name}/claude.md`)
+   - Research-based knowledge
+   - Best practices and patterns
+   - Framework-specific guidance
+
+### Workflow Integration Options
+
+Custom commands can integrate into Claudio workflows:
+- `"after discovery workflow"` - Runs after project analysis
+- `"after prd workflow"` - Runs after requirements generation
+- `"after plan workflow"` - Runs after implementation planning
+- `"before task workflow"` - Runs before task breakdown
+- `"parallel with [phase]"` - Runs concurrently with specified phase
+
+### Quality Assurance
+
+All generated commands undergo automatic validation:
+- Structure and formatting verification
+- Sub-agent integration testing
+- Context reference validation
+- Workflow compatibility checking
+
+## Project-Specific Testing
+
+Claudio automatically generates customized test commands for each project based on its discovered testing framework and patterns.
+
+### Auto-Generated Test Commands
+
+During installation or upgrade, Claudio analyzes your project and creates:
+
+#### `/claudio:test` - Intelligent Test Runner
+- **Features**: 
+  - Runs your project's test suite with framework detection
+  - Provides intelligent summary and analysis
+  - Optional `--fix` flag for auto-remediation
+  - Framework-specific optimizations
+- **Example**: `/claudio:test` or `/claudio:test --fix`
+
+#### `/claudio:test-g` - Gemini-Enhanced Testing
+- **Features**:
+  - AI-assisted test analysis and recommendations
+  - Read-only analysis with task generation
+  - Advanced pattern detection
+  - Test coverage insights
+- **Requirements**: Gemini CLI access and API configuration
+- **Example**: `/claudio:test-g`
+
+### Framework Detection
+
+Test commands are customized for detected frameworks:
+- **JavaScript/TypeScript**: Jest, Mocha, Vitest, Karma
+- **Python**: pytest, unittest, nose2
+- **Ruby**: RSpec, Minitest
+- **Go**: go test, testify
+- **Rust**: cargo test
+- **Java**: JUnit, TestNG
+- **Other frameworks**: Automatically detected from project structure
+
+### Installation Process
+
+Test commands are automatically generated during:
+- `/claudio:install` - Full system installation
+- `/claudio:install commands` - Commands-only installation
+- `/claudio:upgrade` - System upgrades
+- `/claudio:claudio` - Complete workflow execution
+
+The generation process:
+1. Analyzes project discovery document
+2. Detects testing frameworks and patterns
+3. Generates customized command implementations
+4. Creates specialized sub-agents
+5. Installs in project's `.claude/` directory
 
 ## Installation and System Management
 
@@ -519,7 +700,14 @@ claude --add-dir ../my-react-app
 /claudio:claudio ../my-react-app
 /claudio:implement ../my-react-app  # When ready to execute
 
-# 4. Keep system updated
+# 4. Test your project with auto-generated commands
+/claudio:test                        # Run tests with intelligent analysis
+/claudio:test-g                      # Enhanced testing with Gemini
+
+# 5. Create custom commands as needed
+/claudio:new-command metrics "track performance" ./perf-guide.md
+
+# 6. Keep system updated
 /claudio:upgrade --check
 ```
 
@@ -547,6 +735,12 @@ claude
 /claudio:prd feature real-time-chat   # Create requirements doc with domain awareness
 /claudio:test-review                  # Analyze testing setup with framework-specific insights
 /claudio:gcms                        # Generate commit messages following project conventions
+
+# New command generation and testing
+/claudio:new-command linter "code style checker" https://eslint.org/docs  # Create custom command
+/claudio:test                        # Run project tests with intelligent analysis
+/claudio:test --fix                  # Run tests with auto-remediation
+/claudio:test-g                      # Gemini-enhanced test analysis
 ```
 
 ### System Management
@@ -629,7 +823,9 @@ claudio/
 │   │   ├── research.md   # Topic research
 │   │   ├── documentation.md # Documentation generation
 │   │   ├── design.md     # UX/UI analysis
+│   │   ├── new-command.md # Custom command generation
 │   │   ├── newprompt.md  # Agent creation system
+│   │   ├── generate-test-commands.md # Test command generator (system)
 │   │   ├── install.md    # Installation management
 │   │   ├── upgrade.md    # Upgrade management
 │   │   ├── test-review.md # Testing analysis
@@ -646,6 +842,8 @@ claudio/
 │       ├── install-coordinator.md # Installation management
 │       ├── upgrade-orchestrator.md # Upgrade coordination
 │       ├── documentation-coordinator.md # Documentation coordination
+│       ├── new-command-generator.md # Custom command generation
+│       ├── test-command-generator.md # Test command generation
 │       ├── newprompt-coordinator.md # Agent creation
 │       ├── code-quality-analyzer.md # Quality assessment
 │       ├── design-analyzer.md # UX/UI analysis
@@ -657,6 +855,10 @@ claudio/
 │       ├── security-diagram-generator.md # Security Mermaid diagrams
 │       ├── vulnerability-assessment-specialist.md # Vulnerability analysis
 │       ├── security-architecture-analyst.md # Security architecture review
+│       ├── discovery-validator.md # Discovery validation
+│       ├── workflow-validator.md # Workflow validation
+│       ├── install-validator.md # Installation validation
+│       ├── new-command-validator.md # Command validation
 │       └── prompts/      # Extended agent contexts
 │           ├── claudio/  # Master orchestration context
 │           ├── discovery/ # Project analysis context
@@ -667,6 +869,9 @@ claudio/
 │           ├── research/ # Research context
 │           ├── documentation/ # Documentation context
 │           ├── design/   # Design analysis context
+│           ├── new-command/ # Custom command templates
+│           ├── test-generation/ # Test command templates
+│           ├── validation/ # Validation templates
 │           ├── newprompt/ # Agent creation context
 │           ├── install/  # Installation context
 │           ├── upgrade/  # Upgrade context
@@ -715,7 +920,43 @@ your-project/
 
 ### Contributing to Claudio
 
-Claudio includes a comprehensive test suite to validate all workflows and ensure system reliability across different project types and complexity levels.
+Claudio includes a comprehensive test suite with validation loops and template systems to ensure quality and consistency across all components.
+
+#### Validation-Driven Development
+
+All Claudio components undergo automatic validation:
+- **Discovery Documents**: Validated for completeness and depth
+- **Generated Commands**: Validated for structure and integration
+- **Workflow Outputs**: Validated for document quality
+- **Installations**: Validated for completeness and functionality
+
+#### Template System
+
+Claudio uses standardized templates for consistency:
+
+##### Command Templates
+- **Structure**: Frontmatter, description, usage, parameters
+- **Integration**: Sub-agent references, workflow hooks
+- **Validation**: Automatic structure verification
+
+##### Agent Templates  
+- **Components**: Purpose, responsibilities, tools, methodology
+- **Patterns**: Consistent naming, error handling, output formats
+- **Localization**: Project-specific customization points
+
+##### Context Templates
+- **Organization**: Structured knowledge sections
+- **References**: Cross-agent integration points
+- **Extensions**: Research-based content additions
+
+#### Validation Loops
+
+Development workflow includes integrated validation:
+1. **Pre-generation**: Validate inputs and requirements
+2. **Generation**: Apply templates with consistency checks
+3. **Post-generation**: Validate output structure and quality
+4. **Integration**: Validate workflow compatibility
+5. **Installation**: Validate deployment completeness
 
 #### Test Suite Structure
 
@@ -818,6 +1059,44 @@ When adding new Claudio features:
 
 The test projects are **generated examples** designed specifically for validation - they are not live projects but carefully crafted scenarios that exercise all Claudio capabilities.
 
+#### Creating New Validators
+
+To add a new validator:
+
+1. **Create Validator Agent**: `agents/claudio/{name}-validator.md`
+   - Define validation criteria and success metrics
+   - Specify tools needed for validation
+   - Include detailed reporting template
+
+2. **Integration Points**: Update workflows to call validator
+   - Add to relevant command workflows
+   - Include in installation/upgrade processes
+   - Ensure proper error handling
+
+3. **Testing**: Add test cases for validator
+   - Success scenarios with valid inputs
+   - Failure scenarios with invalid inputs
+   - Edge cases and boundary conditions
+
+#### Creating New Generators
+
+To add a new generator:
+
+1. **Create Generator Agent**: `agents/claudio/{name}-generator.md`
+   - Define generation logic and templates
+   - Specify research/discovery requirements
+   - Include localization patterns
+
+2. **Template Creation**: Add templates in `prompts/{category}/`
+   - Standardized structure and formatting
+   - Placeholders for customization
+   - Validation hooks
+
+3. **Command Integration**: Create command in `commands/claudio/`
+   - User-facing interface
+   - Parameter validation
+   - Generator agent invocation
+
 ## Benefits
 
 - **Instant Project Understanding**: Get comprehensive discovery and analysis of any codebase
@@ -828,8 +1107,12 @@ The test projects are **generated examples** designed specifically for validatio
 - **Progress Visibility**: Track work at project, phase, and task levels
 - **Team Collaboration**: Shared project-localized contexts enable consistent development approach
 - **Security Analysis**: Comprehensive STRIDE-based security review with technology-specific threat modeling
-- **Quality Assurance**: Built-in review and testing requirements tailored to your project
+- **Quality Assurance**: Built-in validation system ensures output quality and consistency
 - **Multi-Mode Flexibility**: Use globally for multiple projects or install project-specific versions
+- **Custom Command Generation**: Create tailored commands from research sources with workflow integration
+- **Automated Testing**: Project-specific test commands generated based on framework detection
+- **Validation Loops**: Integrated quality checks throughout all workflows
+- **Template System**: Consistent structure across all generated components
 
 ## Getting Help
 

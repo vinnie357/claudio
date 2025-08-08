@@ -45,20 +45,29 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 ### Phase 1: Project Path Validation
 1. Parse target project path parameter
 2. Validate project directory exists and is accessible
-3. Check for existing `.claudio/` folder and preserve status if present
-4. Prepare project context for analysis phases
+3. **Directory Filtering Rules**:
+   - **COMPLETELY IGNORE `claudio/` directory** - This is Claudio system source, not target project
+   - **CHECK `.claudio/` for existing installation only** - Preserve status/progress, don't analyze as code
+4. Check for existing `.claudio/` folder and preserve status if present
+5. Prepare project context for analysis phases with proper directory exclusions
 
 ### Phase 2: Parallel Workflow Execution
 Launch the following sub-agents using the Task tool:
 
 **Sequential Dependencies** (must complete in order):
-1. **claudio:claudio-discovery-orchestrator**: Project analysis foundation
+1. **claudio:claudio-discovery-orchestrator**: Project analysis foundation (with directory filtering)
 2. **claudio:claudio-prd-orchestrator**: Uses discovery output for requirements
 3. **claudio:claudio-plan-orchestrator**: Uses PRD output for implementation planning
 4. **claudio:claudio-task-orchestrator**: Uses plan output for task breakdown
 
 **Final Integration**:
 5. **claudio:claudio-structure-creator**: Creates final structure and summary
+
+**Test Command Generation**:
+6. **claudio:generate-test-commands**: Generate project-specific test commands based on discovery analysis
+
+**Workflow Validation** (MANDATORY final step):
+7. **claudio:workflow-validator**: Validates complete workflow document quality and completeness
 
 ### Phase 3: Results Integration
 1. Collect outputs from all orchestrator agents
@@ -71,6 +80,24 @@ Launch the following sub-agents using the Task tool:
 2. Verify document consistency and integration
 3. Confirm status tracking systems are operational
 4. Generate comprehensive completion report
+
+### Phase 5: Test Command Generation
+**Generate project-specific test commands:**
+1. **Launch claudio:generate-test-commands** with target project path
+2. **Analyze Discovery**: Use discovery.md to understand testing framework and requirements
+3. **Generate Test Commands**: Create `/claudio:test` and `/claudio:test-g` commands
+4. **Create Sub-Agents**: Generate project-specific test runner and Gemini integration agents
+5. **Install Test System**: Add generated test commands to project's `.claudio/` structure
+
+### Phase 6: Final Workflow Validation (MANDATORY)
+**ALWAYS run as final step:**
+1. **Launch claudio:workflow-validator** to comprehensively validate workflow document quality
+2. **Document Quality Validation**: Validate that discovery.md, prd.md, plan.md meet content quality standards
+3. **Cross-Reference Validation**: Confirm all links and references between documents work correctly
+4. **Feasibility Assessment**: Ensure plans and recommendations are realistic and actionable
+5. **Integration Validation**: Verify document consistency and alignment across workflow phases
+6. **Test Command Validation**: Verify generated test commands are properly integrated
+7. **Final Completion Report**: Generate comprehensive workflow quality validation report
 
 ## Extended Context Reference:
 Reference prompt locations dynamically based on installation context:
@@ -101,6 +128,12 @@ target_project/
         ├── utilities/claude.md
         └── resources/claude.md
 ```
+
+## Directory Filtering Guidelines:
+Ensure all sub-agents follow proper directory handling:
+- **`claudio/` directory**: Never analyze - it's the Claudio system source
+- **`.claudio/` directory**: Only check for existing installation status, never analyze as project code
+- **Project focus**: All analysis should target actual project codebase only
 
 ## Error Handling:
 - **Invalid Project Path**: Validate and guide user to correct path
@@ -135,6 +168,8 @@ Provide real-time updates on workflow progress:
 - ✓ Implementation Planning: [status]
 - ✓ Task Organization: [status]
 - ✓ Structure Creation: [status]
+- ✓ Test Command Generation: [status] - Project-specific test commands created
+- ✓ **Final Validation: [status]** - Comprehensive workflow validation completed
 
 ## Generated Documents
 - discovery.md: [file_size] - Project analysis and recommendations

@@ -381,10 +381,100 @@ the script should also check if claude is installed, and assumes the ci run or l
 
 /claudio:research software design https://12factor.net/
 
+# discovery issues 
+
+review the /claudio:claudio command, users are reporting that it is anaylyzing itself and not their projects
+
+ /claudio:claudio /path/to/project IMPORTANT: ignore the claudio
+directory its not part of the project, it is a tool to enhance the project, you don't need to discuss
+this just run the workflow on the target project and install the commands, use the validation agent to
+ensure the full workflow has run and the validation agent was successful.
+
+the upgrade process does need to use the `claudio` directory and the `.claudio` directory to update the `.claudio` directory the   │
+│   discovery process should only review the `.claudio` directory to see if there is an existing install and use it, the discovery     │
+│   process should never use the `claudio` directory, as it is analyzing the target project not itself.
+
+# validation loop not starting
+
+users are also reporting the install coordinator is not calling the install validator when complete this should always be the installs last task
+
+similarlly we want the claudio:claudio command coordinator to run its validation sub agent also
+
+the the primary workflows are :
+/claudio:claudio /path/to/project - run the workflow and validate
+/claudio:install /path/to/project - run the workflow validate, install the commands and sub agents validate
+/claudio:install commands - run the minimum discovery to create the localized commands then validate, then create the commands and subagents based on the discovery and validate
+
+
+1. /claudio:claudio /path/to/project → run workflow → validate completion
+2. /claudio:install /path/to/project → run workflow → validate workflow  → install → validate installation
+3. /claudio:install commands → discovery → validate discovery docs → install commands only → validate installation
+
+install commands, should always inlcude their required sub agents, and required extented contect documents in .claude/claudio/prompts
+
+review each validation subagent, ensure they have explict success criteria and report what is missing
+
+# test commands
+
+/claudio:generate-test-commands - creates custom commands with their subagents and extended context in the users target project as /claudio:test and /claudio:test-g
+
+each command, sub agent, and extenxted context, is generated using the context from the project discovery documents
+
+/claudio:test - by default runs the users test suite, and provides a summary, if given a --fix flag it makes a plan to address the issues
+
+/claudio:test-g - is a special agent that requires gemini-cli and gemini access, this command gives explict commands to gemini-cli through a bash tool use `gemini -y -p " {user input} + an explict prompt telling gemini it is in a read only mode, and is able to execute the projects test suite, use playwigh or other mcps where releveant and it ONLY responds in prompts to the claude sub agent that called it, it needs to provide a prompt of the issues found and a task list to address them ONLY, the claude sub agent will review the outputs by default and if the --fix flag is set attempt to fix them.
+
+the generated test comamnds /claudio:test, /claudio:test-g 
+are included in the 
+/claudio:install /path/to/project
+/claudio:upgrade /path/to/project
+/claudio:install commands /path/to/project
+/claudo:claudio /path/to/project
+
+the /claudio:generate-test-commands command is used to generate the /claudo:test and /claudio:test-g commands that get installed 
+upgraded or added to a project. the generate-test-commands command will not be installed upgrade or added to a users .claude directory ensure the validator and other subagents know this
+
+the the /claudio:generate-test-commmands will be run, during a /claudio:install, /claudio:install commands, /claudio:claudio, and /claudio:update
+
+# new command generator
+
+create /claudio:new-command  - the new command generator expects a user to provide a name and a purpose, and either a research document or a URL example 
+
+/claudio:new-command mycommand "does the thing I want" https://mything.information , or mything_readme.md 
+
+if a URL is provided, the sub agent uses the /claudio:research command to generate the extended context files for the command
+
+all new commands will follow our command structure of command, sub agent, extended context.
+we can use this as a pattern, and includes validation
+
+if the command needs to be added to the claudio workflow, they can add the --claudio "where it goes in the workflow" to their command like :
+
+/claudio:new-command mycommand "does the thing I want" https://mything.information , or mything_readme.md --claudio "add to after the discovery workflow"
+
+if the --claudio flag is not provided it is a user command and not part of the claudio workflow
+
+#  update docs
+
+review the current readme, the usage and commands have changed, update the read me with the new patterns and features add a development section if not already present that makes reference to the test folder and its patterns 
+
+# update change log
+
+diff our branch with main, and create a new change log in changelog/ with todays date
+
 #
 # todo:
 #
 
+# model diet
+
+use hakiu where possible for subagent work
+use opus where needed for research command
+allow research command to think and deep think
+
+prune sub agent context, rely on extended context files more, and sub section them into
+general
+troubleshooting
+specific-topics
 
 
 # claudini command

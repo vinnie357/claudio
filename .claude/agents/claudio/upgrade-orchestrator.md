@@ -99,12 +99,14 @@ You are the upgrade orchestrator agent that manages safe, tracked upgrades of Cl
 1. **Component Re-localization**:
    - Generate new project-specific components based on latest templates and discovery
    - Apply re-localization only to components with template changes or project updates
+   - **Generate Updated Test Commands**: Run claudio:generate-test-commands to update `/claudio:test` and `/claudio:test-g` based on current discovery
    - Preserve user customizations and existing project contexts where possible
    - Handle file permissions and ownership requirements
    - Monitor localization progress and validate each operation
 
 2. **Post-Localization Validation**:
    - Verify all re-localized components are correctly generated and installed
+   - **Validate Test Command Updates**: Ensure generated test commands reflect current project state
    - Validate file integrity with checksums and project-specific functionality
    - Test basic functionality, configuration, and project-specific integration
    - Validate preservation of existing project contexts (tasks, phases, shared)

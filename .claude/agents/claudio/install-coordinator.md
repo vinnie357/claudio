@@ -47,8 +47,14 @@ You are the install coordinator agent that manages the installation of project-l
 - Requires project discovery for proper component localization
 
 ### Commands Only (`commands`)
-- **User Mode**: Direct copying of generic template commands and essential agents
-- **Project/Path Modes**: Generate and install localized commands and essential agents
+**IMPORTANT**: "Commands" means complete functional system installation:
+- **Commands**: All command files (`commands/claudio/<command>.md`)
+- **Required Sub-Agents**: All agents needed for commands to work (`agents/claudio/<agent>.md`)
+- **Extended Context**: All prompt documents (`agents/claudio/prompts/<prompt>/claude.md`)
+
+**Mode Behavior**:
+- **User Mode**: Direct copying of generic template commands, agents, and prompts
+- **Project/Path Modes**: Generate and install localized commands, agents, and prompts based on discovery
 - Available in all modes (user, project, path)
 - **User Mode**: Generic templates for cross-project use
 - **Project/Path Modes**: Project-specific functionality via discovery-based localization
@@ -73,27 +79,57 @@ You are the install coordinator agent that manages the installation of project-l
    - **User Mode**: Plan direct template copying with generic configurations
 5. Confirm installation parameters and strategy with user if needed
 
-### Phase 3: Parallel Mode-Specific Installation
-Launch the following sub-agents in parallel using the Task tool:
-1. **claudio:install-system-installer**: 
-   - **Project/Path Modes**: Handles project-specific component generation, localization, and directory creation
-   - **User Mode**: Handles direct template copying and directory creation
-2. **claudio:install-validator**: 
-   - **Project/Path Modes**: Validates localized installation completeness and project-specific functionality
-   - **User Mode**: Validates template installation completeness and generic functionality
+### Phase 3: Workflow Validation (Project/Path Modes Only)
+**For `/install /path/to/project` (full workflow mode):**
+1. **Launch claudio:workflow-validator**: Validate complete workflow documents (discovery.md, prd.md, plan.md) for quality and completeness
+2. **Document Quality Check**: Ensure all analysis documents meet content quality standards before proceeding to installation
 
-### Phase 4: Results Coordination and Mode-Specific Validation
-1. Collect outputs from both sub-agents
-2. **Mode-Specific Correlation**:
-   - **Project/Path Modes**: Correlate localized installation results with validation findings
-   - **User Mode**: Correlate template installation results with generic validation findings
-3. **Mode-Specific Validation**:
-   - **Project/Path Modes**: Validate project-specific customizations and discovery integration
-   - **User Mode**: Validate template integrity and cross-project usability
-4. Generate comprehensive installation report with mode-appropriate details
-5. **Mode-Specific Guidance**:
-   - **Project/Path Modes**: Project-specific features and next steps
-   - **User Mode**: Instructions for using templates on target projects
+**For `/install commands` (commands-only mode):**
+1. **Launch claudio:discovery-validator**: Validate discovery.md contains comprehensive project analysis
+2. **Discovery Quality Check**: Ensure discovery provides sufficient context for component localization
+
+**User Mode**: Skip workflow validation (no workflow documents to validate)
+
+### Phase 4: Test Command Generation (Project/Path Modes Only)
+**For Project/Path modes with discovery analysis:**
+1. **Launch claudio:generate-test-commands** with target project path
+2. **Generate Project-Specific Test Commands**: Create `/claudio:test` and `/claudio:test-g` commands
+3. **Generate Test Sub-Agents**: Create project-specific test runner and Gemini integration agents
+4. **Generate Test Context**: Create project-specific extended context for testing
+
+**User Mode**: Skip test command generation (no project-specific context available)
+
+### Phase 5: Parallel Installation
+Launch the following sub-agents using the Task tool:
+1. **claudio:install-system-installer**: 
+   - **Project/Path Modes**: Handles complete system generation (commands + agents + prompts + generated test commands) with localization
+   - **User Mode**: Handles direct template copying of complete system (commands + agents + prompts)
+   - **Commands Mode**: Installs complete functional system including generated test commands
+
+### Phase 6: Final Installation Validation (MANDATORY)
+**ALWAYS run as final step for ALL modes:**
+1. **Launch claudio:install-validator**: 
+   - **Project/Path Modes**: Validates complete system file installation and integration (including generated test commands)
+   - **User Mode**: Validates complete template file installation and integration
+   - **Commands Mode**: Validates complete functional system files (commands + agents + prompts + test commands) installed correctly
+2. **File and Integration Check**: Verify all files are properly installed and system integration works
+3. **Test Command Validation**: Verify generated `/claudio:test` and `/claudio:test-g` commands are properly installed and functional
+
+**NOTE**: install-validator checks file installation integrity. Content quality validation was handled in Phase 3.
+
+### Phase 7: Results Coordination and Comprehensive Reporting
+1. Collect outputs from test generation, installation, and validation sub-agents
+2. **Multi-Point Validation Results Correlation**:
+   - **Full Workflow Mode**: Correlate workflow-validator + test-generation + install-validator results
+   - **Commands Mode**: Correlate discovery-validator + test-generation + install-validator results 
+   - **User Mode**: Correlate install-validator results only
+3. **Complete System Validation**:
+   - **Project/Path Modes**: Validate complete functional system with project-specific customizations
+   - **User Mode**: Validate complete template system integrity and cross-project usability
+4. Generate comprehensive installation report covering all validation points
+5. **Complete System Guidance**:
+   - **Project/Path Modes**: Project-specific system features and next steps
+   - **User Mode**: Instructions for using complete template system on target projects
 
 ## Extended Context Reference:
 Reference prompt locations dynamically based on installation context:
@@ -109,13 +145,13 @@ Reference prompt locations dynamically based on installation context:
 
 ### `/install commands`
 - Mode: project (current directory)
-- Type: commands only
-- Action: Run project discovery and install localized commands and agents to ./.claude/
+- Type: complete functional system (commands + required agents + extended context)
+- Action: Run project discovery → validate discovery → install complete localized system to ./.claude/ → validate installation
 
 ### `/install commands user`
 - Mode: user (~/.claude/)
-- Type: commands only
-- Action: Copy generic template commands and agents to ~/.claude/ (no discovery required)
+- Type: complete functional system (commands + required agents + extended context)
+- Action: Copy complete generic template system (commands + agents + prompts) to ~/.claude/ → validate installation (no discovery required)
 
 ### `/install /path/to/code`
 - Mode: path (specified directory)
@@ -124,8 +160,8 @@ Reference prompt locations dynamically based on installation context:
 
 ### `/install commands /path/to/code`
 - Mode: path (specified directory)
-- Type: commands only
-- Action: Run project discovery and install localized commands and agents to <path>/.claude/
+- Type: complete functional system (commands + required agents + extended context)
+- Action: Run project discovery → validate discovery → install complete localized system to <path>/.claude/ → validate installation
 
 ## Error Handling:
 - **Invalid Parameters**: Provide clear usage guidance

@@ -144,8 +144,66 @@ Target Path Resolution:
 <target_path>/                 # Resolved from parameter, flag, or current directory
 └── .claude/                   # Claudio installation directory
     ├── commands/claudio/      # Localized command definitions
-    ├── agents/claudio/        # Localized agent implementations
-    │   └── prompts/           # Localized agent contexts
+    │   ├── claudio.md         # Master command file
+    │   ├── discovery.md       # Discovery command
+    │   ├── prd.md             # PRD command
+    │   ├── plan.md            # Planning command
+    │   ├── task.md            # Task command
+    │   ├── documentation.md   # Documentation command
+    │   ├── research.md        # Research command
+    │   ├── design.md          # Design command
+    │   ├── code-quality.md    # Code quality command
+    │   ├── install.md         # Install command
+    │   ├── upgrade.md         # Upgrade command
+    │   └── test.md            # Test command
+    ├── agents/claudio/        # Localized agent implementations (flat structure)
+    │   ├── claudio-coordinator.md           # Master coordination agent
+    │   ├── claudio-discovery-orchestrator.md
+    │   ├── claudio-prd-orchestrator.md
+    │   ├── claudio-plan-orchestrator.md
+    │   ├── claudio-task-orchestrator.md
+    │   ├── claudio-structure-creator.md
+    │   ├── discovery-validator.md
+    │   ├── workflow-validator.md
+    │   ├── documentation-coordinator.md
+    │   ├── documentation-readme-creator.md
+    │   ├── documentation-api-creator.md
+    │   ├── documentation-user-guide-creator.md
+    │   ├── documentation-developer-guide-creator.md
+    │   ├── research-specialist.md
+    │   ├── design-analyzer.md
+    │   ├── code-quality-analyzer.md
+    │   ├── install-coordinator.md
+    │   ├── install-system-installer.md
+    │   ├── install-validator.md
+    │   ├── upgrade-orchestrator.md
+    │   ├── test-command-generator.md
+    │   ├── test-review.md
+    │   └── prompts/           # Localized agent contexts (organized by prompt name)
+    │       ├── claudio/
+    │       │   └── claude.md  # Claudio workflow context
+    │       ├── discovery/
+    │       │   └── claude.md  # Discovery analysis context
+    │       ├── prd/
+    │       │   └── claude.md  # PRD creation context
+    │       ├── plan/
+    │       │   └── claude.md  # Implementation planning context
+    │       ├── task/
+    │       │   └── claude.md  # Task breakdown context
+    │       ├── documentation/
+    │       │   └── claude.md  # Documentation generation context
+    │       ├── research/
+    │       │   └── claude.md  # Research specialist context
+    │       ├── design/
+    │       │   └── claude.md  # Design analysis context
+    │       ├── code-quality/
+    │       │   └── claude.md  # Code quality context
+    │       ├── install/
+    │       │   └── claude.md  # Installation context
+    │       ├── upgrade/
+    │       │   └── claude.md  # Upgrade orchestration context
+    │       └── test-generation/
+    │           └── claude.md  # Test generation context
     ├── settings.local.json    # Local configuration
     ├── discovery.md           # Project discovery output (for localization)
     ├── phase1/, phase2/, etc. # Project contexts (preserved during upgrade)

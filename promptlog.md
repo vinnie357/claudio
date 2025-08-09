@@ -461,6 +461,52 @@ review the current readme, the usage and commands have changed, update the read 
 
 diff our branch with main, and create a new change log in changelog/ with todays date
 
+# install structure failures
+
+review the @.claude/agents/claudio/upgrade-orchestrator.md  this section: [Pasted text #1 +18 lines] is not sufficently detailed   │
+│   and upgrade task on a target project produced:  tree .claude                                                                       │
+│   .claude        
+│   ├── agents     
+│   │   ├── claudio
+│   │   │   └── prompts 
+│   │   │       └── claude.md│
+│   │   ├── discovery   
+│   │   │   └── prompts 
+│   │   │       └── claude.md│
+│   │   ├── documentation│
+│   │   │   └── prompts 
+│   │   │       └── claude.md│
+│   │   ├── plan   
+│   │   │   └── prompts 
+│   │   │       └── claude.md│
+│   │   ├── prd    
+│   │   │   └── prompts 
+│   │   │       └── claude.md│
+│   │   ├── research    
+│   │   │   └── prompts 
+│   │   │       └── claude.md│
+│   │   └── task   
+│   │       └── prompts 
+│   │           └── claude.md│
+│   ├── commands   
+│   │   ├── claudio
+│   │   │   └── claude.md│
+│   │   ├── cq.md  
+│   │   ├── discovery.md
+│   │   ├── plan.md
+│   │   ├── prd.md 
+│   │   ├── task.md
+│   │   └── test.md
+│   └── settings.local.json   which is incorrect, its not making the agents correctly
+
+this is incorrect, the agents must be their agent_name.md under .claude/agents/claudio/agent_name.md, and commands
+  comamnd_name.md  under .claude/commands/claudio/command_name.md and the prompts prompt_name.md under
+  .claude/agents/promopts/prompt_name.md  the validator should also check for this pattern.
+
+
+
+
+
 #
 # todo:
 #

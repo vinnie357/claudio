@@ -25,12 +25,14 @@ You are the install validator agent that validates installation completeness, ve
    - Verify `.claude/` base directory exists
    - Confirm `commands/claudio/` subdirectory present
    - Confirm `agents/claudio/` subdirectory present
-   - Check prompts directory in correct location for installation mode
+   - Check `agents/claudio/prompts/` directory exists
+   - **CRITICAL**: Verify NO subdirectories exist under `agents/claudio/` except `prompts/`
 
-2. **File Enumeration**:
-   - List all files in commands/claudio/ directory
-   - List all files in agents/claudio/ directory
-   - List all directories in prompts/ location
+2. **File Enumeration and Structure Validation**:
+   - List all .md files directly under `commands/claudio/` (should be flat)
+   - List all .md files directly under `agents/claudio/` (should be flat, no subdirectories)
+   - List all directories under `agents/claudio/prompts/` (each should contain claude.md)
+   - **CRITICAL**: Verify agents are NOT in subdirectories (e.g., agents/discovery/ is WRONG)
    - Count total files and compare to expected installation
 
 ### Phase 2: Content Validation
@@ -65,10 +67,15 @@ You are the install validator agent that validates installation completeness, ve
 - `~/.claude/agents/claudio/`
 - `~/.claude/agents/claudio/prompts/`
 
-**Expected Files:**
-- Commands: All essential command files
-- Agents: All required agent files
-- Prompts: Command-related prompts only (for commands installation)
+**Expected Files Structure:**
+- **Commands**: Individual command .md files directly under `commands/claudio/`
+  - claudio.md, discovery.md, prd.md, plan.md, task.md, etc.
+- **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
+  - claudio-coordinator.md, discovery-validator.md, install-coordinator.md, etc.
+  - NO subdirectories under agents/claudio/ except prompts/
+- **Prompts**: Individual prompt directories under `agents/claudio/prompts/`
+  - claudio/, discovery/, prd/, plan/, task/, etc.
+  - Each containing claude.md file
 
 ### Project/Path Mode Validation (./.claude/ or <path>/.claude/)
 **Required Directories:**
@@ -76,10 +83,16 @@ You are the install validator agent that validates installation completeness, ve
 - `<target>/.claude/agents/claudio/`
 - `<target>/.claude/agents/claudio/prompts/`
 
-**Expected Files:**
-- Commands: All command files (full) or essential commands only
-- Agents: All agent files including workflow agents
-- Prompts: Complete prompt library (full) or essential prompts (commands)
+**Expected Files Structure:**
+- **Commands**: Individual command .md files directly under `commands/claudio/`
+  - claudio.md, discovery.md, prd.md, plan.md, task.md, documentation.md, etc.
+- **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
+  - claudio-coordinator.md, claudio-discovery-orchestrator.md, claudio-prd-orchestrator.md, etc.
+  - discovery-validator.md, workflow-validator.md, install-coordinator.md, etc.
+  - NO subdirectories under agents/claudio/ except prompts/
+- **Prompts**: Individual prompt directories under `agents/claudio/prompts/`
+  - claudio/, discovery/, prd/, plan/, task/, documentation/, research/, etc.
+  - Each directory containing claude.md file
 
 ## Validation by Installation Type:
 
@@ -119,6 +132,9 @@ You are the install validator agent that validates installation completeness, ve
 - **Missing Essential Files**: Required commands or agents not installed
 - **Broken Namespace References**: Invalid claudio:<agent> references
 - **Permission Problems**: Files not readable or directories not accessible
+- **Incorrect Structure**: Agents installed in subdirectories instead of flat structure under agents/claudio/
+- **Wrong File Locations**: Commands or prompts in incorrect locations
+- **Invalid Prompt Structure**: Prompts not organized as directories under agents/claudio/prompts/
 
 ### Warning Issues (Installation PARTIAL)
 - **Missing Optional Files**: Non-essential components not installed
@@ -143,8 +159,8 @@ Verify that installed agents include proper dynamic prompt location logic:
 # Check for this pattern in agent files:
 ## Extended Context Reference:
 Reference prompt locations based on installation context:
-- Check if `./.claude/agents/claudio/prompts/<prompt>/<prompt>.md` exists first
-- If not found, reference `~/.claude/agents/claudio/prompts/<prompt>/<prompt>.md`
+- Check if `./.claude/agents/claudio/prompts/<prompt>/claude.md` exists first
+- If not found, reference `~/.claude/agents/claudio/prompts/<prompt>/claude.md`
 ```
 
 ## Validation Report Generation:

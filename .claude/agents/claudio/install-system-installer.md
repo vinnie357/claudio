@@ -24,28 +24,124 @@ You are the install system installer agent that handles mode-specific installati
 ```
 ~/.claude/
 ├── commands/claudio/
-│   ├── <command>.md
-│   └── ...
+│   ├── claudio.md
+│   ├── discovery.md
+│   ├── prd.md
+│   ├── plan.md
+│   ├── task.md
+│   ├── documentation.md
+│   ├── research.md
+│   ├── design.md
+│   ├── code-quality.md
+│   ├── install.md
+│   ├── upgrade.md
+│   └── test.md
 ├── agents/claudio/
-│   ├── <agent>.md
-│   └── ...
-└── agents/claudio/prompts/
-    ├── <prompt>/
-    └── ...
+│   ├── claudio-coordinator.md
+│   ├── claudio-discovery-orchestrator.md
+│   ├── claudio-prd-orchestrator.md
+│   ├── claudio-plan-orchestrator.md
+│   ├── claudio-task-orchestrator.md
+│   ├── discovery-validator.md
+│   ├── workflow-validator.md
+│   ├── documentation-coordinator.md
+│   ├── research-specialist.md
+│   ├── design-analyzer.md
+│   ├── code-quality-analyzer.md
+│   ├── install-coordinator.md
+│   ├── install-system-installer.md
+│   ├── install-validator.md
+│   ├── upgrade-orchestrator.md
+│   ├── test-command-generator.md
+│   ├── test-review.md
+│   └── prompts/
+│       ├── claudio/
+│       │   └── claude.md
+│       ├── discovery/
+│       │   └── claude.md
+│       ├── prd/
+│       │   └── claude.md
+│       ├── plan/
+│       │   └── claude.md
+│       ├── task/
+│       │   └── claude.md
+│       ├── documentation/
+│       │   └── claude.md
+│       ├── research/
+│       │   └── claude.md
+│       ├── design/
+│       │   └── claude.md
+│       ├── code-quality/
+│       │   └── claude.md
+│       ├── install/
+│       │   └── claude.md
+│       ├── upgrade/
+│       │   └── claude.md
+│       └── test-generation/
+│           └── claude.md
+└── settings.local.json
 ```
 
 ### Project/Path Mode (./.claude/ or <path>/.claude/)
 ```
 .claude/
 ├── commands/claudio/
-│   ├── <command>.md
-│   └── ...
+│   ├── claudio.md
+│   ├── discovery.md
+│   ├── prd.md
+│   ├── plan.md
+│   ├── task.md
+│   ├── documentation.md
+│   ├── research.md
+│   ├── design.md
+│   ├── code-quality.md
+│   ├── install.md
+│   ├── upgrade.md
+│   └── test.md
 ├── agents/claudio/
-│   ├── <agent>.md
-│   └── ...
-└── agents/claudio/prompts/
-    ├── <prompt>/
-    └── ...
+│   ├── claudio-coordinator.md
+│   ├── claudio-discovery-orchestrator.md
+│   ├── claudio-prd-orchestrator.md
+│   ├── claudio-plan-orchestrator.md
+│   ├── claudio-task-orchestrator.md
+│   ├── discovery-validator.md
+│   ├── workflow-validator.md
+│   ├── documentation-coordinator.md
+│   ├── research-specialist.md
+│   ├── design-analyzer.md
+│   ├── code-quality-analyzer.md
+│   ├── install-coordinator.md
+│   ├── install-system-installer.md
+│   ├── install-validator.md
+│   ├── upgrade-orchestrator.md
+│   ├── test-command-generator.md
+│   ├── test-review.md
+│   └── prompts/
+│       ├── claudio/
+│       │   └── claude.md
+│       ├── discovery/
+│       │   └── claude.md
+│       ├── prd/
+│       │   └── claude.md
+│       ├── plan/
+│       │   └── claude.md
+│       ├── task/
+│       │   └── claude.md
+│       ├── documentation/
+│       │   └── claude.md
+│       ├── research/
+│       │   └── claude.md
+│       ├── design/
+│       │   └── claude.md
+│       ├── code-quality/
+│       │   └── claude.md
+│       ├── install/
+│       │   └── claude.md
+│       ├── upgrade/
+│       │   └── claude.md
+│       └── test-generation/
+│           └── claude.md
+└── settings.local.json
 ```
 
 ## Installation Process:
@@ -86,12 +182,41 @@ Generate project-specific components based on templates and discovery:
   - design.md (project architecture-aware)
   - code-quality.md (technology stack-specific)
   - install.md (self-installation with project context)
-- **Agents Localization**: Install to `<target>/.claude/agents/claudio/`
-  - All coordinator agents (localized for project context)
-  - All specialized sub-agents (customized for project requirements)
-  - Update namespace references and project-specific customizations
+  - upgrade.md (project upgrade capabilities)
+  - test.md (project-specific test commands)
+- **Agents Localization**: Install FLAT structure to `<target>/.claude/agents/claudio/`
+  - claudio-coordinator.md (localized for project context)
+  - claudio-discovery-orchestrator.md (project discovery patterns)
+  - claudio-prd-orchestrator.md (project requirements)
+  - claudio-plan-orchestrator.md (project planning)
+  - claudio-task-orchestrator.md (project task management)
+  - discovery-validator.md (project validation rules)
+  - workflow-validator.md (project workflow validation)
+  - documentation-coordinator.md (project documentation)
+  - research-specialist.md (domain research)
+  - design-analyzer.md (project architecture analysis)
+  - code-quality-analyzer.md (technology-specific quality)
+  - install-coordinator.md (project installation)
+  - install-system-installer.md (project installer)
+  - install-validator.md (project validation)
+  - upgrade-orchestrator.md (project upgrades)
+  - test-command-generator.md (project test generation)
+  - test-review.md (project test review)
+  - All agents as INDIVIDUAL .md files directly under agents/claudio/
 - **Prompts Localization**: Install to `<target>/.claude/agents/claudio/prompts/`
-  - Project-specific prompt directories based on discovery analysis
+  - claudio/ → claude.md (project workflow integration)
+  - discovery/ → claude.md (domain-specific analysis)
+  - prd/ → claude.md (project requirements context)
+  - plan/ → claude.md (project planning context)
+  - task/ → claude.md (project task context)
+  - documentation/ → claude.md (project documentation context)
+  - research/ → claude.md (domain research context)
+  - design/ → claude.md (project design context)
+  - code-quality/ → claude.md (project quality context)
+  - install/ → claude.md (project installation context)
+  - upgrade/ → claude.md (project upgrade context)
+  - test-generation/ → claude.md (project test context)
+  - Each prompt as DIRECTORY under prompts/ containing claude.md
 
 ### Phase 3: Mode-Specific Customization and Namespace Updates
 
@@ -132,8 +257,8 @@ When installed agents need to reference their extended prompts, include dynamic 
 ```markdown
 ## Extended Context Reference:
 Reference prompt locations based on installation context:
-- Check if `./.claude/agents/claudio/prompts/<prompt>/<prompt>.md` exists first
-- If not found, reference `~/.claude/agents/claudio/prompts/<prompt>/<prompt>.md`
+- Check if `./.claude/agents/claudio/prompts/<prompt>/claude.md` exists first
+- If not found, reference `~/.claude/agents/claudio/prompts/<prompt>/claude.md`
 - Use whichever location is available
 ```
 
@@ -163,9 +288,14 @@ cp -r source/prompts/* ~/.claude/agents/claudio/prompts/
 ### Project/Path Mode - Localized Component Generation
 ```bash
 # Generate project-specific components based on discovery
-generate_localized_command(discovery_data, template) -> <target>/.claude/commands/claudio/
-generate_localized_agent(discovery_data, template) -> <target>/.claude/agents/claudio/
-generate_localized_prompts(discovery_data, template) -> <target>/.claude/agents/claudio/prompts/
+# Commands: Individual command files directly under commands/claudio/
+generate_localized_command(discovery_data, template) -> <target>/.claude/commands/claudio/command_name.md
+
+# Agents: Individual agent files directly under agents/claudio/ (FLAT structure)
+generate_localized_agent(discovery_data, template) -> <target>/.claude/agents/claudio/agent_name.md
+
+# Prompts: Individual prompt directories under agents/claudio/prompts/
+generate_localized_prompts(discovery_data, template) -> <target>/.claude/agents/claudio/prompts/prompt_name/claude.md
 ```
 
 ### Permission Setting

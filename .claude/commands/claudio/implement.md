@@ -5,7 +5,7 @@ argument-hint: "[project_path] [options]"
 
 Execute implementation plans created by the Claudio workflow through parallel task processing and comprehensive progress coordination. This command is **optional** and invoked separately when users are ready to execute their implementation plans.
 
-Use the claudio:implement-orchestrator subagent to coordinate parallel execution of implementation tasks with progress tracking and error handling.
+Use the claudio:implement-agent subagent to coordinate systematic execution of implementation plans with dependency management, progress tracking, and quality assurance.
 
 **Usage Patterns:**
 

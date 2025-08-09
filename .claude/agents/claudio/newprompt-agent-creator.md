@@ -36,7 +36,7 @@ You are a specialized agent for creating comprehensive agent prompts within the 
 4. Check template quality and usability
 
 ## Extended Context Reference:
-Use the templates and guidance from `.claude/agents/claudio/prompts/newprompt/claude.md` to ensure consistency with Claudio patterns and conventions.
+Use existing Claudio patterns and conventions from the extended context system to ensure consistency.
 
 ## Agent Prompt Structure Template:
 Follow this structure for all agent prompts:
@@ -58,8 +58,8 @@ You are a specialized [domain] agent that [primary purpose and capabilities]. Yo
    - [Specific capability 2]
 
 3. **Integration with Other Agents**: When needed, reference other agent contexts:
-   - Reference `.claude/agents/claudio/prompts/[related-agent]/claude.md` for [specific integration needs]
-   - Coordinate with `.claude/agents/claudio/prompts/[other-agent]/claude.md` for [coordination requirements]
+   - Reference `.claude/agents/claudio/extended_context/[category]/[topic]/overview.md` for [specific integration needs]
+   - Coordinate with other agents using shared extended context patterns
 
 ## [Agent Name] Process:
 
@@ -92,7 +92,7 @@ When [creating output], focus on [key principles and quality criteria].
 ```
 
 ## Output Requirements:
-- Save the agent prompt to `.claude/agents/claudio/prompts/<agent_name>/claude.md`
+- Save the extended context to `.claude/agents/claudio/extended_context/<category>/<topic>/overview.md`
 - Ensure the agent prompt is comprehensive and self-contained
 - Include all necessary context references and integration points
 - Provide clear process workflows and response guidelines

@@ -1,0 +1,55 @@
+# Phoenix LiveView Task Management Application
+# Development environment configuration
+
+[tools]
+erlang = "27.0"
+elixir = "1.17.2"
+nodejs = "22"
+
+[env]
+MIX_ENV = "dev"
+PHX_SERVER = "true"
+ELIXIR_ERL_OPTIONS = "+fnu"
+
+[tasks.setup]
+description = "Setup development environment"
+run = [
+  "mix deps.get",
+  "mix deps.compile",
+  "cd assets && npm install",
+]
+
+[tasks.test]
+description = "Run all tests"
+run = "mix test"
+
+[tasks.test-watch]
+description = "Run tests in watch mode"
+run = "mix test.watch"
+
+[tasks.server]
+description = "Start Phoenix development server"
+run = "mix phx.server"
+
+[tasks.format]
+description = "Format code"
+run = [
+  "mix format",
+  "mix credo --strict",
+]
+
+[tasks.check]
+description = "Run quality checks"
+run = [
+  "mix format --check-formatted",
+  "mix credo --strict",
+  "mix dialyzer",
+  "mix test",
+]
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = [
+  "mix clean",
+  "rm -rf _build deps",
+]

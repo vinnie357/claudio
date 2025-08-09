@@ -17,7 +17,7 @@ Install complete Claudio system through intelligent project localization to diff
 - `/install /path/to/code` - Full workflow → validate workflow → install → validate installation
 - `/install commands /path/to/code` - Discovery → validate discovery → install complete system → validate installation
 
-Use the claudio:install-coordinator subagent to orchestrate the complete installation process with:
+Use the claudio:install-coordinator-agent subagent to orchestrate the complete installation process with:
 - Project discovery and analysis
 - Complete system component generation (commands + agents + prompts)
 - Multi-point validation (workflow validation + installation validation)

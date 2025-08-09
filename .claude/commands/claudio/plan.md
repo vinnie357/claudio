@@ -12,5 +12,5 @@ Create detailed implementation plans with time estimates, phases, dependencies, 
 - `refactor`: Code refactoring and improvement plan
 - `integration`: System integration implementation plan
 
-Use the claudio:claudio-plan-orchestrator subagent to perform parallel planning across phase creation, resource estimation, and risk analysis.
+Use the claudio:plan-agent subagent to create detailed implementation plans with phases, timelines, resource requirements, and risk mitigation strategies.
 

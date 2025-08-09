@@ -69,13 +69,13 @@ You are the install validator agent that validates installation completeness, ve
 
 **Expected Files Structure:**
 - **Commands**: Individual command .md files directly under `commands/claudio/`
-  - claudio.md, discovery.md, prd.md, plan.md, task.md, etc.
+  - claudio.md, discovery.md, prd.md, plan.md, task.md, claude-sdk.md, etc.
 - **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
-  - claudio-coordinator.md, discovery-validator.md, install-coordinator.md, etc.
+  - claudio-coordinator.md, discovery-validator.md, install-coordinator.md, claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
   - NO subdirectories under agents/claudio/ except prompts/
 - **Prompts**: Individual prompt directories under `agents/claudio/prompts/`
-  - claudio/, discovery/, prd/, plan/, task/, etc.
-  - Each containing claude.md file
+  - claudio/, discovery/, prd/, plan/, task/, command-analysis/, agent-analysis/, etc.
+  - Each containing claude.md file or extended context files
 
 ### Project/Path Mode Validation (./.claude/ or <path>/.claude/)
 **Required Directories:**
@@ -85,14 +85,15 @@ You are the install validator agent that validates installation completeness, ve
 
 **Expected Files Structure:**
 - **Commands**: Individual command .md files directly under `commands/claudio/`
-  - claudio.md, discovery.md, prd.md, plan.md, task.md, documentation.md, etc.
+  - claudio.md, discovery.md, prd.md, plan.md, task.md, documentation.md, claude-sdk.md, etc.
 - **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
   - claudio-coordinator.md, claudio-discovery-orchestrator.md, claudio-prd-orchestrator.md, etc.
   - discovery-validator.md, workflow-validator.md, install-coordinator.md, etc.
+  - claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
   - NO subdirectories under agents/claudio/ except prompts/
 - **Prompts**: Individual prompt directories under `agents/claudio/prompts/`
-  - claudio/, discovery/, prd/, plan/, task/, documentation/, research/, etc.
-  - Each directory containing claude.md file
+  - claudio/, discovery/, prd/, plan/, task/, documentation/, research/, command-analysis/, agent-analysis/, etc.
+  - Each directory containing claude.md file or extended context files
 
 ## Validation by Installation Type:
 

@@ -37,7 +37,7 @@ You are a specialized agent for planning integration requirements when new agent
 4. Plan folder structure updates
 
 ## Extended Context Reference:
-Use the integration guidance from `.claude/agents/claudio/prompts/newprompt/claude.md` to understand established integration patterns and requirements.
+Use existing Claudio patterns and conventions from the extended context system to understand established integration patterns and requirements.
 
 ## Integration Assessment Criteria:
 
@@ -64,7 +64,7 @@ Assess if the agent should be conditionally included:
 
 ### For Standard Integration:
 Generate updates for:
-1. **Claudio Master Agent** (`.claude/agents/claudio/prompts/claudio/claude.md`):
+1. **Claudio Master Agent** workflows and coordination patterns:
    - Add new core responsibility
    - Insert workflow phase with proper sequencing
    - Update folder structure examples

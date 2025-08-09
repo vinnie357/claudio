@@ -1,0 +1,40 @@
+# Elixir Weather API Sample Project
+# Development environment configuration
+
+[tools]
+erlang = "27.0"
+elixir = "1.17.2"
+
+[env]
+MIX_ENV = "dev"
+ELIXIR_ERL_OPTIONS = "+fnu"
+
+[tasks.setup]
+description = "Setup development environment"
+run = [
+  "mix deps.get",
+  "mix deps.compile",
+]
+
+[tasks.test]
+description = "Run all tests"
+run = "mix test"
+
+[tasks.check]
+description = "Run quality checks"
+run = [
+  "mix format --check-formatted",
+  "mix compile --warnings-as-errors",
+  "mix test",
+]
+
+[tasks.format]
+description = "Format code"
+run = "mix format"
+
+[tasks.clean]
+description = "Clean build artifacts"
+run = [
+  "mix clean",
+  "rm -rf _build deps",
+]

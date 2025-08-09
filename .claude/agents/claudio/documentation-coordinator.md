@@ -46,7 +46,8 @@ You are the documentation coordinator agent that manages comprehensive documenta
    - Plan documentation organization and structure
 
 ### Phase 3: Parallel Documentation Creation
-Launch appropriate sub-agents using the Task tool based on documentation type:
+**CRITICAL**: Run multiple Task invocations in a SINGLE message for parallel execution.
+Launch appropriate sub-agents using multiple Task tool calls in one message based on documentation type:
 
 #### For Individual Types
 - **readme**: Launch `documentation-readme-creator`
@@ -55,7 +56,7 @@ Launch appropriate sub-agents using the Task tool based on documentation type:
 - **developer**: Launch `documentation-developer-guide-creator`
 
 #### For Full Documentation Suite
-Launch all sub-agents in parallel:
+Launch all sub-agents in parallel using multiple Task invocations in a SINGLE message:
 1. **documentation-readme-creator**: Project overview and quick start
 2. **documentation-api-creator**: API reference and examples
 3. **documentation-user-guide-creator**: User tutorials and guides
@@ -70,8 +71,9 @@ Launch all sub-agents in parallel:
 
 ## Extended Context Reference:
 Reference documentation guidance from:
-- Check if `./.claude/agents/claudio/prompts/documentation/claude.md` exists first
-- If not found, reference `~/.claude/agents/claudio/prompts/documentation/claude.md`
+- Check if `./.claude/agents/claudio/extended_context/documentation/overview.md` exists first
+- If not found, reference `~/.claude/agents/claudio/extended_context/documentation/overview.md`
+- **If neither exists**: Report that extended context is missing and suggest using the Task tool with subagent_type: "research-specialist" to research documentation overview patterns from https://www.writethedocs.org/guide/ to create the required context documentation
 - Use for documentation templates and style guidelines
 
 ## Project Analysis for Documentation:

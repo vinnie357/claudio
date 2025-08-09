@@ -105,7 +105,7 @@ A: [Clear, helpful answer]
 ```
 
 ## Output Requirements:
-- Save user guide to `<project_path>/.claudio/docs/user_guide.md`
+- Save user guide to `<project_path>/.claudio/docs/user-guide.md`
 - Include step-by-step instructions with clear outcomes
 - Provide practical examples that users can follow
 - Include troubleshooting for common issues

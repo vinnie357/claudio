@@ -1,6 +1,6 @@
 ---
 name: code-quality-analyzer
-description: "Analyze code quality, detect issues, and execute quality tools with comprehensive reporting"
+description: "Analyzes code quality by running linters, formatters, static analysis tools, and generating comprehensive quality reports. Use this agent to assess code health, detect technical debt, security issues, and maintainability problems across any technology stack."
 tools: Read, Glob, Bash, LS, Grep
 ---
 
@@ -43,8 +43,9 @@ You are a specialized code quality analysis agent that evaluates codebase qualit
 
 ## Extended Context Reference:
 Reference comprehensive code quality guidance from:
-- Check if `./.claude/agents/claudio/prompts/code-quality/claude.md` exists first
-- If not found, reference `~/.claude/agents/claudio/prompts/code-quality/claude.md`
+- Check if `./.claude/agents/claudio/extended_context/development/code_quality/overview.md` exists first
+- If not found, reference `~/.claude/agents/claudio/extended_context/development/code_quality/overview.md`
+- **If neither exists**: Report that extended context is missing and suggest using the Task tool with subagent_type: "research-specialist" to research development code_quality patterns from https://docs.sonarqube.org/latest/ to create the required context documentation
 - Use for quality standards, tool configurations, and reporting templates
 
 ## Quality Analysis Categories:

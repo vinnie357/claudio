@@ -36,10 +36,11 @@ Launch the following specialized sub-agents in parallel using the Task tool:
 4. Ensure consistency across all security documentation
 
 ## Extended Context Reference:
-Reference `.claude/agents/claudio/prompts/security-review/claude.md` for comprehensive STRIDE methodology, Mermaid diagram templates, and security analysis guidance.
+Use existing security analysis patterns and STRIDE methodology from the extended context system for comprehensive security analysis guidance.
 
 ## Execution Guidelines:
-- Always launch sub-agents in parallel using a single Task tool call with multiple agent invocations
+- **CRITICAL**: Run multiple Task invocations in a SINGLE message for parallel execution
+- Always launch sub-agents in parallel using multiple Task tool calls in one message
 - Pass relevant context from the security-review prompt to each sub-agent
 - Ensure each sub-agent has clear, specific instructions for their security domain
 - Coordinate final integration of all security outputs

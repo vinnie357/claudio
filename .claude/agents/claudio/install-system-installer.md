@@ -35,50 +35,76 @@ You are the install system installer agent that handles mode-specific installati
 │   ├── code-quality.md
 │   ├── install.md
 │   ├── upgrade.md
-│   └── test.md
+│   ├── test.md
+│   └── claude-sdk.md
 ├── agents/claudio/
-│   ├── claudio-coordinator.md
-│   ├── claudio-discovery-orchestrator.md
-│   ├── claudio-prd-orchestrator.md
-│   ├── claudio-plan-orchestrator.md
-│   ├── claudio-task-orchestrator.md
+│   ├── claudio-coordinator-agent.md
+│   ├── discovery-agent.md
+│   ├── prd-agent.md
+│   ├── plan-agent.md
+│   ├── task-agent.md
 │   ├── discovery-validator.md
 │   ├── workflow-validator.md
 │   ├── documentation-coordinator.md
 │   ├── research-specialist.md
 │   ├── design-analyzer.md
 │   ├── code-quality-analyzer.md
-│   ├── install-coordinator.md
+│   ├── install-coordinator-agent.md
 │   ├── install-system-installer.md
 │   ├── install-validator.md
-│   ├── upgrade-orchestrator.md
+│   ├── upgrade-orchestrator-agent.md
 │   ├── test-command-generator.md
 │   ├── test-review.md
-│   └── prompts/
-│       ├── claudio/
-│       │   └── claude.md
-│       ├── discovery/
-│       │   └── claude.md
-│       ├── prd/
-│       │   └── claude.md
-│       ├── plan/
-│       │   └── claude.md
-│       ├── task/
-│       │   └── claude.md
+│   ├── claude-sdk-architect.md
+│   ├── claude-commands-analyst.md
+│   ├── claude-subagents-analyst.md
+│   └── extended_context/
+│       ├── workflow/
+│       │   ├── discovery/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   ├── prd/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   ├── planning/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   └── task/
+│       │       ├── overview.md
+│       │       └── troubleshooting.md
+│       ├── development/
+│       │   ├── code_quality/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   ├── testing/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   └── design/
+│       │       ├── overview.md
+│       │       └── troubleshooting.md
+│       ├── infrastructure/
+│       │   ├── installation/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   └── upgrade/
+│       │       ├── overview.md
+│       │       └── troubleshooting.md
 │       ├── documentation/
-│       │   └── claude.md
+│       │   ├── overview.md
+│       │   └── troubleshooting.md
 │       ├── research/
-│       │   └── claude.md
-│       ├── design/
-│       │   └── claude.md
-│       ├── code-quality/
-│       │   └── claude.md
-│       ├── install/
-│       │   └── claude.md
-│       ├── upgrade/
-│       │   └── claude.md
-│       └── test-generation/
-│           └── claude.md
+│       │   ├── overview.md
+│       │   └── troubleshooting.md
+│       ├── command-analysis/
+│       │   ├── best-practices.md
+│       │   ├── evaluation-framework.md
+│       │   ├── integration-patterns.md
+│       │   └── troubleshooting.md
+│       └── agent-analysis/
+│           ├── architecture-patterns.md
+│           ├── context-integration.md
+│           ├── evaluation-framework.md
+│           └── troubleshooting.md
 └── settings.local.json
 ```
 
@@ -97,50 +123,76 @@ You are the install system installer agent that handles mode-specific installati
 │   ├── code-quality.md
 │   ├── install.md
 │   ├── upgrade.md
-│   └── test.md
+│   ├── test.md
+│   └── claude-sdk.md
 ├── agents/claudio/
-│   ├── claudio-coordinator.md
-│   ├── claudio-discovery-orchestrator.md
-│   ├── claudio-prd-orchestrator.md
-│   ├── claudio-plan-orchestrator.md
-│   ├── claudio-task-orchestrator.md
+│   ├── claudio-coordinator-agent.md
+│   ├── discovery-agent.md
+│   ├── prd-agent.md
+│   ├── plan-agent.md
+│   ├── task-agent.md
 │   ├── discovery-validator.md
 │   ├── workflow-validator.md
 │   ├── documentation-coordinator.md
 │   ├── research-specialist.md
 │   ├── design-analyzer.md
 │   ├── code-quality-analyzer.md
-│   ├── install-coordinator.md
+│   ├── install-coordinator-agent.md
 │   ├── install-system-installer.md
 │   ├── install-validator.md
-│   ├── upgrade-orchestrator.md
+│   ├── upgrade-orchestrator-agent.md
 │   ├── test-command-generator.md
 │   ├── test-review.md
-│   └── prompts/
-│       ├── claudio/
-│       │   └── claude.md
-│       ├── discovery/
-│       │   └── claude.md
-│       ├── prd/
-│       │   └── claude.md
-│       ├── plan/
-│       │   └── claude.md
-│       ├── task/
-│       │   └── claude.md
+│   ├── claude-sdk-architect.md
+│   ├── claude-commands-analyst.md
+│   ├── claude-subagents-analyst.md
+│   └── extended_context/
+│       ├── workflow/
+│       │   ├── discovery/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   ├── prd/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   ├── planning/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   └── task/
+│       │       ├── overview.md
+│       │       └── troubleshooting.md
+│       ├── development/
+│       │   ├── code_quality/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   ├── testing/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   └── design/
+│       │       ├── overview.md
+│       │       └── troubleshooting.md
+│       ├── infrastructure/
+│       │   ├── installation/
+│       │   │   ├── overview.md
+│       │   │   └── troubleshooting.md
+│       │   └── upgrade/
+│       │       ├── overview.md
+│       │       └── troubleshooting.md
 │       ├── documentation/
-│       │   └── claude.md
+│       │   ├── overview.md
+│       │   └── troubleshooting.md
 │       ├── research/
-│       │   └── claude.md
-│       ├── design/
-│       │   └── claude.md
-│       ├── code-quality/
-│       │   └── claude.md
-│       ├── install/
-│       │   └── claude.md
-│       ├── upgrade/
-│       │   └── claude.md
-│       └── test-generation/
-│           └── claude.md
+│       │   ├── overview.md
+│       │   └── troubleshooting.md
+│       ├── command-analysis/
+│       │   ├── best-practices.md
+│       │   ├── evaluation-framework.md
+│       │   ├── integration-patterns.md
+│       │   └── troubleshooting.md
+│       └── agent-analysis/
+│           ├── architecture-patterns.md
+│           ├── context-integration.md
+│           ├── evaluation-framework.md
+│           └── troubleshooting.md
 └── settings.local.json
 ```
 
@@ -184,6 +236,7 @@ Generate project-specific components based on templates and discovery:
   - install.md (self-installation with project context)
   - upgrade.md (project upgrade capabilities)
   - test.md (project-specific test commands)
+  - claude-sdk.md (Claude Code SDK architecture with project context)
 - **Agents Localization**: Install FLAT structure to `<target>/.claude/agents/claudio/`
   - claudio-coordinator.md (localized for project context)
   - claudio-discovery-orchestrator.md (project discovery patterns)
@@ -202,6 +255,9 @@ Generate project-specific components based on templates and discovery:
   - upgrade-orchestrator.md (project upgrades)
   - test-command-generator.md (project test generation)
   - test-review.md (project test review)
+  - claudio-claude-sdk-architect.md (project-aware Claude Code SDK architect)
+  - claudio-claude-commands-analyst.md (project-specific command analysis)
+  - claudio-claude-subagents-analyst.md (project-specific agent analysis)
   - All agents as INDIVIDUAL .md files directly under agents/claudio/
 - **Prompts Localization**: Install to `<target>/.claude/agents/claudio/prompts/`
   - claudio/ → claude.md (project workflow integration)
@@ -216,7 +272,9 @@ Generate project-specific components based on templates and discovery:
   - install/ → claude.md (project installation context)
   - upgrade/ → claude.md (project upgrade context)
   - test-generation/ → claude.md (project test context)
-  - Each prompt as DIRECTORY under prompts/ containing claude.md
+  - command-analysis/ → (evaluation frameworks, best practices, integration patterns, troubleshooting)
+  - agent-analysis/ → (architecture patterns, context integration, evaluation framework, troubleshooting)
+  - Each prompt as DIRECTORY under prompts/ containing claude.md or extended context files
 
 ### Phase 3: Mode-Specific Customization and Namespace Updates
 
@@ -289,10 +347,10 @@ cp -r source/prompts/* ~/.claude/agents/claudio/prompts/
 ```bash
 # Generate project-specific components based on discovery
 # Commands: Individual command files directly under commands/claudio/
-generate_localized_command(discovery_data, template) -> <target>/.claude/commands/claudio/command_name.md
+generate_localized_command(discovery_data, template) -> <target>/.claude/commands/claudio/command-name.md
 
 # Agents: Individual agent files directly under agents/claudio/ (FLAT structure)
-generate_localized_agent(discovery_data, template) -> <target>/.claude/agents/claudio/agent_name.md
+generate_localized_agent(discovery_data, template) -> <target>/.claude/agents/claudio/agent-name.md
 
 # Prompts: Individual prompt directories under agents/claudio/prompts/
 generate_localized_prompts(discovery_data, template) -> <target>/.claude/agents/claudio/prompts/prompt_name/claude.md
@@ -338,18 +396,18 @@ chmod -R 755 <target>/.claude/
 
 ### Components Installed
 #### Commands (X files)
-- **User Mode**: claudio.md ✓ (generic template), discovery.md ✓ (generic template)
-- **Project/Path Modes**: claudio.md ✓ (localized for [project context]), discovery.md ✓ (customized for [technology stack])
+- **User Mode**: claudio.md ✓ (generic template), discovery.md ✓ (generic template), claude-sdk.md ✓ (generic template)
+- **Project/Path Modes**: claudio.md ✓ (localized for [project context]), discovery.md ✓ (customized for [technology stack]), claude-sdk.md ✓ (project-aware Claude Code SDK)
 - [list all commands with mode-appropriate notes]
 
 #### Agents (X files)  
-- **User Mode**: install-coordinator.md ✓ (generic template), discovery-agent.md ✓ (generic template)
-- **Project/Path Modes**: install-coordinator.md ✓ (project-aware), discovery-agent.md ✓ (technology-specific)
+- **User Mode**: install-coordinator.md ✓ (generic template), discovery-agent.md ✓ (generic template), claudio-claude-sdk-architect.md ✓ (generic template), claudio-claude-commands-analyst.md ✓ (generic template), claudio-claude-subagents-analyst.md ✓ (generic template)
+- **Project/Path Modes**: install-coordinator.md ✓ (project-aware), discovery-agent.md ✓ (technology-specific), claudio-claude-sdk-architect.md ✓ (project-aware Claude Code SDK architect), claudio-claude-commands-analyst.md ✓ (project-specific command analysis), claudio-claude-subagents-analyst.md ✓ (project-specific agent analysis)
 - [list all agents with mode-appropriate specialization notes]
 
 #### Prompts (X directories)
-- **User Mode**: claudio/ ✓ (generic template), discovery/ ✓ (generic template)
-- **Project/Path Modes**: claudio/ ✓ (project workflow integration), discovery/ ✓ (domain-specific analysis)
+- **User Mode**: claudio/ ✓ (generic template), discovery/ ✓ (generic template), command-analysis/ ✓ (generic analysis framework), agent-analysis/ ✓ (generic architecture patterns)
+- **Project/Path Modes**: claudio/ ✓ (project workflow integration), discovery/ ✓ (domain-specific analysis), command-analysis/ ✓ (project-specific command evaluation), agent-analysis/ ✓ (project-specific agent architecture)
 - [list all prompt directories with mode-appropriate customization details]
 
 ### Status: [SUCCESS|PARTIAL|FAILED]

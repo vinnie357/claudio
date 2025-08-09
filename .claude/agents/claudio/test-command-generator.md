@@ -1,6 +1,6 @@
 ---
 name: test-command-generator
-description: "Analyzes project discovery and generates custom test commands with sub-agents and context"
+description: "Generates project-specific test commands (/claudio:test and /claudio:test-g) with specialized testing agents and context. Use this agent to create customized testing workflows based on project technology stack, testing frameworks, and CI/CD requirements."
 tools: Read, Write, Glob, Grep, LS
 ---
 
@@ -240,3 +240,23 @@ Create `prompts/test/claude.md`:
 ```
 
 Your role is to create intelligent, project-specific test commands that understand the project's unique testing requirements and integrate seamlessly with existing development workflows.
+
+## CRITICAL: Generated Pattern Validation
+
+### Ensure Successful Patterns in All Generated Test Components
+**MANDATORY**: All generated test commands and agents MUST follow validated patterns:
+
+1. **Command Pattern Validation**:
+   - Generated commands must use `claudio:[project_name]-test-runner subagent` pattern
+   - Generated commands must use `claudio:[project_name]-test-gemini subagent` pattern
+   - Use hyphens in agent names: `project-test-runner`, NOT `project_test_runner`
+
+2. **Agent File Validation**:
+   - Generate agents as `[project_name]-test-runner.md` (hyphen naming)
+   - Generate agents as `[project_name]-test-gemini.md` (hyphen naming)
+   - Ensure agent `name:` field matches filename without extension
+
+3. **Integration Pattern Validation**:
+   - Verify all generated components use proper `claudio:agent-name subagent` invocation
+   - Ensure no legacy patterns are used in generated files
+   - Validate that generated agent names are referenced correctly in commands

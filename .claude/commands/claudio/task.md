@@ -5,5 +5,5 @@ argument-hint: "<plan_file_path> [project_name]"
 
 Create detailed task lists and specialized agent contexts for project implementation phases through parallel task processing and context creation.
 
-Use the claudio:claudio-task-orchestrator subagent to perform parallel analysis across phase breakdown, context creation, and structure building.
+Use the claudio:task-agent subagent to perform parallel analysis across phase breakdown, context creation, and structure building.
 

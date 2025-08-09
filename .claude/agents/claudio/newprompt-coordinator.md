@@ -34,16 +34,17 @@ Launch the following sub-agents in parallel using the Task tool:
 4. Present final deliverables to the user
 
 ## Extended Context Reference:
-Reference `.claude/agents/claudio/prompts/newprompt/claude.md` for detailed templates, examples, and guidance that should be passed to the specialized sub-agents.
+Use existing Claudio patterns and conventions from the extended context system for detailed templates, examples, and guidance that should be passed to the specialized sub-agents.
 
 ## Execution Guidelines:
-- Always launch sub-agents in parallel using a single Task tool call with multiple agent invocations
-- Pass relevant context from `.claude/agents/claudio/prompts/newprompt/claude.md` to each sub-agent
+- **CRITICAL**: Run multiple Task invocations in a SINGLE message for parallel execution
+- Always launch sub-agents in parallel using multiple Task tool calls in one message
+- Pass relevant context from existing agent and command patterns to each sub-agent
 - Ensure each sub-agent has clear, specific instructions for their component
 - Coordinate final integration of all outputs
 
 ## Output Organization:
-- Agent prompt: `.claude/agents/claudio/prompts/<agent_name>/claude.md`
+- Extended context: `.claude/agents/claudio/extended_context/<category>/<topic>/overview.md`
 - Command file: `.claude/commands/claudio/<agent_name>.md`
 - Integration instructions: Generated as documentation for user implementation
 

@@ -22,30 +22,30 @@ The default workflow combines **discovery and planning** into a unified process 
 Claudio employs specialized AI agents that orchestrate different aspects of project analysis:
 
 ### Core Workflow Agents
-- **Discovery Agent**: Analyzes project structure, technology stack, and existing capabilities
-- **PRD Agent**: Transforms discovery findings into clear business requirements and success criteria
-- **Planning Agent**: Creates phased implementation roadmaps with time estimates and dependencies
-- **Task Agent**: Breaks down plans into executable tasks with specialized execution contexts
-- **Documentation Agent**: Generates comprehensive documentation (README, API docs, user guides)
-- **Security Agent**: Performs STRIDE-based security analysis with visual threat modeling
-- **Research Agent**: Conducts topic-specific research and creates expert knowledge bases
-- **Implementation Agent**: Executes plans through coordinated task processing
+- **discovery-agent**: Analyzes project structure, technology stack, and existing capabilities
+- **prd-agent**: Transforms discovery findings into clear business requirements and success criteria
+- **plan-agent**: Creates phased implementation roadmaps with time estimates and dependencies
+- **task-agent**: Breaks down plans into executable tasks with specialized execution contexts
+- **documentation-coordinator**: Generates comprehensive documentation (README, API docs, user guides)
+- **security-review-coordinator**: Performs STRIDE-based security analysis with visual threat modeling
+- **research-specialist**: Conducts topic-specific research and creates expert knowledge bases
+- **implement-agent**: Executes plans through coordinated task processing
 
 ### Generation & Customization Agents
-- **Test Command Generator**: Creates project-specific test commands based on framework detection
-- **New Command Generator**: Generates custom commands from research sources with workflow integration
-- **Newprompt Agent Creator**: Creates comprehensive agent prompts following Claudio conventions
+- **test-command-generator**: Creates project-specific test commands based on framework detection
+- **new-command-generator**: Generates custom commands from research sources with workflow integration
+- **newprompt-agent-creator**: Creates comprehensive agent prompts following Claudio conventions
 
 ### Quality Assurance Validators
-- **Discovery Validator**: Ensures discovery document quality and analysis depth
-- **Workflow Validator**: Validates complete workflow output and document completeness
-- **Install Validator**: Verifies installation completeness and functionality
-- **New Command Validator**: Validates custom command structure and integration
+- **discovery-validator**: Ensures discovery document quality and analysis depth
+- **workflow-validator**: Validates complete workflow output and document completeness
+- **install-validator**: Verifies installation completeness and functionality
+- **new-command-validator**: Validates custom command structure and integration
 
 ### System Management Agents
-- **Install Coordinator**: Manages Claudio installation with namespace support and localization
-- **Upgrade Orchestrator**: Handles safe upgrades with backup, rollback, and re-localization
-- **Code Quality Analyzer**: Analyzes code quality with comprehensive reporting
+- **install-coordinator-agent**: Manages Claudio installation with namespace support and localization
+- **upgrade-orchestrator-agent**: Handles safe upgrades with backup, rollback, and re-localization
+- **code-quality-analyzer**: Analyzes code quality with comprehensive reporting
 
 Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context through discovery-based customization.
 
@@ -833,14 +833,14 @@ claudio/
 │   │   ├── security-review.md # Security analysis with STRIDE
 │   │   └── code-quality.md # Code quality assessment
 │   └── agents/claudio/   # Agent implementations
-│       ├── claudio-coordinator.md # Master orchestration
-│       ├── claudio-discovery-orchestrator.md # Discovery coordination
-│       ├── claudio-prd-orchestrator.md # PRD creation
-│       ├── claudio-plan-orchestrator.md # Planning coordination
-│       ├── claudio-task-orchestrator.md # Task breakdown
-│       ├── implement-orchestrator.md # Implementation execution
-│       ├── install-coordinator.md # Installation management
-│       ├── upgrade-orchestrator.md # Upgrade coordination
+│       ├── claudio-coordinator-agent.md # Master orchestration
+│       ├── discovery-agent.md # Discovery coordination
+│       ├── prd-agent.md # PRD creation
+│       ├── plan-agent.md # Planning coordination
+│       ├── task-agent.md # Task breakdown
+│       ├── implement-agent.md # Implementation execution
+│       ├── install-coordinator-agent.md # Installation management
+│       ├── upgrade-orchestrator-agent.md # Upgrade coordination
 │       ├── documentation-coordinator.md # Documentation coordination
 │       ├── new-command-generator.md # Custom command generation
 │       ├── test-command-generator.md # Test command generation
@@ -859,23 +859,23 @@ claudio/
 │       ├── workflow-validator.md # Workflow validation
 │       ├── install-validator.md # Installation validation
 │       ├── new-command-validator.md # Command validation
-│       └── prompts/      # Extended agent contexts
-│           ├── claudio/  # Master orchestration context
-│           ├── discovery/ # Project analysis context
-│           ├── prd/      # Requirements context
-│           ├── plan/     # Planning context
-│           ├── task/     # Task breakdown context
-│           ├── implement/ # Implementation context
-│           ├── research/ # Research context
-│           ├── documentation/ # Documentation context
-│           ├── design/   # Design analysis context
-│           ├── new-command/ # Custom command templates
-│           ├── test-generation/ # Test command templates
-│           ├── validation/ # Validation templates
-│           ├── newprompt/ # Agent creation context
-│           ├── install/  # Installation context
-│           ├── upgrade/  # Upgrade context
-│           └── security-review/ # Security analysis context
+│       └── extended_context/  # Extended agent contexts
+│           ├── workflow/
+│           │   ├── discovery/     # Project analysis context
+│           │   ├── prd/           # Requirements context
+│           │   ├── planning/      # Planning context
+│           │   └── task/          # Task breakdown context
+│           ├── development/
+│           │   ├── code_quality/  # Code quality context
+│           │   ├── design/        # Design analysis context
+│           │   └── testing/       # Test command templates
+│           ├── infrastructure/
+│           │   ├── installation/  # Installation context
+│           │   └── upgrade/       # Upgrade context
+│           ├── documentation/     # Documentation context
+│           ├── research/          # Research context
+│           ├── command-analysis/  # Claude SDK command analysis
+│           └── agent-analysis/    # Claude SDK agent analysis
 ├── examples/            # Sample projects for testing
 │   ├── web-app/        # Deno.js task manager SPA with full Claudio analysis
 │   └── rust-game/      # Bevy chess game
@@ -1028,6 +1028,27 @@ cd test/install && /claudio:install
 3. **Add New Features**: Update test projects if new capabilities are added
 4. **Validate Installation Modes**: Test project, user, and path installation modes
 5. **Check Localization**: Ensure components adapt correctly to different technology stacks
+6. **Agent System Validation**: Test restructured agent system using the dedicated test workflow
+
+#### Agent System Testing
+
+For development validation of the Claudio agent system, use the dedicated test workflow:
+
+```bash
+# Start a new Claude Code session and run:
+@test/agent_validation.md
+```
+
+This test workflow:
+- **Validates** all renamed agents are available and properly invoked
+- **Tests** agent descriptions for proper Claude Code selection 
+- **Verifies** extended context structure works with new paths
+- **Checks** command vs agent disambiguation 
+- **Exercises** Claude SDK analysis capabilities
+- **Uses** realistic sample application in `test/claudio-agents/` (Elixir Phoenix task manager)
+- **Provides** comprehensive validation criteria and troubleshooting guidance
+
+**When to Use**: After making changes to agent naming, extended context structure, or agent descriptions. Essential for validating system restructures and ensuring proper Claude Code integration.
 
 #### CI/CD Integration
 
@@ -1122,6 +1143,23 @@ To add a new generator:
 - **Available Commands**: Review `.claude/commands/claudio/` to see all available commands
 - **Installation Help**: Use `/claudio:install --help` or `/claudio:upgrade --help` for system management
 - **Status Checking**: Use `/claudio:upgrade --status` to verify your installation
+
+## Troubleshooting
+
+### Common Issues
+
+#### Node.js Memory Issues
+If Claude Code crashes with "JavaScript heap out of memory" errors when running multiple agents:
+
+```bash
+# Quick fix
+export NODE_OPTIONS="--max-old-space-size=8192" && claude-code
+
+# Permanent solution (add to ~/.zshrc or ~/.bashrc)
+export NODE_OPTIONS="--max-old-space-size=8192"
+```
+
+For detailed memory management guidance, see: [Node.js Memory Issues Documentation](docs/troubleshooting/nodejs-memory-issues.md)
 
 ### Quick Start Commands
 ```bash

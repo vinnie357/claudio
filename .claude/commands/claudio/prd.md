@@ -12,5 +12,5 @@ Create comprehensive Product Requirements Documents (PRDs) with clear requiremen
 - `migration`: Data/system migration PRD
 - `full`: Complete product PRD with all components
 
-Use the claudio:claudio-prd-orchestrator subagent to create specialized PRDs with parallel requirements analysis.
+Use the claudio:prd-agent subagent to create comprehensive Product Requirements Documents with business objectives, functional requirements, and success criteria.
 

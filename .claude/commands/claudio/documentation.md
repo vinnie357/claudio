@@ -13,3 +13,5 @@ Analyze a project and generate clear, comprehensive documentation including READ
 - `full`: Complete documentation suite
 
 Use the claudio:documentation-coordinator subagent to orchestrate parallel documentation creation by specialized sub-agents.
+
+**CRITICAL**: This command uses parallel execution - multiple Task invocations in a SINGLE message to ensure proper coordination of documentation sub-agents.

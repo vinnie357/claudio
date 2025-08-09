@@ -216,7 +216,7 @@ For complete API documentation, see [API Documentation](./docs/api.md).
 [deployment-commands]
 ```
 
-For detailed deployment instructions, see [Developer Guide](./docs/developer_guide.md).
+For detailed deployment instructions, see [Developer Guide](./docs/developer-guide.md).
 
 ## Contributing
 
@@ -231,9 +231,9 @@ We welcome contributions! Please see our [Contributing Guidelines](./CONTRIBUTIN
 
 ## Documentation
 
-- 📚 [User Guide](./docs/user_guide.md) - Comprehensive user documentation
+- 📚 [User Guide](./docs/user-guide.md) - Comprehensive user documentation
 - 🔧 [API Documentation](./docs/api.md) - Complete API reference
-- 💻 [Developer Guide](./docs/developer_guide.md) - Development and architecture
+- 💻 [Developer Guide](./docs/developer-guide.md) - Development and architecture
 - ❓ [FAQ](./docs/faq.md) - Frequently asked questions
 
 ## Support

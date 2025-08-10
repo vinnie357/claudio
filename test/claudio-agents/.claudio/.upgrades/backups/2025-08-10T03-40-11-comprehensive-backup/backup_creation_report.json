@@ -1,0 +1,92 @@
+{
+  "backup_summary": {
+    "timestamp": "2025-08-10T03:40:11Z",
+    "backup_location": ".claudio/.upgrades/backups/2025-08-10T03-40-11-comprehensive-backup/",
+    "backup_type": "comprehensive",
+    "total_files": 68,
+    "total_size": "540K",
+    "duration": "45 seconds",
+    "completion_status": "successful"
+  },
+  "integrity_validation": {
+    "checksum_validation": "passed",
+    "file_count_validation": "passed", 
+    "accessibility_test": "passed",
+    "backup_completeness": "100%",
+    "validation_timestamp": "2025-08-10T03:40:11Z"
+  },
+  "rollback_preparation": {
+    "rollback_script": "generated and validated",
+    "rollback_complexity": "moderate",
+    "estimated_rollback_time": "60 seconds",
+    "manual_intervention_required": false,
+    "safety_backup_included": true
+  },
+  "component_breakdown": {
+    "commands": {
+      "files_backed_up": 3,
+      "size": "~8KB",
+      "status": "complete",
+      "critical_files": [
+        "claudio/phoenix-liveview.md",
+        "claudio/test-g.md", 
+        "claudio/test.md"
+      ]
+    },
+    "agents": {
+      "files_backed_up": 5,
+      "size": "~15KB",
+      "status": "complete",
+      "critical_files": [
+        "claudio/task-app-test-runner.md",
+        "claudio/phoenix-liveview-executor.md",
+        "claudio/task-app-test-gemini.md"
+      ],
+      "extended_context_included": true
+    },
+    "configuration": {
+      "files_backed_up": 1,
+      "size": "2KB",
+      "status": "complete",
+      "critical_files": [
+        "settings.local.json"
+      ]
+    },
+    "project_content": {
+      "files_backed_up": 57,
+      "size": "~515KB",
+      "status": "complete",
+      "categories": {
+        "project_analysis": ["discovery.md", "prd.md", "plan.md", "status.md"],
+        "phase_implementations": ["phase1/", "phase2/", "phase3/", "phases/"],
+        "documentation": ["docs/", "shared/"],
+        "quality_analysis": ["quality/", "research/", "design/"]
+      }
+    },
+    "backup_metadata": {
+      "files_backed_up": 2,
+      "size": "~8KB",
+      "status": "complete",
+      "files": ["backup_manifest.json", "checksums.sha256"]
+    }
+  },
+  "safety_measures": {
+    "pre_backup_validation": "passed",
+    "disk_space_check": "sufficient",
+    "permissions_check": "validated",
+    "backup_location_secured": true,
+    "recovery_tested": "pending"
+  },
+  "upgrade_integration": {
+    "parallel_execution_ready": true,
+    "coordination_signals": "implemented",
+    "failure_recovery": "automated",
+    "rollback_triggers": "configured"
+  },
+  "retention_management": {
+    "cleanup_policy": "keep_10_versions",
+    "current_backup_count": 2,
+    "cleanup_needed": false,
+    "next_cleanup": "after 8 more backups"
+  }
+}

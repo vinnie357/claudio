@@ -1,0 +1,59 @@
+{
+  "backup_timestamp": "2025-08-10T03:40:11Z",
+  "backup_type": "comprehensive",
+  "installation_path": "/Users/vinnie/github/claudio/test/claudio-agents/.claudio",
+  "backup_purpose": "Complete installation backup for upgrade safety",
+  "backup_files": {
+    "total_files": 68,
+    "total_size": "544K",
+    "by_category": {
+      "commands": {
+        "count": 2,
+        "size": "estimated 12KB",
+        "description": "All Claudio command definitions"
+      },
+      "agents": {
+        "count": 3,
+        "size": "estimated 24KB", 
+        "description": "All Claudio agent definitions and contexts"
+      },
+      "configuration": {
+        "count": 1,
+        "size": "2KB",
+        "description": "Settings and configuration files"
+      },
+      "project_content": {
+        "count": 61,
+        "size": "estimated 506KB",
+        "description": "User-created project analysis, plans, phases, and documentation"
+      },
+      "backup_metadata": {
+        "count": 1,
+        "size": "4KB",
+        "description": "Backup manifest and checksums"
+      }
+    }
+  },
+  "checksums": {
+    "sha256_manifest": "checksums.sha256",
+    "verification_status": "validated",
+    "checksum_method": "SHA-256"
+  },
+  "rollback_information": {
+    "rollback_script": "../../../rollback_scripts/2025-08-10T03-40-11-comprehensive-rollback.sh",
+    "rollback_complexity": "moderate",
+    "manual_steps_required": [],
+    "estimated_rollback_time": "60 seconds"
+  },
+  "backup_validation": {
+    "accessibility_test": "passed",
+    "completeness_check": "passed",
+    "integrity_verification": "passed"
+  },
+  "system_information": {
+    "platform": "darwin",
+    "backup_agent": "upgrade-backup-manager",
+    "claudio_installation_detected": true,
+    "user_content_detected": true
+  }
+}

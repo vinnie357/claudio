@@ -895,6 +895,48 @@ update any related doucmentation and any related values in the root claude.md
 
 update our change log
 
+update our test/agent_validation.md with the new flows
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log'
+
+ the subagent invocations you created for upgrade are invalid and don't follow our explicit pattern of no      │
+│   tool use you created invocations that used bash "upgrade-orchestrator-agent(Upgrade Max project Claudio)      │
+│     ⎿  Bash(Use Task tool with subagent_type: "upgrade-discovery-analyzer" to analyze project                   │
+│            discovery and installation status for /Users/vinnie/github/max, including path…)" we need to fix     │
+│   this in the upgrade-orchestrator-agent
+
+update our test/agent_validation.md with the new flows
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log
+
+# run tests
+@test/agent_validation.md
+
+the process didn't produce an agent_validation_results.md this time why?   
+
+address any issues found by the agent_validation test   
+
+we are only interested in fixing issues related to subagent execution update the report generation to 
+  reflect this
+
+
+
+# research not writing docuemnts
+
+when used directly the research command is supposed to create the related research documents in the
+  .claudio/research/<category>/<topic>/{overview.md,troubleshooting.md}
+
+when used for a subagent the research command is supposed to create the related research documents in the
+  .claude/agents/claudio/extended_context/<category>/<topic>/{overview.md,troubleshooting.md}
+
+correct this, as right now directly is just providing a research summary
+
+create a new test/research folder, and a agent_research_test.md to run that targets this folder
+it should work like agent_validation.md but only focus on the research workflows
 
 #
 # todo:

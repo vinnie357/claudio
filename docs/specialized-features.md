@@ -8,39 +8,102 @@ This document details the advanced capabilities and specialized features of the 
 ## Research System
 
 ### Overview
-The Research System generates topic-specific expert agent prompts and organizes research knowledge for use across projects and workflows.
+The Research System creates comprehensive documentation for technical topics, generating structured overview and troubleshooting guides that support both project development and system-wide agent contexts.
 
 ### Core Capabilities
-- **Topic-Specific Research**: Generate detailed research on any development topic
-- **Expert Prompt Generation**: Create specialized AI agent contexts based on research
-- **Knowledge Organization**: Structure research by category and topic hierarchies
-- **Project Integration**: Seamlessly integrate research into Claudio workflows
-- **Troubleshooting Content**: Generate specialized problem-solving guidance
+- **Comprehensive Documentation**: Create detailed topic analysis with practical implementation guidance
+- **Structured Output**: Generate both overview and troubleshooting documents for complete coverage
+- **Context-Aware Creation**: Automatically place files in appropriate locations based on usage context
+- **Complexity Assessment**: Apply appropriate analysis depth using Think/Ultrathink modes for advanced topics
+- **Quality Standards**: Include authoritative sources, practical examples, and current best practices
+
+### Usage Contexts
+
+#### Direct Command Usage
+```bash
+/claudio:research development react-testing
+# Creates: .claudio/research/development/react-testing/
+#   ├── overview.md          # Comprehensive topic analysis
+#   └── troubleshooting.md   # Issues, solutions, diagnostic tools
+```
+
+#### Subagent Usage (Extended Context)
+```bash
+# Via Task tool from other agents
+Use Task tool with subagent_type: "research-specialist" to research PostgreSQL optimization
+# Creates: .claude/agents/claudio/extended_context/development/postgresql-optimization/
+#   ├── overview.md          # Topic analysis for agent reference
+#   └── troubleshooting.md   # Problem-solving guidance
+```
 
 ### Research Categories
-- **Development**: Programming languages, frameworks, architectures
-- **Frontend**: UI/UX technologies, design systems, accessibility
-- **Backend**: Server technologies, databases, APIs, microservices
-- **DevOps**: Deployment, monitoring, CI/CD, infrastructure
-- **Architecture**: System design, patterns, scalability
-- **Security**: Authentication, authorization, data protection
-- **Testing**: Testing strategies, frameworks, automation
+- **Development**: Programming languages, frameworks, testing, performance optimization
+- **Frontend**: UI frameworks, design systems, accessibility, performance
+- **Backend**: Server frameworks, databases, APIs, microservices, security  
+- **Infrastructure**: Deployment, monitoring, CI/CD, orchestration, scaling
+- **Integration**: Third-party services, APIs, event-driven architectures
+- **Security**: Authentication, authorization, compliance, threat modeling
 
-### Research Workflow
-1. **Topic Analysis**: Identify research requirements and scope
-2. **Expert Context Generation**: Create specialized agent prompts
-3. **Knowledge Synthesis**: Combine multiple sources and perspectives
-4. **Practical Application**: Generate actionable recommendations
-5. **Integration Guidance**: Provide implementation strategies
+### Complexity-Aware Analysis
+
+#### Automatic Complexity Assessment (1-10 scale)
+- **Standard Mode (4-5)**: Basic research with core concepts and best practices
+- **Think Mode (6-8)**: Enhanced reasoning with cross-referencing and alternative approaches  
+- **Ultrathink Mode (9-10)**: Multi-perspective analysis with trade-off matrices and scenario planning
+
+#### Manual Override
+```bash
+/claudio:research infrastructure kubernetes-operators --complexity=high
+# Forces Ultrathink mode regardless of automatic assessment
+```
+
+### Document Structure
+
+#### overview.md Template
+- **Complexity Assessment**: Score, thinking mode, and complexity factors
+- **Executive Summary**: 2-3 paragraph topic overview
+- **Core Concepts**: Main topic areas with detailed explanations
+- **Best Practices**: Industry standards and recommendations
+- **Implementation Patterns**: Code examples and usage patterns
+- **Tools and Technologies**: Relevant tools and frameworks
+- **Integration Considerations**: System integration guidance
+- **Sources and References**: Authoritative documentation links
+
+#### troubleshooting.md Template  
+- **Common Issues (5+)**: Symptoms, diagnosis, solutions, prevention
+- **Advanced Troubleshooting**: Performance, integration, edge cases
+- **Diagnostic Tools**: Commands and tools for problem identification
+- **When to Escalate**: Expert help criteria and resources
 
 ### Output Structure
 ```
-research/
-├── <category>/
-│   └── <topic>.md              # Comprehensive research document
-└── prompts/
-    └── <topic>/
-        └── expert_prompt.md    # Generated expert agent context
+# Direct Usage
+.claudio/research/
+├── development/
+│   ├── react-testing/
+│   │   ├── overview.md
+│   │   └── troubleshooting.md
+│   └── nodejs-optimization/
+│       ├── overview.md  
+│       └── troubleshooting.md
+└── infrastructure/
+    └── kubernetes-deployment/
+        ├── overview.md
+        └── troubleshooting.md
+
+# Subagent Usage  
+.claude/agents/claudio/extended_context/
+├── development/
+│   ├── postgresql-optimization/
+│   │   ├── overview.md
+│   │   └── troubleshooting.md
+│   └── testing-strategies/
+│       ├── overview.md
+│       └── troubleshooting.md
+└── frontend/
+    └── react-performance/
+        ├── overview.md
+        └── troubleshooting.md
 ```
 
 ## Claude SDK System

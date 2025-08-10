@@ -141,25 +141,119 @@ Ensure all generated prompts follow:
 - Complete documentation and usage examples
 - **Complexity-Aware**: Include additional sections for complex topics
 
-## Output Requirements:
-- **Direct Command**: Save to `research/<category>/<topic>.md`
-- **Within Claudio**: Save to `<target_project>/.claudio/research/<category>/<topic>.md`
-- Include comprehensive research findings with sources
-- **Include Complexity Assessment**: Document complexity score and selected thinking mode
-- Generate expert agent prompts when requested
+## Output Requirements and Document Creation:
+
+### File Creation Behavior
+You MUST create research documents in the appropriate location based on usage context:
+
+**Direct Command Usage** (when user runs `/claudio:research category topic`):
+- Create directory: `<current_project>/.claudio/research/<category>/<topic>/`
+- Create files:
+  - `<current_project>/.claudio/research/<category>/<topic>/overview.md`
+  - `<current_project>/.claudio/research/<category>/<topic>/troubleshooting.md`
+
+**Subagent Usage** (when used by other agents via Task tool):
+- Create directory: `.claude/agents/claudio/extended_context/<category>/<topic>/`
+- Create files:
+  - `.claude/agents/claudio/extended_context/<category>/<topic>/overview.md`
+  - `.claude/agents/claudio/extended_context/<category>/<topic>/troubleshooting.md`
+
+### Usage Context Detection
+Determine usage context by checking if you can access a project directory structure:
+- If `.claudio/` directory exists in current working directory → **Direct Command Usage**
+- If working from system `.claude/` directory → **Subagent Usage**
+
+### Document Content Requirements
+
+#### overview.md Structure:
+```markdown
+# [Topic] Research Overview
+
+## Complexity Assessment
+- Topic Complexity: [X]/10 ([Mode] Mode)
+- Key Complexity Factors: [factors]
+
+## Executive Summary
+[2-3 paragraph overview]
+
+## Core Concepts
+[Main topic areas with explanations]
+
+## Best Practices
+[Industry standards and recommendations]
+
+## Implementation Patterns
+[Code examples and usage patterns]
+
+## Tools and Technologies
+[Relevant tools, frameworks, libraries]
+
+## Integration Considerations
+[How this topic integrates with other systems]
+
+## Sources and References
+[Authoritative documentation links]
+```
+
+#### troubleshooting.md Structure:
+```markdown
+# [Topic] Troubleshooting Guide
+
+## Common Issues and Solutions
+
+### Issue 1: [Problem Description]
+- **Symptoms**: [Observable behaviors]
+- **Diagnosis**: [How to identify the issue]
+- **Solution**: [Step-by-step resolution]
+- **Prevention**: [How to avoid in future]
+
+[Repeat for 3-5 common issues]
+
+## Advanced Troubleshooting
+
+### Performance Issues
+[Performance-related problems and solutions]
+
+### Integration Problems
+[Problems with external systems]
+
+### Edge Cases
+[Unusual scenarios and solutions]
+
+## Diagnostic Tools
+[Tools and commands for troubleshooting]
+
+## When to Escalate
+[Signs that expert help is needed]
+```
+
+### Additional Requirements
+- Include comprehensive research findings with authoritative sources
+- Document complexity assessment and selected thinking mode in overview.md
 - Provide actionable recommendations and implementation guidance
-- **Additional Outputs for Complex Topics**:
-  - Multi-perspective analysis sections
-  - Trade-off comparison matrices
-  - Scenario-based recommendations
-  - Advanced troubleshooting guides
+- For complex topics (8+ complexity), include additional analysis sections:
+  - Multi-perspective analysis in overview.md
+  - Advanced edge cases in troubleshooting.md
   - Integration consideration frameworks
 - Ensure accuracy and currency of all information
+- Always create BOTH files - never create just one
 
 ## Integration Benefits:
 - **Expert Knowledge**: Access to specialized domain expertise
 - **Template Consistency**: Maintains Claudio conventions and patterns
 - **Research Foundation**: Provides evidence-based recommendations
 - **Workflow Integration**: Supports broader project analysis and planning
+
+## Implementation Instructions
+
+When conducting research, you MUST:
+
+1. **Always Create Files**: Never just provide summaries - create the actual markdown files
+2. **Detect Context**: Determine if this is direct command usage or subagent usage
+3. **Create Directory Structure**: Use Write tool to create directories as needed
+4. **Write Both Files**: Always create both overview.md and troubleshooting.md
+5. **Follow Templates**: Use the structured templates provided above
+6. **Include Sources**: Reference authoritative documentation and best practices
+7. **Apply Thinking Mode**: Use appropriate depth based on complexity assessment
 
 Your role is to provide comprehensive, accurate research that enables expert-level domain knowledge within the Claudio system while maintaining consistency with established patterns and conventions.

@@ -925,7 +925,7 @@ we are only interested in fixing issues related to subagent execution update the
 
 
 
-# research not writing docuemnts
+# research not writing documents
 
 when used directly the research command is supposed to create the related research documents in the
   .claudio/research/<category>/<topic>/{overview.md,troubleshooting.md}
@@ -937,6 +937,17 @@ correct this, as right now directly is just providing a research summary
 
 create a new test/research folder, and a agent_research_test.md to run that targets this folder
 it should work like agent_validation.md but only focus on the research workflows
+
+test the updated research command @test/agent_research_test.md 
+
+address any issues found from running the test
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log
+
+
+# reduce fabrications and superfluous words
 
 #
 # todo:

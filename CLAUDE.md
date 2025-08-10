@@ -25,7 +25,7 @@ Essential information you need right now:
 ## Core Components
 
 ### Commands
-- **`/claudio:research`**: Generate specialized research on topics
+- **`/claudio:research`**: Create comprehensive research documentation with overview and troubleshooting guides
 - **`/claudio:discovery`**: Analyze project structure and capabilities
 - **`/claudio:documentation`**: Create comprehensive project documentation
 - **`/claudio:prd`**: Generate Product Requirements Documents
@@ -49,7 +49,7 @@ Essential information you need right now:
 ### Individual Commands
 ```bash
 /claudio:discovery ./my-project        # Analyze project structure
-/claudio:research backend nodejs       # Research specific topics
+/claudio:research backend nodejs       # Create research docs in .claudio/research/backend/nodejs/
 /claudio:prd feature user-auth         # Create requirements
 /claudio:plan feature user-auth "4w"   # Plan implementation
 ```
@@ -84,6 +84,24 @@ Essential information you need right now:
 ```
 
 **Sequential Analysis**: The Claude SDK architect analyzes one command at a time, evaluating the command structure first, then each individual subagent separately to prevent system overload and ensure focused analysis.
+
+### Research System
+```bash
+/claudio:research development react-testing  # Create comprehensive research documentation
+```
+
+**Document Creation**: Research commands create structured documentation with:
+- **Direct Usage**: Creates files in `.claudio/research/<category>/<topic>/`
+  - `overview.md`: Comprehensive topic analysis with best practices and implementation patterns  
+  - `troubleshooting.md`: Common issues, solutions, diagnostic tools, and escalation guidance
+- **Subagent Usage**: Creates extended context in `.claude/agents/claudio/extended_context/<category>/<topic>/`
+- **Quality Standards**: Includes authoritative sources, practical examples, and complexity-appropriate analysis
+
+**Research Features**:
+- **Complexity Assessment**: Automatic evaluation (1-10 scale) with Think/Ultrathink modes for advanced topics
+- **Thinking Modes**: Standard (4-5), Think (6-8), Ultrathink (9-10) with multi-perspective analysis
+- **Manual Override**: `--complexity=high` forces advanced analysis mode
+- **Context Detection**: Automatically determines direct vs subagent usage for proper file placement
 
 ## What "use claudio on ../my-project" means
 
@@ -230,7 +248,7 @@ suggest using `/claudio:research workflow task https://www.atlassian.com/agile/p
 
 The Claudio system handles missing extended context gracefully:
 - **Resilient Operation**: Agents continue functioning when extended context is incomplete
-- **Self-Healing**: Missing context triggers helpful guidance using `/claudio:research category topic URL`
+- **Self-Healing**: Missing context triggers research creation via research-specialist subagent using Task tool pattern
 - **User Guidance**: Clear instructions for creating missing documentation with authoritative sources
 - **Memory Efficient**: No continuous searching for non-existent files prevents memory leaks
 

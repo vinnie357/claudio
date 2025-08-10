@@ -9,13 +9,17 @@ This guide provides comprehensive command reference, workflow examples, and prac
 
 ### Core Analysis Commands
 
-#### `/claudio:research` - Generate Specialized Research
+#### `/claudio:research` - Create Research Documentation
 ```bash
-# Research a specific topic
-/claudio:research development docker-nodejs
-/claudio:research frontend react-hooks
-/claudio:research backend microservices-architecture
+# Create comprehensive research documentation
+/claudio:research development docker-nodejs      # Creates overview.md + troubleshooting.md
+/claudio:research frontend react-hooks           # Advanced React patterns analysis  
+/claudio:research backend microservices --complexity=high  # Forces Ultrathink mode
 ```
+
+**Output Structure:**
+- `.claudio/research/<category>/<topic>/overview.md` - Topic analysis and best practices
+- `.claudio/research/<category>/<topic>/troubleshooting.md` - Issues, solutions, diagnostic tools
 
 #### `/claudio:discovery` - Analyze Project Structure
 ```bash
@@ -221,7 +225,7 @@ When you say "use claudio on ../my-project", you're requesting:
 ## Command Output Locations
 
 ### Standalone Command Output
-- **Research**: `research/<category>/<topic>.md`
+- **Research**: `.claudio/research/<category>/<topic>/` directory with `overview.md` + `troubleshooting.md`
 - **Discovery**: `discovery/reports/<project_name>_discovery.md`
 - **Documentation**: `docs/` directory
 - **PRD**: `prd/documents/<project_name>_prd.md`
@@ -240,9 +244,11 @@ target_project/
     ├── prd.md                  # Requirements document
     ├── plan.md                 # Implementation plan
     ├── status.md               # Progress tracking
-    ├── research/               # Topic research
+    ├── research/               # Topic research documentation
     │   └── <category>/
-    │       └── <topic>.md
+    │       └── <topic>/        # Research directory
+    │           ├── overview.md       # Topic analysis
+    │           └── troubleshooting.md  # Issues & solutions
     ├── docs/                   # Generated documentation
     │   ├── readme.md
     │   ├── api.md

@@ -1,544 +1,708 @@
-# TaskApp Enhancement PRD: Production-Ready Task Management Platform
+# User Authentication PRD - TaskApp
 
 ## Executive Summary
 
 ### Project Vision
-Transform the current TaskApp Phoenix LiveView demonstration application into a production-ready, multi-user task management platform that showcases modern Elixir/Phoenix development practices while serving real business needs.
+Transform the TaskApp from a single-user demonstration application into a multi-user task management system with secure user authentication, enabling personalized task management and collaborative workflows while maintaining the existing high-quality Phoenix LiveView architecture.
 
 ### Key Objectives
-1. **Production Readiness**: Migrate from demo GenServer storage to enterprise-grade PostgreSQL persistence
-2. **Multi-User Support**: Implement comprehensive authentication and user management system
-3. **Enhanced Functionality**: Add advanced task management features for productivity workflows
-4. **Operational Excellence**: Establish monitoring, deployment, and maintenance capabilities
-5. **Developer Experience**: Maintain reference implementation quality for Phoenix LiveView patterns
+1. **Security First**: Implement robust user authentication using Phoenix's proven phx_gen_auth generator
+2. **Seamless Integration**: Integrate authentication without disrupting the existing LiveView real-time capabilities
+3. **User Experience**: Provide intuitive signup, login, and account management workflows
+4. **Data Isolation**: Ensure users can only access and manage their own tasks
+5. **Scalability Foundation**: Establish architecture patterns for future multi-user features
 
 ### Success Definition
-- **Technical Success**: Production-grade application with 99.9% uptime, <200ms response times, and comprehensive test coverage
-- **Business Success**: Platform capable of supporting 1000+ concurrent users with real-time task management
-- **Development Success**: Maintained code quality standards serving as reference implementation for Phoenix LiveView development
+- Users can securely create accounts and authenticate
+- All existing task management functionality works within user-specific contexts
+- Authentication integrates seamlessly with LiveView real-time updates
+- Zero security vulnerabilities in authentication implementation
+- Performance remains consistent with current benchmarks (<10ms task operations)
 
 ### Timeline Overview
-- **Phase 1 (Weeks 1-4)**: Foundation - Authentication and Database Migration
-- **Phase 2 (Weeks 5-8)**: Enhanced Features - Categories, Due Dates, and Collaboration
-- **Phase 3 (Weeks 9-12)**: Production Operations - Monitoring, Deployment, and Scale
+- **Phase 1 (Week 1-2)**: Core authentication implementation with phx_gen_auth
+- **Phase 2 (Week 3-4)**: User-scoped task management and data migration
+- **Phase 3 (Week 5-6)**: UI/UX refinement and comprehensive testing
+- **Phase 4 (Week 7-8)**: Production readiness and security hardening
 
 ## Project Context
 
 ### Current State
-The TaskApp is a well-architected Phoenix LiveView demonstration application featuring:
-- **Solid Architecture**: Clean separation between business logic and web layer
-- **Real-time Features**: LiveView-based interactive task management
-- **Quality Code**: Comprehensive testing, static analysis, and development tooling
-- **Demo Limitations**: GenServer-based state storage, single-user design, basic feature set
+The TaskApp is a sophisticated Phoenix LiveView application demonstrating modern Elixir development practices with:
 
-**Technical Debt Assessment:**
-- In-memory storage prevents production deployment
-- Lack of authentication limits real-world usage
-- Basic feature set doesn't demonstrate full Phoenix capabilities
-- Missing production operational requirements
+**Architecture Strengths**:
+- Phoenix 1.7.10 with LiveView 0.20.2 for real-time UI
+- GenServer-based in-memory state management
+- Comprehensive testing strategy (>80% coverage target)
+- Modern development workflow with CI/CD
+- Excellent separation of concerns and domain boundaries
+- Production-ready code quality with static analysis tools
+
+**Current Limitations**:
+- Single-user application with no authentication
+- Tasks are shared across all sessions
+- No data persistence across application restarts
+- No user-specific access controls
+- Limited scalability for multi-user scenarios
 
 ### Problem Statement
-1. **Storage Persistence**: Current GenServer storage is volatile and single-instance
-2. **User Management**: No authentication or multi-user support limits practical application
-3. **Feature Gaps**: Limited task management capabilities reduce demonstration value
-4. **Production Gaps**: Missing monitoring, deployment, and operational capabilities
-5. **Scalability Constraints**: Current architecture doesn't demonstrate Phoenix scaling patterns
+The current TaskApp architecture prevents multiple users from using the system simultaneously without interfering with each other's tasks. Key challenges include:
+
+1. **Security Gap**: No authentication mechanism to identify or authorize users
+2. **Data Isolation**: All users share the same task pool in memory
+3. **User Experience**: No personalized task management experience
+4. **Scalability Limitation**: Cannot support multiple organizations or teams
+5. **Audit Trail**: No user attribution for task operations
 
 ### Solution Overview
-Evolve TaskApp into a comprehensive, production-ready task management platform that:
-- **Maintains Demo Value**: Preserves reference implementation quality
-- **Adds Business Value**: Provides real task management capabilities
-- **Demonstrates Best Practices**: Showcases complete Phoenix application lifecycle
-- **Enables Production Use**: Supports real users with enterprise requirements
+Implement Phoenix's phx_gen_auth authentication system to provide:
+
+- **Secure Authentication**: Email/password authentication with password hashing
+- **User Management**: Account creation, login, logout, and password reset
+- **Session Management**: Secure session handling with LiveView integration
+- **Task Scoping**: User-specific task isolation in GenServer state
+- **Authorization**: Role-based access control foundation
+- **Migration Path**: Smooth transition from current architecture to user-scoped system
 
 ### Business Impact
-- **Developer Community**: Enhanced reference implementation for Phoenix LiveView
-- **Technical Demonstration**: Complete showcase of Elixir/Phoenix ecosystem capabilities
-- **Real-world Usage**: Functional productivity tool for teams and individuals
-- **Learning Resource**: Comprehensive example of production Phoenix application development
+**Immediate Benefits**:
+- Enable multi-user deployment scenarios
+- Provide foundation for SaaS or team-based offerings
+- Demonstrate production-ready authentication patterns
+- Increase system security and data privacy
+
+**Long-term Value**:
+- Support for team collaboration features
+- User analytics and personalization opportunities
+- Integration with enterprise identity providers
+- Foundation for advanced features like task sharing and real-time collaboration
 
 ## Stakeholders and Users
 
 ### Primary Users
-1. **Individual Users**
-   - Personal task management and productivity tracking
-   - Need: Simple, fast, reliable task organization
-   - Success: Increased personal productivity and task completion
+**End Users - Task Managers**:
+- **Needs**: Secure access to personal task lists, privacy, seamless experience
+- **Goals**: Manage personal tasks without interference from other users
+- **Pain Points**: Current shared task space, no persistent personal data
+- **Success Metrics**: Account creation completion rate, daily active users, task creation frequency
 
-2. **Small Teams** (3-10 members)
-   - Collaborative task management and project coordination
-   - Need: Shared task visibility and basic collaboration features
-   - Success: Improved team coordination and project completion
+**End Users - Team Members** (Future):
+- **Needs**: Collaborative task management, team visibility, role-based permissions
+- **Goals**: Share tasks with team members while maintaining personal task privacy
+- **Pain Points**: No team organization capabilities, limited collaboration features
+- **Success Metrics**: Team adoption rate, collaborative task creation, user engagement
 
 ### Secondary Users
-3. **Phoenix Developers**
-   - Learning Phoenix LiveView patterns and best practices
-   - Need: High-quality reference implementation with comprehensive examples
-   - Success: Faster Phoenix development learning and skill development
+**System Administrators**:
+- **Needs**: User management capabilities, security monitoring, performance insights
+- **Goals**: Maintain system security and performance with growing user base
+- **Pain Points**: No user administration interface, limited monitoring capabilities
+- **Success Metrics**: System uptime, security incident frequency, user growth handling
 
-4. **Technical Evaluators**
-   - Assessing Phoenix/Elixir for production applications
-   - Need: Complete application demonstrating real-world capabilities
-   - Success: Informed technology adoption decisions
+**Application Developers**:
+- **Needs**: Clear authentication patterns, testable code, maintainable architecture
+- **Goals**: Extend authentication system for additional features
+- **Pain Points**: Need consistent patterns for user-scoped operations
+- **Success Metrics**: Development velocity, bug frequency, code coverage maintenance
 
 ### Internal Stakeholders
-5. **Development Team**
-   - Application development, maintenance, and enhancement
-   - Need: Clear requirements, quality code standards, comprehensive documentation
-   - Success: Efficient development process and maintainable codebase
+**Development Team**:
+- **Needs**: Clear requirements, maintainable code, comprehensive testing
+- **Goals**: Implement authentication without breaking existing functionality
+- **Pain Points**: Complex integration with LiveView, GenServer state migration
+- **Success Metrics**: Implementation timeline adherence, test coverage >85%, zero regressions
 
-6. **DevOps Team**
-   - Application deployment, monitoring, and operational management
-   - Need: Standardized deployment, comprehensive monitoring, automated operations
-   - Success: Reliable production environment with minimal operational overhead
+**Operations Team**:
+- **Needs**: Secure deployment, monitoring capabilities, performance maintenance
+- **Goals**: Deploy authentication system with zero security vulnerabilities
+- **Pain Points**: Additional complexity in session management, user data handling
+- **Success Metrics**: Deployment success rate, security scan results, performance benchmarks
 
 ### External Stakeholders
-7. **Open Source Community**
-   - Contributors and maintainers of related Elixir/Phoenix projects
-   - Need: Quality example demonstrating ecosystem capabilities
-   - Success: Increased Phoenix adoption and ecosystem growth
+**Security Auditors**:
+- **Needs**: Compliance with security best practices, audit trail capabilities
+- **Goals**: Verify authentication implementation meets security standards
+- **Pain Points**: Need comprehensive security documentation and testing evidence
+- **Success Metrics**: Security audit results, vulnerability scan scores
 
 ## Requirements Specification
 
 ### Functional Requirements
 
-#### Core Features (Phase 1 - Foundation)
+#### Core Authentication Features
+**FR-1: User Registration**
+- Users can create accounts with email and password
+- Email validation with confirmation workflow
+- Password strength requirements (8+ characters, mixed case, numbers)
+- Duplicate email prevention with clear error messages
+- Account creation email notifications
 
-**F1: User Authentication and Management**
-- User registration with email/password
-- Secure login with session management
-- Password reset and email verification
-- User profile management and settings
-- Account deletion and data export
+**FR-2: User Authentication**
+- Email/password login with secure session management
+- "Remember me" functionality with extended session duration
+- Failed login attempt tracking and rate limiting
+- Clear login error messages without information disclosure
+- Session timeout with automatic logout
 
-**F2: Database Persistence Layer**
-- PostgreSQL integration with Ecto schemas
-- Data migration from GenServer to database
-- Database indexing for performance optimization
-- Automated backup and recovery procedures
-- Data integrity and consistency validation
+**FR-3: Password Management**
+- Secure password hashing using Argon2 or bcrypt
+- Password reset via email with time-limited tokens
+- Password change functionality for authenticated users
+- Password history to prevent reuse of recent passwords
+- Strong password policy enforcement
 
-**F3: Enhanced Task Management**
-- Task CRUD operations with database persistence
-- Task title, description, and metadata support
-- Task status management (pending, in-progress, completed)
-- Task creation and modification timestamps
-- Bulk task operations (multiple select/update/delete)
+**FR-4: Account Management**
+- User profile viewing and editing capabilities
+- Email address change with verification process
+- Account deactivation and deletion workflows
+- User preference management (timezone, notifications)
+- Account recovery options for locked accounts
 
-#### Enhanced Features (Phase 2 - Advanced Functionality)
+#### Task Management Integration
+**FR-5: User-Scoped Tasks**
+- All tasks associated with specific user accounts
+- Task isolation between users (no cross-user access)
+- User-specific task counters and statistics
+- Migration of existing demo tasks to system account
+- Consistent task operations within user context
 
-**F4: Task Organization**
-- Task categories and tagging system
-- Project-based task grouping
-- Custom task priorities and urgency levels
-- Task search and filtering capabilities
-- Advanced sorting and view options
+**FR-6: LiveView Authentication Integration**
+- Real-time authentication state updates across LiveView components
+- Seamless authentication redirects without page reloads
+- User session persistence across LiveView connections
+- Authentication-aware component rendering
+- Real-time user presence indicators
 
-**F5: Time Management**
-- Due date assignment and tracking
-- Task scheduling and calendar integration
-- Time estimation and tracking
-- Deadline notifications and reminders
-- Time-based reporting and analytics
+**FR-7: API Authentication**
+- Token-based authentication for REST API endpoints
+- API key management for external integrations
+- Rate limiting per authenticated user
+- Consistent authentication between LiveView and API
+- API access logging and audit trail
 
-**F6: Collaboration Features**
-- Task assignment to team members
-- Task sharing and permissions management
-- Real-time collaboration updates via Phoenix PubSub
-- Activity feeds and change notifications
-- Basic commenting and communication
+#### User Experience Features
+**FR-8: Navigation and Access Control**
+- Authentication-aware navigation menu updates
+- Protected route access with redirect handling
+- User dashboard with personalized task overview
+- Logout functionality with session cleanup
+- Guest access to public demo content
 
-#### Advanced Features (Phase 3 - Production Scale)
-
-**F7: Productivity Analytics**
-- Task completion statistics and trends
-- Personal and team productivity dashboards
-- Time tracking and analysis reports
-- Goal setting and progress monitoring
-- Exportable reports and data visualization
-
-**F8: Integration Capabilities**
-- REST API for external integrations
-- Webhook support for third-party services
-- Import/export functionality (CSV, JSON)
-- Calendar application integration (CalDAV)
-- Basic mobile app API support
+**FR-9: Responsive Authentication UI**
+- Mobile-optimized login and registration forms
+- Accessible authentication flows (WCAG 2.1 compliance)
+- Loading states and progress indicators
+- Clear error messaging and recovery guidance
+- Consistent styling with existing Tailwind CSS design
 
 ### Non-Functional Requirements
 
 #### Performance Requirements
-- **Response Time**: <200ms for 95% of requests
-- **Throughput**: Support 1000+ concurrent users
-- **Real-time Updates**: <50ms LiveView update latency
-- **Database**: <100ms query response time for 95% of operations
-- **Asset Loading**: <2s initial page load time
+**NFR-1: Response Time**
+- Authentication operations complete within 200ms (95th percentile)
+- Task operations maintain <10ms average response time
+- LiveView authentication updates within 100ms
+- Password hashing operations optimized for user experience
+- Database queries for user operations <50ms average
+
+**NFR-2: Throughput**
+- Support 1,000 concurrent authenticated sessions
+- Handle 10,000 authentication requests per hour
+- Maintain current task operation throughput (>100/second)
+- Scale to 10,000+ registered users
+- Support 100 concurrent LiveView connections per user
+
+**NFR-3: Resource Usage**
+- Memory usage increase <50MB for authentication system
+- CPU impact <10% additional load under normal operation
+- Session storage optimization for large user bases
+- Efficient GenServer state management for user-scoped data
+- Database connection pooling for user operations
 
 #### Security Requirements
-- **Authentication**: Industry-standard password hashing (bcrypt)
-- **Session Management**: Secure session handling with automatic timeout
-- **Data Protection**: Encryption at rest and in transit
-- **Input Validation**: Comprehensive input sanitization and validation
-- **Audit Logging**: Security event tracking and monitoring
+**NFR-4: Authentication Security**
+- Password hashing using Argon2 with appropriate parameters
+- Secure session token generation and validation
+- Protection against brute force attacks with rate limiting
+- CSRF protection for all authentication forms
+- Secure password reset token generation and validation
+
+**NFR-5: Data Protection**
+- User data encryption at rest and in transit
+- PII handling compliance with privacy regulations
+- Secure session storage with HttpOnly and Secure flags
+- Protection against session fixation attacks
+- User data deletion capabilities for compliance
+
+**NFR-6: Authorization**
+- Principle of least privilege for user access
+- Role-based access control foundation
+- Resource-level authorization for task operations
+- Audit logging for authentication and authorization events
+- Protection against privilege escalation attacks
 
 #### Reliability Requirements
-- **Availability**: 99.9% uptime (8.7 hours downtime/year maximum)
-- **Data Integrity**: Zero data loss with automated backups
-- **Error Handling**: Graceful degradation and user-friendly error messages
-- **Recovery Time**: <5 minutes recovery time from system failures
-- **Monitoring**: Comprehensive application and infrastructure monitoring
+**NFR-7: Availability**
+- Authentication system availability >99.5%
+- Graceful degradation for authentication service issues
+- Fault tolerance with GenServer supervision
+- Session recovery after application restarts
+- Health checks for authentication dependencies
+
+**NFR-8: Error Handling**
+- Comprehensive error handling for all authentication flows
+- User-friendly error messages without technical details
+- Automatic recovery from transient authentication failures
+- Logging of all authentication errors and security events
+- Fallback mechanisms for service dependencies
 
 #### Usability Requirements
-- **Accessibility**: WCAG 2.1 AA compliance for web accessibility
-- **Mobile Responsive**: Full functionality on mobile devices
-- **Browser Support**: Modern browsers (Chrome, Firefox, Safari, Edge)
-- **User Experience**: Intuitive interface with <5 minute learning curve
-- **Keyboard Navigation**: Full keyboard accessibility support
+**NFR-9: User Experience**
+- Authentication flows complete within 3 clicks/screens
+- Password reset process completable within 5 minutes
+- Clear visual feedback for all authentication states
+- Consistent user interface across all authentication screens
+- Accessibility compliance (WCAG 2.1 Level AA)
 
 ### Technical Requirements
 
 #### Architecture Requirements
-- **Microservices Ready**: Modular design supporting future service separation
-- **Event-Driven**: Phoenix PubSub for real-time updates and notifications
-- **Stateless Application**: Horizontal scaling support with external session storage
-- **API-First Design**: Clean separation between API and web interface layers
-- **Database Design**: Normalized schema with proper indexing and constraints
+**TR-1: Phoenix Integration**
+- Integration with Phoenix 1.7+ and LiveView 0.20+
+- Use of phx_gen_auth for authentication scaffolding
+- Minimal changes to existing LiveView component architecture
+- Preservation of current testing patterns and coverage
+- Compatibility with existing CI/CD pipeline
 
-#### Technology Stack Specifications
-- **Backend**: Phoenix 1.7.x, Elixir 1.14+, OTP 25+
-- **Database**: PostgreSQL 14+, Redis for session/cache storage
-- **Frontend**: Phoenix LiveView, Tailwind CSS, Alpine.js
-- **Testing**: ExUnit, Wallaby for integration testing, Property-based testing
-- **Quality**: Credo, Dialyzer, ExCoveralls for code quality assurance
+**TR-2: State Management**
+- Extension of GenServer state to include user context
+- User-scoped task storage within GenServer processes
+- Session state synchronization between LiveView and GenServer
+- Memory-efficient user data structures
+- Graceful handling of user session cleanup
 
-#### Development Environment Requirements
-- **Containerization**: Docker development environment with docker-compose
-- **Local Setup**: One-command development environment setup
-- **Testing Pipeline**: Automated test execution on code changes
-- **Code Quality**: Pre-commit hooks for formatting and basic validation
-- **Documentation**: Living documentation updated with code changes
+**TR-3: Database Requirements**
+- User table schema with proper indexing
+- Session management table for persistent sessions
+- Migration scripts for existing task data
+- Database query optimization for user operations
+- Connection pooling configuration for user load
 
-#### Deployment Requirements
-- **Container Deployment**: Production-ready Docker containers
-- **Infrastructure**: Kubernetes or similar container orchestration
-- **CI/CD Pipeline**: Automated testing, building, and deployment
-- **Environment Management**: Staging and production environment parity
-- **Security**: Secrets management and secure configuration
+#### Development Requirements
+**TR-4: Code Quality**
+- Maintain >85% test coverage including authentication code
+- Static analysis compliance (Credo, Dialyzer)
+- Documentation coverage for all authentication modules
+- Consistent code formatting and style guidelines
+- Type specifications for all authentication functions
+
+**TR-5: Testing Requirements**
+- Unit tests for all authentication business logic
+- Integration tests for LiveView authentication flows
+- End-to-end tests for complete user registration/login workflows
+- Security tests for authentication vulnerabilities
+- Load tests for authentication system performance
+
+**TR-6: Development Workflow**
+- Authentication feature flags for gradual rollout
+- Development environment with test user accounts
+- Staging environment with production-like authentication
+- Hot code reloading support for authentication changes
+- Database seeding for development and testing
 
 ## Success Criteria and Metrics
 
 ### Key Performance Indicators
 
-#### User Engagement Metrics
-- **Daily Active Users**: Target 100+ regular users within 6 months
-- **Task Completion Rate**: >80% of created tasks completed within deadline
-- **Session Duration**: Average 15+ minutes per user session
-- **Return Rate**: >70% of users return within 7 days
-- **Feature Adoption**: >60% of users use advanced features (categories, due dates)
+#### User Adoption Metrics
+**KPI-1: Registration and Activation**
+- **User Registration Rate**: >80% of visitors who start registration complete it
+- **Email Verification Rate**: >70% of registered users verify their email within 24 hours
+- **First Task Creation**: >60% of verified users create at least one task within first session
+- **Daily Active Users**: Track growth from 0 to target user base
+- **User Retention**: >50% of new users return within 7 days
 
-#### System Performance Benchmarks
-- **Response Time**: 95th percentile <200ms for all endpoints
-- **Throughput**: Handle 1000+ concurrent users without degradation
-- **Uptime**: Achieve 99.9% availability (tested monthly)
-- **Database Performance**: 95th percentile query time <100ms
-- **Real-time Updates**: LiveView updates delivered <50ms
+**KPI-2: Authentication Usage**
+- **Login Success Rate**: >95% of login attempts succeed on first try
+- **Session Duration**: Average session length >15 minutes
+- **Password Reset Usage**: <5% of users require password reset per month
+- **Multi-device Usage**: >30% of users access from multiple devices
+- **API Authentication**: Successful token-based authentication for API users
 
-#### Development Quality Indicators
-- **Code Coverage**: Maintain >90% test coverage
-- **Bug Rate**: <1 production bug per 1000 lines of code
-- **Security Scan**: Zero high-severity security vulnerabilities
-- **Performance Regression**: No >10% performance degradation between releases
-- **Documentation**: All public APIs and key functions documented
+#### System Performance Metrics
+**KPI-3: Technical Performance**
+- **Authentication Response Time**: 95th percentile <200ms for login operations
+- **Task Operations Performance**: Maintain current <10ms average response time
+- **System Availability**: >99.5% uptime for authentication services
+- **Concurrent User Support**: Successfully handle 1,000+ concurrent sessions
+- **Memory Usage**: Authentication system adds <50MB to base application
+
+**KPI-4: Security Metrics**
+- **Security Incidents**: Zero successful authentication bypass attempts
+- **Password Security**: 100% of passwords meet strength requirements
+- **Brute Force Protection**: >99% of brute force attempts blocked
+- **Session Security**: Zero session fixation or hijacking incidents
+- **Audit Compliance**: 100% of authentication events properly logged
 
 ### Acceptance Criteria
 
-#### Phase 1 Completion Criteria
-- [ ] User registration and authentication system fully functional
-- [ ] Database migration from GenServer completed with data integrity
-- [ ] Existing task functionality maintained with database persistence
-- [ ] Comprehensive test suite covering all new functionality
-- [ ] Production deployment pipeline established and tested
+#### Feature Completion Criteria
+**AC-1: Authentication Flow Completion**
+- ✅ User can register with email/password
+- ✅ Email verification workflow functions correctly
+- ✅ User can login with correct credentials
+- ✅ User can reset password via email
+- ✅ User can change password when authenticated
+- ✅ User can logout and session is properly cleaned up
 
-#### Phase 2 Completion Criteria
-- [ ] Task categorization and project grouping implemented
-- [ ] Due date management and notification system operational
-- [ ] Multi-user collaboration features functional
-- [ ] Search and filtering capabilities implemented
-- [ ] Performance benchmarks met under load testing
+**AC-2: Task Management Integration**
+- ✅ All existing task operations work for authenticated users
+- ✅ Tasks are isolated per user (no cross-user access)
+- ✅ LiveView real-time updates maintain authentication context
+- ✅ Task statistics and counters are user-specific
+- ✅ Demo tasks are migrated to system account appropriately
 
-#### Phase 3 Completion Criteria
-- [ ] Production monitoring and alerting system operational
-- [ ] Analytics dashboard providing actionable insights
-- [ ] API documentation and external integration capabilities
-- [ ] Mobile-responsive interface fully functional
-- [ ] Disaster recovery procedures tested and documented
+**AC-3: Security Implementation**
+- ✅ Passwords are properly hashed and never stored in plain text
+- ✅ Sessions are secure with proper token management
+- ✅ Rate limiting prevents brute force attacks
+- ✅ CSRF protection is implemented on all forms
+- ✅ Security headers are properly configured
+
+#### Quality Assurance Criteria
+**AC-4: Testing Coverage**
+- ✅ Test coverage remains >85% including authentication code
+- ✅ All authentication flows have integration tests
+- ✅ Security tests validate authentication vulnerabilities
+- ✅ Load tests confirm performance under authentication load
+- ✅ Existing tests continue to pass with authentication changes
+
+**AC-5: User Experience Standards**
+- ✅ Authentication forms are responsive on mobile devices
+- ✅ Error messages are clear and helpful
+- ✅ Loading states provide appropriate user feedback
+- ✅ Authentication flows are accessible (WCAG 2.1 AA)
+- ✅ UI remains consistent with existing design system
 
 ### Performance Benchmarks
 
-#### Load Testing Requirements
-- **Concurrent Users**: 1000 simultaneous active users
-- **Task Operations**: 10,000 task CRUD operations per minute
-- **Real-time Updates**: 500 simultaneous LiveView connections
-- **Database Load**: 100 database operations per second sustained
-- **Memory Usage**: <2GB application memory usage under full load
+#### Response Time Targets
+- **User Registration**: <500ms for complete signup process
+- **User Login**: <200ms for authentication validation
+- **Password Reset**: <300ms for reset token generation
+- **Task Operations**: Maintain <10ms average (no degradation)
+- **LiveView Updates**: <100ms for authentication state changes
 
-#### Quality Assurance Benchmarks
-- **Test Execution**: Full test suite completion <10 minutes
-- **Security Scan**: Weekly automated security vulnerability scanning
-- **Performance Testing**: Monthly load testing with benchmark comparisons
-- **Code Review**: 100% of changes reviewed before production deployment
-- **Documentation Review**: Quarterly documentation accuracy and completeness review
+#### Throughput Requirements
+- **Peak Authentication Load**: 1,000 login requests per minute
+- **Concurrent Sessions**: 1,000+ simultaneous authenticated users
+- **Task Operations**: Maintain >100 operations/second per user
+- **API Requests**: 10,000+ authenticated API calls per hour
+- **Database Operations**: <50ms average query time for user operations
+
+#### Resource Utilization Limits
+- **Memory Overhead**: <50MB additional memory for authentication
+- **CPU Impact**: <10% additional CPU usage under normal load
+- **Database Connections**: Efficient connection pooling for user operations
+- **Session Storage**: <1KB average session data per user
+- **Cache Efficiency**: >90% cache hit rate for user authentication data
 
 ## Implementation Approach
 
-### Phase 1 - Foundation (Weeks 1-4): MVP
+### Phase 1 - Core Authentication (Weeks 1-2)
 
-#### Week 1-2: Authentication and User Management
-**Priority Features:**
-- User registration and login system
-- Password reset and email verification
-- Session management and security
-- User profile and settings
+#### MVP Authentication Features
+**Week 1: Foundation Setup**
+- Install and configure phx_gen_auth generator
+- Generate user authentication scaffolding
+- Set up user database schema and migrations
+- Implement basic registration and login flows
+- Configure password hashing and session management
 
-**Technical Implementation:**
-- Phoenix Auth integration or custom authentication
-- Database user schema and migrations
-- Session storage configuration
-- Security middleware and validation
+**Week 2: Integration and Testing**
+- Integrate authentication with existing LiveView components
+- Implement user-scoped access to task operations
+- Add authentication guards to controllers and live views
+- Create comprehensive test suite for authentication flows
+- Set up development environment with test user accounts
 
-**Success Criteria:**
-- Complete user authentication flow functional
-- Security best practices implemented
-- Comprehensive test coverage for auth flows
-- Documentation for authentication patterns
+#### Deliverables
+- Working user registration and login system
+- Authentication-protected task management interface
+- User isolation for all task operations
+- Basic test coverage for authentication features
+- Development environment with authentication enabled
 
-#### Week 3-4: Database Migration and Task Enhancement
-**Priority Features:**
-- PostgreSQL integration and Ecto schemas
-- Data migration from GenServer to database
-- Enhanced task model with user associations
-- Task CRUD operations with database persistence
+### Phase 2 - User-Scoped Task Management (Weeks 3-4)
 
-**Technical Implementation:**
-- Ecto schemas for users and tasks
-- Database migrations and indexing
-- GenServer to Ecto migration utility
-- Updated task operations with user scoping
+#### Task System Migration
+**Week 3: GenServer State Modification**
+- Modify GenServer state structure for user-scoped tasks
+- Implement user context propagation throughout task operations
+- Add user association to all task-related data structures
+- Create migration utilities for existing demo data
+- Implement user-specific task statistics and counters
 
-**Success Criteria:**
-- All existing functionality preserved with database storage
-- Data integrity and consistency validation
-- Performance benchmarks met for database operations
-- Migration documentation and rollback procedures
+**Week 4: LiveView Integration**
+- Update LiveView components for user-aware task display
+- Implement real-time updates within user authentication context
+- Add user information display in navigation and headers
+- Create user dashboard with personalized task overview
+- Ensure all existing LiveView functionality works with authentication
 
-### Phase 2 - Enhancement (Weeks 5-8): Advanced Features
+#### Deliverables
+- Complete user isolation for task operations
+- Migrated demo data to system account
+- User-specific task statistics and dashboard
+- Real-time updates maintain user authentication context
+- All existing features working within user scope
 
-#### Week 5-6: Task Organization and Time Management
-**Priority Features:**
-- Task categories and tagging system
-- Due date management and scheduling
-- Task priorities and status tracking
-- Search and filtering capabilities
+### Phase 3 - UI/UX Refinement (Weeks 5-6)
 
-**Technical Implementation:**
-- Extended task schema with categories and metadata
-- Date/time handling and timezone support
-- Search indexing and query optimization
-- UI enhancements for task organization
+#### User Experience Enhancement
+**Week 5: Authentication UI Optimization**
+- Design and implement responsive authentication forms
+- Add loading states and progress indicators
+- Improve error messaging and validation feedback
+- Implement "remember me" functionality
+- Add password strength indicators and guidelines
 
-**Success Criteria:**
-- Advanced task organization features functional
-- Search performance meets benchmarks
-- Due date notifications and reminders working
-- Mobile-responsive task management interface
+**Week 6: Navigation and Access Control**
+- Implement authentication-aware navigation
+- Add user account management interface
+- Create password change and profile editing flows
+- Implement proper logout functionality
+- Add guest access to demo content
 
-#### Week 7-8: Collaboration and Real-time Features
-**Priority Features:**
-- Task assignment and sharing
-- Real-time collaboration updates
-- Activity feeds and notifications
-- Basic team management
+#### Deliverables
+- Polished authentication user interface
+- Complete account management functionality
+- Mobile-responsive authentication flows
+- Consistent design integration with existing UI
+- User-friendly error handling and recovery
 
-**Technical Implementation:**
-- Phoenix PubSub for real-time updates
-- Task sharing and permissions system
-- Notification system with email integration
-- Team and organization data models
+### Phase 4 - Production Readiness (Weeks 7-8)
 
-**Success Criteria:**
-- Multi-user collaboration features functional
-- Real-time updates delivered reliably
-- Notification system working across channels
-- Performance maintained with multiple users
+#### Security Hardening and Performance
+**Week 7: Security Implementation**
+- Implement rate limiting for authentication endpoints
+- Add comprehensive security headers and CSRF protection
+- Set up audit logging for authentication events
+- Conduct security testing and vulnerability assessment
+- Implement session timeout and cleanup mechanisms
 
-### Phase 3 - Production Operations (Weeks 9-12): Scale and Operations
+**Week 8: Performance and Monitoring**
+- Optimize authentication database queries and indexing
+- Implement performance monitoring for authentication operations
+- Set up health checks for authentication system components
+- Load test authentication system under concurrent user load
+- Create production deployment and rollback procedures
 
-#### Week 9-10: Monitoring and Analytics
-**Priority Features:**
-- Application performance monitoring
-- User analytics and reporting
-- Error tracking and alerting
-- Productivity dashboards
+#### Deliverables
+- Production-ready authentication system
+- Comprehensive security testing and hardening
+- Performance optimization and monitoring
+- Complete deployment and operations documentation
+- Load tested system ready for production deployment
 
-**Technical Implementation:**
-- Telemetry integration and custom metrics
-- Analytics data collection and storage
-- Dashboard creation with real-time data
-- Alert configuration and notification
+### Long-term Vision
 
-**Success Criteria:**
-- Comprehensive monitoring covering all key metrics
-- Analytics providing actionable insights
-- Alert system detecting and notifying issues
-- Dashboard accessible to stakeholders
+#### Immediate Expansion Opportunities (Months 2-3)
+- **Team Collaboration**: Add team/organization support for shared task management
+- **Advanced Authentication**: Implement OAuth integration (Google, GitHub, etc.)
+- **Role-Based Access**: Add role system for different permission levels
+- **Real-time Collaboration**: Implement cross-user real-time task updates
+- **Mobile App**: Develop mobile application with authentication integration
 
-#### Week 11-12: Deployment and Integration
-**Priority Features:**
-- Production deployment pipeline
-- API documentation and external access
-- Import/export capabilities
-- Mobile optimization and testing
-
-**Technical Implementation:**
-- CI/CD pipeline with automated testing
-- OpenAPI specification and documentation
-- Data export utilities and API endpoints
-- Mobile browser testing and optimization
-
-**Success Criteria:**
-- Automated deployment pipeline functional
-- API fully documented and tested
-- Data portability features working
-- Mobile experience meets usability standards
-
-### Long-term Vision (Months 4-12)
-
-#### Advanced Productivity Features
-- AI-powered task recommendations
-- Advanced project management capabilities
-- Integration with popular productivity tools
-- Custom workflow automation
-
-#### Enterprise Capabilities
-- Single sign-on (SSO) integration
-- Advanced user and team management
-- Compliance and audit features
-- White-label deployment options
-
-#### Platform Expansion
-- Native mobile applications
-- Desktop application development
-- Third-party integrations marketplace
-- Plugin and extension system
+#### Future Enhancement Roadmap (Months 4-12)
+- **Enterprise Integration**: SAML/LDAP authentication for enterprise customers
+- **Advanced Security**: Two-factor authentication and security keys
+- **Analytics and Reporting**: User behavior analytics and task completion metrics
+- **API Ecosystem**: Comprehensive API with third-party integration capabilities
+- **Scalability**: Database migration and horizontal scaling architecture
 
 ## Constraints and Assumptions
 
 ### Budget Constraints
-- **Development Resources**: Maximum 2 full-time developers
-- **Infrastructure Costs**: Target <$500/month operational costs
-- **Third-party Services**: Minimize external service dependencies
-- **Open Source**: Maintain open-source license compatibility
+- **Development Time**: 8 weeks allocated for complete authentication implementation
+- **Resource Allocation**: Single full-time developer with part-time design support
+- **Infrastructure Costs**: Minimal additional hosting costs for authentication services
+- **Third-party Services**: Budget for email service provider for authentication emails
+- **Testing Resources**: Allocation for security testing and penetration testing services
 
 ### Timeline Constraints
-- **Phase 1 Deadline**: 4 weeks for foundation features (non-negotiable)
-- **Production Launch**: 12 weeks maximum for full Phase 3 completion
-- **Feature Freeze**: Week 10 for Phase 3 features to allow adequate testing
-- **Documentation**: All features must be documented within 1 week of completion
+- **Hard Deadline**: Authentication system must be production-ready within 8 weeks
+- **Milestone Dependencies**: Each phase depends on previous phase completion
+- **Testing Timeline**: Comprehensive testing required before production deployment
+- **Documentation Deadline**: Complete documentation must be ready alongside implementation
+- **Deployment Window**: Production deployment must occur during low-usage periods
 
 ### Technical Constraints
-- **Phoenix Version**: Must use Phoenix 1.7.x for latest LiveView features
-- **Database**: PostgreSQL required for JSON support and full-text search
-- **Browser Support**: Modern browsers only (no IE11 support required)
-- **Mobile**: Responsive web app sufficient (no native mobile apps in Phase 1-3)
+- **Phoenix Framework**: Must maintain compatibility with Phoenix 1.7+ and LiveView 0.20+
+- **Database Choice**: Continue with existing database strategy (current: in-memory GenServer)
+- **Authentication Library**: Use phx_gen_auth for consistency with Phoenix ecosystem
+- **Testing Framework**: Maintain existing ExUnit testing patterns and coverage requirements
+- **CI/CD Pipeline**: Authentication implementation must integrate with existing GitHub Actions
 
-### Key Assumptions
-- **User Base**: Primarily technical users comfortable with web applications
-- **Usage Patterns**: Primarily desktop/laptop usage during work hours
-- **Data Volume**: <10,000 tasks per user, <1,000 active users initially
-- **Growth Rate**: Gradual user growth allowing infrastructure scaling
-- **Community**: Open source community will contribute to documentation and testing
+### Assumptions
+
+#### User Behavior Assumptions
+- **Registration Patterns**: Users will provide valid email addresses for account verification
+- **Password Management**: Users will choose reasonably secure passwords when guided
+- **Session Management**: Average session duration will be 15-30 minutes
+- **Feature Adoption**: Existing demo users will migrate to authenticated accounts
+- **Usage Patterns**: Peak usage will remain within current system capacity limits
+
+#### Technical Assumptions
+- **Performance Impact**: Authentication will add minimal overhead to existing operations
+- **Scalability**: Current GenServer architecture can support initial user growth
+- **Integration Complexity**: Phoenix LiveView authentication integration will be straightforward
+- **Database Migration**: Migration from in-memory storage can be deferred beyond authentication
+- **Security Standards**: phx_gen_auth provides sufficient security for initial deployment
+
+#### Business Assumptions
+- **User Demand**: There is demand for multi-user task management functionality
+- **Market Timing**: Authentication feature launch aligns with user acquisition goals
+- **Competitive Advantage**: Secure authentication will differentiate from demo applications
+- **Growth Trajectory**: User base growth will justify authentication system investment
+- **Feature Priority**: Authentication is higher priority than other potential features
+
+#### Environmental Assumptions
+- **Infrastructure Stability**: Existing hosting and deployment infrastructure remains stable
+- **Third-party Services**: Email service providers maintain reliable delivery rates
+- **Security Landscape**: No major security vulnerabilities discovered in Phoenix ecosystem
+- **Development Environment**: Development team maintains access to necessary tools and resources
+- **Regulatory Environment**: No new compliance requirements emerge during development period
 
 ## Risk Assessment
 
 ### Technical Risks
 
-#### High Priority Risks
-1. **Database Migration Complexity**
-   - Risk: Data loss or corruption during GenServer to PostgreSQL migration
-   - Impact: Loss of existing demo data and user trust
-   - Mitigation: Comprehensive migration testing, backup procedures, rollback plan
+#### High Impact Technical Risks
+**Risk T-1: LiveView Authentication Integration Complexity**
+- **Probability**: Medium (30%)
+- **Impact**: High - Could delay implementation by 2-3 weeks
+- **Description**: Complex integration between Phoenix authentication and LiveView real-time features
+- **Mitigation Strategy**: Early prototype development, consultation with Phoenix community experts
+- **Contingency Plan**: Simplify initial integration, implement advanced features in later phases
 
-2. **Performance Degradation**
-   - Risk: Database introduction slows response times below acceptable limits
-   - Impact: Poor user experience and scalability concerns
-   - Mitigation: Performance monitoring, query optimization, caching strategies
+**Risk T-2: GenServer State Management Complications**
+- **Probability**: Medium (25%)
+- **Impact**: High - Could require architecture changes
+- **Description**: User-scoped state management may require significant GenServer modifications
+- **Mitigation Strategy**: Thorough analysis and testing of state management changes
+- **Contingency Plan**: Implement user scoping at application layer rather than GenServer layer
 
-3. **Real-time Feature Complexity**
-   - Risk: Phoenix PubSub implementation introduces bugs or performance issues
-   - Impact: Unreliable real-time updates affecting user experience
-   - Mitigation: Incremental implementation, comprehensive testing, fallback mechanisms
+**Risk T-3: Performance Degradation**
+- **Probability**: Low (15%)
+- **Impact**: Medium - Could impact user experience
+- **Description**: Authentication overhead could slow down existing task operations
+- **Mitigation Strategy**: Performance testing throughout development, optimization focus
+- **Contingency Plan**: Implement caching layer, optimize database queries
 
-#### Medium Priority Risks
-4. **Authentication Security Vulnerabilities**
-   - Risk: Security flaws in custom authentication implementation
-   - Impact: User data exposure and security breaches
-   - Mitigation: Use proven authentication libraries, security audits, penetration testing
+#### Medium Impact Technical Risks
+**Risk T-4: Database Migration Complexity**
+- **Probability**: Medium (40%)
+- **Impact**: Medium - Could complicate deployment
+- **Description**: Migrating existing demo data to user-scoped structure
+- **Mitigation Strategy**: Create comprehensive migration scripts with rollback capability
+- **Contingency Plan**: Start with clean slate, provide data import tools for users
 
-5. **Third-party Dependency Issues**
-   - Risk: Critical dependencies become unmaintained or introduce vulnerabilities
-   - Impact: Security issues or forced major refactoring
-   - Mitigation: Regular dependency audits, minimize dependencies, security monitoring
+**Risk T-5: Third-party Email Service Issues**
+- **Probability**: Low (20%)
+- **Impact**: Medium - Could impact user registration
+- **Description**: Email service reliability could affect verification and password resets
+- **Mitigation Strategy**: Use reliable email service provider, implement fallback options
+- **Contingency Plan**: Multiple email provider integration, manual verification option
 
 ### Business Risks
 
-#### Market and Adoption Risks
-1. **Limited User Adoption**
-   - Risk: Users don't find sufficient value in enhanced features
-   - Impact: Low usage and reduced demonstration value
-   - Mitigation: User feedback collection, iterative improvement, community engagement
+#### Strategic Business Risks
+**Risk B-1: User Adoption Challenges**
+- **Probability**: Medium (35%)
+- **Impact**: High - Could reduce feature value
+- **Description**: Users may resist moving from simple demo to registration-required system
+- **Mitigation Strategy**: Maintain demo access, clear value proposition communication
+- **Contingency Plan**: Implement guest access with upgrade prompts, enhanced demo features
 
-2. **Competition from Established Tools**
-   - Risk: Users prefer existing task management solutions
-   - Impact: Limited growth and reduced business case
-   - Mitigation: Focus on unique Phoenix/LiveView demonstration value, developer-friendly features
+**Risk B-2: Market Timing Issues**
+- **Probability**: Low (20%)
+- **Impact**: Medium - Could reduce competitive advantage
+- **Description**: Competitors might release similar features during development period
+- **Mitigation Strategy**: Monitor competitive landscape, focus on unique value proposition
+- **Contingency Plan**: Accelerate development timeline, differentiate through user experience
+
+**Risk B-3: Resource Allocation Conflicts**
+- **Probability**: Medium (30%)
+- **Impact**: Medium - Could delay implementation
+- **Description**: Development resources might be needed for other critical projects
+- **Mitigation Strategy**: Clear project prioritization, stakeholder communication
+- **Contingency Plan**: Phase implementation, reduce scope to essential features
 
 ### Operational Risks
 
-#### Deployment and Maintenance Risks
-1. **Production Deployment Issues**
-   - Risk: Complex deployment process leads to downtime or failures
-   - Impact: Service interruption and reduced reliability
-   - Mitigation: Staging environment testing, automated deployment, rollback procedures
+#### Production Deployment Risks
+**Risk O-1: Security Vulnerabilities**
+- **Probability**: Medium (25%)
+- **Impact**: High - Could compromise user data
+- **Description**: Authentication implementation might introduce security vulnerabilities
+- **Mitigation Strategy**: Security testing, code review, penetration testing
+- **Contingency Plan**: Immediate rollback procedures, security patch deployment process
 
-2. **Resource Scaling Challenges**
-   - Risk: Unexpected usage growth exceeds infrastructure capacity
-   - Impact: Performance degradation or service outages
-   - Mitigation: Monitoring and alerting, auto-scaling capabilities, capacity planning
+**Risk O-2: Deployment Complications**
+- **Probability**: Low (15%)
+- **Impact**: Medium - Could cause downtime
+- **Description**: Production deployment might cause unexpected system issues
+- **Mitigation Strategy**: Staging environment testing, gradual rollout strategy
+- **Contingency Plan**: Immediate rollback capability, maintenance mode procedures
 
-### Mitigation Strategies
+**Risk O-3: User Data Loss**
+- **Probability**: Low (10%)
+- **Impact**: High - Could damage user trust
+- **Description**: Migration process might result in data loss or corruption
+- **Mitigation Strategy**: Comprehensive backup procedures, migration testing
+- **Contingency Plan**: Data recovery procedures, user communication plan
 
-#### Technical Risk Mitigation
-- **Comprehensive Testing**: Unit, integration, and end-to-end test coverage >90%
-- **Performance Monitoring**: Real-time performance tracking and alerting
-- **Security Auditing**: Regular security scans and penetration testing
-- **Staged Rollouts**: Gradual feature deployment with ability to disable problematic features
+### Risk Mitigation Strategies
 
-#### Business Risk Mitigation
-- **User Feedback Loops**: Regular user surveys and feedback collection
-- **Community Engagement**: Active participation in Elixir/Phoenix community
-- **Clear Value Proposition**: Emphasize unique demonstration and learning value
-- **Documentation Excellence**: Comprehensive documentation supporting adoption
+#### Proactive Risk Management
+**Strategy 1: Early Prototyping**
+- Develop authentication proof-of-concept early in Phase 1
+- Test integration complexity before full implementation
+- Validate performance impact with realistic load testing
+- Identify and resolve integration issues early
 
-#### Operational Risk Mitigation
-- **Infrastructure as Code**: Reproducible and version-controlled infrastructure
-- **Automated Monitoring**: Comprehensive application and infrastructure monitoring
-- **Disaster Recovery**: Tested backup and recovery procedures
-- **Capacity Planning**: Regular capacity assessment and scaling preparation
+**Strategy 2: Incremental Implementation**
+- Implement authentication features incrementally with feature flags
+- Allow rollback of individual features without full system rollback
+- Test each increment thoroughly before proceeding to next phase
+- Maintain backward compatibility throughout development
+
+**Strategy 3: Comprehensive Testing**
+- Implement security testing from day one of development
+- Load test authentication system under realistic user loads
+- Test all failure scenarios and recovery procedures
+- Validate data migration scripts with production-like data
+
+#### Reactive Risk Response
+**Response 1: Technical Issue Escalation**
+- Immediate escalation path for technical blockers
+- Expert consultation available for complex integration issues
+- Alternative implementation approaches documented
+- Timeline adjustment procedures for technical delays
+
+**Response 2: Business Impact Management**
+- Clear communication plan for stakeholders about issues
+- Feature scope adjustment procedures for timeline pressures
+- User communication plan for any service impacts
+- Competitive analysis update procedures for market changes
+
+**Response 3: Security Incident Response**
+- Immediate vulnerability disclosure and patching procedures
+- User notification procedures for security issues
+- Security expert consultation availability
+- Emergency rollback and system lockdown procedures
 
 ---
 
-## Conclusion
-
-This PRD defines a comprehensive transformation of TaskApp from a demonstration application to a production-ready task management platform. The phased approach ensures steady progress while maintaining code quality and educational value. Success depends on careful implementation of authentication, database persistence, and real-time features while preserving the application's role as a Phoenix LiveView reference implementation.
-
-The requirements balance technical excellence with practical utility, creating a platform that serves both developers learning Phoenix patterns and users needing effective task management. Risk mitigation strategies ensure reliable delivery while maintaining the high code quality standards that make TaskApp valuable as a reference implementation.
-EOF < /dev/null
+This Product Requirements Document provides comprehensive guidance for implementing user authentication in the TaskApp while maintaining its high-quality architecture and development standards. The phased approach ensures incremental value delivery while managing risks and maintaining system reliability throughout the authentication implementation process.

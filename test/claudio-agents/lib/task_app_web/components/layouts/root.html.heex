@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
+<html lang="en" class="[scrollbar-gutter:stable]" id="app-root">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,8 +10,34 @@
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
+    <script>
+      // Theme switching functionality
+      window.addEventListener('phx:update_theme', (e) => {
+        const html = document.documentElement;
+        const isDark = e.detail.dark_mode;
+        
+        if (isDark) {
+          html.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        } else {
+          html.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // Initialize theme on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldUseDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+        
+        if (shouldUseDark) {
+          document.documentElement.classList.add('dark');
+        }
+      });
+    </script>
   </head>
-  <body class="bg-white antialiased">
+  <body class="bg-white dark:bg-gray-900 antialiased transition-colors">
     <%= @inner_content %>
   </body>
 </html>

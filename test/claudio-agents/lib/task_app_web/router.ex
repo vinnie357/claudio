@@ -18,7 +18,6 @@ defmodule TaskAppWeb.Router do
     pipe_through :browser
 
     live "/", TaskLive.Index, :index
-    live "/tasks/:id", TaskLive.Show, :show
   end
 
   scope "/api", TaskAppWeb do

@@ -1,54 +1,80 @@
-# Task App API Reference Documentation
+# Task Management API Documentation
 
 ## Overview
 
-The Task App provides a RESTful API for managing tasks built with Phoenix LiveView. The API follows standard HTTP conventions and returns JSON responses.
+The Task Management API is a Phoenix-based REST API that provides task management functionality with real-time WebSocket connections through Phoenix LiveView.
 
 - **Base URL**: `http://localhost:4000/api`
+- **Version**: v1.0
+- **Authentication**: None (Development API)
 - **Content Type**: `application/json`
-- **Phoenix Version**: 1.7.10
-- **Phoenix LiveView**: 0.20.2
+- **Phoenix Framework**: v1.7.21
+- **Elixir**: v1.18.4
 
-## Authentication
+## API Architecture
 
-**Current Status**: No authentication required (development phase)
+The API is built using:
+- **Phoenix Framework** for HTTP routing and middleware
+- **Bandit HTTP Server** for high-performance request handling
+- **GenServer** for in-memory task storage and state management
+- **Phoenix LiveView** for real-time WebSocket connections
+- **JSON** serialization using Jason library
 
-**Future Implementation**: The API is designed to support Bearer Token authentication:
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-     http://localhost:4000/api/endpoint
+## Task Data Model
+
+### Task Object
+
+```json
+{
+  "id": "string (8-character base64 ID)",
+  "title": "string (1-100 characters)",
+  "completed": "boolean",
+  "created_at": "datetime (ISO8601 UTC)"
+}
 ```
 
-## Endpoints Reference
+#### Field Specifications
 
-### Task Management Endpoints
+- **id**: Auto-generated 8-character base64-encoded identifier
+- **title**: Task description (1-100 characters, alphanumeric + common punctuation)
+- **completed**: Boolean completion status (default: false)
+- **created_at**: UTC timestamp in ISO8601 format
+
+#### Validation Rules
+
+- Title must be 1-100 characters
+- Title supports: `a-zA-Z0-9\s\-_.,\!?()\[\]:\/`
+- Title cannot be empty after trimming whitespace
+- ID is automatically generated using cryptographically secure random bytes
+
+## REST API Endpoints
+
+### Tasks Collection
 
 #### GET /api/tasks
-**Description**: Retrieve list of all tasks, sorted by creation date (newest first)
+**Description**: Retrieve all tasks sorted by creation date (newest first)
 
-**Parameters**: None
-
-**Request Example**:
+**Request**:
 ```bash
 curl -X GET "http://localhost:4000/api/tasks" \
-     -H "Content-Type: application/json"
+     -H "Accept: application/json"
 ```
 
-**Response Example** (200 OK):
+**Response** (200 OK):
 ```json
 {
   "tasks": [
     {
-      "id": "AbC1De2f",
-      "title": "Buy groceries",
+      "id": "AbCdEfGh",
+      "title": "Complete project documentation",
       "completed": false,
-      "created_at": "2025-08-09T14:30:00Z"
+      "created_at": "2024-08-10T22:30:15.123456Z"
     },
     {
-      "id": "XyZ3Uv4w",
-      "title": "Finish project documentation",
+      "id": "XyZ12345",
+      "title": "Review API endpoints",
       "completed": true,
-      "created_at": "2025-08-09T13:15:00Z"
+      "created_at": "2024-08-10T21:15:30.654321Z"
     }
   ]
 }
@@ -66,39 +92,38 @@ curl -X GET "http://localhost:4000/api/tasks" \
 }
 ```
 
-**Validation Rules**:
-- `title`: Required, 1-100 characters, alphanumeric with common punctuation
-- Title is automatically trimmed of whitespace
-
 **Request Example**:
 ```bash
 curl -X POST "http://localhost:4000/api/tasks" \
      -H "Content-Type: application/json" \
+     -H "Accept: application/json" \
      -d '{
        "task": {
-         "title": "Learn Phoenix LiveView"
+         "title": "Implement user authentication"
        }
      }'
 ```
 
-**Response Example** (201 Created):
+**Response** (201 Created):
 ```json
 {
   "task": {
-    "id": "QwE5Rt6y",
-    "title": "Learn Phoenix LiveView",
+    "id": "NewTask1",
+    "title": "Implement user authentication",
     "completed": false,
-    "created_at": "2025-08-09T15:45:00Z"
+    "created_at": "2024-08-10T22:35:42.789012Z"
   }
 }
 ```
 
-**Error Response** (400 Bad Request):
+**Validation Error** (400 Bad Request):
 ```json
 {
   "error": "Task title cannot be empty"
 }
 ```
+
+### Individual Task Operations
 
 #### GET /api/tasks/:id
 **Description**: Retrieve a specific task by ID
@@ -108,23 +133,23 @@ curl -X POST "http://localhost:4000/api/tasks" \
 
 **Request Example**:
 ```bash
-curl -X GET "http://localhost:4000/api/tasks/AbC1De2f" \
-     -H "Content-Type: application/json"
+curl -X GET "http://localhost:4000/api/tasks/AbCdEfGh" \
+     -H "Accept: application/json"
 ```
 
-**Response Example** (200 OK):
+**Response** (200 OK):
 ```json
 {
   "task": {
-    "id": "AbC1De2f",
-    "title": "Buy groceries",
+    "id": "AbCdEfGh",
+    "title": "Complete project documentation",
     "completed": false,
-    "created_at": "2025-08-09T14:30:00Z"
+    "created_at": "2024-08-10T22:30:15.123456Z"
   }
 }
 ```
 
-**Error Response** (404 Not Found):
+**Not Found** (404 Not Found):
 ```json
 {
   "error": "Task not found"
@@ -132,32 +157,30 @@ curl -X GET "http://localhost:4000/api/tasks/AbC1De2f" \
 ```
 
 #### PUT /api/tasks/:id/complete
-**Description**: Mark a specific task as completed
+**Description**: Mark a task as completed
 
 **Parameters**:
 - `id` (path, required): Task ID
 
-**Request Body**: None
-
 **Request Example**:
 ```bash
-curl -X PUT "http://localhost:4000/api/tasks/AbC1De2f/complete" \
-     -H "Content-Type: application/json"
+curl -X PUT "http://localhost:4000/api/tasks/AbCdEfGh/complete" \
+     -H "Accept: application/json"
 ```
 
-**Response Example** (200 OK):
+**Response** (200 OK):
 ```json
 {
   "task": {
-    "id": "AbC1De2f",
-    "title": "Buy groceries",
+    "id": "AbCdEfGh",
+    "title": "Complete project documentation",
     "completed": true,
-    "created_at": "2025-08-09T14:30:00Z"
+    "created_at": "2024-08-10T22:30:15.123456Z"
   }
 }
 ```
 
-**Error Response** (404 Not Found):
+**Not Found** (404 Not Found):
 ```json
 {
   "error": "Task not found"
@@ -165,23 +188,23 @@ curl -X PUT "http://localhost:4000/api/tasks/AbC1De2f/complete" \
 ```
 
 #### DELETE /api/tasks/:id
-**Description**: Delete a specific task
+**Description**: Delete a task
 
 **Parameters**:
 - `id` (path, required): Task ID
 
 **Request Example**:
 ```bash
-curl -X DELETE "http://localhost:4000/api/tasks/AbC1De2f" \
-     -H "Content-Type: application/json"
+curl -X DELETE "http://localhost:4000/api/tasks/AbCdEfGh" \
+     -H "Accept: application/json"
 ```
 
-**Response Example** (204 No Content):
+**Response** (204 No Content):
 ```
-(Empty response body)
+(empty response body)
 ```
 
-**Error Response** (404 Not Found):
+**Not Found** (404 Not Found):
 ```json
 {
   "error": "Task not found"
@@ -191,234 +214,302 @@ curl -X DELETE "http://localhost:4000/api/tasks/AbC1De2f" \
 ### Statistics Endpoint
 
 #### GET /api/stats
-**Description**: Retrieve task statistics
-
-**Parameters**: None
+**Description**: Get task completion statistics
 
 **Request Example**:
 ```bash
 curl -X GET "http://localhost:4000/api/stats" \
-     -H "Content-Type: application/json"
+     -H "Accept: application/json"
 ```
 
-**Response Example** (200 OK):
+**Response** (200 OK):
 ```json
 {
   "stats": {
-    "total": 10,
-    "completed": 6,
-    "pending": 4
+    "total": 15,
+    "completed": 8,
+    "pending": 7
   }
 }
 ```
 
-## Data Models
+#### Statistics Object Fields
 
-### Task Object
-```json
-{
-  "id": "string",           // 8-character Base64 encoded ID
-  "title": "string",        // Task title (1-100 characters)
-  "completed": "boolean",   // Completion status
-  "created_at": "datetime"  // ISO 8601 UTC timestamp
-}
+- **total**: Total number of tasks in the system
+- **completed**: Number of tasks marked as completed
+- **pending**: Number of incomplete tasks (total - completed)
+
+## WebSocket / Real-Time Integration
+
+### Phoenix LiveView Connection
+
+The API integrates with Phoenix LiveView for real-time updates:
+
+**WebSocket Endpoint**: `ws://localhost:4000/live`
+
+**Connection Details**:
+- Protocol: WebSocket with Phoenix LiveView protocol
+- Authentication: Session-based (cookie: `_task_app_key`)
+- Signing Salt: `task_app_lv`
+
+### Real-Time Events
+
+LiveView automatically synchronizes the following events:
+
+1. **Task Creation**: New tasks appear instantly in connected clients
+2. **Task Completion**: Status changes propagate immediately
+3. **Task Deletion**: Removed tasks disappear from all clients
+4. **Statistics Updates**: Real-time counter updates
+
+### Client-Side Integration
+
+```javascript
+// Phoenix LiveView handles WebSocket connections automatically
+// No manual WebSocket code needed for basic functionality
+
+// For custom integration:
+import {LiveSocket} from "phoenix_live_view"
+
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+
+liveSocket.connect()
 ```
 
-### Stats Object
-```json
-{
-  "total": "integer",       // Total number of tasks
-  "completed": "integer",   // Number of completed tasks
-  "pending": "integer"      // Number of pending tasks (total - completed)
-}
-```
+## HTTP Status Codes
+
+| Status Code | Description | Usage |
+|------------|-------------|-------|
+| 200 | OK | Successful GET, PUT operations |
+| 201 | Created | Successful POST (task creation) |
+| 204 | No Content | Successful DELETE operations |
+| 400 | Bad Request | Validation errors, malformed requests |
+| 404 | Not Found | Task ID not found |
+| 500 | Internal Server Error | Server-side errors |
 
 ## Error Handling
 
 ### Error Response Format
-All errors follow a consistent JSON structure:
+
+All errors return a consistent JSON structure:
+
 ```json
 {
-  "error": "Human readable error message"
+  "error": "Human-readable error message"
 }
 ```
 
-### HTTP Status Codes
-- `200`: Success
-- `201`: Created (for POST requests)
-- `204`: No Content (for DELETE requests)
-- `400`: Bad Request (validation errors)
-- `404`: Not Found
-- `500`: Internal Server Error
-
 ### Common Error Messages
 
-#### Validation Errors (400 Bad Request)
-- `"Task title is required"`
-- `"Task title must be text"`
-- `"Task title cannot be empty"`
-- `"Task title must be at least 1 character"`
-- `"Task title cannot exceed 100 characters"`
-- `"Task title contains invalid characters"`
+| Error | Cause | Solution |
+|-------|-------|----------|
+| "Task title is required" | Missing title field | Provide non-empty title |
+| "Task title cannot be empty" | Empty or whitespace-only title | Use meaningful task description |
+| "Task title cannot exceed 100 characters" | Title too long | Shorten task description |
+| "Task title contains invalid characters" | Unsupported characters | Use alphanumeric and basic punctuation |
+| "Task not found" | Invalid or non-existent task ID | Verify task ID exists |
 
-#### Resource Errors (404 Not Found)
-- `"Task not found"`
+### Validation Details
 
-## Phoenix-Specific Implementation Details
+The API uses the `TaskApp.Task` module for validation:
 
-### Architecture
-- **Framework**: Phoenix 1.7.10 with LiveView 0.20.2
-- **State Management**: GenServer-based TaskStore for in-memory storage
-- **Data Persistence**: In-memory (data resets on application restart)
-- **Concurrency**: Elixir/OTP GenServer provides thread-safe operations
-- **ID Generation**: Cryptographically secure 8-character Base64 IDs
-
-### Pipeline Configuration
 ```elixir
-pipeline :api do
-  plug :accepts, ["json"]
-end
+# Supported title pattern
+~r/^[a-zA-Z0-9\s\-_.,\!?()\[\]:\/]+$/
+
+# Length constraints
+@min_title_length 1
+@max_title_length 100
 ```
 
-### Controller Pattern
-The API follows Phoenix controller conventions:
-- Controllers use `TaskAppWeb.TaskController`
-- JSON responses via `json(conn, data)`
-- HTTP status codes via `put_status(conn, status)`
+## Data Persistence
 
-### Validation
-- Input validation handled by `TaskApp.Task.validate_title/1`
-- Pattern matching for request structure validation
-- Comprehensive error handling with descriptive messages
+**Important**: This is a development API using in-memory storage via GenServer. Data is not persisted across server restarts.
 
-## Integration Examples
+**Storage Characteristics**:
+- In-memory HashMap using Elixir's GenServer
+- Process-based state management
+- No database persistence
+- Data resets on application restart
+- Concurrent access handled by GenServer message passing
+
+## Rate Limiting
+
+Currently no rate limiting is implemented in this development API.
+
+## Authentication
+
+No authentication is required for this development API. All endpoints are publicly accessible.
+
+## CORS
+
+Cross-Origin Resource Sharing (CORS) is configured for development:
+- `check_origin: false` allows all origins
+- Suitable for development only
+
+## Example API Workflows
+
+### Complete Task Management Flow
+
+```bash
+# 1. Create a new task
+curl -X POST http://localhost:4000/api/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"task": {"title": "Write API documentation"}}'
+
+# Response: {"task": {"id": "abc12345", "title": "Write API documentation", "completed": false, ...}}
+
+# 2. List all tasks
+curl http://localhost:4000/api/tasks
+
+# 3. Get specific task
+curl http://localhost:4000/api/tasks/abc12345
+
+# 4. Mark task as complete
+curl -X PUT http://localhost:4000/api/tasks/abc12345/complete
+
+# 5. Check statistics
+curl http://localhost:4000/api/stats
+
+# 6. Delete task
+curl -X DELETE http://localhost:4000/api/tasks/abc12345
+```
+
+### Error Handling Example
+
+```bash
+# Attempt to create task with empty title
+curl -X POST http://localhost:4000/api/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"task": {"title": ""}}'
+
+# Response: 400 Bad Request
+# {"error": "Task title cannot be empty"}
+
+# Attempt to access non-existent task
+curl http://localhost:4000/api/tasks/nonexistent
+
+# Response: 404 Not Found
+# {"error": "Task not found"}
+```
+
+## Development Setup
+
+### Prerequisites
+
+- Elixir 1.18.4+
+- Phoenix 1.7.21+
+- Mix build tool
+
+### Starting the Server
+
+```bash
+# Install dependencies
+mix deps.get
+
+# Start Phoenix server
+mix phx.server
+
+# Server starts at http://localhost:4000
+```
+
+### Testing the API
+
+```bash
+# Test server health
+curl http://localhost:4000/api/stats
+
+# If you get "no process" error, the TaskStore GenServer needs initialization
+# This is a known issue in the current development setup
+```
+
+## API Client Libraries
+
+### cURL Examples
+
+All examples in this documentation use cURL for simplicity and compatibility.
 
 ### JavaScript/Node.js
-```javascript
-// Fetch all tasks
-const response = await fetch('http://localhost:4000/api/tasks');
-const data = await response.json();
-console.log(data.tasks);
 
-// Create a new task
-const newTask = await fetch('http://localhost:4000/api/tasks', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    task: { title: 'New task' }
-  }),
-});
-const taskData = await newTask.json();
-console.log(taskData.task);
+```javascript
+// Using fetch API
+async function getTasks() {
+  const response = await fetch('http://localhost:4000/api/tasks');
+  const data = await response.json();
+  return data.tasks;
+}
+
+async function createTask(title) {
+  const response = await fetch('http://localhost:4000/api/tasks', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ task: { title } })
+  });
+  const data = await response.json();
+  return data.task;
+}
 ```
 
 ### Python
+
 ```python
 import requests
-import json
 
 # Get all tasks
 response = requests.get('http://localhost:4000/api/tasks')
 tasks = response.json()['tasks']
 
-# Create a new task
-new_task_data = {
-    'task': {
-        'title': 'Learn Elixir'
-    }
-}
-response = requests.post(
-    'http://localhost:4000/api/tasks',
-    headers={'Content-Type': 'application/json'},
-    data=json.dumps(new_task_data)
+# Create new task
+task_data = {'task': {'title': 'New task from Python'}}
+response = requests.post('http://localhost:4000/api/tasks', json=task_data)
+new_task = response.json()['task']
+```
+
+### Elixir (HTTPoison)
+
+```elixir
+# Get tasks
+{:ok, response} = HTTPoison.get("http://localhost:4000/api/tasks")
+{:ok, %{"tasks" => tasks}} = Jason.decode(response.body)
+
+# Create task
+task_payload = %{task: %{title: "New task from Elixir"}}
+{:ok, response} = HTTPoison.post(
+  "http://localhost:4000/api/tasks",
+  Jason.encode\!(task_payload),
+  [{"Content-Type", "application/json"}]
 )
-task = response.json()['task']
 ```
 
-### Ruby
-```ruby
-require 'net/http'
-require 'json'
+## Architecture Notes
 
-# Get all tasks
-uri = URI('http://localhost:4000/api/tasks')
-response = Net::HTTP.get_response(uri)
-tasks = JSON.parse(response.body)['tasks']
+### Phoenix Framework Benefits
 
-# Create a new task
-uri = URI('http://localhost:4000/api/tasks')
-http = Net::HTTP.new(uri.host, uri.port)
-request = Net::HTTP::Post.new(uri)
-request['Content-Type'] = 'application/json'
-request.body = JSON.dump({
-  task: { title: 'Ruby task' }
-})
-response = http.request(request)
-task = JSON.parse(response.body)['task']
+- **Fault Tolerance**: Supervisor trees ensure system resilience
+- **Concurrent Processing**: Lightweight Elixir processes handle multiple requests
+- **Real-Time Capabilities**: Built-in WebSocket support via Phoenix Channels/LiveView
+- **Hot Code Reloading**: Development-friendly code updates without restarts
+
+### GenServer State Management
+
+The TaskStore uses GenServer for thread-safe state management:
+
+```elixir
+# All operations are serialized through GenServer message passing
+GenServer.call(TaskApp.TaskStore, :get_all_tasks)
+GenServer.call(TaskApp.TaskStore, {:add_task, task})
 ```
 
-## Development Server
+This ensures data consistency in concurrent access scenarios.
 
-### Starting the Application
-```bash
-mix deps.get
-mix phx.server
-```
+### Performance Considerations
 
-The API will be available at `http://localhost:4000/api`
+- **In-Memory Storage**: Fast read/write operations
+- **No Database Overhead**: Eliminates I/O bottlenecks for development
+- **Process Isolation**: GenServer crashes don't affect HTTP handling
+- **Lightweight JSON**: Minimal serialization overhead
 
-### Development Tools
-- **Live Reload**: Enabled for development
-- **Phoenix LiveDashboard**: Available at `http://localhost:4000/dev/dashboard`
-- **Code Reloading**: Automatic on file changes
+---
 
-## Future Enhancements
-
-### Planned Features
-1. **Authentication**: Bearer token or API key authentication
-2. **Pagination**: Support for `limit` and `offset` parameters on task listing
-3. **Filtering**: Filter tasks by completion status
-4. **Sorting**: Custom sort orders beyond creation date
-5. **Task Updates**: PUT endpoint for updating task titles
-6. **Bulk Operations**: Batch create/update/delete operations
-
-### Security Considerations
-- Add rate limiting for API endpoints
-- Implement CORS policies for cross-origin requests
-- Add input sanitization for enhanced security
-- Implement request/response logging for audit trails
-
-## Troubleshooting
-
-### Common Issues
-
-#### Port Already in Use
-```bash
-# Kill process using port 4000
-lsof -ti:4000 | xargs kill -9
-```
-
-#### Mix Dependencies
-```bash
-# Clean and reinstall dependencies
-mix deps.clean --all
-mix deps.get
-```
-
-#### Database/State Issues
-Since the app uses in-memory storage, restart the server to reset all data:
-```bash
-# Stop server (Ctrl+C) and restart
-mix phx.server
-```
-
-### API Testing
-Use tools like curl, Postman, or HTTPie to test endpoints:
-```bash
-# Test with HTTPie
-http GET localhost:4000/api/tasks
-http POST localhost:4000/api/tasks task:='{"title":"Test task"}'
-```
+This API documentation covers all available endpoints, data models, error handling, and integration patterns for the Phoenix Task Management API. The API provides a solid foundation for task management applications with real-time capabilities through Phoenix LiveView.
 EOF < /dev/null

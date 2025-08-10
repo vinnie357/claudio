@@ -1,124 +1,130 @@
-# Phase 3: Testing and Security - Tasks
+# Phase 3: Testing and Refinement Context
 
-## Phase Overview
-Comprehensive testing and security hardening of the complete authentication system.
+You are working on Phase 3 of the Dark Mode Feature implementation. This phase focuses on comprehensive testing, user experience optimization, and ensuring production readiness of the dark mode functionality.
 
-**Duration**: 2 days  
-**Team**: 2 developers + QA/Security expertise  
-**Objective**: Validate system for production deployment
+## Phase Objectives:
+- Create comprehensive test suite for dark mode functionality
+- Validate cross-browser compatibility and performance
+- Ensure theme persistence works reliably across user sessions
+- Optimize user experience and fix any visual inconsistencies
 
-## Task Breakdown
+## Key Deliverables:
+- **Test Suite**: Automated tests for theme switching and persistence
+- **Compatibility Testing**: Cross-browser and device validation
+- **Performance Validation**: Theme switching performance optimization
+- **UX Refinement**: Visual consistency and accessibility improvements
 
-### Task 1: Authentication Test Suite
-- **Duration**: 0.5 days
-- **Assignee**: QA Engineer / Backend Developer
-- **Directory**: `task1_auth_test_suite/`
-- **Deliverables**:
-  - Unit tests for all authentication functions
-  - Integration tests for auth workflows
-  - Test coverage report (target >95%)
-  - Automated test suite setup
-  - Edge case and error scenario tests
+## Timeline: 2 days
+## Resources: 2 developers (1 QA/testing focused, 1 UX/refinement focused)
 
-### Task 2: Security Audit
-- **Duration**: 0.5 days
-- **Assignee**: Security Engineer / Senior Developer
-- **Directory**: `task2_security_audit/`
-- **Deliverables**:
-  - Security vulnerability assessment
-  - Password security audit
-  - Session security review
-  - Authorization security validation
-  - Security recommendations report
+## Task Breakdown:
 
-### Task 3: Integration Testing
-- **Duration**: 0.5 days
-- **Assignee**: QA Engineer / Full-stack Developer
-- **Directory**: `task3_integration_testing/`
-- **Deliverables**:
-  - End-to-end workflow tests
-  - Cross-browser compatibility testing
-  - Mobile responsiveness validation
-  - Accessibility compliance testing
-  - User acceptance test scenarios
+### Task 1: Dark Mode Test Suite (Day 1 - 6 hours)
+**Objective**: Create comprehensive automated test coverage for dark mode functionality
+**Assignee**: QA-focused Developer
+**Deliverables**:
+- Unit tests for theme management JavaScript functions
+- Integration tests for LiveView hook theme handling
+- End-to-end tests for theme toggle and persistence
+- Visual regression tests for component styling
 
-### Task 4: Performance Validation
-- **Duration**: 0.5 days
-- **Assignee**: Performance Engineer / Backend Developer
-- **Directory**: `task4_performance_validation/`
-- **Deliverables**:
-  - Load testing results
-  - Performance benchmarking report
-  - Database query optimization validation
-  - Memory and CPU usage analysis
-  - Scalability assessment
+**Acceptance Criteria**:
+- ✅ Theme toggle functionality fully tested
+- ✅ LocalStorage persistence validated in tests
+- ✅ Theme initialization tested across page loads
+- ✅ Component rendering tested in both themes
+- ✅ Error handling tested (localStorage unavailable, etc.)
 
-## Task Coordination
-All tasks can run in parallel but should coordinate:
-- **Tasks 1 & 3**: Share test scenarios and coordinate test data
-- **Task 2**: Independent security review
-- **Task 4**: Performance testing may impact other testing
+### Task 2: Cross-Browser Compatibility Testing (Day 1 - 6 hours)
+**Objective**: Validate dark mode works consistently across browsers and devices
+**Assignee**: QA-focused Developer
+**Deliverables**:
+- Browser compatibility matrix (Chrome, Firefox, Safari, Edge)
+- Mobile device testing (iOS Safari, Chrome Mobile)
+- Theme persistence testing across browser sessions
+- Performance benchmarking across browsers
 
-## Dependencies
-- **Phase 2 Complete**: All authentication and authorization functionality ready
-- **Test Environment**: Production-like environment for realistic testing
-- **Test Data**: Comprehensive user and task data for testing
-- **Testing Tools**: Load testing, security scanning, test automation tools
+**Acceptance Criteria**:
+- ✅ Theme switching works in all target browsers
+- ✅ LocalStorage persistence functions across browsers
+- ✅ Visual consistency maintained across browsers
+- ✅ Mobile responsiveness maintained in both themes
+- ✅ Performance meets benchmarks on all platforms
 
-## Phase Success Criteria
-- [ ] >95% test coverage for authentication code
-- [ ] Zero high-severity security vulnerabilities
-- [ ] All integration workflows tested and passing
-- [ ] Performance benchmarks met
-- [ ] Security audit passed
-- [ ] System validated for production
+### Task 3: Visual Consistency and Accessibility Refinement (Day 2 - 4 hours)
+**Objective**: Optimize visual design and ensure accessibility compliance
+**Assignee**: UX-focused Developer
+**Deliverables**:
+- Color contrast audit and improvements
+- Focus indicator refinement for dark theme
+- Theme transition animation optimization
+- Visual consistency improvements across components
 
-## Quality Standards
-- **Testing**: Comprehensive coverage of all user scenarios
-- **Security**: Industry standard security practices validated
-- **Performance**: Production-ready response times and throughput
-- **Integration**: All workflows tested end-to-end
-- **Documentation**: Complete testing and security documentation
+**Acceptance Criteria**:
+- ✅ All text passes WCAG AA contrast requirements in both themes
+- ✅ Focus indicators clearly visible in both themes
+- ✅ Theme transitions feel smooth and polished
+- ✅ No visual glitches or inconsistencies identified
+- ✅ Component styling follows consistent design patterns
 
-## Testing Scenarios
-### Authentication Workflows
-- User registration → email verification → first login
-- Standard login/logout cycles
-- Password reset workflows (if implemented)
-- Session timeout and renewal
-- Multi-tab/device authentication handling
+### Task 4: User Experience Optimization (Day 2 - 4 hours)
+**Objective**: Refine user experience and address any usability issues
+**Assignee**: UX-focused Developer
+**Deliverables**:
+- Theme toggle discoverability improvements
+- User preference detection refinement
+- Theme switching feedback optimization
+- Documentation for users on dark mode feature
 
-### Security Test Scenarios
-- Unauthorized access attempts
-- Session hijacking prevention
-- CSRF attack prevention
-- SQL injection attempts
-- Password brute force protection
+**Acceptance Criteria**:
+- ✅ Theme toggle is easily discoverable by users
+- ✅ System theme preference correctly detected
+- ✅ Clear visual feedback when theme changes
+- ✅ No user confusion or unexpected behavior
+- ✅ Feature documentation updated for users
 
-### Performance Test Scenarios
-- Concurrent user authentication
-- Task loading with user scoping
-- Database performance under authentication load
-- Memory usage with active sessions
-- Response time benchmarks
+## Integration Context:
+Reference related phases and dependencies:
+- **Previous Phases**: Validates complete dark mode implementation from Phases 1 & 2
+- **Dependencies**: Requires all infrastructure and components completed
+- **Final Validation**: Ensures production-ready dark mode feature
 
-## Integration Points
-- Complete authentication system from Phases 1 and 2
-- Test automation framework integration
-- Security scanning tool integration
-- Performance monitoring tool setup
-- Production deployment pipeline validation
+## Test Scenarios:
 
-## Risk Mitigation
-- **Test Coverage**: Automated coverage reporting to ensure completeness
-- **Security Gaps**: Multi-layer security review process
-- **Performance Issues**: Early identification and optimization
-- **Integration Failures**: Comprehensive scenario coverage
+### Theme Switching Tests
+- Toggle between light and dark modes multiple times
+- Theme switching with form data present
+- Theme switching during task operations
+- Theme switching with validation errors displayed
 
-## Completion Validation
-Each task must demonstrate:
-- Deliverables complete and documented
-- Quality standards met
-- Integration with other tasks verified
-- Issues identified and resolved or documented
-- System ready for production deployment
+### Persistence Tests
+- Theme preference survives browser restart
+- Theme preference works across multiple tabs
+- Theme preference handled when localStorage disabled
+- Theme preference migration from old to new versions
+
+### Visual Tests
+- All components render correctly in both themes
+- No FOUC (Flash of Unstyled Content) on page load
+- Proper contrast ratios maintained
+- Interactive states work in both themes
+
+### Performance Tests
+- Theme switching response time < 100ms
+- No memory leaks from theme management
+- Efficient CSS class updates
+- Minimal JavaScript execution time
+
+## Standards and Guidelines:
+Reference shared project standards:
+- Code Standards: ../shared/standards/claude.md
+- Utilities: ../shared/utilities/claude.md
+- Project Resources: ../shared/resources/claude.md
+
+## Success Criteria:
+- 100% of dark mode functionality covered by automated tests
+- No critical bugs or visual inconsistencies in any supported browser
+- All accessibility standards met for both light and dark themes
+- User experience meets or exceeds design requirements
+- Performance benchmarks achieved across all target platforms
+- Feature ready for production deployment

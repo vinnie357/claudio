@@ -1,132 +1,114 @@
-# Project Standards and Conventions Context
+# Dark Mode Implementation Standards
 
-You are working on the Phoenix Task App User Authentication project. This context provides shared standards and conventions that should be followed across all phases and tasks.
+## Development Standards for Dark Mode Feature
 
-## Phoenix Application Conventions
+### Code Quality Standards
 
-### Code Organization
-- Follow Phoenix 1.7+ directory structure
-- Use context modules for business logic organization  
-- Separate web layer from business logic
-- Group related functionality in appropriate contexts
+#### CSS/Tailwind Standards
+- **Dark Mode Strategy**: Use Tailwind's `class` strategy with `dark:` prefix
+- **Color Naming**: Use semantic color names that adapt to theme (e.g., `text-gray-900 dark:text-white`)
+- **Contrast Requirements**: All text must meet WCAG AA standards (4.5:1 for normal, 3:1 for large text)
+- **Component Consistency**: All components must support both light and dark themes
 
-### Authentication Standards
-- Use bcrypt for password hashing (minimum 12 rounds)
-- Implement secure session management with Phoenix defaults
-- Follow Phoenix authentication best practices
-- Use policy-based authorization patterns
+#### JavaScript Standards
+- **Theme Management**: Use functional programming approach for theme utilities
+- **Error Handling**: Gracefully handle localStorage unavailability
+- **Performance**: Theme detection and application should complete in <100ms
+- **Browser Support**: Support all modern browsers (Chrome 80+, Firefox 75+, Safari 13+, Edge 80+)
 
-### Database Standards
-- Use Ecto migrations for all schema changes
-- Include proper database constraints and indexes
-- Follow naming conventions: snake_case for tables and columns
-- Always include timestamps in migrations
-- Make migrations reversible where possible
+#### Phoenix/Elixir Standards
+- **LiveView Integration**: Theme state should integrate with Phoenix LiveView hooks
+- **Server Awareness**: Server should have access to current theme preference when needed
+- **Session Handling**: Theme preference should persist across LiveView updates
+- **Performance**: No server-side performance impact from theme handling
+
+### Design System Standards
+
+#### Color Palette
+```css
+/* Light Theme Colors */
+--bg-primary: white
+--bg-secondary: #f8fafc
+--text-primary: #1f2937
+--text-secondary: #6b7280
+--accent-primary: #3b82f6
+--border-primary: #e5e7eb
+
+/* Dark Theme Colors */
+--bg-primary-dark: #1f2937
+--bg-secondary-dark: #111827
+--text-primary-dark: white
+--text-secondary-dark: #d1d5db
+--accent-primary-dark: #60a5fa
+--border-primary-dark: #374151
+```
+
+#### Component Patterns
+- **Cards**: Use `bg-white dark:bg-gray-800` with proper border colors
+- **Forms**: Maintain consistent input styling across themes
+- **Buttons**: Ensure all states (hover, active, disabled) work in both themes
+- **Navigation**: Header and navigation elements adapt contextually
+
+### Accessibility Standards
+
+#### Contrast Requirements
+- **Normal Text**: 4.5:1 minimum contrast ratio
+- **Large Text**: 3:1 minimum contrast ratio
+- **Interactive Elements**: Clear focus indicators in both themes
+- **Error States**: Maintain visibility and accessibility in dark mode
+
+#### User Experience
+- **Theme Toggle**: Easy to discover and use
+- **System Preference**: Respect user's system theme preference by default
+- **Persistence**: Theme choice persists across sessions
+- **Performance**: No visual flashing or delay when switching themes
 
 ### Testing Standards
-- Comprehensive test coverage (minimum 90%, target 95%+)
-- Use ExUnit for all testing
-- Follow AAA pattern: Arrange, Act, Assert
-- Create factories for test data generation
-- Mock external dependencies appropriately
 
-## Security Requirements
+#### Automated Testing
+- **Unit Tests**: Cover all theme management functions
+- **Integration Tests**: Test LiveView hook integration
+- **Visual Tests**: Regression testing for component styling
+- **Performance Tests**: Validate theme switching speed
 
-### Authentication Security
-- Password strength requirements (minimum 8 characters)
-- Secure password hashing with salt
-- Session timeout configuration
-- CSRF protection enabled
-- Secure cookie configuration (httpOnly, secure, sameSite)
+#### Browser Testing
+- **Desktop**: Chrome, Firefox, Safari, Edge (latest 2 versions)
+- **Mobile**: iOS Safari, Chrome Mobile
+- **Features**: Theme persistence, visual consistency, performance
 
-### Authorization Security
-- Principle of least privilege
-- Resource-based access control (users own their tasks)
-- Consistent authorization checks across all endpoints
-- Fail-safe authorization (default deny)
-- Proper error handling without information leakage
+#### Accessibility Testing
+- **Contrast**: Automated contrast ratio validation
+- **Focus**: Keyboard navigation testing in both themes
+- **Screen Readers**: Ensure proper announcements for theme changes
 
-### Data Security
-- Input validation and sanitization
-- SQL injection prevention through Ecto
-- XSS prevention through Phoenix HTML helpers
-- Secure handling of sensitive data
-- Audit logging for security events
+### Implementation Guidelines
 
-## Performance Standards
+#### File Organization
+```
+assets/js/
+├── theme-manager.js          # Core theme management utilities
+├── liveview-hooks.js        # Phoenix LiveView theme hooks
+└── app.js                   # Main application file
 
-### Database Performance
-- Optimize queries for user-scoped operations
-- Use appropriate indexes for authentication lookups
-- Minimize N+1 query problems
-- Monitor query performance in development
+lib/task_app_web/
+├── components/layouts/      # Layout components with dark mode
+└── live/task_live/          # LiveView components with theme support
+```
 
-### Application Performance
-- Authentication operations under 100ms response time
-- Task loading under 200ms for typical user data
-- Session operations optimized for concurrent users
-- Memory usage within acceptable limits
+#### Documentation Requirements
+- **Code Comments**: Document theme-related functions and decisions
+- **User Documentation**: How to use dark mode feature
+- **Developer Documentation**: How to extend dark mode to new components
+- **Testing Documentation**: How to test theme functionality
 
-## Code Quality Standards
+### Security Considerations
 
-### Code Style
-- Follow Elixir community style guidelines
-- Use consistent naming conventions
-- Write clear, self-documenting code
-- Include appropriate comments for complex logic
+#### Client-Side Storage
+- **Data Validation**: Validate theme values from localStorage
+- **Fallback Strategy**: Handle localStorage unavailability gracefully
+- **XSS Prevention**: Sanitize any theme-related user inputs
 
-### Error Handling
-- Use Elixir's {:ok, result} / {:error, reason} patterns
-- Provide user-friendly error messages
-- Log errors appropriately without exposing sensitive data
-- Handle edge cases gracefully
-
-### Documentation
-- Document all public functions with @doc
-- Include examples in documentation
-- Maintain README with setup and usage instructions
-- Document security considerations and deployment notes
-
-## Integration Standards
-
-### LiveView Integration
-- Handle authentication state changes in real-time
-- Use Phoenix PubSub for user-scoped real-time updates
-- Maintain consistent authentication state across components
-- Handle network connectivity issues gracefully
-
-### API Standards (if applicable)
-- RESTful endpoint design
-- Consistent JSON response format
-- Proper HTTP status codes
-- Authentication required for all authenticated endpoints
-
-## Deployment and Maintenance
-
-### Environment Configuration
-- Secure secret key management
-- Environment-specific configuration
-- Database connection security
-- Session store configuration
-
-### Monitoring and Logging
-- Log authentication events appropriately
-- Monitor application performance
-- Track security-related events
-- Set up appropriate alerting
-
-## Development Workflow
-
-### Version Control
-- Use meaningful commit messages
-- Branch naming conventions for features
-- Code review requirements
-- Testing requirements before merge
-
-### Development Environment
-- Consistent development setup across team
-- Database migration procedures
-- Test data management
-- Local development authentication setup
-
-These standards should be referenced and followed by all agents working on tasks within this project. Any deviations should be documented and justified within the specific task context.
+#### Server Integration
+- **CSP Headers**: Ensure Content Security Policy allows theme scripts
+- **CSRF Protection**: Maintain CSRF protection for theme-related requests
+- **Session Security**: Theme preference doesn't compromise session security

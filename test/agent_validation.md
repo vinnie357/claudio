@@ -29,7 +29,7 @@ This realistic codebase allows thorough testing of Claudio's discovery, analysis
 Please test the restructured Claudio agent system by performing the following validations:
 
 ### 1. Agent Availability Test
-List all available claudio namespace agents and verify the following **43 agents** are present:
+List all available claudio namespace agents and verify the following **45 agents** are present:
 
 #### Core Workflow Agents
 - claudio:discovery-agent (formerly discovery-orchestrator)
@@ -88,6 +88,7 @@ List all available claudio namespace agents and verify the following **43 agents
 - claudio:claudio-claude-sdk-architect (Claude SDK orchestrator)
 - claudio:claudio-claude-commands-analyst (command analysis specialist)
 - claudio:claudio-claude-subagents-analyst (agent analysis specialist)
+- claudio:phoenix-dev-executor (Elixir Phoenix development workflow optimization)
 
 ### 2. Agent Invocation Test
 Test agent invocation using the new naming pattern with the sample application in `test/claudio-agents/`:
@@ -264,7 +265,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 
 ### ✅ **Success Criteria**:
 #### Agent Availability & Invocation
-- All **43 agents** are available in claudio namespace (up from 37)
+- All **45 agents** are available in claudio namespace (up from 37)
 - Agent invocation works with "Use the claudio:agent-name subagent..." pattern
 - No confusion between `/claudio:command` (commands) and `claudio:agent-name` (agents)
 - Proper disambiguation between `/claudio:claude-sdk` command and `claudio:claudio-claude-sdk-architect` agent
@@ -293,7 +294,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 
 ### ❌ **Failure Indicators**:
 #### Agent Availability Issues
-- Any of the 43 agents not found in claudio namespace
+- Any of the 45 agents not found in claudio namespace
 - Claude Code cannot select appropriate agent based on description
 - Confusion between command and agent invocation patterns
 

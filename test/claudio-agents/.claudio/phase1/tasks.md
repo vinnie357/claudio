@@ -1,65 +1,92 @@
-# Phase 1: Authentication Foundation - Tasks
+# Phase 1: Dark Mode Infrastructure Context
 
-## Phase Overview
-Setting up basic authentication infrastructure for the Phoenix Task App.
+You are working on Phase 1 of the Dark Mode Feature implementation. This phase focuses on establishing the foundational infrastructure for theme switching and persistence.
 
-**Duration**: 5 days  
-**Team**: 2 developers  
-**Objective**: Implement secure user authentication system
+## Phase Objectives:
+- Set up theme preference persistence using browser storage
+- Implement JavaScript theme toggle functionality with LiveView integration
+- Configure Tailwind CSS for proper dark mode support
+- Ensure theme state initializes correctly on page load
 
-## Task Breakdown
+## Key Deliverables:
+- **Theme Persistence**: localStorage/cookie-based theme preference storage
+- **Toggle Functionality**: JavaScript hooks for seamless theme switching
+- **Tailwind Configuration**: Dark mode class strategy and configuration
+- **Initialization Logic**: Proper theme detection and application on load
 
-### Task 1: User Schema and Database Setup
-- **Duration**: 1 day
-- **Assignee**: Backend Developer
-- **Directory**: `task1_user_schema/`
-- **Deliverables**:
-  - User migration file
-  - User schema module
-  - Database seeding scripts
-  - User factory for testing
+## Timeline: 3 days
+## Resources: 2 developers (1 frontend, 1 backend integration)
 
-### Task 2: Authentication Context Module
-- **Duration**: 1.5 days  
-- **Assignee**: Backend Developer
-- **Directory**: `task2_auth_context/`
-- **Deliverables**:
-  - Authentication context module
-  - Password hashing utilities
-  - User registration functions
-  - Login validation functions
+## Task Breakdown:
 
-### Task 3: Registration and Login UI
-- **Duration**: 1.5 days
-- **Assignee**: Frontend Developer  
-- **Directory**: `task3_auth_ui/`
-- **Deliverables**:
-  - Registration form component
-  - Login form component
-  - Form validation
-  - Error handling UI
+### Task 1: Tailwind Dark Mode Configuration (Day 1 - 4 hours)
+**Objective**: Configure Tailwind CSS for class-based dark mode strategy
+**Assignee**: Frontend Developer
+**Deliverables**:
+- Update `tailwind.config.js` with dark mode class strategy
+- Verify dark mode utilities are properly generated
+- Test dark mode class toggling functionality
 
-### Task 4: Session Management
-- **Duration**: 1 day
-- **Assignee**: Backend Developer
-- **Directory**: `task4_session_mgmt/`
-- **Deliverables**:
-  - Session plugs
-  - Authentication helpers
-  - Logout functionality
-  - Session security configuration
+**Acceptance Criteria**:
+- ✅ Tailwind config includes `darkMode: 'class'`
+- ✅ Dark mode utilities generate properly in build
+- ✅ HTML can toggle dark mode with class="dark" on html element
 
-## Dependencies
-- Phoenix authentication generator (phx_gen_auth)
-- Database migration capability
-- UI component library access
+### Task 2: JavaScript Theme Management (Day 1-2 - 6 hours)
+**Objective**: Create client-side theme management system
+**Assignee**: Frontend Developer
+**Deliverables**:
+- Theme detection and persistence logic
+- LocalStorage integration for theme preferences
+- System theme preference detection
 
-## Phase Success Criteria
-- [✓] Users can register with email/password
-- [✓] Users can login and logout
-- [✓] Sessions persist appropriately
-- [✓] Password security standards met
-- [✓] Basic tests pass
+**Acceptance Criteria**:
+- ✅ Function to detect system theme preference
+- ✅ Function to persist theme choice in localStorage
+- ✅ Function to apply theme to DOM (add/remove 'dark' class)
+- ✅ Handles edge cases (no localStorage, invalid values)
 
-**NOTE**: Extended context missing for detailed task templates. To create comprehensive task contexts, run:
-`/claudio:research workflow task https://www.atlassian.com/agile/project-management`
+### Task 3: LiveView Hook Integration (Day 2-3 - 8 hours)
+**Objective**: Integrate theme management with Phoenix LiveView
+**Assignee**: Backend Developer + Frontend Developer
+**Deliverables**:
+- Phoenix LiveView hook for theme management
+- Server-side theme state awareness
+- Theme synchronization across LiveView updates
+
+**Acceptance Criteria**:
+- ✅ LiveView hook manages theme state
+- ✅ Theme persists through LiveView navigation
+- ✅ Server can access current theme preference
+- ✅ Theme applies before content renders (no flash)
+
+### Task 4: Theme Initialization & Performance (Day 3 - 4 hours)
+**Objective**: Optimize theme loading and prevent theme flashing
+**Assignee**: Frontend Developer
+**Deliverables**:
+- Inline theme initialization script
+- Performance optimization for theme detection
+- Theme flash prevention strategies
+
+**Acceptance Criteria**:
+- ✅ Theme applies immediately on page load
+- ✅ No visible theme flashing/flickering
+- ✅ Works with both server-rendered and client-rendered content
+- ✅ Performance impact < 50ms on theme detection
+
+## Integration Context:
+Reference related phases and dependencies:
+- **Next Phase**: Phase 2 will consume theme state for component styling
+- **Parallel Work**: None - foundational phase
+
+## Standards and Guidelines:
+Reference shared project standards:
+- Code Standards: ../shared/standards/claude.md
+- Utilities: ../shared/utilities/claude.md
+- Project Resources: ../shared/resources/claude.md
+
+## Success Criteria:
+- Theme switching works reliably across all browsers
+- User preference persists across sessions and page reloads
+- No performance degradation from theme detection
+- Foundation ready for component-level dark mode integration

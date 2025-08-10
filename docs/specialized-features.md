@@ -5,14 +5,21 @@
 ## Purpose
 This document details the advanced capabilities and specialized features of the Claudio system. Use this when you need to understand or leverage the system's advanced functionality beyond basic project analysis.
 
+## Anti-Fabrication Standards
+All specialized features adhere to strict anti-fabrication policies:
+- Research outputs based on authoritative sources only
+- Quality assessments from actual tool execution
+- Progress tracking reflects real milestone completion
+- Security analysis reports only verified findings
+
 ## Research System
 
 ### Overview
-The Research System creates comprehensive documentation for technical topics, generating structured overview and troubleshooting guides that support both project development and system-wide agent contexts.
+The Research System creates documentation for technical topics, generating structured overview and troubleshooting guides that support both project development and system-wide agent contexts.
 
 ### Core Capabilities
-- **Comprehensive Documentation**: Create detailed topic analysis with practical implementation guidance
-- **Structured Output**: Generate both overview and troubleshooting documents for complete coverage
+- **Topic Documentation**: Create topic analysis with practical implementation guidance
+- **Structured Output**: Generate both overview and troubleshooting documents
 - **Context-Aware Creation**: Automatically place files in appropriate locations based on usage context
 - **Complexity Assessment**: Apply appropriate analysis depth using Think/Ultrathink modes for advanced topics
 - **Quality Standards**: Include authoritative sources, practical examples, and current best practices
@@ -23,7 +30,7 @@ The Research System creates comprehensive documentation for technical topics, ge
 ```bash
 /claudio:research development react-testing
 # Creates: .claudio/research/development/react-testing/
-#   ├── overview.md          # Comprehensive topic analysis
+#   ├── overview.md          # Topic analysis
 #   └── troubleshooting.md   # Issues, solutions, diagnostic tools
 ```
 
@@ -62,7 +69,7 @@ Use Task tool with subagent_type: "research-specialist" to research PostgreSQL o
 #### overview.md Template
 - **Complexity Assessment**: Score, thinking mode, and complexity factors
 - **Executive Summary**: 2-3 paragraph topic overview
-- **Core Concepts**: Main topic areas with detailed explanations
+- **Core Concepts**: Main topic areas with explanations
 - **Best Practices**: Industry standards and recommendations
 - **Implementation Patterns**: Code examples and usage patterns
 - **Tools and Technologies**: Relevant tools and frameworks
@@ -109,7 +116,7 @@ Use Task tool with subagent_type: "research-specialist" to research PostgreSQL o
 ## Claude SDK System
 
 ### Overview
-The Claude SDK System provides comprehensive analysis and development capabilities for Claude Code implementations, enabling quality assessment, cross-system evaluation, and architectural improvements.
+The Claude SDK System provides analysis and development capabilities for Claude Code implementations, enabling quality assessment, cross-system evaluation, and architectural improvements.
 
 ### Core Components
 
@@ -182,7 +189,7 @@ The Claude SDK System provides comprehensive analysis and development capabiliti
 ## Progress Tracking System
 
 ### Overview
-The Progress Tracking System provides comprehensive project visibility, milestone management, and progress monitoring across all Claudio workflows.
+The Progress Tracking System provides project visibility, milestone management, and progress monitoring across all Claudio workflows.
 
 ### Tracking Levels
 

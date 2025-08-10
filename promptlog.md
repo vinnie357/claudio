@@ -942,12 +942,32 @@ test the updated research command @test/agent_research_test.md
 
 address any issues found from running the test
 
+the extended_context documents under .claude/agents/claudio/extended_context are meant to support subagents 
+  and their topics may only have overview.md files, the .claudio/research/ documents are meant to support 
+  difficult patterns or tasks that requires our new format
+
+
 update any related doucmentation and any related values in the root claude.md
 
 update our change log
 
 
 # reduce fabrications and superfluous words
+
+we need to instruct every single command and agent to NEVER fabricate information
+NEVER fabricate timelines
+NEVER fabricate security review contents
+NEVER fabricate code quality
+NEVER fabricate task status, if a task doesn't have a valid test it is not passing or complete
+NEVER add superlatives to descriptions its wasting context
+
+this should also be in our root claude.md
+
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log
+
 
 #
 # todo:
@@ -964,12 +984,7 @@ general
 troubleshooting
 specific-topics
 
-we need to instruct every single command and agent to NEVER fabricate information
-NEVER fabricate timelines
-NEVER fabricate security review contents
-NEVER fabricate code quality
-NEVER fabricate task status, if a task doesn't have a valid test it is not passing or complete
-NEVER add superlatives to descriptions its wasting context
+
 
 
 # claudini command

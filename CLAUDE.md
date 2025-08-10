@@ -25,11 +25,11 @@ Essential information you need right now:
 ## Core Components
 
 ### Commands
-- **`/claudio:research`**: Create comprehensive research documentation with overview and troubleshooting guides
+- **`/claudio:research`**: Create research documentation with overview and troubleshooting guides
 - **`/claudio:discovery`**: Analyze project structure and capabilities
-- **`/claudio:documentation`**: Create comprehensive project documentation
+- **`/claudio:documentation`**: Create project documentation
 - **`/claudio:prd`**: Generate Product Requirements Documents
-- **`/claudio:plan`**: Create detailed implementation plans
+- **`/claudio:plan`**: Create implementation plans
 - **`/claudio:task`**: Break down plans into executable tasks
 - **`/claudio:claudio`**: Complete project analysis workflow
 - **`/claudio:upgrade`**: Parallel upgrade system using 6 specialized subagents for improved performance
@@ -71,11 +71,11 @@ Essential information you need right now:
 - **Discovery Analyzer**: Installation analysis and compatibility assessment
 - **Legacy Cleaner**: Phase 0 deprecated pattern cleanup with user content protection
 - **Template Analyzer**: Localization planning and conflict detection  
-- **Backup Manager**: Comprehensive backup creation and rollback script generation
+- **Backup Manager**: Backup creation and rollback script generation
 - **Component Localizer**: Project-specific template application and test command coordination
 - **Installation Validator**: Integrity verification and completion reporting
 
-**Performance Optimization**: Parallel batch execution (Phase 2: template analysis + backup creation, Phase 3: localization + validation) provides improved efficiency while maintaining complete safety guarantees.
+**Performance Optimization**: Parallel batch execution (Phase 2: template analysis + backup creation, Phase 3: localization + validation) provides improved efficiency while maintaining safety guarantees.
 
 ### Claude Code Development
 ```bash
@@ -87,12 +87,12 @@ Essential information you need right now:
 
 ### Research System
 ```bash
-/claudio:research development react-testing  # Create comprehensive research documentation
+/claudio:research development react-testing  # Create research documentation
 ```
 
 **Document Creation**: Research commands create structured documentation with:
 - **Direct Usage**: Creates files in `.claudio/research/<category>/<topic>/`
-  - `overview.md`: Comprehensive topic analysis with best practices and implementation patterns  
+  - `overview.md`: Topic analysis with best practices and implementation patterns  
   - `troubleshooting.md`: Common issues, solutions, diagnostic tools, and escalation guidance
 - **Subagent Usage**: Creates extended context in `.claude/agents/claudio/extended_context/<category>/<topic>/`
 - **Quality Standards**: Includes authoritative sources, practical examples, and complexity-appropriate analysis
@@ -113,13 +113,13 @@ When you say **"use claudio on ../my-project"**, you're requesting:
    - **`.claudio/docs/`**: Discovery analysis, PRD requirements, implementation plan, executive summary
    - **`.claudio/phase1/, phase2/, etc.`**: Task breakdown with executable contexts
    - **`.claudio/status.md`**: Progress tracking and workflow status
-   - **Comprehensive documentation**: API docs, README, user guides (parallel generation)
+   - **Documentation**: API docs, README, user guides (parallel generation)
    - **Quality analysis**: Security review, code quality assessment, design evaluation
    - **Validation**: Mandatory workflow quality validation ensuring all documents meet standards
 
 This transforms your existing codebase into an organized, trackable development process with clear next steps and **validated quality assurance**.
 
-**[→ See complete workflow examples in Usage Guide](docs/usage-guide.md#comprehensive-claudio-workflow)**
+**[→ See workflow examples in Usage Guide](docs/usage-guide.md#claudio-workflow)**
 
 ## System Integration
 
@@ -253,6 +253,28 @@ The Claudio system handles missing extended context gracefully:
 - **Memory Efficient**: No continuous searching for non-existent files prevents memory leaks
 
 ## Important Instructions
+
+### **CRITICAL: Anti-Fabrication Policy**
+
+**NEVER fabricate information, data, or results:**
+
+- **NEVER fabricate timelines**: Use actual project data or state "timeline requires analysis"
+- **NEVER fabricate security review contents**: Only report actual vulnerabilities found through tool execution
+- **NEVER fabricate code quality metrics**: Base assessments on real linter/analyzer outputs
+- **NEVER fabricate task status**: Tasks are only complete when tests pass and acceptance criteria are met
+- **NEVER add superlatives to descriptions**: Avoid "comprehensive", "excellent", "amazing" - use factual language
+- **NEVER create sample data as real data**: Clearly mark all examples, templates, and placeholders
+- **NEVER assume test results**: Execute tests and report actual outcomes only
+
+**Requirements for all agents and commands:**
+- Base all outputs on actual analysis of real project data
+- Execute tools and report their actual results
+- Mark uncertain information as "requires analysis" or "needs investigation"
+- Use precise, factual language without unnecessary adjectives
+- Clearly distinguish between templates/examples and real project data
+- Report actual file contents, not assumed or fabricated content
+- Execute tests before marking tasks complete
+- Use actual tool outputs for quality and security assessments
 
 ### **CRITICAL: Lowercase-Hyphen Naming Convention**
 

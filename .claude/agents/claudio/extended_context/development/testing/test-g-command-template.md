@@ -43,9 +43,9 @@ Run {PROJECT_NAME} test suite with Gemini AI analysis for comprehensive issue id
 - **Claude Integration**: All changes go through Claude sub-agent review
 - **User Approval**: --fix flag requires confirmation before applying changes
 
-Use the claudio:{PROJECT_SLUG}-test-gemini subagent for Gemini integration and analysis.
+Use Task tool with subagent_type: "{PROJECT_SLUG}-test-gemini" for Gemini integration and AI-powered test analysis.
 
-**Reference**: Uses `.claude/agents/claudio/prompts/test/claude.md` for project-specific testing context and Gemini integration patterns.
+**Reference**: Uses `.claude/agents/claudio/extended_context/development/testing/claude.md` for project-specific testing context and Gemini integration patterns.
 
 **Prerequisites Check:**
 - gemini-cli installed and configured

@@ -345,7 +345,7 @@ Each custom command creates:
    - Tool selection and capabilities
    - Error handling
 
-3. **Extended Context** (`agents/claudio/prompts/{name}/claude.md`)
+3. **Extended Context** (`agents/claudio/extended_context/{category}/{name}/overview.md`)
    - Research-based knowledge
    - Best practices and patterns
    - Framework-specific guidance
@@ -632,7 +632,7 @@ Want to add a security review prompt manually? Here's how:
 mkdir -p .claude/agents/claudio/prompts/security-review
 ```
 
-Create `.claude/agents/claudio/prompts/security-review/claude.md`:
+Create `.claude/agents/claudio/extended_context/security-review/overview.md`:
 ```markdown
 # Security Review Agent
 
@@ -671,7 +671,7 @@ Perform comprehensive security analysis of codebases with vulnerability assessme
 - `security_standard`: Optional standard (OWASP, SOC2, etc.)
 
 ## Context
-Use the security review agent prompt from `.claude/agents/claudio/prompts/security-review/claude.md`.
+Use the security review agent context from `.claude/agents/claudio/extended_context/security-review/overview.md`.
 
 ## Instructions
 1. Analyze code for security vulnerabilities
@@ -683,7 +683,7 @@ Use the security review agent prompt from `.claude/agents/claudio/prompts/securi
 ```
 
 ### 3. Integration with Claudio
-To integrate with the main Claudio workflow, update `.claude/agents/claudio/prompts/claudio/claude.md` to include security review as an optional phase.
+To integrate with the main Claudio workflow, update the claudio-coordinator-agent to include security review as an optional phase.
 
 ## Simple Usage Examples
 

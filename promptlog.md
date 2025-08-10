@@ -794,6 +794,95 @@ localiazing them
 
 update our change log
 
+# review our commands to help
+
+review claudio:claude-sdk command, look at the command hints section
+
+we should add command hints to all of our current .claude/comamnds, .claude/commands/claudio
+
+# upgrade leftovers
+
+the upgrade command didn't clean up the last version it left behind prompts, and commands in the wrong 
+  locations how might we check for claudio specific prompts and fix this? clean up some of the old patterns, 
+  the prompts are now extended_context and the agents in 
+folders are replaced by the ones in .claude/agents/claudio/, also clean up the commands in
+.claude/commmands to be the onces in .claudio/commands/claudio
+if the commands or subagents were not created by the claudio process leave them
+
+here is a summary from the upgrade agents clean up in the other project
+  Summary for the Claudio Update Agent:
+
+  Cleanup Actions Performed:
+  1. Removed old agent patterns: Deleted individual claudio-generated agent folders
+  (discovery/, prd/, plan/, task/, documentation/, research/) that used the old
+  prompts/claude.md pattern
+  2. Consolidated commands: Removed duplicate command files, keeping only the claudio/
+  namespace versions
+  3. Preserved manual customizations: Kept custom Max platform commands (gcms.md, cq.md) and
+  manual agents (claude-commands-analyst.md, claude-subagents-analyst.md)
+  4. Validated structure: Confirmed all references work properly
+
+  Final Clean Structure:
+  .claude/
+  ├── agents/
+  │   ├── claude-commands-analyst.md (manual - preserved)
+  │   ├── claude-subagents-analyst.md (manual - preserved)
+  │   └── claudio/ (centralized claudio agents with extended_context)
+  ├── commands/
+  │   ├── cq.md (manual - preserved)
+  │   ├── gcms.md (manual - preserved)
+  │   └── claudio/ (all claudio namespace commands)
+  ├── discovery.md (project analysis output)
+  └── settings.local.json
+
+  For Future Upgrades: This pattern should be standard - remove old claudio-generated
+  individual agent/command folders while preserving manual customizations that don't follow
+  the claudio namespace pattern.
+
+  the cleanup agents should be part of the upgrade agent workflow
+
+update any related documentation or values in the root claude.md
+
+# claudio upgrade and claudio command fail to run validation agent
+
+/claudio:upgrade /path/to/prokect
+/claudio:claudio /path/to/project
+claudio-coordinator-agent only ran the discovery creation, it failed to run any other tasks and related subagents, it must ALLWAYS run the validation subagent last, it kept incorrectly reporting success when the only document created was .claudio/discovery.md, it wasn't even in the .claudio/docs
+
+the patterns should be similar to those in test/agent_validation.md
+which does groups of parallel agents to complete the task faster
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log
+
+# re run agent validator
+
+@test/agent_validation.md
+
+# test commands invalid
+
+the test commands get created in .claudo/agents/claudio, with a prompts folder, they  │
+│   all belong in the new format of .claude/agents/claudio and .claude/agents/extended_context
+
+/github/max$ tree .claudio
+.claudio
+├── agents
+│   └── claudio
+│       ├── max-test-gemini.md
+│       ├── max-test-runner.md
+│       └── prompts
+│           └── test
+│               └── claude.md
+├── commands
+
+also make sure it uses the new subagent invocation process when creating the commands
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log
+
+
 #
 # todo:
 #

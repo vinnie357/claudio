@@ -34,10 +34,10 @@ Comprehensive security review using STRIDE methodology with Mermaid diagram visu
 /claudio:security-review /path/to/code SOC2
 ```
 
-Use the claudio:security-review-coordinator subagent to orchestrate comprehensive security analysis through STRIDE methodology and generate Mermaid diagrams for threat visualization.
+Use Task tool with subagent_type: "security-review-coordinator" to orchestrate comprehensive security analysis through STRIDE methodology and generate Mermaid diagrams for threat visualization.
 
 **CRITICAL**: This command uses parallel execution - multiple Task invocations in a SINGLE message to coordinate security analysis specialists for optimal performance.
 
 **Integration**: Automatically included in Claudio discovery phase for comprehensive project security assessment. Creates structured security documentation in `<target>/.claudio/docs/security/` with STRIDE analysis, threat models, vulnerability reports, and visual diagrams.
 
-**Reference**: Uses `.claude/agents/claudio/prompts/security-review/claude.md` for comprehensive security analysis templates and STRIDE methodology implementation.
+**Reference**: Uses security-review-coordinator and specialized security agents for comprehensive STRIDE methodology implementation.

@@ -5,7 +5,7 @@ argument-hint: "[target_path] [options]"
 
 Upgrade existing Claudio installations through intelligent project localization with comprehensive change tracking, backup management, and rollback capabilities. This command safely updates Claudio components by re-localizing them based on current project discovery while preserving user customizations and providing complete version history.
 
-Use the claudio:upgrade-orchestrator-agent subagent to coordinate safe upgrade operations with project discovery, localization, backup management, and rollback capabilities.
+Use the upgrade-orchestrator-agent subagent to coordinate safe upgrade operations with project discovery, localization, backup management, and rollback capabilities including Phase 0 legacy pattern cleanup.
 
 **Path Resolution**: Supports multiple ways to specify upgrade target:
 - **Direct Path**: `/claudio:upgrade /path/to/project` (upgrades specified path)
@@ -175,4 +175,4 @@ When no updates are available:
 - Graceful handling of permission and access issues
 - Recovery coordination across partial upgrade states
 
-**Reference**: Uses `.claude/agents/claudio/prompts/upgrade/claude.md` for comprehensive upgrade orchestration patterns and safety procedures.
+**Reference**: Uses `.claude/agents/claudio/extended_context/infrastructure/upgrade/overview.md` for comprehensive upgrade orchestration patterns and safety procedures.

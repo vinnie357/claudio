@@ -17,11 +17,13 @@ Comprehensive project analysis and planning system that orchestrates discovery, 
 **Optional Implementation Integration**:
 - Include implementation execution: `/claudio <project_path> --implement`
 
-Use the claudio:claudio-coordinator-agent subagent to orchestrate the complete analysis workflow with parallel phase execution and automatic validation. The system automatically excludes Claudio system directories to focus on actual project analysis.
+Use the claudio-coordinator-agent subagent to orchestrate the complete analysis workflow with parallel phase execution and mandatory workflow validation. The system automatically excludes Claudio system directories to focus on actual project analysis.
+
+**Critical**: The workflow MUST complete with workflow-validator execution and ALL documents in `.claudio/docs/` folder before reporting success.
 
 **CRITICAL**: This command coordinates multiple phases - each phase may use parallel Task invocations in SINGLE messages to ensure optimal workflow execution. 
 
 **Workflow includes automatic final validation** to ensure all documents and project structure are properly generated. The `--implement` flag optionally includes implementation execution as the final phase.
 
-**Reference**: Uses `.claude/agents/claudio/prompts/claudio/claude.md` for comprehensive workflow templates and execution patterns.
+**Reference**: Uses claudio-coordinator-agent for comprehensive workflow orchestration and parallel execution patterns.
 

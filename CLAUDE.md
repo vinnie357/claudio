@@ -30,12 +30,13 @@ Essential information you need right now:
 - **`/claudio:plan`**: Create detailed implementation plans
 - **`/claudio:task`**: Break down plans into executable tasks
 - **`/claudio:claudio`**: Complete project analysis workflow
+- **`/claudio:upgrade`**: Safe upgrade of Claudio installations with legacy pattern cleanup
 - **`/claudio:claude-sdk`**: Analyze and improve Claude Code implementations
 
 ### Extended Context Structure
 - **`extended_context/workflow/`**: Core workflow contexts (discovery, prd, planning, task)
 - **`extended_context/development/`**: Development-specific contexts (code quality, testing, design)
-- **`extended_context/infrastructure/`**: System contexts (installation, upgrade)
+- **`extended_context/infrastructure/`**: System contexts (installation, upgrade, legacy pattern cleanup)
 - **`extended_context/documentation/`**: Documentation generation contexts
 - **`extended_context/research/`**: Research methodology contexts
 - **`extended_context/command-analysis/`**: Claude SDK command evaluation
@@ -57,6 +58,15 @@ Essential information you need right now:
 # Creates complete .claudio/ folder with analysis, requirements, plans, and tasks
 ```
 
+### System Upgrade and Cleanup
+```bash
+/claudio:upgrade ./my-project           # Upgrade Claudio installation with legacy cleanup
+/claudio:upgrade --check               # Preview upgrade changes without applying
+/claudio:upgrade --force               # Force complete re-installation
+```
+
+**Phase 0 Cleanup**: The upgrade process includes automatic legacy pattern cleanup - removes deprecated `prompts/` structures, old `claudio-*-orchestrator.md` files, and updates naming conventions while preserving all user customizations and project content.
+
 ### Claude Code Development
 ```bash
 /claudio:claude-sdk command_name        # Analyze specific Claude Code command and its subagents
@@ -70,10 +80,16 @@ Essential information you need right now:
 When you say **"use claudio on ../my-project"**, you're requesting:
 
 1. **Execute**: `/claudio:claudio ../my-project`
-2. **Expected Result**: A complete `.claudio/` folder created inside `../my-project/`
-3. **Deliverables**: Project discovery, requirements (PRD), implementation plan, task breakdown, progress tracking, and documentation templates
+2. **Expected Result**: A complete `.claudio/` folder with organized structure inside `../my-project/`
+3. **Deliverables**: 
+   - **`.claudio/docs/`**: Discovery analysis, PRD requirements, implementation plan, executive summary
+   - **`.claudio/phase1/, phase2/, etc.`**: Task breakdown with executable contexts
+   - **`.claudio/status.md`**: Progress tracking and workflow status
+   - **Comprehensive documentation**: API docs, README, user guides (parallel generation)
+   - **Quality analysis**: Security review, code quality assessment, design evaluation
+   - **Validation**: Mandatory workflow quality validation ensuring all documents meet standards
 
-This transforms your existing codebase into an organized, trackable development process with clear next steps.
+This transforms your existing codebase into an organized, trackable development process with clear next steps and **validated quality assurance**.
 
 **[→ See complete workflow examples in Usage Guide](docs/usage-guide.md#comprehensive-claudio-workflow)**
 
@@ -106,24 +122,30 @@ Some workflows are prerequisites and MUST run sequentially:
 - **Planning**: Depends on PRD requirements
 
 #### **Phase 2+: Parallel Batches**
-After prerequisites are met, use parallel execution:
+After discovery foundation, the claudio-coordinator-agent executes in optimized parallel batches:
 
-**✅ CORRECT - Parallel Batch After Discovery:**
+**✅ CORRECT - Core Workflow Batch (Parallel):**
 ```
 Run multiple Task invocations in a SINGLE message:
 - Task with prd-agent using discovery results
-- Task with security-review-coordinator for vulnerability analysis  
-- Task with code-quality-analyzer for quality assessment
-- Task with design-analyzer for UI/UX evaluation
+- Task with plan-agent for implementation planning  
+- Task with task-agent for executable task breakdown
 ```
 
-**✅ CORRECT - Documentation Suite (Parallel):**
+**✅ CORRECT - Documentation & Quality Batch (Parallel):**
 ```
 Run multiple Task invocations in a SINGLE message:
 - Task with documentation-coordinator for comprehensive docs
-- Task with documentation-readme-creator for README
-- Task with documentation-api-creator for API reference
-- Task with documentation-user-guide-creator for user docs
+- Task with code-quality-analyzer for quality assessment
+- Task with test-command-generator for project-specific tests
+```
+
+**✅ CORRECT - Security & Analysis Batch (Parallel):**
+```
+Run multiple Task invocations in a SINGLE message:
+- Task with security-review-coordinator for vulnerability analysis
+- Task with design-analyzer for UI/UX evaluation
+- Task with research-specialist for technology best practices
 ```
 
 ### Performance Benefits
@@ -197,7 +219,7 @@ The Claudio system handles missing extended context gracefully:
 **ALWAYS use lowercase-hyphen naming for ALL Claudio system components:**
 
 - **Agent Files**: `agent-name.md` (NOT `agent_name.md`)
-- **Agent References**: `claudio:agent-name subagent` (NOT `claudio:agent_name`)
+- **Agent References**: `Task tool with subagent_type: "agent-name"` (NOT `claudio:agent_name`)
 - **Command Files**: `command-name.md` (NOT `command_name.md`)
 - **Documentation Files**: `user-guide.md`, `developer-guide.md` (NOT underscore variants)
 - **Template Variables**: `{agent-name}`, `{command-name}` (NOT underscore variants)

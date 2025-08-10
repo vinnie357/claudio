@@ -43,7 +43,7 @@ Generate complete custom command systems (command + sub-agent + extended context
    - Tools and capabilities based on research
    - Error handling and validation
 
-3. **Extended Context**: `agents/claudio/prompts/{name}/claude.md`
+3. **Extended Context**: `agents/claudio/extended_context/{category}/{name}/overview.md`
    - Comprehensive context from research source
    - Best practices and implementation patterns
    - Framework-specific guidance

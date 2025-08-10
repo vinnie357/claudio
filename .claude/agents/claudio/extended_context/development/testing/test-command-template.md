@@ -33,9 +33,9 @@ Run the {PROJECT_NAME} test suite using {TEST_FRAMEWORK} with intelligent summar
 - **Coverage Reports**: {COVERAGE_INTEGRATION}  
 - **Watch Mode**: {WATCH_MODE_SUPPORT}
 
-Use the claudio:{PROJECT_SLUG}-test-runner subagent to execute tests and analyze results with project-specific understanding.
+Use Task tool with subagent_type: "{PROJECT_SLUG}-test-runner" to execute tests and analyze results with project-specific understanding.
 
-**Reference**: Uses `.claude/agents/claudio/prompts/test/claude.md` for project-specific testing context and patterns.
+**Reference**: Uses `.claude/agents/claudio/extended_context/development/testing/claude.md` for project-specific testing context and patterns.
 ```
 
 ## Replacement Variables:

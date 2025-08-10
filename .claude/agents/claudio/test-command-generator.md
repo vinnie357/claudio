@@ -68,7 +68,7 @@ Run the [PROJECT_NAME] test suite using [TEST_FRAMEWORK] with intelligent summar
 **Project-Specific Features:**
 [CUSTOM_FEATURES_BASED_ON_DISCOVERY]
 
-Use the claudio:[project_name]-test-runner subagent to execute tests and analyze results.
+Use Task tool with subagent_type: "[project_name]-test-runner" to execute tests and analyze results.
 ```
 
 #### Generate `/claudio:test-g` Command  
@@ -93,7 +93,7 @@ Run [PROJECT_NAME] test suite with Gemini AI analysis for comprehensive issue id
 - `/test-g [pattern]` - AI analysis of specific test pattern
 - `/test-g --fix` - Generate AI-powered fix tasks and attempt implementation
 
-Use the claudio:[project_name]-test-gemini subagent for Gemini integration.
+Use Task tool with subagent_type: "[project_name]-test-gemini" for Gemini AI-powered test analysis and solution generation.
 ```
 
 ### Phase 3: Sub-Agent Generation
@@ -152,7 +152,7 @@ You are a Gemini AI integration agent for [PROJECT_NAME] test analysis.
 
 ### Phase 4: Extended Context Generation
 
-Create `prompts/test/claude.md`:
+Create `extended_context/development/testing/claude.md`:
 
 ```markdown
 # [PROJECT_NAME] Testing Context
@@ -179,7 +179,7 @@ Create `prompts/test/claude.md`:
    - `<target>/.claudio/commands/claudio/test-g.md`
    - `<target>/.claudio/agents/claudio/[project]-test-runner.md`
    - `<target>/.claudio/agents/claudio/[project]-test-gemini.md`
-   - `<target>/.claudio/agents/claudio/prompts/test/claude.md`
+   - `<target>/.claudio/agents/claudio/extended_context/development/testing/claude.md`
 
 2. **Write Generated Files**:
    - Install customized command files
@@ -247,8 +247,8 @@ Your role is to create intelligent, project-specific test commands that understa
 **MANDATORY**: All generated test commands and agents MUST follow validated patterns:
 
 1. **Command Pattern Validation**:
-   - Generated commands must use `claudio:[project_name]-test-runner subagent` pattern
-   - Generated commands must use `claudio:[project_name]-test-gemini subagent` pattern
+   - Generated commands must use `Task tool with subagent_type: "[project_name]-test-runner"` pattern
+   - Generated commands must use `Task tool with subagent_type: "[project_name]-test-gemini"` pattern
    - Use hyphens in agent names: `project-test-runner`, NOT `project_test_runner`
 
 2. **Agent File Validation**:
@@ -257,6 +257,6 @@ Your role is to create intelligent, project-specific test commands that understa
    - Ensure agent `name:` field matches filename without extension
 
 3. **Integration Pattern Validation**:
-   - Verify all generated components use proper `claudio:agent-name subagent` invocation
+   - Verify all generated components use proper `Task tool with subagent_type: "agent-name"` invocation
    - Ensure no legacy patterns are used in generated files
    - Validate that generated agent names are referenced correctly in commands

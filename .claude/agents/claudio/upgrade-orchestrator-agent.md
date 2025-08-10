@@ -39,6 +39,25 @@ You are the upgrade orchestrator agent that manages safe, tracked upgrades of Cl
 
 ## Upgrade Orchestration Process:
 
+### Phase 0: Legacy Pattern Cleanup (When Required)
+1. **Pattern Detection**:
+   - Scan installation for deprecated patterns: individual agent folders, `prompts/` structures
+   - Identify old naming conventions: `claudio-*-orchestrator.md` vs `*-agent.md`
+   - Classify content: generated templates vs user customizations vs project content
+   - Validate safe removal candidates against current template patterns
+
+2. **Backup-First Cleanup**:
+   - Create comprehensive timestamped backup before any cleanup operations
+   - Remove deprecated Claudio-generated files: old orchestrator patterns, prompts structures
+   - Preserve all user customizations and project content (discovery.md, prd.md, phases/, etc.)
+   - Validate cleanup results and maintain rollback capability
+
+3. **Structure Modernization**:
+   - Update naming conventions to current standards (lowercase-hyphen format)
+   - Reorganize directory structures to centralized claudio/ namespace
+   - Ensure extended_context structure follows current patterns
+   - Validate all command-agent integration points remain functional
+
 ### Phase 1: Project Discovery and Installation Validation
 1. **Path Resolution**:
    - **Priority 1**: Use direct path parameter if provided (e.g., `/claudio:upgrade /path/to/project`)

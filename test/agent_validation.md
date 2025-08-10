@@ -29,7 +29,7 @@ This realistic codebase allows thorough testing of Claudio's discovery, analysis
 Please test the restructured Claudio agent system by performing the following validations:
 
 ### 1. Agent Availability Test
-List all available claudio namespace agents and verify the following **37 agents** are present:
+List all available claudio namespace agents and verify the following **43 agents** are present:
 
 #### Core Workflow Agents
 - claudio:discovery-agent (formerly discovery-orchestrator)
@@ -42,7 +42,13 @@ List all available claudio namespace agents and verify the following **37 agents
 
 #### Infrastructure & Installation Agents
 - claudio:install-coordinator-agent
-- claudio:upgrade-orchestrator-agent
+- claudio:upgrade-orchestrator-agent (lightweight coordinator)
+- claudio:upgrade-discovery-analyzer (project discovery and installation analysis)
+- claudio:upgrade-legacy-cleaner (Phase 0 legacy pattern cleanup)
+- claudio:upgrade-template-analyzer (template comparison and localization planning)
+- claudio:upgrade-backup-manager (backup creation and version management)
+- claudio:upgrade-component-localizer (component re-localization execution)
+- claudio:upgrade-installation-validator (post-upgrade validation and reporting)
 - claudio:install-system-installer
 - claudio:install-validator
 
@@ -157,6 +163,34 @@ s) **Git Workflow Test**:
 t) **Command Generation Test**:
    "Use the claudio:new-command-generator subagent to create a custom command for Elixir Phoenix development workflows"
 
+#### Phase 7: Upgrade System Architecture (Parallel Subagent Validation)
+**Test the new specialized upgrade subagent architecture**:
+
+u) **Upgrade Orchestrator Test**:
+   "Use the claudio:upgrade-orchestrator-agent subagent to coordinate a check-mode upgrade analysis of the current Claudio installation"
+
+v) **Upgrade Discovery Test** (Sequential Foundation):
+   "Use the claudio:upgrade-discovery-analyzer subagent to analyze project discovery and installation status for a simulated upgrade operation"
+
+w) **Upgrade Legacy Cleanup Test**:
+   "Use the claudio:upgrade-legacy-cleaner subagent to detect and analyze legacy patterns in a test installation structure"
+
+**Parallel Batch Execution Test - Analysis Phase**:
+**Run multiple Task invocations in a SINGLE message**:
+x) **Template Analysis Test**:
+   "Use the claudio:upgrade-template-analyzer subagent to analyze template differences and plan localization strategy for a simulated upgrade"
+
+y) **Backup Manager Test**:
+   "Use the claudio:upgrade-backup-manager subagent to create comprehensive backup plan with version management for upgrade operations"
+
+**Parallel Batch Execution Test - Application Phase**:
+**Run multiple Task invocations in a SINGLE message**:
+z) **Component Localizer Test**:
+   "Use the claudio:upgrade-component-localizer subagent to execute a simulated localization plan with test command coordination"
+
+aa) **Installation Validator Test**:
+   "Use the claudio:upgrade-installation-validator subagent to validate file integrity and pattern compliance for a completed upgrade simulation"
+
 ### 3. Agent Description Validation
 For each test above, verify:
 - Claude Code successfully identifies and selects the appropriate agent
@@ -214,15 +248,15 @@ e) **Claude SDK Agent-Specific Workflow**:
 
 ### ✅ **Success Criteria**:
 #### Agent Availability & Invocation
-- All **37 agents** are available in claudio namespace (up from 12)
+- All **43 agents** are available in claudio namespace (up from 37)
 - Agent invocation works with "Use the claudio:agent-name subagent..." pattern
 - No confusion between `/claudio:command` (commands) and `claudio:agent-name` (agents)
 - Proper disambiguation between `/claudio:claude-sdk` command and `claudio:claudio-claude-sdk-architect` agent
 
 #### Parallel Execution Performance
-- **Multiple Task invocations in SINGLE message** work correctly across all 6 phases
-- No conflicts or failures when running 3-4 agents simultaneously
-- Parallel batches complete faster than sequential execution
+- **Multiple Task invocations in SINGLE message** work correctly across all 7 phases
+- No conflicts or failures when running 3-4 agents simultaneously in parallel batches
+- Upgrade system parallel batch execution works for both analysis and application phases
 - Memory usage remains stable during parallel agent execution
 
 #### Specialized Agent Capabilities
@@ -232,6 +266,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 - **Design agents** evaluate LiveView UI/UX patterns correctly
 - **Research agents** provide relevant Phoenix/Elixir best practices
 - **Installation agents** handle Claudio system setup properly
+- **Upgrade agents** coordinate specialized subagent orchestration with proper parallel execution
 
 #### Context & Integration
 - Agents can reference extended context using new paths (all categories)
@@ -242,14 +277,15 @@ e) **Claude SDK Agent-Specific Workflow**:
 
 ### ❌ **Failure Indicators**:
 #### Agent Availability Issues
-- Any of the 37 agents not found in claudio namespace
+- Any of the 43 agents not found in claudio namespace
 - Claude Code cannot select appropriate agent based on description
 - Confusion between command and agent invocation patterns
 
 #### Parallel Execution Failures
 - **Multiple Task invocations in SINGLE message** fail or cause errors
-- Agent conflicts during parallel execution
+- Agent conflicts during parallel execution in any of the 7 phases
 - Memory issues or performance degradation during batch execution
+- Upgrade system parallel batch execution fails in analysis or application phases
 - Sequential fallback required due to parallel failures
 
 #### Specialized Agent Failures

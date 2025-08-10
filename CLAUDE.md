@@ -30,13 +30,13 @@ Essential information you need right now:
 - **`/claudio:plan`**: Create detailed implementation plans
 - **`/claudio:task`**: Break down plans into executable tasks
 - **`/claudio:claudio`**: Complete project analysis workflow
-- **`/claudio:upgrade`**: Safe upgrade of Claudio installations with legacy pattern cleanup
+- **`/claudio:upgrade`**: Parallel upgrade system using 6 specialized subagents for improved performance
 - **`/claudio:claude-sdk`**: Analyze and improve Claude Code implementations
 
 ### Extended Context Structure
 - **`extended_context/workflow/`**: Core workflow contexts (discovery, prd, planning, task)
 - **`extended_context/development/`**: Development-specific contexts (code quality, testing, design)
-- **`extended_context/infrastructure/`**: System contexts (installation, upgrade, legacy pattern cleanup)
+- **`extended_context/infrastructure/`**: System contexts (installation, parallel upgrade architecture, specialized subagent coordination)
 - **`extended_context/documentation/`**: Documentation generation contexts
 - **`extended_context/research/`**: Research methodology contexts
 - **`extended_context/command-analysis/`**: Claude SDK command evaluation
@@ -60,12 +60,20 @@ Essential information you need right now:
 
 ### System Upgrade and Cleanup
 ```bash
-/claudio:upgrade ./my-project           # Upgrade Claudio installation with legacy cleanup
+/claudio:upgrade ./my-project           # High-performance parallel upgrade with 6 specialized subagents
 /claudio:upgrade --check               # Preview upgrade changes without applying
-/claudio:upgrade --force               # Force complete re-installation
+/claudio:upgrade --force               # Force complete re-installation with full re-discovery
 ```
 
-**Phase 0 Cleanup**: The upgrade process includes automatic legacy pattern cleanup - removes deprecated `prompts/` structures, old `claudio-*-orchestrator.md` files, and updates naming conventions while preserving all user customizations and project content.
+**Parallel Architecture**: The upgrade system uses 6 specialized subagents with parallel execution for improved performance:
+- **Discovery Analyzer**: Installation analysis and compatibility assessment
+- **Legacy Cleaner**: Phase 0 deprecated pattern cleanup with user content protection
+- **Template Analyzer**: Localization planning and conflict detection  
+- **Backup Manager**: Comprehensive backup creation and rollback script generation
+- **Component Localizer**: Project-specific template application and test command coordination
+- **Installation Validator**: Integrity verification and completion reporting
+
+**Performance Optimization**: Parallel batch execution (Phase 2: template analysis + backup creation, Phase 3: localization + validation) provides improved efficiency while maintaining complete safety guarantees.
 
 ### Claude Code Development
 ```bash

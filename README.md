@@ -44,7 +44,7 @@ Claudio employs specialized AI agents that orchestrate different aspects of proj
 
 ### System Management Agents
 - **install-coordinator-agent**: Manages Claudio installation with namespace support and localization
-- **upgrade-orchestrator-agent**: Handles safe upgrades with backup, rollback, and re-localization
+- **upgrade-orchestrator-agent**: Lightweight coordinator for 6 specialized upgrade subagents with parallel execution
 - **code-quality-analyzer**: Analyzes code quality with comprehensive reporting
 
 Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context through discovery-based customization.

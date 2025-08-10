@@ -882,6 +882,19 @@ update any related doucmentation and any related values in the root claude.md
 
 update our change log
 
+# upgrades folder in wrong place
+ the .upgrades folder belongs in .claudio/.upgrades not .claude/.upgrades we need to fix this in the upgrade   │
+│   command and subagent   
+
+the upgrade-orchestrator-agent is very slow as a single subagent see if it could be enhanced by creating 
+  specialized subagents to handle its tasks
+
+it should also be parallel when possible
+
+update any related doucmentation and any related values in the root claude.md
+
+update our change log
+
 
 #
 # todo:

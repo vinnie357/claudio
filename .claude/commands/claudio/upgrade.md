@@ -141,16 +141,16 @@ Override change detection, re-run project discovery, and perform complete locali
 1. **Discovery Analysis**: Run or validate project discovery to understand current codebase
 2. **Installation Detection**: Detect installation mode and catalog current structure
 3. **Localization Planning**: Compare current localized components with latest templates
-4. **Backup**: Create timestamped backup in `.claude/.upgrades/backups/`
+4. **Backup**: Create timestamped backup in `.claudio/.upgrades/backups/`
 5. **Re-localization**: Generate new project-specific components based on discovery
 6. **Integration**: Merge updates while preserving existing project contexts
 7. **Validation**: Verify upgrade success and project-specific functionality
 8. **Reporting**: Provide completion summary with localization details
 
 ## File Organization:
-Creates organized upgrade tracking in `.claude/.upgrades/`:
+Creates organized upgrade tracking in `.claudio/.upgrades/`:
 ```
-.claude/
+.claudio/
 └── .upgrades/
     ├── backups/
     │   └── <timestamp>/          # Complete backup of previous version

@@ -86,7 +86,7 @@ Claudio uses an organized extended context system located in `extended_context/`
 #### Coordination Agents
 - **`claudio_coordinator_agent`**: Master orchestration for complete workflows
 - **`install_coordinator_agent`**: Installation process coordination
-- **`upgrade_orchestrator_agent`**: System upgrade management
+- **`upgrade-orchestrator-agent`**: Lightweight coordinator for 6 specialized upgrade subagents with parallel execution
 
 #### Workflow Agents
 - **`discovery_agent`**: Project analysis and technology assessment

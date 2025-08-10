@@ -20,6 +20,8 @@ Essential information you need right now:
 
 **🔧 INTEGRATION: Subagents MUST use Task tool pattern:** `Use Task tool with subagent_type: "agent-name" to [action]`
 
+**⚠️ CRITICAL: NEVER wrap Task tool invocations in bash code blocks** - causes execution failures
+
 ## Core Components
 
 ### Commands
@@ -173,6 +175,18 @@ Run multiple Task invocations in a SINGLE message:
 
 ```
 Use Task tool with subagent_type: "target-agent-name" to [action] [context]
+```
+
+**⚠️ CRITICAL**: Task tool invocations must be plain text, NEVER wrapped in bash code blocks:
+
+**✅ CORRECT:**
+```
+Use Task tool with subagent_type: "research-specialist" to research topic from URL
+```
+
+**❌ WRONG (causes bash execution failures):**
+```bash
+Use Task tool with subagent_type: "research-specialist" to research topic from URL
 ```
 
 ### Why This Pattern is Required

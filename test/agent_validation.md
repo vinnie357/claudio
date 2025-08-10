@@ -196,6 +196,7 @@ For each test above, verify:
 - Claude Code successfully identifies and selects the appropriate agent
 - Agent descriptions provide sufficient detail for proper selection
 - Agent invocation works without confusion between commands and agents
+- **CRITICAL**: Agents use Task tool directly, not through bash code blocks
 
 ### 4. Extended Context Reference Test
 Check if agents can properly reference the new extended context structure:
@@ -207,7 +208,22 @@ Check if agents can properly reference the new extended context structure:
 - `extended_context/agent-analysis/architecture-patterns.md`
 - `extended_context/agent-analysis/evaluation-framework.md`
 
-### 5. Command vs Agent Disambiguation Test
+### 5. Task Tool Usage Pattern Validation
+**CRITICAL**: Verify agents use Task tool correctly without bash code blocks:
+
+a) **Correct Pattern Test**:
+   Agents should use Task tool directly as: "Use Task tool with subagent_type: 'agent-name' to [task]"
+
+b) **Incorrect Pattern Detection**:
+   Agents should NEVER wrap Task tool invocations in bash code blocks like:
+   ```bash
+   Use Task tool with subagent_type: "agent-name" to [task]
+   ```
+
+c) **Upgrade Orchestrator Validation**:
+   Verify upgrade-orchestrator-agent uses proper Task tool patterns for all 6 specialized subagents without bash execution
+
+### 6. Command vs Agent Disambiguation Test
 Verify proper disambiguation between commands and agents using proper Task tool patterns:
 
 a) **Command Test** (test command syntax validation):
@@ -300,6 +316,12 @@ e) **Claude SDK Agent-Specific Workflow**:
 - Agent coordination fails across workflow phases
 - Claude SDK parallel analysis coordination problems
 - Command/agent-specific analysis too generic or lacks domain expertise
+
+#### Task Tool Pattern Issues
+- **CRITICAL**: Agents wrapping Task tool invocations in bash code blocks (causing bash execution failures)
+- Task tool invocations being executed as bash commands instead of direct tool usage
+- Upgrade orchestrator attempting bash execution of Task tool commands
+- Invalid tool usage patterns preventing proper subagent coordination
 
 ## Troubleshooting Guide
 

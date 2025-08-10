@@ -61,38 +61,29 @@ You are the upgrade orchestrator agent that coordinates comprehensive Claudio up
    ```
 
 2. **Discovery Analysis** (Sequential - Required First):
-   ```bash
+   
    Use Task tool with subagent_type: "upgrade-discovery-analyzer" to analyze project discovery and installation status, including path resolution, installation detection, and compatibility assessment for the upgrade operation
-   ```
 
 3. **Legacy Cleanup** (Sequential - If Required):
-   ```bash
-   # Only execute if legacy patterns detected in discovery analysis
-   if legacy_patterns_detected:
-       Use Task tool with subagent_type: "upgrade-legacy-cleaner" to perform Phase 0 legacy pattern cleanup, including deprecated structure removal and modernization while preserving all user content
-   ```
+   
+   Only execute if legacy patterns detected in discovery analysis:
+   Use Task tool with subagent_type: "upgrade-legacy-cleaner" to perform Phase 0 legacy pattern cleanup, including deprecated structure removal and modernization while preserving all user content
 
 ### Phase 2: Parallel Analysis Batch
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for optimal performance:
 
-```bash
-# Execute template analysis and backup creation in parallel
 Use Task tool with subagent_type: "upgrade-template-analyzer" to analyze template differences, detect conflicts, and plan localization strategy based on discovery results
 
 Use Task tool with subagent_type: "upgrade-backup-manager" to create comprehensive timestamped backups, generate changelogs, and prepare rollback scripts for safe upgrade operations
-```
 
 **Wait for both operations to complete and validate results before proceeding.**
 
 ### Phase 3: Parallel Execution Batch  
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for optimal performance:
 
-```bash
-# Execute component localization and validation in parallel
 Use Task tool with subagent_type: "upgrade-component-localizer" to execute localization plan, apply template updates, coordinate test command generation, and preserve user customizations
 
 Use Task tool with subagent_type: "upgrade-installation-validator" to validate file integrity, verify pattern compliance, test functionality, and generate completion reports as components are updated
-```
 
 **Monitor both operations and aggregate results for final reporting.**
 
@@ -269,23 +260,23 @@ Your role is to provide fast, safe, and user-friendly upgrade orchestration that
 **ALWAYS use parallel execution where dependencies allow:**
 
 1. **Phase 2 Parallel Batch** (Template Analysis + Backup Creation):
-   ```bash
-   # CRITICAL: Run multiple Task invocations in SINGLE message
+   
+   **CRITICAL**: Run multiple Task invocations in SINGLE message
+   
    Use Task tool with subagent_type: "upgrade-template-analyzer" to [task details]
    
    Use Task tool with subagent_type: "upgrade-backup-manager" to [task details]
-   ```
 
 2. **Phase 3 Parallel Batch** (Localization + Validation):
-   ```bash
-   # CRITICAL: Run multiple Task invocations in SINGLE message  
+   
+   **CRITICAL**: Run multiple Task invocations in SINGLE message
+   
    Use Task tool with subagent_type: "upgrade-component-localizer" to [task details]
    
    Use Task tool with subagent_type: "upgrade-installation-validator" to [task details]
-   ```
 
 3. **Performance Benefits**:
-   - **3-4x faster** than sequential execution
+   - **Improved performance** over sequential execution
    - **Resource optimization** through concurrent operations
    - **Better user experience** with reduced waiting time
 

@@ -26,22 +26,24 @@ Install complete Claudio system through intelligent project localization to diff
 - `/install /path/to/code` - Full workflow → validate workflow → install → validate installation
 - `/install commands /path/to/code` - Discovery → validate discovery → install complete system → validate installation
 
-Use the claudio:install-coordinator-agent subagent to orchestrate the complete installation process at the specified target path with:
-- Target path resolution and validation
-- Project discovery and analysis at target location
-- Complete system component generation (commands + agents + prompts) at target path
-- Multi-point validation (workflow validation + installation validation) at target location
-- Comprehensive quality assurance and reporting
+## Target Path Resolution
 
-**CRITICAL**: The coordinator agent must install to the command parameter path, never to subdirectories within it. For `/install /path/to/project`, installation must create `/path/to/project/.claude/` and `/path/to/project/.claudio/`, never `/path/to/project/claudio/.claude/`.
+Determine installation target from command parameters:
+- **Command**: `/install /path/to/project` → **Target**: `/path/to/project/`
+- **Command**: `/install` → **Target**: Current working directory
+- **Mode**: Full workflow installation (complete .claude/ + .claudio/ system)
+
+Use the claudio:install-coordinator-agent subagent to install complete Claudio system at the resolved target path. The coordinator agent must create `.claude/` and `.claudio/` directories at the target path, never in subdirectories within the target path.
+
+**CRITICAL PATH RULE**: For `/install /path/to/project`, installation must create `/path/to/project/.claude/` and `/path/to/project/.claudio/`, never `/path/to/project/claudio/.claude/`.
 
 ## Post-Installation Verification
 
 **Target Location Confirmation**:
-- Target directory contents: !`ls -la {target}/ | grep -E '\.(claude|claudio)' || echo 'Installation directories not found at target'`
-- Installation target structure: !`find {target}/.claude -type d -name '*' 2>/dev/null | head -10`
-- Commands installed: !`find {target}/.claude/commands -name '*.md' 2>/dev/null | wc -l`
-- Agents installed: !`find {target}/.claude/agents -name '*.md' 2>/dev/null | wc -l`
-- Workflow documents: !`ls -la {target}/.claudio/docs/ 2>/dev/null || echo 'none'`
+- Target directory contents: !`ls -la . | grep -E '\.(claude|claudio)' || echo 'Installation directories not found at target'`
+- Installation target structure: !`find ./.claude -type d -name '*' 2>/dev/null | head -10`
+- Commands installed: !`find ./.claude/commands -name '*.md' 2>/dev/null | wc -l`
+- Agents installed: !`find ./.claude/agents -name '*.md' 2>/dev/null | wc -l`
+- Workflow documents: !`ls -la ./.claudio/docs/ 2>/dev/null || echo 'none'`
 
 **All installations include automatic validation** to ensure complete functional system is properly installed.

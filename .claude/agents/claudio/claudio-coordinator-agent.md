@@ -56,39 +56,39 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 
 #### Phase 2a: Discovery (Sequential - Foundation Required)
 **Must complete first** as foundation for all subsequent phases:
-1. **Use Task tool with subagent_type: "discovery-agent"**: Project analysis foundation (with directory filtering)
+1. **Use the discovery-agent subagent**: Project analysis foundation (with directory filtering)
 
 #### Phase 2b: Core Workflow (Parallel Batch 1)
-**Run multiple Task invocations in a SINGLE message**:
-2. **Use Task tool with subagent_type: "prd-agent"**: Uses discovery output for requirements
-3. **Use Task tool with subagent_type: "plan-agent"**: Uses discovery output for implementation planning  
-4. **Use Task tool with subagent_type: "task-agent"**: Uses discovery output for task breakdown
+**Execute multiple subagents in parallel**:
+2. **Use the prd-agent subagent**: Uses discovery output for requirements
+3. **Use the plan-agent subagent**: Uses discovery output for implementation planning  
+4. **Use the task-agent subagent**: Uses discovery output for task breakdown
 
 #### Phase 2c: Documentation & Quality (Parallel Batch 2)
-**Run multiple Task invocations in a SINGLE message**:
-5. **Use Task tool with subagent_type: "documentation-coordinator"**: Orchestrate comprehensive documentation creation
-6. **Use Task tool with subagent_type: "code-quality-analyzer"**: Analyze code quality and technical debt
-7. **Use Task tool with subagent_type: "test-command-generator"**: Generate project-specific test commands
+**Execute multiple subagents in parallel**:
+5. **Use the documentation-coordinator subagent**: Orchestrate comprehensive documentation creation
+6. **Use the code-quality-analyzer subagent**: Analyze code quality and technical debt
+7. **Use the test-command-generator subagent**: Generate project-specific test commands
 
 #### Phase 2d: Security & Analysis (Parallel Batch 3)
-**Run multiple Task invocations in a SINGLE message**:
-8. **Use Task tool with subagent_type: "security-review-coordinator"**: Comprehensive security analysis
-9. **Use Task tool with subagent_type: "design-analyzer"**: UI/UX design pattern evaluation
-10. **Use Task tool with subagent_type: "research-specialist"**: Technology-specific best practices research
+**Execute multiple subagents in parallel**:
+8. **Use the security-review-coordinator subagent**: Comprehensive security analysis
+9. **Use the design-analyzer subagent**: UI/UX design pattern evaluation
+10. **Use the research-specialist subagent**: Technology-specific best practices research
 
 #### Phase 2e: Structure & Integration (Sequential - Final Steps)
 **Must complete in order after all analysis**:
-11. **Use Task tool with subagent_type: "claudio-structure-creator-agent"**: Creates final structure and summary
+11. **Use the claudio-structure-creator-agent subagent**: Creates final structure and summary
 
 #### Phase 2f: Claude SDK Analysis (Optional - Parallel Batch 4)
-**Run multiple Task invocations in a SINGLE message** (only for Claude Code development projects):
-12. **Use Task tool with subagent_type: "claudio-claude-sdk-architect"**: Claude Code SDK analysis and coordination
-13. **Use Task tool with subagent_type: "claudio-claude-commands-analyst"**: Command analysis specialist  
-14. **Use Task tool with subagent_type: "claudio-claude-subagents-analyst"**: Agent architecture analysis
+**Execute Claude SDK subagents in parallel** (only for Claude Code development projects):
+12. **Use the claudio-claude-sdk-architect subagent**: Claude Code SDK analysis and coordination
+13. **Use the claudio-claude-commands-analyst subagent**: Command analysis specialist  
+14. **Use the claudio-claude-subagents-analyst subagent**: Agent architecture analysis
 
 #### Phase 2g: Final Validation (MANDATORY - NEVER SKIP)
 **Must be final step**:
-15. **Use Task tool with subagent_type: "workflow-validator"**: Validates complete workflow document quality and completeness with explicit success criteria
+15. **Use the workflow-validator subagent**: Validates complete workflow document quality and completeness with explicit success criteria
 
 ### Phase 3: Results Integration
 1. Collect outputs from all orchestrator agents
@@ -133,7 +133,7 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 3. **Completeness Check**: Verify all required files exist in `.claudio/docs/` folder
 
 **Quality Validation** (MANDATORY - NEVER SKIP):
-1. **Use Task tool with subagent_type: "workflow-validator"** for comprehensive quality validation
+1. **Use the workflow-validator subagent** for comprehensive quality validation
 2. **Document Standards**: Validate discovery.md, prd.md, plan.md meet content quality standards
 3. **Integration Validation**: Verify document consistency and alignment across all workflow phases
 4. **Test Integration**: Confirm generated test commands integrate properly with project structure
@@ -144,7 +144,7 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 Reference extended context locations dynamically based on installation context:
 - Check if `./.claude/agents/claudio/extended_context/workflow/` exists first
 - If not found, reference `~/.claude/agents/claudio/extended_context/workflow/`
-- **If neither exists**: Report that extended context is missing and suggest using the Task tool with subagent_type: "research-specialist" to research workflow coordination patterns from https://www.atlassian.com/agile/project-management/project-management-intro to create the required context documentation
+- **If neither exists**: Report that extended context is missing and suggest using the research-specialist subagent to research workflow coordination patterns from https://www.atlassian.com/agile/project-management/project-management-intro to create the required context documentation
 - Use whichever location is available for extended context
 
 ## Target Project Structure Created:

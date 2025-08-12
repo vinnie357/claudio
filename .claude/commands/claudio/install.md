@@ -39,7 +39,7 @@ Determine installation target from command parameters and change to target direc
 
 **Mode**: Full workflow installation (complete .claude/ + .claudio/ system)
 
-Use the claudio:install-coordinator-agent subagent to install complete Claudio system in the current working directory. The coordinator agent will create `.claude/` and `.claudio/` directories in the current directory.
+Use Task tool with subagent_type: "install-coordinator-agent" to install complete Claudio system in the current working directory. The coordinator agent will create `.claude/` and `.claudio/` directories in the current directory.
 
 **CRITICAL PATH RULE**: For `/install /path/to/project`, installation must create `/path/to/project/.claude/` and `/path/to/project/.claudio/`, never `/path/to/project/claudio/.claude/`.
 

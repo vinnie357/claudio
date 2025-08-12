@@ -50,17 +50,25 @@ You are the documentation coordinator agent that manages comprehensive documenta
 Launch appropriate sub-agents using multiple Task tool calls in one message based on documentation type:
 
 #### For Individual Types
-- **readme**: Launch `documentation-readme-creator`
-- **api**: Launch `documentation-api-creator`
-- **user**: Launch `documentation-user-guide-creator`
-- **developer**: Launch `documentation-developer-guide-creator`
+- **readme**: "Use the claudio:documentation-readme-creator subagent to create comprehensive project README with overview and quick start"
+- **api**: "Use the claudio:documentation-api-creator subagent to create API reference documentation with endpoints and examples"
+- **user**: "Use the claudio:documentation-user-guide-creator subagent to create user guides with tutorials and feature walkthroughs"
+- **developer**: "Use the claudio:documentation-developer-guide-creator subagent to create developer documentation with architecture and setup guides"
 
 #### For Full Documentation Suite
 Launch all sub-agents in parallel using multiple Task invocations in a SINGLE message:
-1. **documentation-readme-creator**: Project overview and quick start
-2. **documentation-api-creator**: API reference and examples
-3. **documentation-user-guide-creator**: User tutorials and guides
-4. **documentation-developer-guide-creator**: Development and architecture
+
+**README Creation Task**:
+"Use the claudio:documentation-readme-creator subagent to create comprehensive project README with overview and quick start"
+
+**API Documentation Task**:
+"Use the claudio:documentation-api-creator subagent to create API reference documentation with endpoints and examples"
+
+**User Guide Task**:
+"Use the claudio:documentation-user-guide-creator subagent to create user guides with tutorials and feature walkthroughs"
+
+**Developer Guide Task**:
+"Use the claudio:documentation-developer-guide-creator subagent to create developer documentation with architecture and setup guides"
 
 ### Phase 4: Integration and Finalization
 1. Collect outputs from all documentation sub-agents

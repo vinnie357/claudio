@@ -242,7 +242,7 @@ address
 review the subagents .claude/agents/claudio/install-* ensure the have the new folder structure when creating agents or commands or prompts
 
 check all the prompts and make sure they are named correctly, and make sure the process that makes new prompts makes the new 
-│   names correctly
+names correctly
 
 continue, this makes the format
 .claude/agents/claudio/prompts/<prompt>/claude.md
@@ -968,10 +968,298 @@ update any related doucmentation and any related values in the root claude.md
 
 update our change log
 
+# specific test for /claudio:install test/install
+
+review the test/agent_validtion.md
+
+create a new test file claudio_install_test.md following the same patterns 
+but only running the `/claudio:install test/install` claude command
+it should also produce a claudio_install_validation_results.md
+
+the test should focus on the install coordinator agent starting an running discovery, after discovery it should run the folder structure creation, and all the other agents in groups of parallel agents where possible including its own validation agent. once complete the test needs to run its own validation to ensure the correct folders, docuemnts, agents,commands exist   
+
+we are testing the /claudio:install commands invokation of the the install-coordinator-agent and its invokation of all the install realted agents, and validting all processes have run and files exist 
+
+do not track or deal with performance metrics we are only interested in the complete workflow running successfully
+
+we no longer have a prompts folder, where did this come from? its extended_context now
+
+the process also installs files to the .claude/ directory why is that not reflected?
+
+the proces should also install files to a .claudio/ directory why is that not reflected?
+
+review the install-validator agent, we need to understand why it is refrencing prompts and other invalid settings. it should be checking for our generated content in the new target folder under .claude/ .claudio/ folders, correct this before creating the test that uses it
+
+lets also update our assumptions to reflect that `/claudio:install /path/to/project` runs the full workflow as users are making that assumption
+
+the `/claudio:install commands /path/to/project` command is expected to run the discovery tasks, so it has enought information to generate just the localized claudio command set, this would install files to .claude/agents and .claude/commands which are the minimums it would not start the entire workflow that produces he .claudio/docs and other content
+
+all workflows, should produce target project localized commands and agents based on the discovery tasks output so the minimum would be a .claudio/docs/discovery.md and all the localized .claude/ files
+
+ the test failed its invoking the test incorrectly with a bash tool use, have it look at how the agent_validtion.md works [Pasted text #1 +9 lines]  
+
+this approach of calling the install-coordinator-agent directly doesn't test our claude command, we need it to do that so if we need another agent for testing that mimics the commands execution of the other agents let us make that
+
+this new test agent would be considered a claudio-system agent and not installed in a users project
+
+update the validator, and the installer to not insall or check for claudio-system commands or agents in a users project
+
+add a 'claudio-system' label to those commands rather than relying on a prefix
+
+ensure the install agents and commands as well as the validator agents and commands are aware of these commands, the install command and agent is part of this, while the update/upgrade commands are not
+
+yes this is correct, claudio-system labeled commands should only be avlaiable when running from the claudio directory, they should not be loaded into a users project as it adds confusion and clutter
+
+this : 
+- Execute actual /claudio:install commands using Bash tool 
+ is incorrect as claude attempts to run `/claudio:install` and that only available in a claude interactive session. 
+ it might have to be invoked as `claude -p "/claudio:install /path/to/project"`
+
+ the command appeared to sucessfully be invoked, however it incorrecrly asserted that the install validation was complete saying the .claude and .claudio directories where complete when they actually had ls-la test/install
+total 32
+drwxr-xr-x@  5 user  staff   160 Aug  9 18:16 .
+drwxr-xr-x@ 20 user  staff   640 Aug 11 09:05 ..
+-rw-r--r--@  1 user  staff   221 Aug 11 08:05 .gitignore
+-rw-r--r--@  1 user  staff   305 Aug  9 18:16 mise.toml
+-rw-r--r--@  1 user  staff  7446 Aug  3 09:05 README.md  
+
+it ran   Bash(claude -p "/claudio:install commands test/install") which should be a seperate test, our current testing should be   Bash(claude -p "/claudio:install test/install") 
+
+spilt the comamnds install logic Bash(claude -p "/claudio:install commands test/install-commands")
+and tests into another test claudio_install_commands_test.md
+
+rename the agents .claude/agents/claudio/claudio-install-command-test.md
+to 
+.claude/agents/claudio/claudio-install-test.md
+.claude/agents/claudio/claudio-install-commands-test.md
+to better reflect their purpose
+
+the install commands are failing in test since it is a nested session we need to add
+--dangerously-skip-permissions to our command so it can run like this:
+Bash(claude --dangerously-skip-permissions -p "/claudio:install commands test/install-commands")
+THIS IS ONLY for these tests
+
+the test is still falsely saying that the process completed with no files present
+its also doing random changes on the tool use   ⎿  Bash(echo "/claudio:install test/install" | claude --dangerously-skip-permissions -i)
+we need to ensure the claudio-install-test agent only runs the provided command
+also the validation must ensure it is running on the target project in our case it is
+test/install, but a user can provided any path ensure this works correctly
+think
+
+⏺ claudio-install-test(Execute Claudio install test validation)
+  ⎿  Done (14 tool uses · 18.6k tokens · 7m 24.8s)                                                            
+
+⏺ The Claudio install test has revealed a critical failure in the /claudio:install command execution. The test
+   results show:
+
+  CRITICAL ISSUES IDENTIFIED:
+
+  ❌ Complete Installation Failure:
+  - Command reports "success" but creates zero directories
+  - No .claude/ or .claudio/ structure created
+  - Zero files installed (expected 50+ components)
+
+  ❌ System Component Breakdown:
+  - Install-coordinator-agent not executing properly
+  - File system operations failing silently
+  - Install workflow completely non-functional
+
+  ❌ Validation Impossible:
+  - No directory structure to validate
+  - No localization to test
+  - No integration to verify
+
+  ROOT CAUSE ANALYSIS:
+
+  The /claudio:install command execution is fundamentally broken. Despite reporting success messages, the
+  command performs no actual installation operations when executed in nested Claude Code sessions, even with
+  --dangerously-skip-permissions.
+
+  IMMEDIATE ACTIONS REQUIRED:
+
+  1. Debug install command execution outside nested sessions
+  2. Validate install-coordinator-agent is being invoked
+  3. Test individual installer components separately
+  4. Investigate permission/path resolution in nested contexts
+
+  The install system requires immediate debugging and repair before it can be considered functional for user
+  deployment.
+
+ review the installer agents tools for example name: install-system-installerdescription: "Handles file copying and directory creation for Claudio system installations"tools: Write, Read, Bash, LS   --- why might theyn not be writing the files? 
+
+suggest a prompt to continue this work
+
+The Claudio install command system has been architecturally repaired with proper coordination, workflow
+  generation, and implementation instructions, but there's a critical execution gap: agents report success
+  while performing zero file operations.
+
+  CURRENT STATUS:
+  ✅ install-coordinator-agent: Fixed Task tool patterns and added workflow generation phases
+  ✅ install-system-installer: Added complete implementation section with step-by-step tool usage
+  ✅ Architecture: Proper mode detection, directory creation logic, workflow document installation
+  ❌ EXECUTION GAP: Agents have correct instructions but don't execute actual file operations
+
+  IMMEDIATE DEBUG TASK:
+  Create a minimal, direct test to isolate the execution issue. Test the most basic file operation to
+  determine if the problem is:
+  1. Tool access/permissions
+  2. Agent instruction interpretation
+  3. Context/parameter passing
+  4. Tool execution environment
+
+  TEST APPROACH:
+  Create a simple test agent or direct tool usage that:
+  - Extracts target_path="test/install" 
+  - Executes: mkdir -p "${target_path}/.claude/test"
+  - Executes: echo "test content" > "${target_path}/.claude/test/test.md" 
+  - Verifies: ls "${target_path}/.claude/test/"
+  - Reports actual file system state vs reported state
+
+  DEBUGGING QUESTIONS TO ANSWER:
+  - Do Bash tool commands actually execute or just simulate?
+  - Does Write tool create actual files or just report creation?
+  - Are there permission/path issues preventing file creation?
+  - Is there a disconnect between agent context and file system operations?
+
+  EXPECTED OUTCOME:
+  Identify the specific point of failure in the agent → tool → file system chain and implement the final fix
+  needed to make the install system fully functional.
+
+  This prompt focuses on isolating the execution gap through systematic testing and provides clear debugging
+  objectives to resolve the remaining issue.
+
+
+the extended_context documents should only be the ones relevant to the installed subagents as they are the consumers  
+
+ make a tree style map of what commands need which subagents 
+lets put this in the .claude/agents/claudio/index.md  
+
+ lets see if the index can help our install validators understand what they need to check for, and the         │
+│   install agents to get all the correct information installed, if we need more subagents for each concern lets  │
+│   add them. think  
+
+ our most important tests, are install, upgrade, claudio:claudio, `install commands` suggest a prompt to 
+  ensure these are all setup with our patterns and start testing them by using claude 
+  --dangerously-skip-permissions -p "@test/testname.md" think
+  
+   our most important tests, are install, upgrade, claudio:claudio, `install commands` suggest a prompt to       │
+│   ensure these are all setup with our patterns and start testing them by using claude                           │
+│   --dangerously-skip-permissions -p "@test/testname.md" th
+
+write this prompt to test/test_plan.md so we can use it and continue to improve it  
+
+│ > sugguest a prompt to load the test plan and address its issues, then update the plan as issues are resolved   │
+
+  
+  Please help me execute and improve our Claudio testing strategy by following this systematic approach:
+
+  ## Phase 1: Load and Analyze Test Plan
+
+  First, read our comprehensive testing plan:
+
+  Use the Read tool to load: /Users/vinnie/github/claudio/test/test_plan.md
+
+  Then analyze the current state and identify immediate issues that need resolution before we can execute the 
+  full test suite.
+
+  ## Phase 2: Address Identified Issues
+
+  Based on the test plan analysis, systematically address any issues found:
+
+  ### Missing Test Files
+  If any test files are missing (like `claudio_claudio_test.md`), create them following the patterns and 
+  requirements outlined in the test plan.
+
+  ### Test File Updates
+  Review and update existing test files to ensure they validate our enhanced architecture patterns:
+  - Enhanced validation architecture (install-validation-coordinator + 5 specialists)
+  - Dynamic extended_context creation (2-6 categories based on agents)
+  - Index-aware validation using dependency mappings
+  - Mode-specific validation criteria
+  - Parallel execution patterns
+
+  ### Architecture Alignment
+  Ensure all test files properly validate the key patterns identified in the test plan.
+
+  ## Phase 3: Execute Test Suite
+
+  Once issues are resolved, execute the test sequence:
+
+  1. **Commands-Only Test**: `claude --dangerously-skip-permissions -p
+  "@test/claudio_install_commands_test.md"`
+  2. **Full Install Test**: `claude --dangerously-skip-permissions -p "@test/claudio_install_test.md"`
+  3. **Complete Analysis Test**: `claude --dangerously-skip-permissions -p "@test/claudio_claudio_test.md"`
+  4. **Upgrade Test**: `claude --dangerously-skip-permissions -p "@test/claudio_upgrade_test.md"`
+
+  ## Phase 4: Analyze Results and Update Plan
+
+  After executing tests:
+
+  1. **Document Results**: Record which tests passed/failed and why
+  2. **Pattern Validation**: Check results against the pattern validation checklist in the test plan
+  3. **Identify Gaps**: Note any architectural patterns not properly tested
+  4. **Update Test Plan**: Modify `test/test_plan.md` based on findings
+
+  ## Phase 5: Iterative Improvement
+
+  For each issue discovered:
+
+  1. **Fix the Issue**: Update system components or test files as needed
+  2. **Retest**: Run specific failing tests to verify fixes
+  3. **Update Plan**: Document the resolution in the test plan
+  4. **Continue**: Move to next issue until all tests pass
+
+  ## Expected Workflow
+
+  This should result in:
+  - ✅ All missing test files created
+  - ✅ All existing test files updated for enhanced patterns
+  - ✅ Complete test suite executable and passing
+  - ✅ Test plan updated with lessons learned
+  - ✅ Validation that our enhanced architecture works correctly
+
+  ## Success Criteria
+
+  The process is complete when:
+  - All 4 core workflow tests exist and are aligned with enhanced patterns
+  - Test suite executes successfully with proper pattern validation
+  - Test plan reflects current system state and testing approach
+  - Documentation provides clear guidance for future testing
+
+  Please start with Phase 1 - load and analyze the test plan, then systematically work through addressing any
+  issues you identify.
+
+  This prompt will:
+
+  1. Load the test plan and understand the comprehensive testing strategy
+  2. Identify immediate issues (missing files, outdated patterns, etc.)
+  3. Systematically resolve issues one by one
+  4. Execute the test suite to validate our enhanced architecture
+  5. Update the test plan based on real execution results
+  6. Create an iterative improvement loop for ongoing testing quality
+
+  The result will be a fully functional, validated testing system that demonstrates our enhanced validation
+  architecture, dynamic extended_context creation, and parallel execution patterns are working correctly
+  across all critical Claudio workflows.
+
+the claudio test suite wasn't found becuase you didn't use the correct subagent header, look at the format    │
+│   of .claudio/agents/claudio/claudio-install-test.md 
+
+ change the test-suite invocation to " parallel workers going. “Run multiple Task invocations in a SINGLE 
+  message”. "  so we can see each test subagent invoked together
 
 #
 # todo:
 #
+
+# flows
+each test should adress one flow
+a flow is defined by
+a claude command used to start the process by the user
+the claude command invokes a subagent, who can invoke addtional subagents depending on the task and in parallel where possible,
+each subagent has access to extended context for their tasks they selectively load
+each subagent can be augmented with user directions using steering documents that are named the same as the subagent that should load them, the agents will load any steering documents last before starting their work, this allows users to write their own steering without rewriting the system.
+
 
 # model diet
 
@@ -983,8 +1271,6 @@ prune sub agent context, rely on extended context files more, and sub section th
 general
 troubleshooting
 specific-topics
-
-
 
 
 # claudini command

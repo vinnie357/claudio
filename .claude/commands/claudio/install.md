@@ -1,9 +1,18 @@
 ---
 description: "Install Claudio system components with flexible path support and claudio namespace integration"
 argument-hint: "[commands] [user|<path>]"
+allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*), Bash(tree:*)
+system: claudio-system
 ---
 
 Install complete Claudio system through intelligent project localization to different target locations with flexible installation modes. All components are customized based on project discovery rather than directly copied.
+
+## Pre-Installation Context
+
+- Current working directory: !`pwd`
+- Available installation targets: !`find . -maxdepth 1 -type d -name '.*' 2>/dev/null || echo 'none'`
+- Existing .claude installation: !`test -d ./.claude && echo 'found' || echo 'none'`
+- Home .claude installation: !`test -d ~/.claude && echo 'found' || echo 'none'`
 
 **IMPORTANT**: "Commands" installs complete functional system:
 - Commands files (`commands/claudio/`)
@@ -22,5 +31,12 @@ Use the claudio:install-coordinator-agent subagent to orchestrate the complete i
 - Complete system component generation (commands + agents + prompts)
 - Multi-point validation (workflow validation + installation validation)
 - Comprehensive quality assurance and reporting
+
+## Post-Installation Verification
+
+- Installation target structure: !`find {target}/.claude -type d -name '*' 2>/dev/null | head -10`
+- Commands installed: !`find {target}/.claude/commands -name '*.md' 2>/dev/null | wc -l`
+- Agents installed: !`find {target}/.claude/agents -name '*.md' 2>/dev/null | wc -l`
+- Workflow documents: !`ls -la {target}/.claudio/docs/ 2>/dev/null || echo 'none'`
 
 **All installations include automatic validation** to ensure complete functional system is properly installed.

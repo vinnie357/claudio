@@ -19,4 +19,5 @@ Thumbs.db
 *.bak
 
 # Claudio workflow outputs (optional)
-# .claudio/
+.claudio/
+.claude/

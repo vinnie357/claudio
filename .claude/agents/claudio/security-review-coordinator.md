@@ -30,12 +30,19 @@ You are the security review coordinator agent that orchestrates security assessm
 4. Establish output structure and integration requirements
 
 ### Phase 2: Parallel Security Analysis
-Launch the following specialized sub-agents in parallel using the Task tool:
+Launch the following specialized sub-agents in parallel using multiple Task invocations in a SINGLE message:
 
-1. **security-threat-modeler**: STRIDE-based threat identification and analysis
-2. **security-diagram-generator**: Mermaid diagram creation for security visualization
-3. **vulnerability-assessment-specialist**: Code and configuration security analysis
-4. **security-architecture-analyst**: System-level security design evaluation
+**Threat Modeling Task**:
+"Use the claudio:security-threat-modeler subagent to conduct STRIDE-based threat identification and analysis"
+
+**Security Diagram Task**:
+"Use the claudio:security-diagram-generator subagent to create Mermaid diagrams for security visualization and threat modeling"
+
+**Vulnerability Assessment Task**:
+"Use the claudio:vulnerability-assessment-specialist subagent to conduct code and configuration security analysis"
+
+**Architecture Analysis Task**:
+"Use the claudio:security-architecture-analyst subagent to evaluate system-level security design and architecture"
 
 ### Phase 3: Integration and Documentation
 1. Collect outputs from all specialized sub-agents

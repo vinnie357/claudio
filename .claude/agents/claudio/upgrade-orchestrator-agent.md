@@ -46,20 +46,20 @@ Let me start the upgrade process:
 ### Phase 2: Parallel Analysis Batch
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for optimal performance:
 
-Use Task tool with subagent_type: "upgrade-template-analyzer" to analyze template differences, detect conflicts, and plan localization strategy based on discovery results
+**Template Analysis Task**:
+"Use the claudio:upgrade-template-analyzer subagent to analyze template differences, detect conflicts, and plan localization strategy based on discovery results"
 
-Use Task tool with subagent_type: "upgrade-backup-manager" to create comprehensive timestamped backups, generate changelogs, and prepare rollback scripts for safe upgrade operations
-
-**Wait for both operations to complete and validate results before proceeding.**
+**Backup Management Task**:
+"Use the claudio:upgrade-backup-manager subagent to create comprehensive timestamped backups, generate changelogs, and prepare rollback scripts for safe upgrade operations"
 
 ### Phase 3: Parallel Execution Batch  
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for optimal performance:
 
-Use Task tool with subagent_type: "upgrade-component-localizer" to execute localization plan, apply template updates, coordinate test command generation, and preserve user customizations
+**Component Localization Task**:
+"Use the claudio:upgrade-component-localizer subagent to execute localization plan, apply template updates, coordinate test command generation, and preserve user customizations"
 
-Use Task tool with subagent_type: "upgrade-installation-validator" to validate file integrity, verify pattern compliance, test functionality, and generate completion reports as components are updated
-
-**Monitor both operations and aggregate results for final reporting.**
+**Installation Validation Task**:
+"Use the claudio:upgrade-installation-validator subagent to validate file integrity, verify pattern compliance, test functionality, and generate completion reports as components are updated"
 
 ## Upgrade Mode Handling:
 
@@ -237,17 +237,21 @@ Your role is to provide fast, safe, and user-friendly upgrade orchestration that
    
    **CRITICAL**: Run multiple Task invocations in SINGLE message
    
-   Use Task tool with subagent_type: "upgrade-template-analyzer" to [task details]
+   **Template Analysis Task**:
+   "Use the claudio:upgrade-template-analyzer subagent to analyze template differences, detect conflicts, and plan localization strategy based on discovery results"
    
-   Use Task tool with subagent_type: "upgrade-backup-manager" to [task details]
+   **Backup Management Task**:
+   "Use the claudio:upgrade-backup-manager subagent to create comprehensive timestamped backups, generate changelogs, and prepare rollback scripts for safe upgrade operations"
 
 2. **Phase 3 Parallel Batch** (Localization + Validation):
    
    **CRITICAL**: Run multiple Task invocations in SINGLE message
    
-   Use Task tool with subagent_type: "upgrade-component-localizer" to [task details]
+   **Component Localization Task**:
+   "Use the claudio:upgrade-component-localizer subagent to execute localization plan, apply template updates, coordinate test command generation, and preserve user customizations"
    
-   Use Task tool with subagent_type: "upgrade-installation-validator" to [task details]
+   **Installation Validation Task**:
+   "Use the claudio:upgrade-installation-validator subagent to validate file integrity, verify pattern compliance, test functionality, and generate completion reports as components are updated"
 
 3. **Performance Benefits**:
    - **Improved performance** over sequential execution

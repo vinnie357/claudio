@@ -1,0 +1,6 @@
+Claudio System Version: 2.2.1
+Installation Date: 2024-01-15
+Last Modified: 2024-02-28
+Installation Mode: project
+Legacy Pattern: prompts/ directory structure
+EOF < /dev/null

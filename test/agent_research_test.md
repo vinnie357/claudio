@@ -62,7 +62,7 @@ From the main Claudio directory, test subagent context:
 Use Task tool with subagent_type: "research-specialist" to research database optimization patterns for PostgreSQL applications with focus on query performance and indexing strategies
 
 Expected Results:
-- Directory created: .claude/agents/claudio/extended_context/development/postgresql-optimization/
+- Directory created: .claude/agents/claudio/extended_context/development/postgresql-optimization/ (only if agent needs this context category)
 - Files created in extended_context location (NOT in project .claudio/)
 - Content specific to PostgreSQL optimization
 - Proper template structure maintained

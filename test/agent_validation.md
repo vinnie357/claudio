@@ -29,7 +29,7 @@ This realistic codebase allows thorough testing of Claudio's discovery, analysis
 Please test the restructured Claudio agent system by performing the following validations:
 
 ### 1. Agent Availability Test
-List all available claudio namespace agents and verify the following **45 agents** are present:
+List all available claudio namespace agents and verify the following **51 agents** are present (includes new validation specialists):
 
 #### Core Workflow Agents
 - claudio:discovery-agent (formerly discovery-orchestrator)
@@ -50,7 +50,12 @@ List all available claudio namespace agents and verify the following **45 agents
 - claudio:upgrade-component-localizer (component re-localization execution)
 - claudio:upgrade-installation-validator (post-upgrade validation and reporting)
 - claudio:install-system-installer
-- claudio:install-validator
+- claudio:install-validation-coordinator (orchestrates 5 specialized validators)
+- claudio:extended-context-dependency-validator (index-aware agent-context validation)
+- claudio:orchestrator-integration-validator (complex hierarchy validation)
+- claudio:installation-mode-validator (mode-specific validation)
+- claudio:extended-context-content-validator (content quality validation)
+- claudio:command-agent-integration-validator (command-agent relationship validation)
 
 #### Documentation Agents
 - claudio:documentation-coordinator
@@ -192,6 +197,29 @@ z) **Component Localizer Test**:
 aa) **Installation Validator Test**:
    "Use the claudio:upgrade-installation-validator subagent to validate file integrity and pattern compliance for a completed upgrade simulation"
 
+#### Phase 8: Enhanced Validation System (Parallel Batch 6)
+**Test the new index-aware validation architecture**:
+
+bb) **Validation Coordinator Test**:
+   "Use the claudio:install-validation-coordinator subagent to orchestrate comprehensive installation validation through 5 specialized validators"
+
+**Parallel Batch Execution Test - Specialized Validation**:
+**Run multiple Task invocations in a SINGLE message**:
+cc) **Extended Context Dependency Validation**:
+   "Use the claudio:extended-context-dependency-validator subagent to validate agent-context mappings using index specifications"
+
+dd) **Orchestrator Integration Validation**:
+   "Use the claudio:orchestrator-integration-validator subagent to validate complex agent hierarchies and Task tool patterns"
+
+ee) **Installation Mode Validation**:
+   "Use the claudio:installation-mode-validator subagent to validate mode-specific requirements for a test installation"
+
+ff) **Content Quality Validation**:
+   "Use the claudio:extended-context-content-validator subagent to validate extended_context content quality and customization"
+
+gg) **Command-Agent Integration Validation**:
+   "Use the claudio:command-agent-integration-validator subagent to validate command-agent relationships match index specifications"
+
 ### 3. Agent Description Validation
 For each test above, verify:
 - Claude Code successfully identifies and selects the appropriate agent
@@ -265,7 +293,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 
 ### ✅ **Success Criteria**:
 #### Agent Availability & Invocation
-- All **45 agents** are available in claudio namespace (up from 37)
+- All **51 agents** are available in claudio namespace (up from 45, includes 6 new validation specialists)
 - Agent invocation works with "Use the claudio:agent-name subagent..." pattern
 - No confusion between `/claudio:command` (commands) and `claudio:agent-name` (agents)
 - Proper disambiguation between `/claudio:claude-sdk` command and `claudio:claudio-claude-sdk-architect` agent
@@ -284,6 +312,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 - **Research agents** provide relevant Phoenix/Elixir best practices
 - **Installation agents** handle Claudio system setup properly
 - **Upgrade agents** coordinate specialized subagent orchestration with proper parallel execution
+- **Validation agents** provide comprehensive index-aware installation validation with specialized analysis
 
 #### Context & Integration
 - Agents can reference extended context using new paths (all categories)
@@ -294,7 +323,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 
 ### ❌ **Failure Indicators**:
 #### Agent Availability Issues
-- Any of the 45 agents not found in claudio namespace
+- Any of the 51 agents not found in claudio namespace
 - Claude Code cannot select appropriate agent based on description
 - Confusion between command and agent invocation patterns
 
@@ -311,6 +340,7 @@ e) **Claude SDK Agent-Specific Workflow**:
 - Quality agents fail to run or misinterpret Elixir/Phoenix code patterns
 - Design agents cannot evaluate LiveView-specific UI patterns
 - Research agents provide outdated or incorrect Phoenix information
+- Validation agents fail to provide index-aware validation or specialized analysis
 
 #### Context & Integration Issues
 - Extended context references broken (any category paths)

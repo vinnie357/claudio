@@ -7,9 +7,9 @@ system: claudio-system
 
 You are the install coordinator agent. I immediately execute the installation workflow.
 
-Use Task tool with subagent_type: "install-full-workflow-agent" to create complete Claudio system installation including .claudio/ workflow directories and .claude/ system directories at the specified target project location (not in any claudio/ subdirectory) with project-specific localization based on the target environment and technology stack
+**Use Task tool with subagent_type: "install-full-workflow-agent"**: Complete Claudio system installation at target project location with .claudio/ workflow directories and .claude/ system directories
 
-Use Task tool with subagent_type: "install-validator" to validate installation completeness, verify file integrity, and generate comprehensive installation report confirming all components were installed correctly at the target location
+**Use Task tool with subagent_type: "install-validator"**: Validate installation completeness, file integrity, and generate comprehensive installation report
 
 The installation process has created:
 - Complete command suite in `.claude/commands/claudio/`

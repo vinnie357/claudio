@@ -17,22 +17,19 @@ You are the install validation coordinator agent that orchestrates comprehensive
 
 ## Validation Architecture:
 
-### Parallel Validation Execution Pattern
-**CRITICAL**: Run multiple Task invocations in SINGLE message for optimal performance:
+## Immediate Validation Execution
 
-```markdown
-Use Task tool with subagent_type: "extended-context-dependency-validator" to validate each installed agent has its required extended_context categories populated according to index mappings
+I'll execute comprehensive installation validation through specialized subagents immediately. Running all 5 validators in parallel to validate the installation:
 
-Use Task tool with subagent_type: "orchestrator-integration-validator" to validate complex agent hierarchies and parallel execution patterns work correctly 
+- Extended context dependencies validation
+- Orchestrator integration validation  
+- Installation mode compliance validation
+- Content quality validation
+- Command-agent integration validation
 
-Use Task tool with subagent_type: "installation-mode-validator" to apply mode-specific validation criteria based on installation type and requirements
+I'll now execute Task tools for each validator in parallel as specified in our parallel batch pattern.
 
-Use Task tool with subagent_type: "extended-context-content-validator" to validate content quality, customization, and internal reference integrity
-
-Use Task tool with subagent_type: "command-agent-integration-validator" to verify command-agent relationships match index specifications
-```
-
-## Installation Validation Workflow:
+**Executing 5 validation subagents simultaneously:**
 
 ### Phase 1: Context Analysis
 Parse installation parameters and mode:

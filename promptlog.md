@@ -1254,6 +1254,21 @@ an upgrade produced "[Pasted text #1 +24 lines]" which is a failure, the claude 
 
 
 
+# install command
+lets compare the current install-coordinator-agent with the one in the main branch, that one was 
+  successfully installing the .claudio/ folder and its correct documents, but missing the .claude/ folder, 
+  while our current one is printing a success message of everything we want, but not preforming any of the 
+  actions the success messsage should be after the actions are performed and validated think
+ 
+ we want the new parallel subtask execuition of the current version we just need those subagents to do their 
+  respective work and not just return to the coordinator
+
+our best example right now, is in test/agent_validation.md , this phased approach is launching all the 
+  subagents in parallell, we want our coordinatior to keep the descriptions, but the subagents it calls in 
+  subtasks should just do their work and report to the coordinator. think
+
+
+
 #
 # todo:
 #

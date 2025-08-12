@@ -268,7 +268,7 @@ use the /claudio:newprompt command and its sub agents to create a new /claudio:i
 command to beging implementing the plan that was created by the claudio workflow
 the implement should attempt to do tasks that can be completed in parallel with sub agents
 
-the implement command should not automatically be part of the claudio workflow, users have to invoke it or pass an argument to     │
+the implement command should not automatically be part of the claudio workflow, users have to invoke it or pass an argument to 
 │   add it to the  workflow
 
 
@@ -1247,6 +1247,12 @@ the claudio test suite wasn't found becuase you didn't use the correct subagent 
 
  change the test-suite invocation to " parallel workers going. “Run multiple Task invocations in a SINGLE 
   message”. "  so we can see each test subagent invoked together
+
+# upgrade command 
+
+an upgrade produced "[Pasted text #1 +24 lines]" which is a failure, the claude command `/claudio:upgrade /Users/vinnie/github/max` and properly invoked the upgrade-orchestrator-agent subagent. but the subagent tried to invoke the command that started it, this is incorrect, whe should see the upgrade-orchestrator-agent invoke each of its respective subagents in sub tasks, like the phased approach defined in @test/agent_validation.md , the only differnce is when a user runs /claudio:upgrade /path/to/project, it should start the upgrade-orchestrator-agent , and its sub agents. in the test senario user there isn't a user so the test file starts the process using the bash tool use of bash( claude -p  "/claudio:upgrade /path/to/code") think 
+
+
 
 #
 # todo:

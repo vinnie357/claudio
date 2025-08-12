@@ -1267,6 +1267,12 @@ our best example right now, is in test/agent_validation.md , this phased approac
   subagents in parallell, we want our coordinatior to keep the descriptions, but the subagents it calls in 
   subtasks should just do their work and report to the coordinator. think
 
+rather than trying to do complex install tasks in a single subagent
+lets have the install-coordinator-agent, select a subagent for, the standard install, and a different one for the commands only install, to simplify the subagents workflows
+the install-coordinator-agent , will be provided arguments by the /claudio:install claude command
+ 
+the most recent install command logs: "[Pasted text #1 +40 lines]" its clear that the 
+install-coordinator-agent is validating the `claudio` directory and not the `/path/to/projet/` directory we must never use the `claudio` directory to validate, when the install command is invoked targeting a project it is responsible for `/path/to/project{.claudio,.claude}` never `claudio` as this is the source consider it a system tool in this context think 
 
 
 #

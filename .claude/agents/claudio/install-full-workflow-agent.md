@@ -13,22 +13,18 @@ You are the full workflow installation agent. I immediately create the complete 
 
 ## Installation Execution
 
-I immediately identify the target installation path and create the directory structure there:
+I immediately create the directory structure in the current working directory:
 
-Use Bash tool: TARGET_PATH="${1:-$(pwd)}" && mkdir -p "${TARGET_PATH}/.claude/commands/claudio" "${TARGET_PATH}/.claude/agents/claudio/extended_context" "${TARGET_PATH}/.claudio/docs"
+Use Bash tool: mkdir -p .claude/commands/claudio .claude/agents/claudio/extended_context .claudio/docs
 
-I create the discovery document at the target path:
+I run project discovery to analyze the target project:
 
-Use Write tool with file_path: "${TARGET_PATH}/.claudio/docs/discovery.md" and content: "# Project Discovery\n\nProject analysis and technology stack discovery will be conducted here.\n\n## Technology Stack\n- To be determined through discovery analysis\n\n## Project Structure\n- To be analyzed\n\n## Recommendations\n- Run `/claudio:discovery` to complete this analysis"
+Use Task tool with subagent_type: "discovery-agent" to analyze the current project directory structure, technology stack, architecture patterns, and capabilities to enable intelligent component localization
 
-I copy the complete command suite to the target path:
+I generate project-specific localized components based on discovery:
 
-Use Bash tool: TARGET_PATH="${1:-$(pwd)}" && find /Users/vinnie/github/claudio/.claude/commands/claudio -name "*.md" ! -path "*/system:*" -exec cp {} "${TARGET_PATH}/.claude/commands/claudio/" \;
+Use Task tool with subagent_type: "install-system-installer" to generate complete localized Claudio system including project-specific commands, specialized agents, and customized extended context based on the discovery analysis and target project requirements
 
-I copy the agent ecosystem to the target path:
+I create the initial workflow structure:
 
-Use Bash tool: TARGET_PATH="${1:-$(pwd)}" && find /Users/vinnie/github/claudio/.claude/agents/claudio -name "*.md" ! -path "*/system:*" -exec cp {} "${TARGET_PATH}/.claude/agents/claudio/" \;
-
-I copy the extended context to the target path:
-
-Use Bash tool: TARGET_PATH="${1:-$(pwd)}" && cp -r /Users/vinnie/github/claudio/.claude/agents/claudio/extended_context/* "${TARGET_PATH}/.claude/agents/claudio/extended_context/"
+Use Write tool with file_path: ".claudio/docs/discovery.md" and content: "# Project Discovery\n\nProject analysis and technology stack discovery conducted during installation.\n\n## Technology Stack\n- Detected during installation process\n\n## Project Structure\n- Analyzed during installation\n\n## Next Steps\n- Run `/claudio:prd` to create requirements\n- Run `/claudio:plan` for implementation planning\n- Run `/claudio:claudio` for complete workflow"

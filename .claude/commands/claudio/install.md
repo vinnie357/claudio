@@ -26,14 +26,20 @@ Install complete Claudio system through intelligent project localization to diff
 - `/install /path/to/code` - Full workflow → validate workflow → install → validate installation
 - `/install commands /path/to/code` - Discovery → validate discovery → install complete system → validate installation
 
-## Target Path Resolution
+## Target Path Resolution and Directory Change
 
-Determine installation target from command parameters:
-- **Command**: `/install /path/to/project` → **Target**: `/path/to/project/`
-- **Command**: `/install` → **Target**: Current working directory
-- **Mode**: Full workflow installation (complete .claude/ + .claudio/ system)
+Determine installation target from command parameters and change to target directory:
 
-Use the claudio:install-coordinator-agent subagent to install complete Claudio system at the resolved target path. The coordinator agent must create `.claude/` and `.claudio/` directories at the target path, never in subdirectories within the target path.
+**For path-based installation** (`/install /path/to/project`):
+- Target: `/path/to/project/`
+- Change to target directory: !`cd "$1" || (echo "Failed to change to directory: $1" && exit 1)`
+
+**For current directory installation** (`/install`):
+- Target: Current working directory (no directory change needed)
+
+**Mode**: Full workflow installation (complete .claude/ + .claudio/ system)
+
+Use the claudio:install-coordinator-agent subagent to install complete Claudio system in the current working directory. The coordinator agent will create `.claude/` and `.claudio/` directories in the current directory.
 
 **CRITICAL PATH RULE**: For `/install /path/to/project`, installation must create `/path/to/project/.claude/` and `/path/to/project/.claudio/`, never `/path/to/project/claudio/.claude/`.
 

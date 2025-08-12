@@ -66,7 +66,7 @@ Generate complete custom command systems (command + sub-agent + extended context
 - Integration validation and testing
 - Following established Claudio patterns
 
-Use the claudio:new-command-generator subagent to orchestrate research analysis, template generation, and command installation process.
+Use the new-command-generator subagent to orchestrate research analysis, template generation, and command installation process.
 
 **Prerequisites:**
 - For URL sources: Internet access for research

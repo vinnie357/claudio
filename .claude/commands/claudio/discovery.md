@@ -7,5 +7,5 @@ Analyze a project to identify tools, requirements, and suggest relevant MCPs thr
 
 **CRITICAL: NEVER fabricate project details or capabilities. Only report findings from actual file and code examination.**
 
-Use the claudio:discovery-agent subagent to perform project analysis including technology stack identification, architecture assessment, and MCP recommendations based on actual project files.
+Use the discovery-agent subagent to perform project analysis including technology stack identification, architecture assessment, and MCP recommendations based on actual project files.
 

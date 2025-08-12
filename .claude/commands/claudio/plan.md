@@ -12,5 +12,5 @@ Create detailed implementation plans with time estimates, phases, dependencies, 
 - `refactor`: Code refactoring and improvement plan
 - `integration`: System integration implementation plan
 
-Use the claudio:plan-agent subagent to create detailed implementation plans with phases, timelines, resource requirements, and risk mitigation strategies.
+Use the plan-agent subagent to create detailed implementation plans with phases, timelines, resource requirements, and risk mitigation strategies.
 

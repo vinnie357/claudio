@@ -1,6 +1,6 @@
 ---
 name: discovery-agent
-description: "Analyzes codebases to discover technology stack, architecture patterns, capabilities, and project structure. Use this agent to understand what a project does, how it's built, what technologies it uses, and identify improvement opportunities."
+description: "MUST BE USED for project analysis and technology discovery. Use PROACTIVELY to analyze any codebase and understand technology stack, architecture patterns, project structure, and capabilities. Essential for understanding what projects do, how they're built, and identifying improvement opportunities."
 tools: Read, Glob, Bash, LS, Grep
 ---
 

@@ -3,4 +3,4 @@ description: "review project testing patterns"
 argument-hint: ""
 ---
 
-Please analyze the current project testing framework and tools, Use the claudio:test-review subagent to analyze testing frameworks and tools configuration.
+Please analyze the current project testing framework and tools, Use the test-review subagent to analyze testing frameworks and tools configuration.

@@ -1,6 +1,6 @@
 ---
 name: git-commit-message
-description: "Analyzes git status and suggests brief conventional commit messages"
+description: "MUST BE USED for git commit message generation. Use PROACTIVELY when users need conventional commit messages. Analyzes git status, staged changes, and recent commit history to suggest 1-3 brief, conventional commit messages following project patterns."
 tools: Bash, Grep, Read
 ---
 

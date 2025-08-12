@@ -1,55 +1,48 @@
 ---
-description: "Install Claudio system components with flexible path support and claudio namespace integration"
-argument-hint: "[commands] [user|<path>]"
-allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*), Bash(tree:*), Bash(cd:*)
+description: "Install complete Claudio system with full workflow generation (discovery, PRD, planning, tasks)"
+argument-hint: "[<path>]"
+allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*)
 system: claudio-system
 ---
 
-Install complete Claudio system through intelligent project localization to different target locations with flexible installation modes. All components are customized based on project discovery rather than directly copied.
+Install complete Claudio system with full workflow generation including project discovery, requirements documentation, implementation planning, and task organization.
 
-## Pre-Installation Context
+## Installation Modes
 
-- Current working directory: !`pwd`
-- Available installation targets: !`find . -maxdepth 1 -type d -name '.*' 2>/dev/null || echo 'none'`
-- Existing .claude installation: !`test -d ./.claude && echo 'found' || echo 'none'`
-- Home .claude installation: !`test -d ~/.claude && echo 'found' || echo 'none'`
+**Full System Installation:**
+- `/claudio:install` - Install to current directory with complete workflow
+- `/claudio:install /path/to/project` - Install to specific project with complete workflow
 
-**IMPORTANT**: "Commands" installs complete functional system:
-- Commands files (`commands/claudio/`)
-- Required sub-agents (`agents/claudio/`) 
-- Extended context documents (`agents/claudio/prompts/`)
+## Target Path Resolution
 
-**Installation Workflows with Validation:**
-- `/install` - Full workflow → validate workflow → install → validate installation
-- `/install commands` - Discovery → validate discovery → install complete system → validate installation  
-- `/install commands user` - Install generic templates → validate installation
-- `/install /path/to/code` - Full workflow → validate workflow → install → validate installation
-- `/install commands /path/to/code` - Discovery → validate discovery → install complete system → validate installation
+Determine installation target from command parameters:
 
-## Target Path Resolution and Directory Change
+**Path Variable Setup:**
+!`if [ -z "$1" ]; then TARGET_PATH=$(pwd); else TARGET_PATH="$1"; fi`
 
-Determine installation target from command parameters and change to target directory:
-
-**For path-based installation** (`/install /path/to/project`):
-- Target: `/path/to/project/`
-- Change to target directory: !`cd "$1"`
-
-**For current directory installation** (`/install`):
-- Target: Current working directory (no directory change needed)
+**Installation Modes:**
+- **Current Directory**: `TARGET_PATH=$(pwd)` - Full workflow installation
+- **Specified Path**: `TARGET_PATH="$1"` - Full workflow installation
 
 **Mode**: Full workflow installation (complete .claude/ + .claudio/ system)
 
-Use Task tool with subagent_type: "install-coordinator-agent" to install complete Claudio system in the current working directory. The coordinator agent will create `.claude/` and `.claudio/` directories in the current directory.
+## Pre-Installation Context
 
-**CRITICAL PATH RULE**: For `/install /path/to/project`, installation must create `/path/to/project/.claude/` and `/path/to/project/.claudio/`, never `/path/to/project/claudio/.claude/`.
+- Target installation path: !`echo "${TARGET_PATH}"`
+- Target installation check: !`test -d "${TARGET_PATH}/.claude" && echo 'exists' || echo 'available'`
+
+## Installation Process
+
+Use the install-coordinator-agent subagent to install complete Claudio system at the target path. The coordinator agent will create `.claude/` and `.claudio/` directories at `${TARGET_PATH}`.
+
+**CRITICAL PATH RULE**: Installation creates `${TARGET_PATH}/.claude/` and `${TARGET_PATH}/.claudio/`, never nested subdirectories.
 
 ## Post-Installation Verification
 
 **Target Location Confirmation**:
-- Target directory contents: !`ls -la . | grep -E '\.(claude|claudio)' || echo 'Installation directories not found at target'`
-- Installation target structure: !`find ./.claude -type d -name '*' 2>/dev/null | head -10`
-- Commands installed: !`find ./.claude/commands -name '*.md' 2>/dev/null | wc -l`
-- Agents installed: !`find ./.claude/agents -name '*.md' 2>/dev/null | wc -l`
-- Workflow documents: !`ls -la ./.claudio/docs/ 2>/dev/null || echo 'none'`
+- Installation target structure: !`find "${TARGET_PATH}/.claude" -type d -name '*' 2>/dev/null | head -10`
+- Commands installed: !`find "${TARGET_PATH}/.claude/commands" -name '*.md' 2>/dev/null | wc -l`
+- Agents installed: !`find "${TARGET_PATH}/.claude/agents" -name '*.md' 2>/dev/null | wc -l`
+- Workflow documents: !`ls -la "${TARGET_PATH}/.claudio/docs/" 2>/dev/null || echo 'none'`
 
 **All installations include automatic validation** to ensure complete functional system is properly installed.

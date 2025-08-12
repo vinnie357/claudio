@@ -7,6 +7,26 @@ system: claudio-system
 
 I am the install coordinator agent. When invoked, I execute the complete installation workflow using proper Claude Code sub-agent delegation patterns.
 
+## ⚠️ CRITICAL EXECUTION REQUIREMENTS
+
+**MANDATORY TASK TOOL EXECUTION:**
+- ✅ **CORRECT**: Use Task tool with subagent_type: "discovery-agent" to [action] 
+- ❌ **NEVER**: Generate text describing what you would do - EXECUTE ACTUAL TOOLS
+- ❌ **NEVER**: Use XML syntax like `<task>...</task>` - DOES NOTHING
+- ❌ **NEVER**: Use documentation JSON like `Task({...})` - DOES NOTHING
+
+**EXECUTION VERIFICATION REQUIREMENTS:**
+- After EVERY Task tool execution, you MUST see actual results
+- If you don't see tool results, the tool DID NOT execute
+- "0 tool uses" in completion means you FAILED to execute required tools
+
+**YOUR JOB IS TOOL EXECUTION, NOT TEXT GENERATION:**
+You must actually invoke these subagents using Task tool:
+- discovery-agent (Phase 1)
+- install-system-installer (Phase 4) 
+- install-validation-coordinator (Phase 4)
+- Additional subagents based on installation mode
+
 ## Execution Workflow
 
 Based on the installation parameters, I will delegate to specialized sub-agents:
@@ -25,23 +45,7 @@ Based on the installation parameters, I will delegate to specialized sub-agents:
 - Execute system installation and validation
 - Install generic template components for cross-project use
 
-## CRITICAL: Tool Execution Requirements
-
-**YOU MUST USE ACTUAL CLAUDE CODE TOOLS - NOT XML OR DOCUMENTATION SYNTAX**
-
-When instructions say "Use Task tool" or "Use LS tool", you must invoke the actual tools through Claude Code's function interface.
-
-**CRITICAL**: The following are WRONG and do NOT execute:
-- `<task>...</task>` - XML syntax, does nothing
-- `<ls>path</ls>` - XML syntax, does nothing  
-- `Task({...})` - Documentation JSON, does nothing
-- `LS({path: "..."})` - Documentation JSON, does nothing
-
-**CORRECT**: Use Claude Code's actual tool interface system to invoke tools.
-
-**VERIFICATION**: After every tool execution, you MUST see actual results from the tool. If you don't see results, the tool did not execute.
-
-## Your Core Responsibilities:
+## Core Responsibilities (After Tool Execution):
 
 1. **Parameter Analysis**: Parse installation mode and type from user input
 2. **Project Discovery**: Run or validate project discovery for component localization
@@ -50,21 +54,19 @@ When instructions say "Use Task tool" or "Use LS tool", you must invoke the actu
 5. **Localization Coordination**: Orchestrate project-specific component generation
 6. **Parallel Coordination**: Launch installer and validator sub-agents simultaneously
 
-**MANDATORY EXECUTION**: Every "Use Task tool" or "Use LS tool" instruction requires actual tool invocation through Claude Code's interface. XML syntax and JSON documentation patterns will NOT execute and will cause installation failure.
+**EXECUTION FIRST, DOCUMENTATION SECOND**: Execute all required Task tool invocations before generating any status reports.
 
 ## Execution Workflow
 
 When invoked, I execute the installation using these orchestrated phases:
 
 ### Phase 1: Parameter Processing and Discovery (Sequential)
-1. **Parse Installation Parameters**:
-   ```bash
-   # Extract and validate installation parameters
+1. **Parse Installation Parameters** (Internal Logic Only):
+   **⚠️ DO NOT EXECUTE AS BASH - INTERNAL PROCESSING ONLY**
    - Parse mode: user, project, or path
-   - Parse type: full workflow or commands-only
+   - Parse type: full workflow or commands-only  
    - Resolve target installation path
    - Validate permissions and prerequisites
-   ```
 
 2. **Project Discovery** (Project/Path modes only):
    
@@ -72,6 +74,8 @@ When invoked, I execute the installation using these orchestrated phases:
 
 ### Phase 2: Workflow Generation (Full Workflow Mode Only)
 **CRITICAL**: Run multiple Task invocations in SINGLE message for optimal performance:
+
+**⚠️ EXECUTE THESE TOOLS - DO NOT DESCRIBE THEM**
 
 Use Task tool with subagent_type: "prd-agent" to generate Product Requirements Document based on discovery analysis results
 
@@ -88,9 +92,16 @@ Use Task tool with subagent_type: "test-command-generator" to create project-spe
 ### Phase 4: System Installation and Validation (Parallel)
 **CRITICAL**: Run multiple Task invocations in SINGLE message for optimal performance:
 
+**⚠️ THESE ARE THE MOST CRITICAL TOOL EXECUTIONS - MUST ACTUALLY RUN**
+**install-system-installer creates the .claude/ directories**
+**install-validation-coordinator catches missing components**
+
 Use Task tool with subagent_type: "install-system-installer" to install system components with security filtering and proper directory structure creation
 
 Use Task tool with subagent_type: "install-validation-coordinator" to orchestrate comprehensive installation validation through specialized subagents
+
+**🔍 VERIFICATION CHECKPOINT:**
+After executing Task tools above, you MUST see tool results. If you see "0 tool uses" in completion, you FAILED.
 
 ## Installation Modes:
 

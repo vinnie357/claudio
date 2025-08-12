@@ -14,13 +14,13 @@ Claudio is a comprehensive project analysis and planning system that transforms 
 ### Quick Reference
 Essential information you need right now:
 
-**🚨 CRITICAL: ALL agent names use lowercase-hyphen format:** `claudio:agent-name subagent`
+**🚨 CRITICAL: ALL agent names use lowercase-hyphen format:** `agent-name`
 
-**🚀 PERFORMANCE: Use parallel Task invocations when possible:** `Run multiple Task invocations in a SINGLE message`
+**🚀 PERFORMANCE: Use sub-agent chaining when possible:** `First use the X subagent to..., then use the Y subagent to...`
 
-**🔧 INTEGRATION: Subagents MUST use Task tool pattern:** `Use Task tool with subagent_type: "agent-name" to [action]`
+**🔧 INTEGRATION: Subagents MUST use Claude Code natural language pattern:** `Use the agent-name subagent to [action]`
 
-**⚠️ CRITICAL: NEVER wrap Task tool invocations in bash code blocks** - causes execution failures
+**⚠️ CRITICAL: NEVER use Task tool patterns for sub-agent invocation** - use natural language following Claude Code standards
 
 ## Core Components
 
@@ -187,38 +187,38 @@ Run multiple Task invocations in a SINGLE message:
 
 ## Subagent Command Invocation Pattern
 
-### **ALWAYS Use Task Tool for Subagent Commands**
+### **ALWAYS Use Claude Code Natural Language for Subagent Commands**
 
-**🔧 Critical Integration Pattern**: When subagents need to invoke other commands, they MUST use the Task tool pattern:
+**🔧 Critical Integration Pattern**: When subagents need to invoke other commands, they MUST use the Claude Code natural language pattern:
 
 ```
-Use Task tool with subagent_type: "target-agent-name" to [action] [context]
+Use the target-agent-name subagent to [action] [context]
 ```
 
-**⚠️ CRITICAL**: Task tool invocations must be plain text, NEVER wrapped in bash code blocks:
+**⚠️ CRITICAL**: Sub-agent invocations must use natural language, NEVER Task tool patterns:
 
 **✅ CORRECT:**
 ```
-Use Task tool with subagent_type: "research-specialist" to research topic from URL
+Use the research-specialist subagent to research topic from URL
 ```
 
-**❌ WRONG (causes bash execution failures):**
-```bash
+**❌ WRONG (outdated Task tool pattern):**
+```
 Use Task tool with subagent_type: "research-specialist" to research topic from URL
 ```
 
 ### Why This Pattern is Required
 
-- **Proper Tool Usage**: Subagents cannot execute slash commands directly
-- **System Reliability**: Prevents bash execution failures and tool errors
-- **Workflow Integration**: Maintains proper agent coordination and data flow
-- **Error Prevention**: Eliminates invalid command invocation attempts
+- **Claude Code Standards**: Follows native sub-agent invocation patterns
+- **System Reliability**: Uses Claude's built-in sub-agent coordination
+- **Natural Language**: More intuitive and maintainable than tool patterns
+- **Performance**: Better integration with Claude Code's agent system
 
 ### Command Invocation Examples
 
-**✅ CORRECT - Task Tool Pattern:**
+**✅ CORRECT - Natural Language Pattern:**
 ```markdown
-Use the Task tool with subagent_type: "research-specialist" to research workflow task patterns from https://www.atlassian.com/agile/project-management to create the required context documentation
+Use the research-specialist subagent to research workflow task patterns from https://www.atlassian.com/agile/project-management to create the required context documentation
 ```
 
 **❌ INCORRECT - Direct Command References:**
@@ -237,12 +237,12 @@ suggest using `/claudio:research workflow task https://www.atlassian.com/agile/p
 
 **🚨 MANDATORY**: All new subagents and localized subagents MUST follow this pattern:
 
-1. **Agent Creation**: Use Task tool pattern in all agent contexts
-2. **Localization**: Update existing agents to use Task tool pattern
-3. **Context References**: Replace command references with Task tool invocations
-4. **Validation**: Test all agent integrations use proper Task tool syntax
+1. **Agent Creation**: Use natural language sub-agent patterns in all agent contexts
+2. **Localization**: Update existing agents to use Claude Code sub-agent patterns
+3. **Context References**: Replace Task tool references with natural language invocations
+4. **Validation**: Test all agent integrations use proper Claude Code syntax
 
-**[→ See Task tool implementation examples in System Architecture](docs/system-architecture.md)**
+**[→ See sub-agent implementation examples in System Architecture](docs/system-architecture.md)**
 
 ## Graceful Context Handling
 

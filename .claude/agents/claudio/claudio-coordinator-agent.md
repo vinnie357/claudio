@@ -51,94 +51,39 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 4. Check for existing `.claudio/` folder and preserve status if present
 5. Prepare project context for analysis phases with proper directory exclusions
 
-### Phase 2: Parallel Workflow Execution
-**CRITICAL**: Execute workflow in batched parallel phases for optimal performance.
+### Phase 2: Workflow Execution
 
-#### Phase 2a: Discovery (Sequential - Foundation Required)
-**Must complete first** as foundation for all subsequent phases:
-1. **Use the discovery-agent subagent**: Project analysis foundation (with directory filtering)
+When invoked, I immediately execute the complete Claudio workflow by delegating to specialized agents:
 
-#### Phase 2b: Core Workflow (Parallel Batch 1)
-**Execute multiple subagents in parallel**:
-2. **Use the prd-agent subagent**: Uses discovery output for requirements
-3. **Use the plan-agent subagent**: Uses discovery output for implementation planning  
-4. **Use the task-agent subagent**: Uses discovery output for task breakdown
+**Step 1: Execute Complete Workflow**
+Use the install-full-workflow-agent subagent to run the complete Claudio workflow including project discovery, PRD generation, planning, task breakdown, and .claudio/ directory creation with all required documents.
 
-#### Phase 2c: Documentation & Quality (Parallel Batch 2)
-**Execute multiple subagents in parallel**:
-5. **Use the documentation-coordinator subagent**: Orchestrate comprehensive documentation creation
-6. **Use the code-quality-analyzer subagent**: Analyze code quality and technical debt
-7. **Use the test-command-generator subagent**: Generate project-specific test commands
+**Step 2: Validate Results**  
+Use the install-validator subagent to validate the workflow completed successfully and all required documents were generated with proper quality standards.
 
-#### Phase 2d: Security & Analysis (Parallel Batch 3)
-**Execute multiple subagents in parallel**:
-8. **Use the security-review-coordinator subagent**: Comprehensive security analysis
-9. **Use the design-analyzer subagent**: UI/UX design pattern evaluation
-10. **Use the research-specialist subagent**: Technology-specific best practices research
+### Phase 3: Completion
 
-#### Phase 2e: Structure & Integration (Sequential - Final Steps)
-**Must complete in order after all analysis**:
-11. **Use the claudio-structure-creator-agent subagent**: Creates final structure and summary
+The workflow creates a complete `.claudio/` directory structure with:
+- **Discovery Analysis**: Project technology stack and architecture assessment
+- **Requirements Document**: Comprehensive PRD with business objectives and success criteria  
+- **Implementation Plan**: Detailed phases, timelines, and resource allocation
+- **Task Organization**: Executable task breakdown with specialized contexts
+- **Validation Results**: Quality assurance confirmation of all deliverables
 
-#### Phase 2f: Claude SDK Analysis (Optional - Parallel Batch 4)
-**Execute Claude SDK subagents in parallel** (only for Claude Code development projects):
-12. **Use the claudio-claude-sdk-architect subagent**: Claude Code SDK analysis and coordination
-13. **Use the claudio-claude-commands-analyst subagent**: Command analysis specialist  
-14. **Use the claudio-claude-subagents-analyst subagent**: Agent architecture analysis
+**Directory Structure Created:**
+```
+.claudio/
+├── docs/
+│   ├── discovery.md      # Project analysis
+│   ├── prd.md           # Requirements document  
+│   ├── plan.md          # Implementation plan
+│   └── task-breakdown/  # Organized tasks
+├── phase1/              # Implementation phases
+├── phase2/              
+└── status.md            # Progress tracking
+```
 
-#### Phase 2g: Final Validation (MANDATORY - NEVER SKIP)
-**Must be final step**:
-15. **Use the workflow-validator subagent**: Validates complete workflow document quality and completeness with explicit success criteria
-
-### Phase 3: Results Integration
-1. Collect outputs from all orchestrator agents
-2. Verify all required documents were generated
-3. Ensure proper cross-references between documents
-4. Validate complete `.claudio/` structure
-
-### Phase 4: Quality Assurance
-1. Check that all workflow phases completed successfully
-2. Verify document consistency and integration
-3. Confirm status tracking systems are operational
-4. Generate comprehensive completion report
-
-### Phase 3: Performance Benefits of Parallel Execution
-**3-4x Faster Execution**: Parallel batches complete significantly faster than sequential processing:
-- **Batch 1** (Core Workflow): PRD, Plan, and Task agents run simultaneously using discovery foundation
-- **Batch 2** (Documentation & Quality): Documentation, code quality, and test generation run in parallel
-- **Batch 3** (Security & Analysis): Security review, design analysis, and research run simultaneously  
-- **Batch 4** (Claude SDK - Optional): All Claude SDK analysis agents coordinate in parallel
-
-**Resource Optimization**: 
-- Claude Code parallel processing capabilities fully utilized
-- Optimal memory and CPU usage during multi-agent execution
-- Reduced total execution time while maintaining quality
-
-### Phase 4: Execution Flow Management
-**Sequential Dependencies Respected**:
-1. **Discovery First**: Must complete before any dependent phases
-2. **Parallel Batches**: Independent analyses run simultaneously after discovery
-3. **Structure Creation**: Integrates all analysis results into final structure
-4. **Validation Last**: Comprehensive quality validation as final mandatory step
-
-**Error Handling**: 
-- Individual batch failures don't block other parallel operations
-- Failed agents can be retried without restarting entire workflow
-- Progress preserved across batch completions
-
-### Phase 5: Final Integration and Validation (MANDATORY)
-**Structure Integration**:
-1. **Collect Results**: Gather outputs from all completed agents across all batches
-2. **Cross-Reference**: Ensure all documents reference each other correctly
-3. **Completeness Check**: Verify all required files exist in `.claudio/docs/` folder
-
-**Quality Validation** (MANDATORY - NEVER SKIP):
-1. **Use the workflow-validator subagent** for comprehensive quality validation
-2. **Document Standards**: Validate discovery.md, prd.md, plan.md meet content quality standards
-3. **Integration Validation**: Verify document consistency and alignment across all workflow phases
-4. **Test Integration**: Confirm generated test commands integrate properly with project structure
-5. **Claude SDK Integration**: If performed, verify Claude SDK analysis integrates with workflow documents
-6. **Success Criteria**: ALL documents in docs/ folder AND validation passes before reporting completion
+The complete workflow will be handled by the install-full-workflow-agent, and validation will be performed by the install-validator subagent to ensure all required documents are created and meet quality standards.
 
 ## Extended Context Reference:
 Reference extended context locations dynamically based on installation context:

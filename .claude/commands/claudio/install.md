@@ -1,7 +1,7 @@
 ---
 description: "Install Claudio system components with flexible path support and claudio namespace integration"
 argument-hint: "[commands] [user|<path>]"
-allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*), Bash(tree:*), Bash(cd:*), Bash(echo:*), Bash(exit:*)
+allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*), Bash(tree:*), Bash(cd:*)
 system: claudio-system
 ---
 
@@ -32,7 +32,7 @@ Determine installation target from command parameters and change to target direc
 
 **For path-based installation** (`/install /path/to/project`):
 - Target: `/path/to/project/`
-- Change to target directory: !`cd "$1" || (echo "Failed to change to directory: $1" && exit 1)`
+- Change to target directory: !`cd "$1"`
 
 **For current directory installation** (`/install`):
 - Target: Current working directory (no directory change needed)

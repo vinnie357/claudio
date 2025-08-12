@@ -26,11 +26,14 @@ Install complete Claudio system through intelligent project localization to diff
 - `/install /path/to/code` - Full workflow → validate workflow → install → validate installation
 - `/install commands /path/to/code` - Discovery → validate discovery → install complete system → validate installation
 
-Use the claudio:install-coordinator-agent subagent to orchestrate the complete installation process with:
-- Project discovery and analysis
-- Complete system component generation (commands + agents + prompts)
-- Multi-point validation (workflow validation + installation validation)
+Use the claudio:install-coordinator-agent subagent to orchestrate the complete installation process at the specified target path with:
+- Target path resolution and validation
+- Project discovery and analysis at target location
+- Complete system component generation (commands + agents + prompts) at target path
+- Multi-point validation (workflow validation + installation validation) at target location
 - Comprehensive quality assurance and reporting
+
+**CRITICAL**: The coordinator agent must install to the command parameter path, never to subdirectories within it. For `/install /path/to/project`, installation must create `/path/to/project/.claude/` and `/path/to/project/.claudio/`, never `/path/to/project/claudio/.claude/`.
 
 ## Post-Installation Verification
 

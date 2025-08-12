@@ -1,7 +1,7 @@
 ---
 description: "Install Claudio system components with flexible path support and claudio namespace integration"
 argument-hint: "[commands] [user|<path>]"
-allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*), Bash(tree:*)
+allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*), Bash(tree:*), Bash(cd:*)
 system: claudio-system
 ---
 

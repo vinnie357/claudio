@@ -98,7 +98,7 @@ argument-hint: "{argument_pattern}"
 
 Use the claudio:{name}-executor subagent to {execution_description}.
 
-**Reference**: Uses `.claude/agents/claudio/prompts/{name}/claude.md` for {context_description}.
+**Reference**: Uses `.claude/agents/claudio/extended_context/{category}/{name}/overview.md` for {context_description}.
 ```
 
 #### Sub-Agent Generation
@@ -132,7 +132,7 @@ Your role is to {role_summary_from_research}.
 ```
 
 #### Extended Context Generation
-Generate `agents/claudio/prompts/{name}/claude.md`:
+Generate `agents/claudio/extended_context/{category}/{name}/overview.md`:
 
 ```markdown
 # {Command Name} - Extended Context and Implementation Guide
@@ -188,7 +188,7 @@ Generate `agents/claudio/prompts/{name}/claude.md`:
    - Create target directories if needed
    - Install command file in `commands/claudio/{name}.md`
    - Install sub-agent in `agents/claudio/{name}-executor.md`
-   - Install extended context in `agents/claudio/prompts/{name}/claude.md`
+   - Install extended context in `agents/claudio/extended_context/{category}/{name}/overview.md`
 
 2. **Workflow Integration Installation**:
    - Update coordinator files with new command integration

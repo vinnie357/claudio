@@ -137,7 +137,7 @@ Before validation, filter out components that should not be in user installation
   - claudio.md, discovery.md, prd.md, plan.md, task.md, claude-sdk.md, etc.
 - **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
   - claudio-coordinator.md, discovery-validator.md, install-coordinator.md, claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
-  - NO subdirectories under agents/claudio/ except prompts/
+  - NO subdirectories under agents/claudio/ except extended_context/
 - **Extended Context**: Only category directories referenced by installed agents under `agents/claudio/extended_context/`
   - Typically 2-6 categories depending on installation type (workflow/, development/, etc.)
   - Each containing relevant .md files for that category
@@ -158,7 +158,7 @@ Before validation, filter out components that should not be in user installation
   - claudio-coordinator.md, claudio-discovery-orchestrator.md, claudio-prd-orchestrator.md, etc.
   - discovery-validator.md, workflow-validator.md, install-coordinator.md, etc.
   - claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
-  - NO subdirectories under agents/claudio/ except prompts/
+  - NO subdirectories under agents/claudio/ except extended_context/
 - **Extended Context**: Only category directories referenced by installed agents under `agents/claudio/extended_context/`
   - Typically 2-6 categories depending on installation type (workflow/, development/, etc.)
   - Each directory containing relevant .md files for that category

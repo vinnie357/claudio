@@ -9,6 +9,25 @@ You are the install-coordinator-agent. **Your purpose is installation orchestrat
 
 **⚠️ CRITICAL PATH RULE: NEVER use or validate claudio/ directory - it's the source, not the target**
 
-When invoked, I immediately execute the complete installation workflow by chaining specialized subagents:
+## Execution Process:
 
-First use the discovery-agent subagent to analyze target project structure, technology stack, architecture patterns, and capabilities for intelligent component localization, then use the prd-agent subagent to create comprehensive project requirements document based on discovery analysis findings and identified enhancement opportunities, then use the plan-agent subagent to create detailed implementation plan with phases, time estimates, and resource allocation based on requirements, then use the task-agent subagent to break down implementation plan into executable tasks with specialized contexts and acceptance criteria, then use the install-system-installer subagent to install complete .claude/ system with commands, agents, and extended context localized for the target project, then use the install-validator subagent to validate installation completeness and verify file integrity, and finally use the install-summary-agent subagent to generate comprehensive user-friendly installation summary and guidance.
+When invoked, I coordinate the complete installation workflow through parallel Task tool execution:
+
+### Phase 1: Project Analysis (Sequential)
+Run multiple Task invocations in a SINGLE message:
+- Task with discovery-agent to analyze project structure and create discovery.md for localization
+
+### Phase 2: Workflow Generation (Parallel Batch)
+After discovery completes, run multiple Task invocations in a SINGLE message:
+- Task with prd-agent using discovery results to create comprehensive requirements
+- Task with plan-agent using discovery results to create implementation plan
+- Task with task-agent using discovery results to create task structure
+
+### Phase 3: System Installation (Sequential)
+Run multiple Task invocations in a SINGLE message:
+- Task with install-system-installer to install .claude/ system with project-specific localization
+
+### Phase 4: Validation and Summary (Parallel Batch)
+Run multiple Task invocations in a SINGLE message:
+- Task with install-validator to validate installation completeness
+- Task with install-summary-agent to generate user-friendly summary

@@ -219,7 +219,7 @@ Before installation, check each component's frontmatter for `system: claudio-sys
    - `<target>/.claude/`
    - `<target>/.claude/commands/claudio/`
    - `<target>/.claude/agents/claudio/`
-   - `<target>/.claude/agents/claudio/prompts/`
+   - `<target>/.claude/agents/claudio/extended_context/`
 
 2. **Permission Validation**:
    - Check write permissions for target directories
@@ -234,8 +234,8 @@ Direct copying of generic template files to `~/.claude/`:
   - discovery.md, prd.md, plan.md, task.md, etc. (generic versions)
 - **Agents**: Copy all agent templates to `~/.claude/agents/claudio/`
   - All coordinator agents and sub-agents (generic versions)
-- **Prompts**: Copy all prompt templates to `~/.claude/agents/claudio/prompts/`
-  - Generic prompt contexts for universal applicability
+- **Extended Context**: Copy all extended context to `~/.claude/agents/claudio/extended_context/`
+  - Generic context files for universal applicability
 
 #### Project/Path Mode - Localized Component Installation
 Generate project-specific components based on templates and discovery:
@@ -271,21 +271,20 @@ Generate project-specific components based on templates and discovery:
   - claudio-claude-commands-analyst.md (project-specific command analysis)
   - claudio-claude-subagents-analyst.md (project-specific agent analysis)
   - All agents as INDIVIDUAL .md files directly under agents/claudio/
-- **Prompts Localization**: Install to `<target>/.claude/agents/claudio/prompts/`
-  - claudio/ → claude.md (project workflow integration)
-  - discovery/ → claude.md (domain-specific analysis)
-  - prd/ → claude.md (project requirements context)
-  - plan/ → claude.md (project planning context)
-  - task/ → claude.md (project task context)
-  - documentation/ → claude.md (project documentation context)
-  - research/ → claude.md (domain research context)
-  - design/ → claude.md (project design context)
-  - code-quality/ → claude.md (project quality context)
-  - upgrade/ → claude.md (project upgrade context)
-  - test-generation/ → claude.md (project test context)
+- **Extended Context Localization**: Install to `<target>/.claude/agents/claudio/extended_context/`
+  - workflow/discovery/ → overview.md (domain-specific analysis)
+  - workflow/prd/ → overview.md (project requirements context)
+  - workflow/planning/ → overview.md (project planning context)
+  - workflow/task/ → overview.md (project task context)
+  - documentation/ → overview.md (project documentation context)
+  - research/ → overview.md (domain research context)
+  - development/design/ → overview.md (project design context)
+  - development/code_quality/ → overview.md (project quality context)
+  - infrastructure/upgrade/ → overview.md (project upgrade context)
+  - development/testing/ → overview.md (project test context)
   - command-analysis/ → (evaluation frameworks, best practices, integration patterns, troubleshooting)
   - agent-analysis/ → (architecture patterns, context integration, evaluation framework, troubleshooting)
-  - Each prompt as DIRECTORY under prompts/ containing claude.md or extended context files
+  - Each context as CATEGORY/TOPIC structure under extended_context/ containing overview.md and troubleshooting.md files
 
 ### Phase 3: Mode-Specific Customization and Namespace Updates
 
@@ -313,22 +312,22 @@ Use the claudio:discovery agent customized for [project technology]...
 Update prompt references based on installation mode:
 ```markdown
 # User mode installation
-Reference: ~/.claude/agents/claudio/prompts/<prompt>/<prompt>.md
+Reference: ~/.claude/agents/claudio/extended_context/<category>/<topic>/overview.md
 
 # Project/Path mode installation
-Reference: ./.claude/agents/claudio/prompts/<prompt>/<prompt>.md
+Reference: ./.claude/agents/claudio/extended_context/<category>/<topic>/overview.md
 # Project/Path mode includes project-specific customizations
 ```
 
 ## Extended Context Reference Logic:
-When installed agents need to reference their extended prompts, include dynamic location logic:
+When installed agents need to reference their extended context, include dynamic location logic:
 
 ```markdown
 ## Extended Context Reference:
-Reference prompt locations based on installation context:
-- Check if `./.claude/agents/claudio/prompts/<prompt>/claude.md` exists first
-- If not found, reference `~/.claude/agents/claudio/prompts/<prompt>/claude.md`
-- Use whichever location is available
+Reference extended context locations based on installation context:
+- Check if `./.claude/agents/claudio/extended_context/<category>/<topic>/overview.md` exists first
+- If not found, reference `~/.claude/agents/claudio/extended_context/<category>/<topic>/overview.md`
+- Use whichever location is available for extended context
 ```
 
 ## Mode-Specific Component Operations:
@@ -338,12 +337,12 @@ Reference prompt locations based on installation context:
 # User mode
 mkdir -p ~/.claude/commands/claudio
 mkdir -p ~/.claude/agents/claudio
-mkdir -p ~/.claude/agents/claudio/prompts
+mkdir -p ~/.claude/agents/claudio/extended_context
 
 # Project/Path mode
 mkdir -p <target>/.claude/commands/claudio
 mkdir -p <target>/.claude/agents/claudio
-mkdir -p <target>/.claude/agents/claudio/prompts
+mkdir -p <target>/.claude/agents/claudio/extended_context
 ```
 
 ### User Mode - Direct Template Copying
@@ -351,7 +350,7 @@ mkdir -p <target>/.claude/agents/claudio/prompts
 # Copy generic templates to user installation
 cp source/.claude/commands/*.md ~/.claude/commands/claudio/
 cp source/.claude/agents/*.md ~/.claude/agents/claudio/
-cp -r source/prompts/* ~/.claude/agents/claudio/prompts/
+cp -r source/extended_context/* ~/.claude/agents/claudio/extended_context/
 ```
 
 ### Project/Path Mode - Localized Component Generation
@@ -363,8 +362,8 @@ generate_localized_command(discovery_data, template) -> <target>/.claude/command
 # Agents: Individual agent files directly under agents/claudio/ (FLAT structure)
 generate_localized_agent(discovery_data, template) -> <target>/.claude/agents/claudio/agent-name.md
 
-# Prompts: Individual prompt directories under agents/claudio/prompts/
-generate_localized_prompts(discovery_data, template) -> <target>/.claude/agents/claudio/prompts/prompt_name/claude.md
+# Extended Context: Category/topic structure under agents/claudio/extended_context/
+generate_localized_context(discovery_data, template) -> <target>/.claude/agents/claudio/extended_context/category/topic/overview.md
 ```
 
 ### Permission Setting
@@ -403,7 +402,7 @@ chmod -R 755 <target>/.claude/
 ### Directories Created
 - <target>/.claude/commands/claudio/
 - <target>/.claude/agents/claudio/
-- <target>/.claude/agents/claudio/prompts/
+- <target>/.claude/agents/claudio/extended_context/
 
 ### Components Installed
 #### Commands (X files)

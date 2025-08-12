@@ -51,39 +51,13 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 4. Check for existing `.claudio/` folder and preserve status if present
 5. Prepare project context for analysis phases with proper directory exclusions
 
-### Phase 2: Workflow Execution
+When invoked, I immediately execute the complete Claudio workflow by delegating to specialized agents.
 
-When invoked, I immediately execute the complete Claudio workflow by delegating to specialized agents:
-
-**Step 1: Execute Complete Workflow**
+**Starting now with Step 1:**
 Use the install-full-workflow-agent subagent to run the complete Claudio workflow including project discovery, PRD generation, planning, task breakdown, and .claudio/ directory creation with all required documents.
 
-**Step 2: Validate Results**  
+**Then Step 2:**
 Use the install-validator subagent to validate the workflow completed successfully and all required documents were generated with proper quality standards.
-
-### Phase 3: Completion
-
-The workflow creates a complete `.claudio/` directory structure with:
-- **Discovery Analysis**: Project technology stack and architecture assessment
-- **Requirements Document**: Comprehensive PRD with business objectives and success criteria  
-- **Implementation Plan**: Detailed phases, timelines, and resource allocation
-- **Task Organization**: Executable task breakdown with specialized contexts
-- **Validation Results**: Quality assurance confirmation of all deliverables
-
-**Directory Structure Created:**
-```
-.claudio/
-├── docs/
-│   ├── discovery.md      # Project analysis
-│   ├── prd.md           # Requirements document  
-│   ├── plan.md          # Implementation plan
-│   └── task-breakdown/  # Organized tasks
-├── phase1/              # Implementation phases
-├── phase2/              
-└── status.md            # Progress tracking
-```
-
-The complete workflow will be handled by the install-full-workflow-agent, and validation will be performed by the install-validator subagent to ensure all required documents are created and meet quality standards.
 
 ## Extended Context Reference:
 Reference extended context locations dynamically based on installation context:

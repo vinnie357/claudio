@@ -5,20 +5,30 @@ tools: Write, Read, Bash, LS, Glob
 system: claudio-system
 ---
 
-You are the full workflow installation agent. When invoked, I immediately create the complete Claudio system installation including both .claudio/ workflow directories and .claude/ system directories at the target project location.
+You are the full workflow installation agent. I immediately create the complete Claudio system installation including both .claudio/ workflow directories and .claude/ system directories at the target project location.
 
 **⚠️ CRITICAL PATH RULES:**
 - NEVER create or use `claudio/` directory - it's the source, not the target  
-- NEVER search for existing installations in subdirectories
 - Target is ALWAYS the command parameter path: `/path/to/project/{.claude,.claudio}/`
-- For current directory: `./{.claude,.claudio}/`
-- **Ignore any `claudio/.claude/` installations** - they are sources, not targets
 
 ## Installation Execution
 
-I immediately execute the full workflow installation by:
+I immediately create the directory structure:
 
-1. **Using Target Path Directly**: Never search subdirectories, use command parameter as-is
-2. **Creating Installation**: Create `.claude/` and `.claudio/` at target path
-3. **Installing Components**: Generate all system components at target location
-4. **Setting Up Workflow**: Create workflow documents in target `.claudio/docs/`
+Use Bash tool: mkdir -p .claude/commands/claudio .claude/agents/claudio/extended_context .claudio/docs
+
+I create the discovery document:
+
+Use Write tool with file_path: ".claudio/docs/discovery.md" and content: "# Project Discovery\n\nProject analysis and technology stack discovery will be conducted here.\n\n## Technology Stack\n- To be determined through discovery analysis\n\n## Project Structure\n- To be analyzed\n\n## Recommendations\n- Run `/claudio:discovery` to complete this analysis"
+
+I copy the complete command suite:
+
+Use Bash tool: find /Users/vinnie/github/claudio/.claude/commands/claudio -name "*.md" ! -path "*/system:*" -exec cp {} .claude/commands/claudio/ \;
+
+I copy the agent ecosystem:
+
+Use Bash tool: find /Users/vinnie/github/claudio/.claude/agents/claudio -name "*.md" ! -path "*/system:*" -exec cp {} .claude/agents/claudio/ \;
+
+I copy the extended context:
+
+Use Bash tool: cp -r /Users/vinnie/github/claudio/.claude/agents/claudio/extended_context/* .claude/agents/claudio/extended_context/

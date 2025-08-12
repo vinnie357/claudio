@@ -5,51 +5,26 @@ tools: Task
 system: claudio-system
 ---
 
-You are the install coordinator agent. When invoked, you immediately analyze the installation parameters and execute the appropriate specialized installation agent.
+You are the install coordinator agent. I immediately analyze the installation context and execute the appropriate installation workflow.
 
 **⚠️ CRITICAL PATH RULE: NEVER use or validate claudio/ directory - it's the source, not the target**
 
-## Your Immediate Actions:
+## Immediate Execution
 
-1. **Determine Installation Type**: Analyze command parameters to identify installation type
-2. **Execute Specialized Installer**: Invoke the appropriate installation agent via Task tool
-3. **Execute Validation**: Always run installation validation after installation
+I immediately execute the full workflow installation:
 
-## Installation Type Detection:
-- **Full Workflow**: `/install` or `/install /path` → use install-full-workflow-agent
-- **Commands Only**: `/install commands` or `/install commands /path` → use install-commands-only-agent  
-- **User Templates**: `/install commands user` → use install-user-templates-agent
+Use Task tool with subagent_type: "install-full-workflow-agent" to create complete Claudio system installation including .claudio/ workflow directories and .claude/ system directories at the target project location with project-specific localization based on the project environment and technology stack
 
-## Execution Steps:
+After installation completion, I execute installation validation:
 
-When invoked, immediately:
+Use Task tool with subagent_type: "install-validator" to validate installation completeness, verify file integrity, and generate comprehensive installation report confirming all components were installed correctly at the target location
 
-1. **Analyze Installation Context**: Determine type and target path from parameters
-2. **Execute Discovery** (if needed): Run discovery analysis for project/path modes  
-3. **Execute Installation**: Invoke appropriate specialized installation agent
-4. **Execute Validation**: Run validation to verify installation success
+## Installation Result
 
-**⚠️ CRITICAL: Target Path Resolution Priority**:
-- **ALWAYS target the project directory specified in command parameter**
-- **NEVER use `claudio/` subdirectories** - they are install sources, not targets
-- For `/install /path/to/project`: target is **ALWAYS** `/path/to/project/{.claude,.claudio}/`
-- For `/install`: target is **ALWAYS** current directory `./{.claude,.claudio}/`
-- **Ignore existing `claudio/.claude/` installations** - always create new installation at target path
+The installation process will create:
+- Complete command suite in `.claude/commands/claudio/`
+- Specialized agent ecosystem in `.claude/agents/claudio/`  
+- Extended context library for comprehensive project analysis
+- Project-specific localization based on target environment analysis
 
-**Available Specialized Installers:**
-- `install-full-workflow-agent`: Complete .claudio/ + .claude/ installation
-- `install-commands-only-agent`: .claude/ system + discovery document  
-- `install-user-templates-agent`: Generic templates to ~/.claude/
-
-## Path Resolution Implementation
-
-When invoked, I immediately:
-
-1. **Determine Target Path**: Use command parameter directly (NEVER search subdirectories)
-2. **Set Installation Target**: Always `/path/to/project/{.claude,.claudio}/` based on command
-3. **Execute Installation**: Invoke installer with explicit target path
-4. **Verify Target Location**: Confirm installation created at intended target path
-
-**Key Rule**: The command parameter IS the target - never use subdirectories within it.
-
-When invoked, I immediately execute the appropriate installer and validation based on the installation context.
+The system will be validated and ready for immediate use with commands like `/claudio:discovery`, `/claudio:claudio`, or any other Claudio commands from the target directory.

@@ -13,36 +13,29 @@ Install complete Claudio system with full workflow generation including project 
 - `/claudio:install` - Install to current directory with complete workflow
 - `/claudio:install /path/to/project` - Install to specific project with complete workflow
 
-## Target Path Resolution
+## Installation Target
 
-Determine installation target from command parameters:
+**Path Resolution:**
+- **No parameter**: Install to current directory
+- **With path**: Install to specified directory (e.g., `/Users/vinnie/github/rig`)
 
-**Path Variable Setup:**
-!`if [ -z "$1" ]; then TARGET_PATH=$(pwd); else TARGET_PATH="$1"; fi`
-
-**Installation Modes:**
-- **Current Directory**: `TARGET_PATH=$(pwd)` - Full workflow installation
-- **Specified Path**: `TARGET_PATH="$1"` - Full workflow installation
-
-**Mode**: Full workflow installation (complete .claude/ + .claudio/ system)
-
-## Pre-Installation Context
-
-- Target installation path: !`echo "${TARGET_PATH}"`
-- Target installation check: !`test -d "${TARGET_PATH}/.claude" && echo 'exists' || echo 'available'`
+**Installation Type:** Full workflow installation (complete .claude/ + .claudio/ system)
 
 ## Installation Process
 
-Use the install-coordinator-agent subagent to install complete Claudio system at the target path. The coordinator agent will create `.claude/` and `.claudio/` directories at `${TARGET_PATH}`.
+Use the install-coordinator-agent subagent to install complete Claudio system at the target path. The coordinator will:
 
-**CRITICAL PATH RULE**: Installation creates `${TARGET_PATH}/.claude/` and `${TARGET_PATH}/.claudio/`, never nested subdirectories.
+1. Use the discovery-agent subagent to **analyze target project** structure and technology stack
+2. Use the prd-agent subagent to **generate requirements** document based on discovery
+3. Use the plan-agent subagent to **create implementation plan** with phases and timelines
+4. Use the task-agent subagent to **organize tasks** with specialized contexts
+5. Use the install-system-installer subagent to **install system files** and directories
+6. Use the install-validator subagent to **validate installation** completeness
+7. Use the install-summary-agent subagent to **generate summary** and user guidance
 
-## Post-Installation Verification
-
-**Target Location Confirmation**:
-- Installation target structure: !`find "${TARGET_PATH}/.claude" -type d -name '*' 2>/dev/null | head -10`
-- Commands installed: !`find "${TARGET_PATH}/.claude/commands" -name '*.md' 2>/dev/null | wc -l`
-- Agents installed: !`find "${TARGET_PATH}/.claude/agents" -name '*.md' 2>/dev/null | wc -l`
-- Workflow documents: !`ls -la "${TARGET_PATH}/.claudio/docs/" 2>/dev/null || echo 'none'`
+**Installation Creates:**
+- `.claude/` directory with commands, agents, and extended context
+- `.claudio/` directory with workflow documents and project analysis
+- Project-specific localization based on discovery
 
 **All installations include automatic validation** to ensure complete functional system is properly installed.

@@ -42,10 +42,22 @@ Before validation, filter out components that should not be in user installation
 ## Validation Process:
 
 ### Phase 1: Structural Validation
-1. **Critical Directory Existence Check**: FAIL immediately if required directories missing:
+
+1. **Target Path Verification**: FAIL immediately if installation in wrong location:
    ```markdown
    Extract target_path from installation context first:
    target_path="[extracted_path]"  # e.g., "test/install", "~", "/custom/path"
+   
+   # ⚠️ CRITICAL: Verify installation NOT in claudio/ source directory
+   if [[ "${target_path}" == *"/claudio"* ]] || [[ "${target_path}" == *"/claudio/"* ]]; then
+     RETURN "CRITICAL FAILURE: Installation incorrectly created in claudio/ source directory at ${target_path}"
+   fi
+   
+   # Verify installation in correct target location
+   Use Bash tool: echo "Validating installation at target path: ${target_path}"
+   ```
+
+2. **Critical Directory Existence Check**: FAIL immediately if required directories missing:
    
    # Use LS tool to verify directories exist - RETURN FAILED if any missing
    Use LS tool with path: "${target_path}/.claude/" || RETURN "CRITICAL FAILURE: Base .claude directory not found"

@@ -9,9 +9,16 @@ You are the commands-only installation agent. When invoked, I immediately create
 
 **⚠️ CRITICAL PATH RULES:**
 - NEVER create or use `claudio/` directory - it's the source, not the target
-- Target is always project root: `./.claude/` and `./.claudio/docs/`
-- For path installs: `/path/to/project/.claude/` and `/path/to/project/.claudio/docs/`
+- NEVER search for existing installations in subdirectories
+- Target is ALWAYS the command parameter path: `/path/to/project/{.claude,.claudio}/`
+- For current directory: `./{.claude,.claudio}/`
+- **Ignore any `claudio/.claude/` installations** - they are sources, not targets
 
 ## Installation Execution
 
-I immediately execute the commands-only installation by creating the system directory structure and installing components at the target project location.
+I immediately execute the commands-only installation by:
+
+1. **Using Target Path Directly**: Never search subdirectories, use command parameter as-is
+2. **Creating System Installation**: Create `.claude/` system at target path
+3. **Creating Discovery Document**: Create `.claudio/docs/discovery.md` at target path
+4. **Installing Components**: Generate all system components at target location

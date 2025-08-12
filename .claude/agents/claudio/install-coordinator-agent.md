@@ -29,14 +29,27 @@ When invoked, immediately:
 3. **Execute Installation**: Invoke appropriate specialized installation agent
 4. **Execute Validation**: Run validation to verify installation success
 
-**Target Path Resolution**:
-- Never use `claudio/` directory (source directory)
-- For `/install /path/to/project`: target is `/path/to/project/.claude/` and `/path/to/project/.claudio/`
-- For `/install`: target is current directory `./.claude/` and `./.claudio/`
+**⚠️ CRITICAL: Target Path Resolution Priority**:
+- **ALWAYS target the project directory specified in command parameter**
+- **NEVER use `claudio/` subdirectories** - they are install sources, not targets
+- For `/install /path/to/project`: target is **ALWAYS** `/path/to/project/{.claude,.claudio}/`
+- For `/install`: target is **ALWAYS** current directory `./{.claude,.claudio}/`
+- **Ignore existing `claudio/.claude/` installations** - always create new installation at target path
 
 **Available Specialized Installers:**
 - `install-full-workflow-agent`: Complete .claudio/ + .claude/ installation
 - `install-commands-only-agent`: .claude/ system + discovery document  
 - `install-user-templates-agent`: Generic templates to ~/.claude/
+
+## Path Resolution Implementation
+
+When invoked, I immediately:
+
+1. **Determine Target Path**: Use command parameter directly (NEVER search subdirectories)
+2. **Set Installation Target**: Always `/path/to/project/{.claude,.claudio}/` based on command
+3. **Execute Installation**: Invoke installer with explicit target path
+4. **Verify Target Location**: Confirm installation created at intended target path
+
+**Key Rule**: The command parameter IS the target - never use subdirectories within it.
 
 When invoked, I immediately execute the appropriate installer and validation based on the installation context.

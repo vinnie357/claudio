@@ -1274,6 +1274,11 @@ the install-coordinator-agent , will be provided arguments by the /claudio:insta
 the most recent install command logs: "[Pasted text #1 +40 lines]" its clear that the 
 install-coordinator-agent is validating the `claudio` directory and not the `/path/to/projet/` directory we must never use the `claudio` directory to validate, when the install command is invoked targeting a project it is responsible for `/path/to/project{.claudio,.claude}` never `claudio` as this is the source consider it a system tool in this context think 
 
+review the upgrade-orchestrator-agent, and ensure it is also only working on validating the `claudio` 
+  directory and not the `/path/to/projet/` directory we must never use the `claudio` directory to validate, 
+  when the install command is invoked targeting a project it is responsible for 
+  `/path/to/project{.claudio,.claude}` never `claudio` as this is the source consider it a system tool in this
+   context think
 
 #
 # todo:

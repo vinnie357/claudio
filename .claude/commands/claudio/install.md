@@ -34,6 +34,8 @@ Use the claudio:install-coordinator-agent subagent to orchestrate the complete i
 
 ## Post-Installation Verification
 
+**Target Location Confirmation**:
+- Target directory contents: !`ls -la {target}/ | grep -E '\.(claude|claudio)' || echo 'Installation directories not found at target'`
 - Installation target structure: !`find {target}/.claude -type d -name '*' 2>/dev/null | head -10`
 - Commands installed: !`find {target}/.claude/commands -name '*.md' 2>/dev/null | wc -l`
 - Agents installed: !`find {target}/.claude/agents -name '*.md' 2>/dev/null | wc -l`

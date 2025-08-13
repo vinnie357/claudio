@@ -51,19 +51,25 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 4. Check for existing `.claudio/` folder and preserve status if present
 5. Prepare project context for analysis phases with proper directory exclusions
 
-## Immediate Execution:
+## Workflow Coordination:
 
-**I immediately begin the Claudio workflow execution by using Task tools:**
+### Phase 1: Project Discovery
+Launch the following sub-agent using the Task tool:
+1. **discovery-agent**: Analyze project structure, technology stack, and capabilities
 
-**Step 1**: I use the Task tool with discovery-agent to analyze the project structure and create discovery.md document.
+### Phase 2: Core Workflow Generation (Parallel Execution)
+After discovery completes, launch the following sub-agents in parallel using the Task tool:
+2. **prd-agent**: Transform discovery into business requirements and specifications  
+3. **plan-agent**: Create detailed implementation plan with phases and time estimates
+4. **task-agent**: Break down plan into executable tasks with specialized contexts
 
-**Step 2**: After discovery completes, I run multiple Task invocations in a SINGLE message with prd-agent, plan-agent, and task-agent to create requirements, planning, and task organization based on the discovery results.
+### Phase 3: Structure Finalization
+Launch the following sub-agent using the Task tool:
+5. **claudio-structure-creator-agent**: Finalize .claudio/ structure and create summary documentation
 
-**Step 3**: I use the Task tool with claudio-structure-creator-agent to finalize the .claudio/ folder structure and create the summary document.
-
-**Step 4**: I use the Task tool with workflow-validator to validate that all documents were created and meet quality standards.
-
-**Execution starts now using actual Task tools.**
+### Phase 4: Quality Validation
+Launch the following sub-agent using the Task tool:
+6. **workflow-validator**: Validate all documents meet quality standards and workflow requirements
 
 ## Extended Context Reference:
 Reference extended context locations dynamically based on installation context:

@@ -27,21 +27,11 @@ Claudio Command System (20 Commands)
 │   └── /claudio:task → task-agent [LEAF]
 │
 ├── Installation & Management (2)
-│   ├── /claudio:install → install-coordinator-agent
-│   │   ├── discovery-agent (conditional)
-│   │   ├── prd-agent (full workflow only)
-│   │   ├── plan-agent (full workflow only)
-│   │   ├── task-agent (full workflow only)
-│   │   ├── workflow-validator (full workflow only)
-│   │   ├── test-command-generator (project/path modes)
-│   │   ├── install-system-installer
-│   │   └── install-validation-coordinator → [5 specialized validators]
-│   │       ├── extended-context-dependency-validator
-│   │       ├── orchestrator-integration-validator
-│   │       ├── installation-mode-validator
-│   │       ├── extended-context-content-validator
-│   │       └── command-agent-integration-validator
-│   │   └── [Total: 8 subagents (validation coordinator orchestrates 5 specialists), varies by mode]
+│   ├── /claudio:install → install-full-workflow-agent
+│   │   ├── discovery-agent (immediate execution)
+│   │   ├── install-system-installer (generates localized components)
+│   │   └── initial workflow structure creation
+│   │   └── [Total: 2 subagents, direct execution pattern]
 │   │
 │   └── /claudio:upgrade → upgrade-orchestrator-agent
 │       ├── upgrade-discovery-analyzer
@@ -178,7 +168,7 @@ This ensures extended_context creation matches actual subagent requirements rath
 - research-specialist (research/)
 
 ### infrastructure/
-- install-coordinator-agent (infrastructure/installation/)
+- install-full-workflow-agent (infrastructure/installation/)
 - upgrade-orchestrator-agent (infrastructure/upgrade/)
 
 ### command-analysis/

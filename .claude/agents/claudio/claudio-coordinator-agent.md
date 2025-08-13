@@ -51,27 +51,19 @@ You are the claudio coordinator agent that manages the complete Claudio workflow
 4. Check for existing `.claudio/` folder and preserve status if present
 5. Prepare project context for analysis phases with proper directory exclusions
 
-## Execution Process:
+## Immediate Execution:
 
-When invoked, I coordinate the complete Claudio workflow through the following parallel execution pattern:
+**I immediately begin the Claudio workflow execution by using Task tools:**
 
-### Phase 1: Foundation (Sequential - Required)
-Run multiple Task invocations in a SINGLE message:
-- Task with discovery-agent to analyze project structure and create discovery.md
+**Step 1**: I use the Task tool with discovery-agent to analyze the project structure and create discovery.md document.
 
-### Phase 2: Core Workflow (Parallel Batch)  
-After discovery completes, run multiple Task invocations in a SINGLE message:
-- Task with prd-agent using discovery results to create prd.md
-- Task with plan-agent using discovery results to create plan.md  
-- Task with task-agent using discovery results to create task structure
+**Step 2**: After discovery completes, I run multiple Task invocations in a SINGLE message with prd-agent, plan-agent, and task-agent to create requirements, planning, and task organization based on the discovery results.
 
-### Phase 3: Structure Integration (Sequential)
-Run multiple Task invocations in a SINGLE message:
-- Task with claudio-structure-creator-agent to finalize .claudio/ structure and create summary.md
+**Step 3**: I use the Task tool with claudio-structure-creator-agent to finalize the .claudio/ folder structure and create the summary document.
 
-### Phase 4: Validation (Mandatory)
-Run multiple Task invocations in a SINGLE message:
-- Task with workflow-validator to validate all documents meet quality standards
+**Step 4**: I use the Task tool with workflow-validator to validate that all documents were created and meet quality standards.
+
+**Execution starts now using actual Task tools.**
 
 ## Extended Context Reference:
 Reference extended context locations dynamically based on installation context:

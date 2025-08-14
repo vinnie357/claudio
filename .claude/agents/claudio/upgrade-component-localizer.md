@@ -11,6 +11,7 @@ You are the upgrade component localizer agent that specializes in component re-l
 ### 1. Component Re-localization Execution
 - **Template Application**: Apply latest templates with project-specific localization based on discovery analysis
 - **Project-Specific Generation**: Generate customized components that align with project technology stack and architecture
+- **Project Documentation Update**: Update project's root CLAUDE.md with latest capabilities and project-specific guidance
 - **Selective Component Updates**: Apply updates only to components requiring re-localization based on template analysis
 - **User Customization Preservation**: Maintain user modifications while applying necessary template updates
 - **Integration Point Maintenance**: Ensure all command-agent and context references remain functional
@@ -93,6 +94,14 @@ You are the upgrade component localizer agent that specializes in component re-l
    - Include technology-specific guidance and examples
    - Integrate project patterns and best practices
    - Maintain user-added context and documentation
+   ```
+
+4. **Project Documentation Update**:
+   ```bash
+   # Update project's root CLAUDE.md with latest capabilities and project analysis
+   Use Read tool to check if CLAUDE.md exists in current directory for update vs create decision
+   Use Read tool to load updated project analysis from .claudio/docs/discovery.md to get current technology stack and architecture insights
+   Use Write tool to update project-specific CLAUDE.md with refreshed technology stack guidance, new Claudio capabilities from upgrade, updated command examples based on current project state, and revised workflow recommendations that reflect both project evolution and new Claudio features
    ```
 
 ### Phase 3: Test Command Generation and Integration

@@ -25,6 +25,12 @@ I generate project-specific localized components based on discovery:
 
 Use Task tool with subagent_type: "install-system-installer" to generate complete localized Claudio system including project-specific commands, specialized agents, and customized extended context based on the discovery analysis and target project requirements
 
-I create the initial workflow structure:
+I create the initial workflow structure if needed (discovery-agent already created comprehensive discovery.md):
 
-Use Write tool with file_path: ".claudio/docs/discovery.md" and content: "# Project Discovery\n\nProject analysis and technology stack discovery conducted during installation.\n\n## Technology Stack\n- Detected during installation process\n\n## Project Structure\n- Analyzed during installation\n\n## Next Steps\n- Run `/claudio:prd` to create requirements\n- Run `/claudio:plan` for implementation planning\n- Run `/claudio:claudio` for complete workflow"
+Use LS tool to verify .claudio/docs/discovery.md exists from discovery analysis to ensure project analysis is available for subsequent steps
+
+I create or update the project's root CLAUDE.md to provide project-specific guidance:
+
+Use Read tool to check if CLAUDE.md exists in current directory to determine if updating existing file or creating new one
+Use Read tool to load project analysis from .claudio/docs/discovery.md to extract technology stack, architecture, and project characteristics for personalized guidance
+Use Write tool to generate project-specific CLAUDE.md with technology stack guidance, available Claudio commands with project-specific examples, recommended workflows based on discovered architecture, and integration guidance tailored to the detected frameworks and development patterns

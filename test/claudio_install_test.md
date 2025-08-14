@@ -5,9 +5,9 @@ This file contains validation prompts to test the `/claudio:install` command orc
 ## Purpose
 
 Validate that:
-1. **Install Coordinator Orchestration**: The install-coordinator-agent properly manages the complete installation workflow
+1. **Install Full Workflow Orchestration**: The install-full-workflow-agent properly manages the complete installation workflow
 2. **Discovery-Based Localization**: Project discovery analysis generates localized commands and agents
-3. **Parallel Agent Coordination**: Install-coordinator-agent successfully launches sub-agents in parallel
+3. **Direct Implementation**: Install-full-workflow-agent directly implements complete workflow without sub-agent coordination
 4. **Complete System Installation**: All required files are installed to correct locations
 5. **Integration Validation**: Installed system components work together correctly
 
@@ -31,11 +31,11 @@ Please test the Claudio install command workflow by performing the following val
 ### 1. Install Command Execution Test
 Test the complete `/claudio:install` command using the system testing agent:
 
-**Agent Invocation**: "Use the claudio:claudio-install-test subagent to execute and validate the complete /claudio:install test/install workflow, including command execution, install-coordinator-agent orchestration, and file system installation validation"
+**Agent Invocation**: "Use the claudio:claudio-install-test subagent to execute and validate the complete /claudio:install test/install workflow, including command execution, install-full-workflow-agent implementation, and file system installation validation"
 
 **Expected Behavior**:
 a) **Command Execution**: Execute `claude --dangerously-skip-permissions -p "/claudio:install test/install"` successfully (full workflow install)
-b) **Coordinator Orchestration**: Install-coordinator-agent should orchestrate complete workflow (discovery → PRD → planning → tasks)
+b) **Full Workflow Implementation**: Install-full-workflow-agent should implement complete workflow (discovery → PRD → planning → tasks)
 c) **Discovery Analysis**: Should run project discovery analysis on ShopFlow platform
 d) **Requirements Creation**: Should generate PRD based on ShopFlow e-commerce analysis
 e) **Implementation Planning**: Should create implementation plan for ShopFlow enhancement
@@ -43,10 +43,10 @@ f) **Task Breakdown**: Should break down plan into executable tasks
 g) **System Filtering**: Should exclude system components from user installation
 h) **File System Installation**: Should create both `.claude/` and `.claudio/` directory structures
 
-### 2. Install Coordinator Agent Orchestration Test
-Verify the install-coordinator-agent manages the complete workflow:
+### 2. Install Full Workflow Agent Implementation Test
+Verify the install-full-workflow-agent implements the complete workflow:
 
-The install-coordinator-agent should orchestrate the complete workflow through its internal coordination process. This test validates that the single agent invocation above properly manages:
+The install-full-workflow-agent should implement the complete workflow through its internal implementation process. This test validates that the single agent invocation above properly manages:
 
 #### Phase 1: Discovery and Validation (Sequential)
 a) **Project Discovery**: Analysis of the test/install/ ShopFlow e-commerce platform to understand technology stack, architecture, and development needs
@@ -61,7 +61,7 @@ d) **Implementation Planning**: Launch claudio:plan-agent to create implementati
 e) **Task Breakdown**: Launch claudio:task-agent to break down the plan into executable tasks with contexts
 
 #### Phase 3: Parallel Installation Coordination
-**CRITICAL: The install-coordinator-agent should run multiple Task invocations in a SINGLE message**
+**CRITICAL: The install-full-workflow-agent should implement complete workflow through direct execution**
 f) **System Installation**: Launch of the install-system-installer agent to generate and install localized commands and agents based on the ShopFlow discovery
 
 g) **Installation Validation**: Launch of the install-validation-coordinator agent to orchestrate comprehensive validation through 5 specialized validators (extended_context dependencies, orchestrator integration, mode compliance, content quality, and command-agent integration)
@@ -209,7 +209,7 @@ a) **System Commands Exclusion**:
    - Confirm system-only commands remain available only in main Claudio directory
 
 b) **System Agents Exclusion**:
-   - Verify install-coordinator-agent.md is NOT present in `test/install/.claude/agents/claudio/`
+   - Verify install-full-workflow-agent.md is NOT present in `test/install/.claude/agents/claudio/` (system component excluded)
    - Verify install-system-installer.md is NOT present in `test/install/.claude/agents/claudio/`  
    - Verify install-validation-coordinator.md and 5 validation subagents are NOT present in `test/install/.claude/agents/claudio/`
    - Confirm system-only agents remain available only in main Claudio directory
@@ -305,7 +305,7 @@ c) **Integration Validation**:
 ### If Install Command Fails:
 1. Check that test/install/ directory exists and is accessible
 2. Verify Claude Code has write permissions for target directory
-3. Ensure install-coordinator-agent exists and is properly configured
+3. Ensure install-full-workflow-agent exists and is properly configured
 4. Check command syntax: `claude --dangerously-skip-permissions -p "/claudio:install test/install"`
 
 ### If Discovery Analysis Fails:
@@ -354,7 +354,7 @@ c) **Integration Validation**:
 
 ## Notes for Implementation
 
-This validation should be run in a **new Claude Code session** after any changes to the install-coordinator-agent or related installation components, as agents are only loaded at session start.
+This validation should be run in a **new Claude Code session** after any changes to the install-full-workflow-agent or related installation components, as agents are only loaded at session start.
 
 The test focuses on the **complete workflow orchestration** rather than individual component functionality, ensuring the entire installation system works as an integrated process.
 ```

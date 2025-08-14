@@ -177,7 +177,7 @@ Generate `agents/claudio/extended_context/{category}/{name}/overview.md`:
 
 #### Workflow Files to Update
 - **claudio-coordinator.md**: For main workflow integration
-- **install-coordinator.md**: Include in installation processes
+- **install-full-workflow-agent.md**: Include in installation processes
 - **upgrade-orchestrator.md**: Include in upgrade processes
 - **workflow-validator.md**: Add validation for new command output
 

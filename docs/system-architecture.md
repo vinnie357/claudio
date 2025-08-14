@@ -85,7 +85,7 @@ Claudio uses an organized extended context system located in `extended_context/`
 
 #### Coordination Agents
 - **`claudio_coordinator_agent`**: Master orchestration for complete workflows
-- **`install_coordinator_agent`**: Installation process coordination
+- **`install-full-workflow-agent`**: Complete installation with project-aware CLAUDE.md generation
 - **`upgrade-orchestrator-agent`**: Lightweight coordinator for 6 specialized upgrade subagents with parallel execution
 
 #### Workflow Agents
@@ -108,6 +108,7 @@ Claudio uses an organized extended context system located in `extended_context/`
 #### System Agents
 - **`install-system-installer`**: File operations and directory management
 - **`install-validator`**: Installation verification and reporting
+- **`upgrade-component-localizer`**: Component re-localization with CLAUDE.md update capability
 - **`workflow-validator`**: Document quality validation
 - **`discovery-validator`**: Discovery analysis validation
 
@@ -220,6 +221,12 @@ When extended context is missing, agents:
 - **User Mode**: Direct copying of generic templates
 - **Project Mode**: Template customization based on discovery analysis
 - **Localization**: Technology stack-specific adaptations
+
+#### Project Documentation Generation
+- **CLAUDE.md Creation**: Automatic generation of project-aware integration documentation
+- **Technology-Specific Content**: Framework-specific commands and workflow guidance
+- **Dynamic Examples**: Context-aware command examples based on detected stack
+- **Team Onboarding**: Self-documenting projects with immediate productivity guidance
 
 #### Extended Context Management
 - **Hierarchical Organization**: Category-based directory structure

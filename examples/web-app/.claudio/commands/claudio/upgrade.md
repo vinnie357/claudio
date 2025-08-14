@@ -133,7 +133,7 @@ Override change detection, re-run project discovery, and perform complete locali
 ## Integration Points:
 - **Input Sources**: Current `.claude/` installation structure, latest Claudio version templates, project discovery outputs
 - **Output Targets**: Localized installation files, backup archives, changelogs, rollback scripts
-- **Coordination**: Works with discovery, install-coordinator, and localization patterns
+- **Coordination**: Works with discovery, install-full-workflow, and localization patterns
 - **Safety**: Comprehensive backup and validation before any modifications
 - **Discovery Integration**: Automatic project analysis and component customization
 

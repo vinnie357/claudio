@@ -86,6 +86,63 @@ This guide provides comprehensive command reference, workflow examples, and prac
 /claudio:claudio /path/to/codebase
 ```
 
+## System Installation Commands
+
+### `/claudio:install` - Project Installation with Documentation Generation
+```bash
+# Install Claudio system with project-aware CLAUDE.md generation
+/claudio:install                        # Install to current directory
+/claudio:install /path/to/project       # Install to specific project path
+/claudio:install commands               # Commands-only installation (streamlined)
+```
+
+**Installation Process:**
+1. **Directory Creation**: Creates `.claude/` and `.claudio/` directories
+2. **Project Discovery**: Analyzes technology stack and architecture patterns
+3. **Component Localization**: Generates project-specific commands and agents  
+4. **Documentation Generation**: Creates project-aware CLAUDE.md with:
+   - Technology stack-specific guidance and command examples
+   - Recommended workflows based on detected frameworks
+   - Integration patterns tailored to project architecture
+   - Team onboarding information for immediate productivity
+
+**Example Generated CLAUDE.md Content:**
+```markdown
+# MyProject - Claudio Development Tools
+
+React/Node.js full-stack application with integrated Claudio development tools.
+
+## 🎯 Project Overview
+**Technology Stack**: React, Node.js, Express, PostgreSQL, Redis
+**Architecture**: Full-stack web application with RESTful API
+**Primary Languages**: JavaScript, TypeScript
+
+## 🛠️ Available Commands (Localized for Full-Stack Development)
+- `/claudio:discovery` - Analyze React/Node.js structure
+- `/claudio:prd` - Create web application requirements
+- `/claudio:plan` - Full-stack implementation planning
+- `/claudio:test` - Run Jest/Cypress tests with analysis
+
+## 🚀 Quick Start for This Project
+1. **API Development**: `/claudio:prd feature user-authentication`
+2. **Frontend Features**: `/claudio:plan component user-dashboard "2w"`
+3. **Testing**: `/claudio:test --fix` for intelligent test execution
+```
+
+### `/claudio:upgrade` - System Upgrade with Documentation Refresh
+```bash
+# Upgrade Claudio system with CLAUDE.md refresh
+/claudio:upgrade ./my-project           # Update capabilities and refresh documentation
+/claudio:upgrade --check               # Preview changes including documentation updates
+/claudio:upgrade --force               # Complete refresh with re-discovery and new CLAUDE.md
+```
+
+**Upgrade Process:**
+- **Component Updates**: Latest Claudio features and agent improvements
+- **CLAUDE.md Refresh**: Updated with new capabilities and current project analysis
+- **Discovery Re-run**: Fresh project analysis for evolved codebases
+- **Capability Integration**: Guidance for new commands and workflow enhancements
+
 ## Usage Patterns
 
 ### Standalone Commands

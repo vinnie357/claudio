@@ -27,7 +27,7 @@ Before validation, filter out components that should not be in user installation
 **System Components (EXCLUDED from user validation)**:
 - Components marked with `system: claudio-system` in frontmatter
 - These remain only in the main Claudio directory
-- Examples: install.md, install-coordinator-agent.md, install-system-installer.md, install-validator.md
+- Examples: install.md, install-full-workflow-agent.md, install-system-installer.md, install-validator.md
 
 **User Components (INCLUDED in user validation)**:
 - Components without system label (or different system value) 
@@ -136,7 +136,7 @@ Before validation, filter out components that should not be in user installation
 - **Commands**: Individual command .md files directly under `commands/claudio/`
   - claudio.md, discovery.md, prd.md, plan.md, task.md, claude-sdk.md, etc.
 - **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
-  - claudio-coordinator.md, discovery-validator.md, install-coordinator.md, claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
+  - claudio-coordinator.md, discovery-validator.md, install-full-workflow-agent.md, claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
   - NO subdirectories under agents/claudio/ except extended_context/
 - **Extended Context**: Only category directories referenced by installed agents under `agents/claudio/extended_context/`
   - Typically 2-6 categories depending on installation type (workflow/, development/, etc.)
@@ -156,7 +156,7 @@ Before validation, filter out components that should not be in user installation
   - claudio.md, discovery.md, prd.md, plan.md, task.md, documentation.md, claude-sdk.md, etc.
 - **Agents**: Individual agent .md files directly under `agents/claudio/` (FLAT structure)
   - claudio-coordinator.md, claudio-discovery-orchestrator.md, claudio-prd-orchestrator.md, etc.
-  - discovery-validator.md, workflow-validator.md, install-coordinator.md, etc.
+  - discovery-validator.md, workflow-validator.md, install-full-workflow-agent.md, etc.
   - claudio-claude-sdk-architect.md, claudio-claude-commands-analyst.md, claudio-claude-subagents-analyst.md, etc.
   - NO subdirectories under agents/claudio/ except extended_context/
 - **Extended Context**: Only category directories referenced by installed agents under `agents/claudio/extended_context/`

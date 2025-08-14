@@ -3,7 +3,7 @@
 ## Command Architecture Overview
 
 ```
-Claudio Command System (20 Commands)
+Claudio Command System (21 Commands)
 ├── Core Workflow Commands (5)
 │   ├── /claudio:claudio → claudio-coordinator-agent
 │   │   ├── discovery-agent
@@ -53,7 +53,7 @@ Claudio Command System (20 Commands)
 │   │
 │   └── /claudio:design → design-analyzer [LEAF]
 │
-├── Development Tools (5)
+├── Development Tools (6)
 │   ├── /claudio:documentation → documentation-coordinator  
 │   │   ├── documentation-readme-creator
 │   │   ├── documentation-user-guide-creator
@@ -61,6 +61,7 @@ Claudio Command System (20 Commands)
 │   │   └── documentation-api-creator
 │   │   └── [Total: 4 subagents in parallel]
 │   │
+│   ├── /claudio:test → project-test-runner [LEAF]
 │   ├── /claudio:research → research-specialist [LEAF]
 │   ├── /claudio:phoenix-dev → phoenix-dev-executor [LEAF]
 │   ├── /claudio:generate-test-commands → test-command-generator [LEAF]
@@ -129,11 +130,11 @@ Claudio Command System (20 Commands)
 
 ## Summary Statistics
 
-- **Total Commands**: 20
-- **Leaf Commands** (single agent): 11  
+- **Total Commands**: 21
+- **Leaf Commands** (single agent): 12  
 - **Orchestrator Commands** (multiple agents): 9
 - **Maximum Subagents**: 15+ (claudio-coordinator-agent)
-- **Total Unique Agents**: 45+ across entire system
+- **Total Unique Agents**: 46+ across entire system
 - **Extended Context Categories**: 7 (6 typically used)
 
 ## Dynamic Extended Context Logic
@@ -159,6 +160,7 @@ This ensures extended_context creation matches actual subagent requirements rath
 - code-quality-analyzer (development/code_quality/)
 - design-analyzer (development/design/)
 - test-command-generator (development/testing/)
+- project-test-runner (development/testing/)
 
 ### documentation/
 - documentation-coordinator (documentation/)

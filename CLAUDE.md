@@ -60,9 +60,22 @@ Essential information you need right now:
 # Creates complete .claudio/ folder with analysis, requirements, plans, and tasks
 ```
 
+### System Installation with Project Integration
+```bash
+/claudio:install                        # Install with project-aware CLAUDE.md generation
+/claudio:install /path/to/project       # Install at specific path with project documentation
+/claudio:install commands               # Commands-only installation (streamlined)
+```
+
+**Installation Creates:**
+- `.claude/` directory with localized commands and agents
+- `.claudio/` directory with project workflow documents  
+- **Project-specific CLAUDE.md with integration guidance** (technology stack-aware)
+- Comprehensive project discovery and technology analysis
+
 ### System Upgrade and Cleanup
 ```bash
-/claudio:upgrade ./my-project           # High-performance parallel upgrade with 6 specialized subagents
+/claudio:upgrade ./my-project           # Upgrade with CLAUDE.md refresh and capability updates
 /claudio:upgrade --check               # Preview upgrade changes without applying
 /claudio:upgrade --force               # Force complete re-installation with full re-discovery
 ```
@@ -125,6 +138,9 @@ This transforms your existing codebase into an organized, trackable development 
 
 The Claudio system integrates with existing development practices:
 - **Version Control**: All `.claudio/` content can be committed to git
+- **Self-Documenting Projects**: Each project maintains its own Claudio integration guide (CLAUDE.md)
+- **Technology-Specific Guidance**: Framework-specific commands and workflows tailored to your stack
+- **Team Onboarding**: Project-aware documentation for immediate productivity
 - **Team Collaboration**: Shared context enables consistent development approach
 - **Project Management**: Progress tracking provides visibility into development status
 - **Quality Assurance**: Task contexts include testing and review requirements

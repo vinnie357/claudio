@@ -159,6 +159,7 @@ Reference context locations based on installation:
 
 #### Git Best Practices
 - **Commit `.claudio/` Content**: Version control all generated documentation
+- **Commit `CLAUDE.md`**: Include project-specific integration documentation in version control
 - **Meaningful Commit Messages**: Clear descriptions of documentation changes
 - **Branch Strategy**: Align documentation branches with feature branches
 - **Merge Coordination**: Resolve documentation conflicts systematically
@@ -170,6 +171,12 @@ Reference context locations based on installation:
 - **Team Synchronization**: Ensure team access to latest documentation
 
 ### Team Collaboration Strategies
+
+#### Project Documentation Management
+- **CLAUDE.md Maintenance**: Keep project integration documentation current with system upgrades
+- **Technology Evolution**: Update documentation when project stack changes or expands
+- **User Content Preservation**: Maintain non-Claudio sections while refreshing integration guidance
+- **Team Onboarding**: Leverage self-documenting projects for immediate new member productivity
 
 #### Shared Context Development
 - **Consistent Standards**: Establish team-wide context and documentation standards

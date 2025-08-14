@@ -43,7 +43,7 @@ Claudio employs specialized AI agents that orchestrate different aspects of proj
 - **new-command-validator**: Validates custom command structure and integration
 
 ### System Management Agents
-- **install-coordinator-agent**: Manages Claudio installation with namespace support and localization
+- **install-full-workflow-agent**: Manages complete Claudio installation with full workflow generation
 - **upgrade-orchestrator-agent**: Lightweight coordinator for 6 specialized upgrade subagents with parallel execution
 - **code-quality-analyzer**: Analyzes code quality with comprehensive reporting
 
@@ -839,7 +839,7 @@ claudio/
 │       ├── plan-agent.md # Planning coordination
 │       ├── task-agent.md # Task breakdown
 │       ├── implement-agent.md # Implementation execution
-│       ├── install-coordinator-agent.md # Installation management
+│       ├── install-full-workflow-agent.md # Full workflow installation
 │       ├── upgrade-orchestrator-agent.md # Upgrade coordination
 │       ├── documentation-coordinator.md # Documentation coordination
 │       ├── new-command-generator.md # Custom command generation

@@ -176,7 +176,7 @@ Reference prompt locations based on installation context:
 - [list all with status indicators]
 
 ### Agents ([count] files installed)
-- install-coordinator.md ✓
+- install-full-workflow-agent.md ✓
 - discovery-agent.md ✓
 - [list all with status indicators]
 

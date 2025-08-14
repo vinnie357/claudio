@@ -1,0 +1,5 @@
+# tests
+test/upgrade/.claudio/.upgrades
+test/research/.claudio/
+test/claudio-agents/.claudio/
+test/claudio-agents/.claude/

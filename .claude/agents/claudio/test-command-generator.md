@@ -20,7 +20,7 @@ You are the test command generator agent that analyzes project discovery documen
 ### Phase 1: Discovery Analysis and Test Framework Detection
 
 1. **Read Discovery Document**:
-   - Analyze `<target_project>/.claudio/discovery.md`
+   - Analyze `<target_project>/.claudio/docs/discovery.md`
    - Extract testing framework information
    - Identify test runners and tools
    - Understand project structure and patterns
@@ -175,11 +175,11 @@ Create `extended_context/development/testing/claude.md`:
 ### Phase 5: Installation Process
 
 1. **Create Target Directories**:
-   - `<target>/.claudio/commands/claudio/test.md`
-   - `<target>/.claudio/commands/claudio/test-g.md`
-   - `<target>/.claudio/agents/claudio/[project]-test-runner.md`
-   - `<target>/.claudio/agents/claudio/[project]-test-gemini.md`
-   - `<target>/.claudio/agents/claudio/extended_context/development/testing/claude.md`
+   - `<target>/.claude/commands/claudio/test.md`
+   - `<target>/.claude/commands/claudio/test-g.md`
+   - `<target>/.claude/agents/claudio/[project]-test-runner.md`
+   - `<target>/.claude/agents/claudio/[project]-test-gemini.md`
+   - `<target>/.claude/agents/claudio/extended_context/development/testing/claude.md`
 
 2. **Write Generated Files**:
    - Install customized command files
@@ -232,8 +232,8 @@ Create `extended_context/development/testing/claude.md`:
 - ✓ [project]-test-gemini - AI-powered test analysis
 
 ### Installation Location: 
-[target_project]/.claudio/commands/claudio/
-[target_project]/.claudio/agents/claudio/
+[target_project]/.claude/commands/claudio/
+[target_project]/.claude/agents/claudio/
 
 ### Test Framework Detected: [TEST_FRAMEWORK]
 ### Ready for Testing: YES

@@ -27,13 +27,13 @@ This command is automatically called during:
 2. Generate project-specific test command implementations  
 3. Create specialized sub-agents for test execution and analysis
 4. Generate extended context based on project's testing patterns
-5. Install generated commands in target project's `.claudio/` structure
+5. Install generated commands in target project's `.claude/` structure
 
 **Command Distribution:**
 - **This system command**: Remains in Claudio system directory only
-- **Generated test commands**: Installed in `<target_project>/.claudio/commands/claudio/`
-- **Generated sub-agents**: Installed in `<target_project>/.claudio/agents/claudio/`
-- **Generated context**: Installed in `<target_project>/.claudio/agents/claudio/prompts/`
+- **Generated test commands**: Installed in `<target_project>/.claude/commands/claudio/`
+- **Generated sub-agents**: Installed in `<target_project>/.claude/agents/claudio/`
+- **Generated context**: Installed in `<target_project>/.claude/agents/claudio/extended_context/`
 
 Use the claudio:test-command-generator subagent to orchestrate discovery analysis, command generation, and installation process.
 

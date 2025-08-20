@@ -22,16 +22,140 @@ Essential information you need right now:
 
 **⚠️ CRITICAL: NEVER use Task tool patterns for sub-agent invocation** - use natural language following Claude Code standards
 
+## Command Development Standards
+
+### **🔥 MANDATORY: Working Agent Invocation Pattern**
+
+**ALL new commands MUST follow this proven pattern for direct agent coordination:**
+
+```markdown
+---
+description: "Command description with clear purpose"
+argument-hint: "[input]"
+---
+
+I am a [command purpose] that [brief description]. My task is to:
+
+1. Setup todo tracking for the workflow
+2. Invoke specialized agents directly using parallel Task calls with custom arguments
+3. Read and validate outputs from [expected output files]
+4. Create a comprehensive [validation/summary] report
+
+## Implementation
+
+I will use TodoWrite to track progress, then make parallel Task calls:
+- Task with subagent_type: "agent1" - pass the input-value argument for processing
+- Task with subagent_type: "agent2" - pass the input-value argument for processing
+- Task with subagent_type: "agent3" - pass the input-value argument for processing
+
+Then read outputs from [output files], validate them, and create comprehensive report.
+
+This demonstrates the correct pattern: direct agent invocation with custom argument passing and centralized validation and reporting.
+```
+
+### **🔥 MANDATORY: Explicit Parallel Task Pattern**
+
+**ALL commands MUST use this exact TodoWrite and parallel Task pattern:**
+
+```markdown
+## Implementation
+
+I will use TodoWrite to track progress, then make parallel Task calls:
+- Task with subagent_type: "agent1" - pass the input-value argument for processing
+- Task with subagent_type: "agent2" - pass the input-value argument for processing
+
+Then read outputs, validate them, and create comprehensive report.
+```
+
+**✅ REQUIRED Elements:**
+- **TodoWrite first**: Always setup todo tracking before Task calls
+- **"make parallel Task calls"**: Explicit parallel execution statement
+- **Multiple Task calls**: List each agent with custom arguments
+- **Custom arguments**: Pass meaningful context to each agent
+- **Output validation**: Read and validate actual outputs
+- **Comprehensive report**: Centralized result compilation
+
+### **⚡ Performance Requirements**
+- **Parallel Execution**: Run as many Task calls as possible in parallel
+- **TodoWrite Tracking**: ALWAYS use TodoWrite for progress management
+- **Direct Invocation**: NO coordinator agents - commands coordinate directly
+- **Custom Arguments**: Pass meaningful arguments to each sub-agent
+- **Output Validation**: Read and validate actual outputs from sub-agents
+
+### **🚨 Anti-Patterns (NEVER USE)**
+- ❌ Coordinator agents that call other agents
+- ❌ Sequential execution when parallel is possible
+- ❌ Missing TodoWrite progress tracking
+- ❌ Generic arguments or no argument passing
+- ❌ Assuming outputs without validation
+
+### **✅ Proven Examples**
+- **`/claudio:update-docs`**: Uses 3 parallel agents (readme-updater, claude-md-updater, changelog-updater)
+- **`/claudio:discovery`**: Uses 4 parallel discovery agents + consolidation agent
+- **`/claudio:claudio`**: Direct coordination without coordinator complexity
+- **`/claudio:upgrade`**: Uses 6 parallel agents with batched execution
+- **Pattern Success**: Fast, reliable, clear completion signaling with validated outputs
+
 ## Core Components
+
+### **System vs User Component Classification**
+
+Claudio uses the `system: claudio-system` frontmatter field to differentiate between internal system components and user-facing workflow components:
+
+#### **System Components (Internal Use Only)**
+Components marked with `system: claudio-system` are excluded from user installations and remain in the main Claudio directory for system operations:
+
+**System Commands (6 components):**
+- **`/claudio:install`**: System installation and setup coordination
+- **`/claudio:upgrade`**: System upgrade and maintenance coordination  
+- **`/claudio:test`**: System testing and validation workflows
+- **`/claudio:install-commands`**: Commands-only installation coordination
+- **`/claudio:generate-test-commands`**: Project-specific test command generation system
+- **`/claudio:update-docs`**: Documentation maintenance with parallel agent coordination
+
+**System Agents (35+ components):**
+- **Installation Agents**: `install-*` (path validation, directory creation, component localization)
+- **Discovery Agents**: `discovery-*` (parallel project analysis, structure/technology/architecture/integration analysis, consolidation)
+- **Documentation Agents**: `*-updater`, `claude-md-generator`, `readme-updater`, `changelog-updater` (documentation maintenance)
+- **Validation Agents**: `*-validator`, `*-test` (system integrity, integration testing)
+- **Internal Coordinators**: System-level workflow orchestration and validation
+
+#### **User Components (Workflow Execution)**
+Components without the system tag are installed to user projects and provide workflow functionality:
+
+**User Commands (22+ components):**
+- **Core Workflow**: `/claudio:discovery`, `/claudio:prd`, `/claudio:plan`, `/claudio:task`, `/claudio:claudio`
+- **Testing**: `/claudio:test`, `/claudio:test-g` (project-specific test commands generated during installation)
+- **Analysis Tools**: `/claudio:code-quality`, `/claudio:security-review`, `/claudio:design`, `/claudio:test-review`
+- **Documentation**: `/claudio:documentation`, `/claudio:research`
+- **Development**: `/claudio:claude-sdk`, `/claudio:phoenix-dev`, `/claudio:implement`
+
+**User Agents (40+ components):**
+- **Workflow Agents**: `discovery-agent`, `prd-agent`, `plan-agent`, `task-agent`
+- **Analysis Agents**: `code-quality-analyzer`, `security-review-coordinator`, `design-analyzer`
+- **Generation Agents**: `documentation-coordinator`, `research-specialist`, `claude-sdk-architect`
+
+#### **Installation Filtering Logic**
+The `install-system-installer` agent automatically filters components during installation:
+```markdown
+1. Read each component file's frontmatter
+2. Check for `system: claudio-system` field
+3. Skip system components during user installations
+4. Continue with user components only
+```
+
+This ensures users receive only workflow-relevant components while keeping system internals separate.
 
 ### Commands
 - **`/claudio:research`**: Create research documentation with overview and troubleshooting guides
-- **`/claudio:discovery`**: Analyze project structure and capabilities
+- **`/claudio:discovery`**: Analyze project structure and capabilities with parallel analysis system
 - **`/claudio:documentation`**: Create project documentation
 - **`/claudio:prd`**: Generate Product Requirements Documents
 - **`/claudio:plan`**: Create implementation plans
 - **`/claudio:task`**: Break down plans into executable tasks
+- **`/claudio:test`**: Execute project test suite with intelligent analysis and optional fixes
 - **`/claudio:claudio`**: Complete project analysis workflow
+- **`/claudio:update-docs`**: Update README, CLAUDE.md, and changelogs with parallel agent coordination
 - **`/claudio:upgrade`**: Parallel upgrade system using 6 specialized subagents for improved performance
 - **`/claudio:claude-sdk`**: Analyze and improve Claude Code implementations
 
@@ -48,10 +172,12 @@ Essential information you need right now:
 
 ### Individual Commands
 ```bash
-/claudio:discovery ./my-project        # Analyze project structure
+/claudio:discovery ./my-project        # Comprehensive project analysis with parallel specialist agents
 /claudio:research backend nodejs       # Create research docs in .claudio/research/backend/nodejs/
 /claudio:prd feature user-auth         # Create requirements
 /claudio:plan feature user-auth "4w"   # Plan implementation
+/claudio:test                          # Execute project test suite with intelligent reporting
+/claudio:test --fix                    # Run tests with automatic failure analysis and fixes
 ```
 
 ### Complete Project Analysis
@@ -70,8 +196,9 @@ Essential information you need right now:
 **Installation Creates:**
 - `.claude/` directory with localized commands and agents
 - `.claudio/` directory with project workflow documents  
-- **Project-specific CLAUDE.md with integration guidance** (technology stack-aware)
-- Comprehensive project discovery and technology analysis
+- **Project-specific CLAUDE.md with integration guidance** (generated based on discovery analysis, technology stack-aware workflows)
+- **Project-specific test commands** (`/claudio:test`, `/claudio:test-g`) based on detected testing frameworks
+- Comprehensive project discovery and technology analysis using parallel analysis system
 
 ### System Upgrade and Cleanup
 ```bash
@@ -97,6 +224,44 @@ Essential information you need right now:
 ```
 
 **Sequential Analysis**: The Claude SDK architect analyzes one command at a time, evaluating the command structure first, then each individual subagent separately to prevent system overload and ensure focused analysis.
+
+### Enhanced Discovery System
+```bash
+/claudio:discovery ./my-project         # Comprehensive project analysis with parallel specialist agents
+```
+
+**Parallel Analysis Architecture**: The discovery system uses 4 specialized analysis agents running in parallel:
+- **Structure Analyzer**: Project organization, file patterns, directory structure, and build system analysis
+- **Technology Analyzer**: Technology stack detection, framework identification, and dependency analysis
+- **Architecture Analyzer**: Design patterns, architectural style, and component relationships
+- **Integration Analyzer**: Tool integration opportunities, development workflow compatibility, and CI/CD analysis
+
+**Analysis Consolidation**: After parallel analysis completion, a consolidation agent combines all findings into a comprehensive discovery document with:
+- **Executive Summary**: Technology stack overview and project classification
+- **Localization Recommendations**: Optimal agent and command selections for the project
+- **Integration Guidance**: Project-specific workflow and tool integration suggestions
+- **Quality Assessment**: Analysis completeness and recommendation confidence levels
+
+**Performance Benefits**: Parallel analysis provides 4x faster discovery compared to sequential analysis while maintaining comprehensive coverage.
+
+### Testing System
+```bash
+/claudio:test                           # Execute project test suite with intelligent reporting
+/claudio:test [pattern]                 # Run specific test files or patterns  
+/claudio:test --fix                     # Run tests with automatic failure analysis and fixes
+/claudio:test-g                         # Gemini-integrated testing with analysis and task generation
+```
+
+**Project-Specific Test Integration**: The testing system provides:
+- **Framework Detection**: Automatic detection of testing frameworks (Jest, pytest, ExUnit, Go test, etc.)
+- **Intelligent Reporting**: Comprehensive test result analysis and failure diagnosis
+- **Fix Capabilities**: Automatic failure analysis and repair suggestions with `--fix` flag
+- **Project-Specific Commands**: Generated test commands during installation based on discovery analysis
+- **Fallback Execution**: Direct framework detection when project-specific commands aren't available
+
+**Generated Test Commands**: During installation, project-specific test commands are created:
+- **`/claudio:test`**: Project-tailored test execution with sophisticated reporting
+- **`/claudio:test-g`**: Gemini-integrated testing for advanced analysis (requires gemini-cli)
 
 ### Research System
 ```bash
@@ -138,12 +303,13 @@ This transforms your existing codebase into an organized, trackable development 
 
 The Claudio system integrates with existing development practices:
 - **Version Control**: All `.claudio/` content can be committed to git
-- **Self-Documenting Projects**: Each project maintains its own Claudio integration guide (CLAUDE.md)
-- **Technology-Specific Guidance**: Framework-specific commands and workflows tailored to your stack
-- **Team Onboarding**: Project-aware documentation for immediate productivity
-- **Team Collaboration**: Shared context enables consistent development approach
+- **Self-Documenting Projects**: Each project maintains its own Claudio integration guide (CLAUDE.md) generated based on discovery analysis
+- **Technology-Specific Guidance**: Framework-specific commands and workflows tailored to your stack, including project-specific test commands
+- **Parallel Analysis**: Enhanced discovery system provides comprehensive project understanding in optimal time
+- **Team Onboarding**: Project-aware documentation for immediate productivity with technology-specific examples
+- **Team Collaboration**: Shared context enables consistent development approach with project-tailored workflows
 - **Project Management**: Progress tracking provides visibility into development status
-- **Quality Assurance**: Task contexts include testing and review requirements
+- **Quality Assurance**: Task contexts include testing and review requirements with automated test execution capabilities
 
 **[→ Learn more about integration in Best Practices](docs/best-practices.md#integration-with-development-workflow)**
 

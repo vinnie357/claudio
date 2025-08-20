@@ -1,6 +1,7 @@
 ---
 description: "Generate project-specific test commands based on discovery analysis"
 argument-hint: "<target_project_path>"
+system: claudio-system
 ---
 
 **SYSTEM COMMAND** - Automatically called during install/upgrade workflows. Stays in Claudio system, only generated commands are installed in user projects.

@@ -1,37 +1,38 @@
 # Claudio Commands → Subagents Tree Map
 
+**System Marker**: `system: claudio-system`  
+**Total Commands**: 23  
+**Total Agents**: 64  
+**Last Updated**: 2025-01-20  
+
 ## Command Architecture Overview
 
 ```
-Claudio Command System (21 Commands)
+Claudio Command System (23 Commands)
 ├── Core Workflow Commands (5)
-│   ├── /claudio:claudio → claudio-coordinator-agent
-│   │   ├── discovery-agent
-│   │   ├── prd-agent  
-│   │   ├── plan-agent
-│   │   ├── task-agent
-│   │   ├── documentation-coordinator → [4 sub-subagents]
-│   │   ├── code-quality-analyzer
-│   │   ├── test-command-generator
-│   │   ├── security-review-coordinator → [3 sub-subagents]
-│   │   ├── design-analyzer
-│   │   ├── research-specialist
-│   │   ├── claudio-structure-creator-agent
-│   │   ├── claudio-claude-sdk-architect → [2 sub-subagents] (optional)
-│   │   ├── workflow-validator
-│   │   └── [Total: 15+ subagents in parallel batches]
+│   ├── /claudio:claudio → Direct coordination (no coordinator)
+│   │   ├── discovery-agent (sequential)
+│   │   ├── prd-agent (parallel)
+│   │   ├── plan-agent (parallel)
+│   │   ├── task-agent (parallel) 
+│   │   ├── claudio-structure-creator-agent (sequential)
+│   │   └── [Total: 5 subagents with parallel execution]
 │   │
 │   ├── /claudio:discovery → discovery-agent [LEAF]
 │   ├── /claudio:prd → prd-agent [LEAF]
 │   ├── /claudio:plan → plan-agent [LEAF]  
 │   └── /claudio:task → task-agent [LEAF]
 │
-├── Installation & Management (2)
+├── Installation & Management (3)
 │   ├── /claudio:install → install-full-workflow-agent
 │   │   ├── discovery-agent (immediate execution)
 │   │   ├── install-system-installer (generates localized components)
 │   │   └── initial workflow structure creation
 │   │   └── [Total: 2 subagents, direct execution pattern]
+│   │
+│   ├── /claudio:install-commands → install-commands-coordinator-agent
+│   │   ├── install-commands-only-agent (streamlined installation)
+│   │   └── [Total: 1 subagent, fast commands-only pattern]
 │   │
 │   └── /claudio:upgrade → upgrade-orchestrator-agent
 │       ├── upgrade-discovery-analyzer
@@ -53,13 +54,19 @@ Claudio Command System (21 Commands)
 │   │
 │   └── /claudio:design → design-analyzer [LEAF]
 │
-├── Development Tools (6)
+├── Development Tools (7)
 │   ├── /claudio:documentation → documentation-coordinator  
 │   │   ├── documentation-readme-creator
 │   │   ├── documentation-user-guide-creator
 │   │   ├── documentation-developer-guide-creator
 │   │   └── documentation-api-creator
 │   │   └── [Total: 4 subagents in parallel]
+│   │
+│   ├── /claudio:update-docs → Direct coordination (no coordinator)
+│   │   ├── readme-updater-agent (parallel)
+│   │   ├── claude-md-updater-agent (parallel)
+│   │   └── changelog-updater-agent (parallel)
+│   │   └── [Total: 3 subagents in parallel]
 │   │
 │   ├── /claudio:test → project-test-runner [LEAF]
 │   ├── /claudio:research → research-specialist [LEAF]
@@ -130,12 +137,135 @@ Claudio Command System (21 Commands)
 
 ## Summary Statistics
 
-- **Total Commands**: 21
-- **Leaf Commands** (single agent): 12  
+- **Total Commands**: 23
+- **Leaf Commands** (single agent): 14  
 - **Orchestrator Commands** (multiple agents): 9
-- **Maximum Subagents**: 15+ (claudio-coordinator-agent)
-- **Total Unique Agents**: 46+ across entire system
+- **Maximum Subagents**: 6 (upgrade-orchestrator-agent) 
+- **Total Unique Agents**: 64 across entire system
 - **Extended Context Categories**: 7 (6 typically used)
+
+## All System Agents (Alphabetical)
+
+**System Marker**: `system: claudio-system`  
+**Total**: 64 agents across all categories
+
+### A-C
+- **changelog-updater-agent** - Creates and maintains changelog files with version tracking
+- **claude-commands-analyst** - Evaluates Claude Code slash commands across systems  
+- **claude-md-updater-agent** - Maintains and updates CLAUDE.md project integration files
+- **claude-sdk-architect** - Creates new Claude Code slash commands and sub-agents
+- **claude-subagents-analyst** - Analyzes Claude Code sub-agents across systems
+- **claudio-coordinator-agent** - *(Deprecated)* Orchestrates complete Claudio workflow  
+- **claudio-install-commands-test** - Tests /claudio:install commands execution
+- **claudio-install-test** - Tests /claudio:install full workflow execution
+- **claudio-structure-creator-agent** - Finalizes .claudio directory structure and creates summary docs
+- **claudio-test-suite** - Execute all 4 core Claudio workflow tests in parallel
+- **claudio-upgrade-test** - Tests /claudio:upgrade complete workflow execution
+- **code-quality-analyzer** - Analyzes code quality by running linters, formatters, static analysis
+- **command-agent-integration-validator** - Validates command-agent relationships match index specs
+
+### D-G  
+- **design-analyzer** - Analyzes UX/UI design systems, evaluates design patterns
+- **discovery-agent** - **CORE** Project analysis and technology discovery specialist
+- **discovery-validator** - Validates discovery document quality and analysis depth
+- **documentation-api-creator** - Creates comprehensive API reference documentation
+- **documentation-coordinator** - Coordinates parallel documentation creation by specialized sub-agents
+- **documentation-developer-guide-creator** - Creates comprehensive developer documentation  
+- **documentation-readme-creator** - Creates comprehensive project README documentation
+- **documentation-user-guide-creator** - Creates comprehensive user guides with tutorials
+- **extended-context-content-validator** - Validates extended_context content quality and customization
+- **extended-context-dependency-validator** - Validates agents have required extended_context categories
+- **generate-test-commands-test** - Tests /claudio:generate-test-commands command execution
+- **git-commit-message** - **LEAF** Generate conventional commit messages from git status
+
+### I-N
+- **implement-agent** - Executes implementation plans by coordinating task execution
+- **install-commands-coordinator-agent** - **FAST** Orchestrates streamlined commands-only installation
+- **install-commands-only-agent** - Handles commands-only installations with .claude/ directories
+- **install-full-workflow-agent** - Handles complete full workflow installations
+- **install-summary-agent** - Generates comprehensive installation summaries and guidance
+- **install-system-installer** - Handles file copying and directory creation for system installations
+- **install-user-templates-agent** - Handles user mode installations with generic templates
+- **install-validation-coordinator** - Orchestrates comprehensive installation validation
+- **install-validator** - Validates Claudio installation completeness and generates reports
+- **installation-mode-validator** - Applies mode-specific validation criteria
+- **new-command-generator** - Generate custom commands with sub-agents and extended context
+- **new-command-validator** - Validates generated custom commands for structure and quality
+- **newprompt-agent-creator** - Creates comprehensive agent prompts following Claudio conventions
+- **newprompt-command-creator** - Creates command files following Claudio patterns  
+- **newprompt-coordinator** - Coordinates creation of new agent prompts and commands
+- **newprompt-integration-planner** - Plans workflow integration requirements for new agents
+
+### O-R
+- **orchestrator-integration-validator** - Validates complex agent hierarchies and parallel execution
+- **phoenix-dev-executor** - **LEAF** Analyze and optimize Elixir Phoenix development workflows
+- **plan-agent** - **CORE** Creates detailed implementation plans with phases and time estimates
+- **prd-agent** - **CORE** Creates comprehensive Product Requirements Documents
+- **project-test-runner** - **LEAF** Executes project test suites with intelligent framework detection
+- **readme-updater-agent** - Updates and maintains project README files with current features
+- **research-specialist** - **LEAF** Conduct comprehensive research and create expert agent prompts
+
+### S-T
+- **security-architecture-analyst** - System-level security design and architecture evaluation
+- **security-diagram-generator** - Mermaid diagram creation specialist for security visualization
+- **security-review-coordinator** - Coordinates comprehensive security review using STRIDE methodology
+- **security-threat-modeler** - STRIDE-based threat identification and analysis specialist
+- **task-agent** - **CORE** Breaks down implementation plans into specific executable tasks
+- **test-command-generator** - **LEAF** Generates project-specific test commands with specialized agents
+- **test-review** - **LEAF** Reviews testing suite tools and provides recommendations
+
+### U-W
+- **upgrade-backup-manager** - Specializes in backup creation and version management for upgrades
+- **upgrade-component-localizer** - Specializes in component re-localization execution for upgrades
+- **upgrade-discovery-analyzer** - Analyzes project discovery and installation status for upgrades
+- **upgrade-installation-validator** - Specializes in post-upgrade validation and reporting
+- **upgrade-legacy-cleaner** - Specializes in Phase 0 legacy pattern cleanup for upgrades
+- **upgrade-orchestrator-agent** - **FAST** Lightweight coordinator for Claudio upgrade operations
+- **upgrade-template-analyzer** - Specializes in template comparison and localization planning
+- **vulnerability-assessment-specialist** - Code and configuration security analysis specialist
+- **workflow-validator** - **MANDATORY** Validates Claudio workflow document quality and completeness
+
+### Agent Categories by Function
+
+#### **Core Workflow Agents** (5) - Essential for project analysis
+- discovery-agent, prd-agent, plan-agent, task-agent, claudio-structure-creator-agent
+
+#### **Installation & Upgrade Agents** (12) - System management
+- All install-* and upgrade-* agents
+
+#### **Documentation Agents** (7) - Content generation
+- All documentation-* agents, readme-updater-agent, claude-md-updater-agent, changelog-updater-agent
+
+#### **Validation Agents** (8) - Quality assurance  
+- All *-validator agents, discovery-validator, workflow-validator
+
+#### **Testing Agents** (4) - Quality and testing
+- All test-* agents, claudio-test-suite
+
+#### **Security Agents** (4) - Security analysis
+- All security-* agents, vulnerability-assessment-specialist
+
+#### **System Integration Agents** (6) - Claude Code integration
+- All claude-* agents (except claudio-coordinator-agent)
+
+#### **Command Generation Agents** (6) - System expansion
+- All new-*, newprompt-* agents
+
+## Direct Coordination Pattern Migration
+
+### **✅ New Pattern** (Fast, Reliable)
+- **claudio** - Direct coordination, 5 agents
+- **update-docs** - Direct coordination, 3 agents
+
+### **🔄 Migration Candidates** (High Priority)
+- **documentation** → Direct coordination with 4 parallel agents
+- **security-review** → Direct coordination with 4 parallel agents  
+- **newprompt** → Direct coordination with 3 parallel agents
+
+### **⚠️ Complex Coordinators** (Specialized, Keep As-Is)
+- **upgrade** - 6 parallel agents with complex dependencies
+- **install** - Complex multi-phase installation logic
+- **claude-sdk** - Sequential analysis requirements
 
 ## Dynamic Extended Context Logic
 

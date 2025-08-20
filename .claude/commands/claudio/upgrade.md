@@ -1,27 +1,76 @@
 ---
-description: "Upgrade existing Claudio installations with changelog tracking and rollback support"
-argument-hint: "[target_path] [options]"
+description: "Upgrade existing Claudio installations with parallel coordination and project path support"
+argument-hint: "[<path>]"
+allowed-tools: Bash(mkdir:*), Bash(ls:*), Bash(find:*), Bash(test:*), Bash(pwd:*)
+system: claudio-system
 ---
 
-Upgrade existing Claudio installations through intelligent project localization with comprehensive change tracking, backup management, and rollback capabilities. This command safely updates Claudio components by re-localizing them based on current project discovery while preserving user customizations and providing complete version history.
+I am an upgrade system that coordinates comprehensive Claudio system upgrades with project discovery, parallel execution, and localized component updates. My task is to:
 
-Use the upgrade-orchestrator-agent subagent to coordinate safe upgrade operations with project discovery, localization, backup management, and rollback capabilities including Phase 0 legacy pattern cleanup.
+1. Setup todo tracking for upgrade workflow
+2. Invoke specialized agents directly using parallel Task calls with project_path arguments
+3. Read and validate upgrade outputs from target directory
+4. Create comprehensive upgrade report
 
-**Path Resolution**: Supports multiple ways to specify upgrade target:
-- **Direct Path**: `/claudio:upgrade /path/to/project` (upgrades specified path)
-- **Current Directory**: `/claudio:upgrade` (upgrades current working directory)
-- **Flag Method**: `/claudio:upgrade --path /custom/path` (alternative syntax)
+## Implementation
 
-**Installation Detection**: Automatically detects Claudio installation mode and location:
-- **User Mode**: `~/.claude/` (global user installation)
-- **Project Mode**: `./.claude/` (current directory installation)  
-- **Custom Path**: Specified path installation
+I will use TodoWrite to track progress, then make direct Task calls:
 
-**Safety Features**: 
-- Timestamped backups before any changes
-- Detailed changelogs for all modifications
-- Automated rollback scripts for easy reversion
-- File integrity validation throughout process
+**Sequential Foundation** (Dependencies require order):
+- Task with subagent_type: "upgrade-discovery-analyzer" - pass the project_path argument for installation analysis
+- Task with subagent_type: "upgrade-legacy-cleaner" - pass the project_path argument for deprecated pattern cleanup
+
+**Parallel Analysis & Backup** (Run multiple Task invocations in SINGLE message):
+- Task with subagent_type: "upgrade-template-analyzer" - pass the project_path argument for diff analysis
+- Task with subagent_type: "upgrade-backup-manager" - pass the project_path argument for backup creation
+
+**Parallel Component Update** (Run multiple Task invocations in SINGLE message):
+- Task with subagent_type: "upgrade-component-localizer" - pass the project_path argument for component re-localization
+- Task with subagent_type: "claude-md-generator" - pass the project_path argument for CLAUDE.md refresh
+
+**Sequential Completion**:
+- Task with subagent_type: "upgrade-installation-validator" - pass the project_path argument for final validation
+
+Then read outputs from upgrade results, validate system completeness, and create comprehensive upgrade report.
+
+This demonstrates the correct pattern: direct agent invocation with parallel execution and centralized validation and reporting.
+
+## Upgrade Modes
+
+**Full System Upgrade with Project Path Support:**
+- `/claudio:upgrade` - Upgrade current directory (`./`) with complete parallel workflow
+- `/claudio:upgrade /path/to/project` - Upgrade specific project path with complete parallel workflow
+- `/claudio:upgrade ../relative/path` - Upgrade relative path with complete parallel workflow
+
+## Upgrade Process
+
+**Sequential Foundation** (Dependencies require order):
+1. **Installation Analysis**: Analyze current installation and compatibility
+2. **Legacy Cleanup**: Clean deprecated patterns while preserving user content
+
+**Parallel Analysis & Backup** (Run multiple Task invocations in SINGLE message):
+3. **Template Analysis**: Compare current vs latest templates and plan localization
+4. **Backup Creation**: Create timestamped backups and rollback scripts
+
+**Parallel Component Update** (Run multiple Task invocations in SINGLE message):
+5. **Component Localization**: Apply project-specific template updates and test command coordination
+6. **CLAUDE.md Refresh**: Update project integration documentation
+
+**Sequential Completion**:
+7. **Upgrade Validation**: Verify complete functional system integrity
+
+## Upgrade Creates
+
+**Project Path Target Updates:**
+- `{project_path}/.claude/` directory with updated commands, agents, and extended context
+- `{project_path}/.claudio/.upgrades/` directory with backups and changelogs
+- `{project_path}/CLAUDE.md` refreshed with latest integration guidance
+- Project-specific re-localization based on current discovery analysis
+
+**Path Resolution:**
+- **No parameter**: Upgrade current directory (`./`)
+- **With path**: Upgrade specified directory (supports `./`, `../path`, `/full/path`)
+- **All operations**: Relative to provided project_path argument
 
 ## Usage Modes:
 

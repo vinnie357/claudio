@@ -269,7 +269,7 @@ command to beging implementing the plan that was created by the claudio workflow
 the implement should attempt to do tasks that can be completed in parallel with sub agents
 
 the implement command should not automatically be part of the claudio workflow, users have to invoke it or pass an argument to 
-│   add it to the  workflow
+add it to the  workflow
 
 
 
@@ -1279,6 +1279,70 @@ review the upgrade-orchestrator-agent, and ensure it is also only working on val
   when the install command is invoked targeting a project it is responsible for 
   `/path/to/project{.claudio,.claude}` never `claudio` as this is the source consider it a system tool in this
    context think
+# removed install coordinator
+it was failing over and over so :
+
+ have the /claudio:install command call the install-full-workflow-agent instead of the coordinator as that     │
+│   fails every single time or lies about its status, think     
+
+update any related documentation and any related values in the root claude.md
+
+update our change log
+
+
+# refactor multi agent calls
+ review our /claudio:claudio command and compare it with this working multi agent example command the       
+provided example properly runs agents in parallel. [Pasted text #1 +22 lines] , here are the agents: ---   
+name: agent1                                                                                               
+description: when the coordinator calls for agent1                                                         
+---                                                                                                        
+                                                                                                           
+Your role is the write a file named file1 with the current date as its content.                            
+                                                                                                           
+## Argument Handling                                                                                       
+                                                                                                           
+If the coordinator provides addtional arguments or values to append, include them in the file content after
+the current date ( seperated by a space),                                                                  
+                                                                                                           
+## Output Format                                                                                           
+                                                                                                           
+- Basic: `YYYY-MM-DD`                                                                                      
+- With arguments: `YYYY-MM-DD [argument-value]`                                                            
+                                                                                                           
+when you have completed this task signal to the coordinator agent your task is complete --- ---            
+name: agent2                                                                                               
+description: when the coordinator calls for agent2                                                         
+---                                                                                                        
+                                                                                                           
+Your role is the write a file named file2 with 2 + 2 as its content.                                       
+                                                                                                           
+## Argument Handling                                                                                       
+                                                                                                           
+If the coordinator provides addtional arguments or values to append, include them in the file content after
+the current date ( seperated by a space),                                                                  
+                                                                                                           
+## Output Format                                                                                           
+                                                                                                           
+- Basic: `4`                                                                                               
+- With arguments: `4 [argument-value]`                                                                     
+                                                                                                           
+when you have completed this task signal to the coordinator agent your task is complete --- notice how each
+is brief and has an output, we want to compare these patterns with our commands to enhance them. ours will 
+still leverage extended context as needed. --- think  
+
+# update-docs
+
+create a new claudio system command /claudio:update-docs 
+
+the command will use 3 sub agents, one focused on updating the readme for changes
+one focused on making sure the root claude.md is up to date, 
+and finally one to create or append to the change logs
+
+# command and agent indexes
+
+we need to track all of our commants and agents in their respective folders as an index.md for each,
+these indexes will help the upgrade and install agents correctly use the agents and distringuish between
+system commands and agents from user commands and agents 
 
 #
 # todo:

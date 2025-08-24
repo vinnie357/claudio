@@ -1,7 +1,7 @@
 # Claudio System Commands Index
 
 **Total Commands**: 23 (18 User + 5 System)  
-**Last Updated**: 2025-01-20  
+**Last Updated**: 2025-08-24  
 **Component Classification**: System commands marked with `system: claudio-system`  
 
 ## Command Categories
@@ -23,9 +23,9 @@
 
 | Command | Description | Arguments | Agent |
 |---------|-------------|-----------|-------|
-| `install` | Install Claudio system with project integration | `[target_path] [mode]` | install-full-workflow-agent |
+| `install` | Install Claudio system with project integration | `[target_path] [mode]` | Direct coordination (14 agents) |
 | `install-commands` | Install commands-only version | `[target_path]` | install-commands-coordinator-agent |
-| `upgrade` | Parallel upgrade system using 6 specialized subagents | `[target_path] [--check\|--force]` | upgrade-orchestrator-agent |
+| `upgrade` | Parallel upgrade system using 7 specialized subagents | `[target_path] [--check\|--force]` | Direct coordination (7 agents) |
 | `test` | Execute system test suites with validation | `[test_type]` | project-test-runner |
 | `generate-test-commands` | Generate project-specific test commands | `[target_path]` | test-command-generator |
 
@@ -35,7 +35,7 @@
 | Command | Description | Arguments | Agent |
 |---------|-------------|-----------|-------|
 | `code-quality` | Analyze code quality and generate improvement recommendations | `[target_path] [--fix]` | code-quality-analyzer |
-| `security-review` | Comprehensive security analysis using STRIDE methodology | `[target_path] [--depth=level]` | security-review-coordinator |
+| `security-review` | Comprehensive security analysis using STRIDE methodology with Mermaid visualization | `<target_path_or_instruction> [security_framework]` | Direct coordination (1 agent) |
 | `design` | Analyze UX/UI design systems and accessibility compliance | `[target_path] [--components]` | design-analyzer |
 
 ### Development Tools (5)
@@ -44,8 +44,8 @@
 | Command | Description | Arguments | Agent |
 |---------|-------------|-----------|-------|
 | `documentation` | Create comprehensive project documentation | `[target_path] [--type=all\|api\|user]` | documentation-coordinator |
-| `update-docs` | Updates project documentation including README, CLAUDE.md, and changelogs | `[changes-description]` | Direct coordination (3 parallel agents) |
 | `test-review` | Review testing suite tools and provide recommendations | `[target_path]` | test-review |
+| `update-docs` | Updates project documentation including README, CLAUDE.md, and changelogs | `[changes-description]` | Direct coordination (3 agents) |
 | `research` | Create research documentation with overview and troubleshooting guides | `<category> <topic> [--complexity=level]` | research-specialist |
 | `phoenix-dev` | Analyze and optimize Elixir Phoenix development workflows | `[target_path]` | phoenix-dev-executor |
 
@@ -55,9 +55,9 @@
 | Command | Description | Arguments | Agent |
 |---------|-------------|-----------|-------|
 | `claude-sdk` | Analyze and improve Claude Code implementations | `[command_name] [--cross-system]` | claudio-claude-sdk-architect |
-| `new-command` | Generate custom commands with sub-agents and extended context | `<command_name> [description]` | new-command-generator |
-| `newprompt` | Create comprehensive agent prompts following Claudio conventions | `<agent_name> [purpose]` | newprompt-coordinator |
-| `implement` | Execute implementation plans with systematic task coordination | `[target_path] [--phase=N]` | implement-agent |
+| `new-command` | Generate custom commands with sub-agents and extended context | `<command_name> [description]` | Direct coordination (3 agents) |
+| `newprompt` | Create comprehensive agent prompts following Claudio conventions | `<agent_name> [purpose]` | Direct coordination (3 agents) |
+| `implement` | Execute implementation plans with systematic task coordination | `[target_path] [--phase=N]` | Direct coordination (1 agent) |
 | `gcms` | Generate conventional commit messages from git status and changes | `[--scope] [--type]` | git-commit-message |
 
 ## System Metadata
@@ -65,8 +65,8 @@
 ### Component Classification
 - **System Commands (5)**: Marked with `system: claudio-system`, excluded from user installations
 - **User Commands (18)**: Installed in user projects for workflow execution
-- **System Agents (27+)**: Installation, validation, and testing agents (excluded from user installations)  
-- **User Agents (40+)**: Workflow execution agents (included in user installations)
+- **System Agents (45+)**: Installation, validation, and testing agents (excluded from user installations)  
+- **User Agents (33+)**: Workflow execution agents (included in user installations)
 
 ### For Upgrade Agents
 - **System Components**: Commands and agents marked with `system: claudio-system`
@@ -81,20 +81,21 @@
 - **User Mode**: Install to `~/.claude/` with generic templates
 
 ### Direct Coordination Pattern Commands
-**Following new proven pattern** (no coordinator agents):
-- `claudio` - 5 sequential + parallel agents
-- `update-docs` - 3 parallel agents  
-- *(Pattern to be applied to future commands)*
+**Proven pattern for performance and reliability** (no coordinator agents):
+- `claudio` - 20+ conditional agents with smart workflow
+- `install` - 14 agents with mixed parallel/sequential execution
+- `upgrade` - 7 agents in parallel batches
+- `update-docs` - 3 parallel agents (system)
+- `security-review` - 1 agent with internal coordination
+- `newprompt` - 3 parallel agents
+- `new-command` - 3 parallel agents
+- `implement` - 1 agent
 
-### Legacy Coordinator Pattern Commands  
-**Being deprecated** (use coordinator agents):
-- `security-review` → security-review-coordinator
-- `documentation` → documentation-coordinator
-- `upgrade` → upgrade-orchestrator-agent
-- `newprompt` → newprompt-coordinator
-- `claude-sdk` → claudio-claude-sdk-architect
-- `install` → install-full-workflow-agent
-- `install-commands` → install-commands-coordinator-agent
+### Remaining Coordinator Pattern Commands  
+**Specialized requirements** (maintain coordinator pattern):
+- `documentation` → documentation-coordinator (4 parallel sub-agents)
+- `claude-sdk` → claudio-claude-sdk-architect (sequential analysis)
+- `install-commands` → install-commands-coordinator-agent (streamlined)
 
 ## Usage Examples
 

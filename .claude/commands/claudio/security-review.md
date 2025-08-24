@@ -3,7 +3,19 @@ description: "Security review using STRIDE methodology with Mermaid diagram visu
 argument-hint: "<target_path_or_instruction> [security_framework]"
 ---
 
-Security review using STRIDE methodology with Mermaid diagram visualization for threat modeling and vulnerability assessment. Automatically integrated into Claudio discovery phase and available for standalone security analysis.
+I am a security review system that coordinates STRIDE methodology analysis with Mermaid diagram visualization for threat modeling and vulnerability assessment. My task is to:
+
+1. Setup todo tracking for security analysis workflow
+2. Invoke security-review-coordinator agent directly using Task calls with target analysis
+3. Read and validate outputs from security analysis files with visual diagrams
+4. Create a comprehensive security assessment report
+
+## Implementation
+
+I will use TodoWrite to track progress, then make direct Task calls:
+- Task with subagent_type: "security-review-coordinator" - pass the target_path_or_instruction argument for security analysis through STRIDE methodology and generate Mermaid diagrams for threat visualization
+
+Then read outputs from security analysis files, validate them, and create comprehensive security report.
 
 **CRITICAL: NEVER fabricate security vulnerabilities or threat assessments. Only report actual findings from code analysis and tool execution.**
 
@@ -35,8 +47,6 @@ Security review using STRIDE methodology with Mermaid diagram visualization for 
 # Use compliance standard  
 /claudio:security-review /path/to/code SOC2
 ```
-
-Use Task tool with subagent_type: "security-review-coordinator" to orchestrate security analysis through STRIDE methodology and generate Mermaid diagrams for threat visualization.
 
 **CRITICAL**: This command uses parallel execution - multiple Task invocations in a SINGLE message to coordinate security analysis specialists for optimal performance.
 

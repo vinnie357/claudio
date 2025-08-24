@@ -26,7 +26,7 @@ I will use TodoWrite to track progress, then make direct Task calls:
 
 **Parallel Component Update** (Run multiple Task invocations in SINGLE message):
 - Task with subagent_type: "upgrade-component-localizer" - pass the project_path argument for component re-localization
-- Task with subagent_type: "claude-md-generator" - pass the project_path argument for CLAUDE.md refresh
+- Task with subagent_type: "claude-md-generator-agent" - pass the project_path argument for CLAUDE.md refresh
 
 **Sequential Completion**:
 - Task with subagent_type: "upgrade-installation-validator" - pass the project_path argument for final validation

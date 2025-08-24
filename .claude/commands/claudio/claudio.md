@@ -23,8 +23,8 @@ I will use TodoWrite to track progress, then execute the smart conditional workf
 **If Installation NOT Found** (run full install):
 
 **Sequential Foundation**:
-- Task with subagent_type: "install-path-validator" - pass the project_path argument for path validation
-- Task with subagent_type: "install-directory-creator" - pass the project_path argument for structure creation
+- Task with subagent_type: "install-path-validator-agent" - pass the project_path argument for path validation
+- Task with subagent_type: "install-directory-creator-agent" - pass the project_path argument for structure creation
 
 **Parallel Discovery Analysis** (Run multiple Task invocations in SINGLE message):
 - Task with subagent_type: "discovery-structure-analyzer" - pass the project_path argument for structure analysis
@@ -36,16 +36,16 @@ I will use TodoWrite to track progress, then execute the smart conditional workf
 - Task with subagent_type: "discovery-consolidator" - pass the project_path argument for consolidating analyses
 
 **Parallel Command Generation**:
-- Task with subagent_type: "install-commands-localizer" - pass the project_path argument for command localization
+- Task with subagent_type: "install-commands-localizer-agent" - pass the project_path argument for command localization
 - Task with subagent_type: "test-command-generator" - pass the project_path argument for test command generation
 
 **Sequential Agent Generation**:
-- Task with subagent_type: "install-agents-localizer" - pass the project_path argument for agent localization
+- Task with subagent_type: "install-agents-localizer-agent" - pass the project_path argument for agent localization
 
 **Sequential Context & Documentation**:
-- Task with subagent_type: "install-extended-context-generator" - pass the project_path argument for context creation
-- Task with subagent_type: "claude-md-generator" - pass the project_path argument for CLAUDE.md generation
-- Task with subagent_type: "user-readme-generator" - pass the project_path argument for user documentation
+- Task with subagent_type: "install-extended-context-generator-agent" - pass the project_path argument for context creation
+- Task with subagent_type: "claude-md-generator-agent" - pass the project_path argument for CLAUDE.md generation
+- Task with subagent_type: "user-readme-generator-agent" - pass the project_path argument for user documentation
 
 **Sequential Validation**:
 - Task with subagent_type: "install-validator" - pass the project_path argument for validation

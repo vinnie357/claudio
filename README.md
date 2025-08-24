@@ -11,12 +11,12 @@ Claudio is a comprehensive project analysis system built on specialized AI agent
 **Key Features:**
 - **Enhanced Discovery System**: 5 parallel specialist agents (structure, technology, architecture, integration, consolidation) for comprehensive project understanding with 5x faster analysis
 - **User README Generator Agent**: Automated project-specific documentation generation with technology stack-aware content and integration guidance
-- **System Component Classification**: Automatic filtering between system (45+ internal components) and user components (60+ workflow components) for optimized installations
+- **System Component Classification**: Automatic filtering between system (45+ internal components) and user components (78+ workflow components) for optimized installations with accurate command→agent mappings
 - **Project-Specific CLAUDE.md Generation**: Technology stack-aware integration guidance generated during installation based on discovery analysis
 - **Parallel Upgrade System**: 6 specialized subagents with batched execution for improved performance (discovery, legacy cleanup, template analysis, backup management, localization, validation)
 - **Project-Specific Test Commands**: Auto-generated `/claudio:test` and `/claudio:test-g` commands during installation based on detected testing frameworks
 - **Documentation Maintenance**: Parallel agent coordination (readme-updater, claude-md-updater, changelog-updater) with user-readme-generator for comprehensive updates
-- **Enhanced Agent Coordination**: Natural language sub-agent invocation patterns for improved system reliability and Claude Code integration
+- **Enhanced Agent Coordination**: Direct coordination patterns with proper subagent_type references matching actual agent file names for improved system reliability
 - **Research System**: Complexity-aware analysis with Think/Ultrathink modes for advanced topics and authoritative source integration
 - **Claude SDK Development**: Sequential analysis of Claude Code implementations with cross-system comparison capabilities
 - **Intelligent Localization**: Components automatically adapt to specific project context through discovery-based customization
@@ -70,12 +70,12 @@ Claudio employs specialized AI agents that orchestrate different aspects of proj
   - **upgrade-component-localizer**: Project-specific template application and test command coordination
   - **upgrade-installation-validator**: Integrity verification and completion reporting
 - **System Component Classification**:
-  - **install-system-installer**: Automatic filtering between system (45+ components) and user components (60+ components) with improved installation logic
+  - **install-system-installer**: Automatic filtering between system (45+ components) and user components (78+ components) with accurate command→agent mappings and improved installation logic
   - **install-directory-creator-agent**: Creates project directory structures during installation
   - **install-path-validator-agent**: Validates installation paths and permissions
 - **code-quality-analyzer**: Analyzes code quality with comprehensive reporting
 
-Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context through discovery-based customization. **All agents use lowercase-hyphen naming convention** and employ **natural language sub-agent invocation patterns** for improved Claude Code integration.
+Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context through discovery-based customization. **All agents use lowercase-hyphen naming convention** and employ **direct coordination patterns with verified subagent_type references** matching actual agent file names for improved system reliability and Claude Code integration.
 
 ## Requirements
 
@@ -153,10 +153,10 @@ claude
 - Maintain consistency in project-specific analysis across your organization
 - Components automatically adapt to your technology stack and architecture patterns through discovery-based customization
 - **5 parallel specialist agents** provide comprehensive project understanding with 5x performance improvement (structure, technology, architecture, integration, consolidation)
-- **Automatic system component filtering** ensures only relevant user components (60+) are installed from total system (105+ components)
+- **Automatic system component filtering** ensures only relevant user components (78+) are installed from total system (123+ components) with accurate command→agent mappings
 - **Project-specific CLAUDE.md generation** with technology stack-aware integration guidance and framework-specific workflows
 - **Auto-generated test commands** (`/claudio:test`, `/claudio:test-g`) based on detected testing frameworks during installation
-- **Enhanced agent coordination** with natural language sub-agent invocation patterns for improved system reliability
+- **Enhanced agent coordination** with direct coordination patterns and verified subagent_type references for improved system reliability
 
 **Benefits of Global User Installation (Option 3)**:
 - Use generic Claudio tools across multiple projects
@@ -191,7 +191,7 @@ This will create a comprehensive `.claudio/` folder in your target project with:
 **Quality Assurance**: All outputs are automatically validated for completeness and quality through integrated validation loops.
 
 ### Team/Organization Setup
-1. **Install localized system**: `/claudio:install /path/to/team/project` (runs 5 parallel specialist discovery agents and localizes 60+ components with system filtering)
+1. **Install localized system**: `/claudio:install /path/to/team/project` (runs 5 parallel specialist discovery agents and localizes 78+ components with system filtering and verified command→agent mappings)
 2. **Team members use**: Navigate to project, start Claude, use project-customized `/claudio:claudio` with technology stack-aware workflows
 3. **Stay updated**: Use `/claudio:upgrade` with 6 parallel subagents for efficient localization updates
 4. **Version control**: Commit `.claude/` folder for team consistency with project-specific customizations and auto-generated test commands
@@ -1195,12 +1195,12 @@ To add a new generator:
 
 - **5 Parallel Specialist Agents**: Comprehensive project understanding with 5x performance improvement through simultaneous structure, technology, architecture, integration, and consolidation analysis
 - **User README Generator Agent**: Automated project-specific documentation generation with technology stack-aware content and integration guidance
-- **System Component Classification**: Automatic filtering between system (45+ internal) and user components (60+ workflow) ensures optimized installations
+- **System Component Classification**: Automatic filtering between system (45+ internal) and user components (78+ workflow) ensures optimized installations with accurate command→agent mappings
 - **Project-Specific CLAUDE.md Generation**: Technology stack-aware integration guidance automatically generated during installation based on discovery
 - **Parallel Upgrade System**: 6 specialized subagents with batched execution (discovery, cleanup, templates, backup, localization, validation) for improved performance
 - **Auto-Generated Test Commands**: Project-specific `/claudio:test` and `/claudio:test-g` created during installation based on detected testing frameworks
 - **Documentation Maintenance System**: Parallel agent coordination (readme-updater, claude-md-updater, changelog-updater, user-readme-generator) for comprehensive updates
-- **Enhanced Agent Coordination**: Natural language sub-agent invocation patterns for improved system reliability and Claude Code integration
+- **Enhanced Agent Coordination**: Direct coordination patterns with verified subagent_type references matching actual agent file names for improved system reliability
 - **Complexity-Aware Research**: Think/Ultrathink modes for advanced topics with authoritative source integration and quality assessment
 - **Claude SDK Development Capabilities**: Sequential analysis of Claude Code implementations with cross-system comparison and architecture evaluation
 - **Clear Implementation Path**: Receive actionable plans with time estimates based on comprehensive 5-stage discovery with consolidation
@@ -1213,6 +1213,7 @@ To add a new generator:
 - **Multi-Mode Flexibility**: Use globally for multiple projects or install project-specific versions with intelligent discovery-based localization
 - **Research-Driven Command Generation**: Create tailored commands from research sources with workflow integration and validation
 - **Enhanced Upgrade Management**: Parallel execution with backup management, rollback capabilities, and version tracking
+- **System Reliability Improvements**: Fixed 15+ subagent_type references across upgrade, install, and claudio commands to match actual agent file names for consistent operation
 
 ## Getting Help
 

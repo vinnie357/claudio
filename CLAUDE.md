@@ -91,14 +91,20 @@ Then read outputs, validate them, and create comprehensive report.
 - ❌ File operations without proper termination checks
 - ❌ Incomplete error handling and recovery mechanisms
 - ❌ Missing system vs user component classification
+- ❌ Incorrect subagent_type references that don't match actual agent files
+- ❌ Inconsistent agent naming (must use lowercase-hyphen format)
 
 ### **✅ Proven Examples**
 - **`/claudio:update-docs`**: Uses 3 parallel agents (readme-updater, claude-md-updater, changelog-updater)
 - **`/claudio:discovery`**: Enhanced parallel system with 5 specialized analyzers + consolidation
-- **`/claudio:claudio`**: Direct coordination without coordinator complexity
-- **`/claudio:upgrade`**: Uses 6 parallel agents with batched execution
-- **`/claudio:generate-test-commands`**: Project-specific test command generation with framework detection
-- **Pattern Success**: Fast, reliable, clear completion signaling with validated outputs
+- **`/claudio:claudio`**: Direct coordination without coordinator complexity (20+ conditional agents)
+- **`/claudio:upgrade`**: Uses 7 parallel agents with direct coordination and batched execution (corrected from previous 6-agent reference)
+- **`/claudio:install`**: Uses 14 agents with direct coordination and mixed parallel/sequential execution
+- **`/claudio:security-review`**: Direct coordination with 1 agent using internal coordination
+- **`/claudio:new-command`**: Direct coordination with 3 parallel agents
+- **`/claudio:newprompt`**: Direct coordination with 3 parallel agents
+- **`/claudio:implement`**: Direct coordination with 1 agent
+- **Pattern Success**: Fast, reliable, clear completion signaling with validated outputs and accurate agent references
 
 ## Core Components
 
@@ -109,13 +115,12 @@ Claudio uses the `system: claudio-system` frontmatter field to differentiate bet
 #### **System Components (Internal Use Only)**
 Components marked with `system: claudio-system` are excluded from user installations and remain in the main Claudio directory for system operations:
 
-**System Commands (6 components):**
-- **`/claudio:install`**: System installation and setup coordination
-- **`/claudio:upgrade`**: System upgrade and maintenance coordination  
+**System Commands (5 components):**
+- **`/claudio:install`**: System installation and setup coordination with direct coordination (14 agents)
+- **`/claudio:upgrade`**: System upgrade and maintenance coordination with direct coordination (7 agents)  
 - **`/claudio:test`**: System testing and validation workflows
 - **`/claudio:install-commands`**: Commands-only installation coordination
 - **`/claudio:generate-test-commands`**: Project-specific test command generation system
-- **`/claudio:update-docs`**: Documentation maintenance with parallel agent coordination
 
 **System Agents (45+ components):**
 - **Installation Agents**: `install-*` (path validation, directory creation, component localization)
@@ -134,7 +139,7 @@ Components marked with `system: claudio-system` are excluded from user installat
 #### **User Components (Workflow Execution)**
 Components without the system tag are installed to user projects and provide workflow functionality:
 
-**User Commands (20+ components):**
+**User Commands (18 components):**
 - **Core Workflow**: `/claudio:discovery`, `/claudio:prd`, `/claudio:plan`, `/claudio:task`, `/claudio:claudio`
 - **Testing**: `/claudio:test`, `/claudio:test-g` (project-specific test commands generated during installation)
 - **Analysis Tools**: `/claudio:code-quality`, `/claudio:security-review`, `/claudio:design`, `/claudio:test-review`
@@ -142,7 +147,7 @@ Components without the system tag are installed to user projects and provide wor
 - **Development**: `/claudio:claude-sdk`, `/claudio:phoenix-dev`, `/claudio:implement`, `/claudio:newprompt`, `/claudio:new-command`
 - **Specialized**: `/claudio:gcms` (Git commit message generation)
 
-**User Agents (35+ components):**
+**User Agents (33+ components):**
 - **Workflow Agents**: `discovery-agent`, `prd-agent`, `plan-agent`, `task-agent`, `claudio-coordinator-agent`
 - **Analysis Agents**: `code-quality-analyzer`, `security-review-coordinator`, `design-analyzer`
 - **Security Specialists**: `vulnerability-assessment-specialist`, `security-architecture-analyst`, `security-threat-modeler`, `security-diagram-generator`
@@ -171,7 +176,7 @@ This ensures users receive only workflow-relevant components while keeping syste
 - **`/claudio:test`**: Execute project test suite with intelligent analysis and optional fixes
 - **`/claudio:claudio`**: Complete project analysis workflow
 - **`/claudio:update-docs`**: Update README, CLAUDE.md, and changelogs with parallel agent coordination
-- **`/claudio:upgrade`**: Parallel upgrade system using 6 specialized subagents for improved performance
+- **`/claudio:upgrade`**: Parallel upgrade system using 7 specialized subagents with direct coordination for improved performance
 - **`/claudio:claude-sdk`**: Analyze and improve Claude Code implementations
 - **`/claudio:gcms`**: Generate intelligent Git commit messages based on staged changes
 - **`/claudio:newprompt`**: Create new command and agent prompts with integrated planning
@@ -226,7 +231,7 @@ This ensures users receive only workflow-relevant components while keeping syste
 /claudio:upgrade --force               # Force complete re-installation with full re-discovery
 ```
 
-**Parallel Architecture**: The upgrade system uses 6 specialized subagents with parallel execution for improved performance:
+**Parallel Architecture**: The upgrade system uses 7 specialized subagents with direct coordination and parallel execution for improved performance:
 - **Discovery Analyzer**: Installation analysis and compatibility assessment
 - **Legacy Cleaner**: Phase 0 deprecated pattern cleanup with user content protection
 - **Template Analyzer**: Localization planning and conflict detection  
@@ -235,6 +240,8 @@ This ensures users receive only workflow-relevant components while keeping syste
 - **Installation Validator**: Integrity verification and completion reporting
 
 **Performance Optimization**: Parallel batch execution (Phase 2: template analysis + backup creation, Phase 3: localization + validation) provides improved efficiency while maintaining safety guarantees.
+
+**Recent System Improvements**: Fixed 15+ subagent_type references in upgrade, install, and claudio commands to match actual agent files, ensuring reliable command execution with accurate agent mappings.
 
 ### Claude Code Development
 ```bash
@@ -494,6 +501,21 @@ The Claudio system handles missing extended context gracefully:
 - **Recovery Mechanisms**: Graceful handling of partial results, incomplete analysis, and system interruptions  
 - **Status Verification**: Mandatory verification that all operations complete successfully before signaling completion
 - **Safety Guarantees**: Multi-layer safety mechanisms prevent data loss and ensure system integrity
+
+### **System Reliability Improvements**
+
+**Recent Critical Fixes**:
+- **Command→Agent Mapping Validation**: Fixed 15+ subagent_type references to match actual agent files
+- **Agent Count Accuracy**: Corrected system statistics to reflect actual 78 agents (23 commands, 18 user + 5 system)
+- **Index Synchronization**: Updated both agent and commands indexes with accurate component counts and mappings
+- **Direct Coordination Migration**: Completed migration for 8 commands eliminating coordinator overhead
+- **Agent Reference Consistency**: Ensured proper -agent suffixes and lowercase-hyphen naming throughout system
+
+**Integration Pattern Enhancements**:
+- **Proven Direct Coordination**: 8 commands now use direct coordination pattern for improved performance
+- **Accurate Agent References**: All subagent_type references validated against actual implementation files
+- **System Reliability**: Enhanced command execution reliability through proper agent mapping
+- **Documentation Accuracy**: Technical documentation now matches actual system implementation
 
 ## Important Instructions
 

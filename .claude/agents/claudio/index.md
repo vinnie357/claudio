@@ -2,8 +2,8 @@
 
 **System Marker**: `system: claudio-system`  
 **Total Commands**: 23  
-**Total Agents**: 64  
-**Last Updated**: 2025-01-20  
+**Total Agents**: 78  
+**Last Updated**: 2025-08-24  
 
 ## Command Architecture Overview
 
@@ -24,33 +24,42 @@ Claudio Command System (23 Commands)
 │   └── /claudio:task → task-agent [LEAF]
 │
 ├── Installation & Management (3)
-│   ├── /claudio:install → install-full-workflow-agent
-│   │   ├── discovery-agent (immediate execution)
-│   │   ├── install-system-installer (generates localized components)
-│   │   └── initial workflow structure creation
-│   │   └── [Total: 2 subagents, direct execution pattern]
+│   ├── /claudio:install → Direct coordination (no coordinator)
+│   │   ├── install-path-validator-agent (sequential)
+│   │   ├── install-directory-creator-agent (sequential)
+│   │   ├── discovery-structure-analyzer (parallel)
+│   │   ├── discovery-tech-analyzer (parallel)
+│   │   ├── discovery-architecture-analyzer (parallel)
+│   │   ├── discovery-integration-analyzer (parallel)
+│   │   ├── discovery-consolidator (sequential)
+│   │   ├── install-commands-localizer-agent (parallel)
+│   │   ├── test-command-generator (parallel)
+│   │   ├── install-agents-localizer-agent (sequential)
+│   │   ├── install-extended-context-generator-agent (sequential)
+│   │   ├── claude-md-generator-agent (sequential)
+│   │   ├── user-readme-generator-agent (sequential)
+│   │   └── install-validator (sequential)
+│   │   └── [Total: 14 subagents with mixed parallel/sequential execution]
 │   │
 │   ├── /claudio:install-commands → install-commands-coordinator-agent
 │   │   ├── install-commands-only-agent (streamlined installation)
 │   │   └── [Total: 1 subagent, fast commands-only pattern]
 │   │
-│   └── /claudio:upgrade → upgrade-orchestrator-agent
-│       ├── upgrade-discovery-analyzer
-│       ├── upgrade-legacy-cleaner
+│   └── /claudio:upgrade → Direct coordination (no coordinator)
+│       ├── upgrade-discovery-analyzer (sequential)
+│       ├── upgrade-legacy-cleaner (sequential)
 │       ├── upgrade-template-analyzer (parallel)
 │       ├── upgrade-backup-manager (parallel)
 │       ├── upgrade-component-localizer (parallel)
-│       └── upgrade-installation-validator (parallel)
-│       └── [Total: 6 subagents in parallel batches]
+│       ├── claude-md-generator-agent (parallel)
+│       └── upgrade-installation-validator (sequential)
+│       └── [Total: 7 subagents in parallel batches]
 │
 ├── Analysis & Quality (3)
 │   ├── /claudio:code-quality → code-quality-analyzer [LEAF]
-│   ├── /claudio:security-review → security-review-coordinator
-│   │   ├── vulnerability-assessment-specialist
-│   │   ├── security-architecture-analyst  
-│   │   ├── security-threat-modeler
-│   │   └── security-diagram-generator
-│   │   └── [Total: 4 subagents]
+│   ├── /claudio:security-review → Direct coordination (no coordinator)
+│   │   └── security-review-coordinator (parallel)
+│   │   └── [Total: 1 subagent with internal coordination]
 │   │
 │   └── /claudio:design → design-analyzer [LEAF]
 │
@@ -80,28 +89,36 @@ Claudio Command System (23 Commands)
     │   └── claudio-claude-subagents-analyst (parallel)  
     │   └── [Total: 2 subagents in parallel]
     │
-    ├── /claudio:new-command → new-command-generator [LEAF]
-    ├── /claudio:newprompt → newprompt-coordinator
+    ├── /claudio:new-command → Direct coordination (no coordinator)
+    │   ├── research-specialist (parallel)
+    │   ├── new-command-generator (parallel)
+    │   └── new-command-validator (parallel)
+    │   └── [Total: 3 subagents in parallel]
+    │
+    ├── /claudio:newprompt → Direct coordination (no coordinator)
     │   ├── newprompt-agent-creator (parallel)
     │   ├── newprompt-command-creator (parallel)
     │   └── newprompt-integration-planner (parallel)
     │   └── [Total: 3 subagents in parallel]
     │
-    ├── /claudio:implement → implement-agent [LEAF]
+    ├── /claudio:implement → Direct coordination (no coordinator)
+    │   └── implement-agent (parallel)
+    │   └── [Total: 1 subagent]
+    │
     └── /claudio:gcms → git-commit-message [LEAF]
 ```
 
 ## Installation Groupings
 
 ### Commands-Only Installation (/claudio:install commands)
-**Installs Core System (45+ agents):**
-- All 20 command files
+**Installs Core System (78 agents):**
+- All 23 command files
 - All required subagents for commands to function
 - Discovery, workflow, documentation, and research agents
 - Extended context: workflow/, development/, research/, documentation/
 
 ### Full Workflow Installation (/claudio:install)  
-**Installs Complete System (45+ agents + workflow docs):**
+**Installs Complete System (78 agents + workflow docs):**
 - Everything from commands-only
 - Plus: Complete .claudio/ workflow documents (discovery.md, prd.md, plan.md, etc.)
 - Extended context: All categories as needed by installed agents
@@ -109,7 +126,7 @@ Claudio Command System (23 Commands)
 ### Complete Analysis (/claudio:claudio)
 **Uses Existing Installation + Orchestrates Full Workflow:**
 - Requires existing Claudio installation
-- Executes claudio-coordinator-agent → 15+ subagents in parallel batches
+- Direct coordination with 20+ subagents in conditional batches
 - Creates complete .claudio/docs/ and phase structure
 
 ## Extended Context Requirements by Command Group
@@ -138,16 +155,16 @@ Claudio Command System (23 Commands)
 ## Summary Statistics
 
 - **Total Commands**: 23
-- **Leaf Commands** (single agent): 14  
-- **Orchestrator Commands** (multiple agents): 9
-- **Maximum Subagents**: 6 (upgrade-orchestrator-agent) 
-- **Total Unique Agents**: 64 across entire system
+- **Leaf Commands** (single agent): 12  
+- **Multi-agent Commands** (multiple agents): 11
+- **Maximum Subagents**: 14 (/claudio:install direct coordination) 
+- **Total Unique Agents**: 78 across entire system
 - **Extended Context Categories**: 7 (6 typically used)
 
 ## All System Agents (Alphabetical)
 
 **System Marker**: `system: claudio-system`  
-**Total**: 64 agents across all categories
+**Total**: 78 agents across all categories
 
 ### A-C
 - **changelog-updater-agent** - Creates and maintains changelog files with version tracking
@@ -253,19 +270,26 @@ Claudio Command System (23 Commands)
 
 ## Direct Coordination Pattern Migration
 
-### **✅ New Pattern** (Fast, Reliable)
-- **claudio** - Direct coordination, 5 agents
+### **✅ Completed Migrations** (Fast, Reliable)
+- **claudio** - Direct coordination, 20+ conditional agents
 - **update-docs** - Direct coordination, 3 agents
+- **install** - Direct coordination, 14 agents with mixed execution
+- **upgrade** - Direct coordination, 7 agents in parallel batches
+- **security-review** - Direct coordination, 1 agent with internal coordination
+- **newprompt** - Direct coordination, 3 parallel agents
+- **new-command** - Direct coordination, 3 parallel agents
+- **implement** - Direct coordination, 1 agent
 
-### **🔄 Migration Candidates** (High Priority)
-- **documentation** → Direct coordination with 4 parallel agents
-- **security-review** → Direct coordination with 4 parallel agents  
-- **newprompt** → Direct coordination with 3 parallel agents
+### **🔄 Remaining Coordinator Pattern** (Specialized)
+- **documentation** → Uses documentation-coordinator (4 parallel sub-agents)
+- **claude-sdk** - Uses claudio-claude-sdk-architect (sequential analysis)
+- **install-commands** - Uses install-commands-coordinator-agent (streamlined)
 
-### **⚠️ Complex Coordinators** (Specialized, Keep As-Is)
-- **upgrade** - 6 parallel agents with complex dependencies
-- **install** - Complex multi-phase installation logic
-- **claude-sdk** - Sequential analysis requirements
+### **✨ Direct Coordination Benefits**
+- **Performance**: Eliminated coordinator overhead
+- **Reliability**: Reduced coordination complexity
+- **Clarity**: Direct command→agent relationships
+- **Maintenance**: Simplified debugging and updates
 
 ## Dynamic Extended Context Logic
 

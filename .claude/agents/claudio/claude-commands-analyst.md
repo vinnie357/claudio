@@ -3,6 +3,7 @@ name: claudio-claude-commands-analyst
 description: "Evaluates Claude Code slash commands across systems with cross-system analysis capabilities. Use for command analysis, integration quality assessment, and best practice validation tasks."
 tools: [Read, Glob, Grep, LS]
 model: sonnet
+system: claudio-system
 ---
 
 # Claude Commands Analyst

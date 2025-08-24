@@ -3,6 +3,7 @@ name: claudio-claude-subagents-analyst
 description: "Analyzes Claude Code sub-agents across systems with architecture evaluation, model selection analysis, and coordination assessment capabilities. Use for agent quality analysis, performance evaluation, and architectural review tasks."
 tools: [Read, Glob, Grep, LS]
 model: sonnet
+system: claudio-system
 ---
 
 # Claude Subagents Analyst

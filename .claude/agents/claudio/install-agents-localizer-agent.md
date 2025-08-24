@@ -42,94 +42,107 @@ The coordinator provides the target project path as an argument:
    - **Testing Frameworks**: Jest, pytest, JUnit, Go test, RSpec
    - **Build Systems**: Webpack, Vite, npm/yarn, pip, Maven, Gradle
 
-### Phase 2: Core Workflow Agent Localization
-1. **discovery-agent.md**:
-   - Include technology-specific analysis patterns
-   - Add framework-specific discovery questions
-   - Reference project-appropriate tools and conventions
-   - Customize for detected architecture patterns
+### Phase 2: Dependency Analysis from Index
 
-2. **prd-agent.md**:
-   - Adapt requirements approaches to project domain
-   - Include domain-specific requirement templates
-   - Reference appropriate stakeholder patterns
-   - Customize for project scale and complexity
+1. **Read Index Mapping**:
+   - Load source index: `/.claude/agents/claudio/index.md`
+   - Extract command → agent → subagent tree structure
+   - Parse "Command Architecture Overview" for complete dependency mapping
+   - Identify all required agents across the entire command system
 
-3. **plan-agent.md**:
-   - Customize planning strategies for detected patterns
-   - Include architecture-specific implementation phases
-   - Reference appropriate development methodologies
-   - Adapt to project team size and structure
+2. **Build Required Agents List**:
+   - Start with all user agents (without `system: claudio-system`)
+   - Add all subagents referenced by commands:
+     * claudio-structure-creator-agent (for /claudio:claudio)
+     * documentation-*-creator agents (for documentation-coordinator)  
+     * security-threat-modeler, security-diagram-generator (for security-review-coordinator)
+     * vulnerability-assessment-specialist, security-architecture-analyst (for security-review-coordinator)
+   - Include sub-subagents referenced by coordinator agents
+   - Ensure complete coverage of all dependencies from index
 
-4. **task-agent.md**:
-   - Optimize task organization for project complexity
-   - Include technology-specific task breakdown patterns
-   - Reference appropriate development workflows
-   - Customize for detected build and deployment systems
+3. **Validate Dependency Completeness**:
+   - Cross-reference index tree with available source agents
+   - Report any missing source agents that are required
+   - Create comprehensive agent installation list ensuring no orphaned references
 
-### Phase 3: Development Tool Agent Localization
-1. **code-quality-analyzer.md**:
-   - Configure for detected languages and tools
-   - Reference project-specific linters and formatters
-   - Include appropriate quality metrics and standards
-   - Adapt to project testing and CI/CD patterns
+### Phase 3: Dynamic Agent Discovery and Localization
 
-2. **test-command-generator.md**:
-   - Customize for discovered testing setup
-   - Reference detected testing frameworks
-   - Include appropriate test organization patterns
-   - Adapt to project build system integration
+1. **Discover All Required Agents** (Enhanced from Phase 2):
+   - Use dependency list from index analysis (not just user agents)
+   - Read source agent directory: `/.claude/agents/claudio/`
+   - Filter out agents with `system: claudio-system` frontmatter  
+   - Create list of ALL required agents ensuring complete command functionality
 
-3. **design-analyzer.md**:
-   - Adapt to detected UI frameworks and patterns
-   - Include appropriate design system references
-   - Reference project-specific accessibility patterns
-   - Customize for detected frontend architecture
+2. **Generate Localized Version of Each User Agent**:
+   For each discovered user agent:
+   - Read original agent template
+   - Extract agent purpose and core responsibilities
+   - Generate project-specific localized version with:
+     * Technology-specific capabilities (Node.js/microservices integration)
+     * Extended context awareness (graceful handling when context exists/doesn't exist)
+     * Project-specific examples and patterns (e-commerce domain)
+     * Reference to project-appropriate tools and frameworks
 
-### Phase 4: Project-Specific Agent Customizations
+3. **Agent Localization Patterns**:
+   - **Workflow Agents** (discovery, prd, plan, task): Include microservices architecture patterns
+   - **Development Agents** (code-quality, design, research): Include Node.js tooling and patterns
+   - **Security Agents** (security-review-coordinator, etc.): Include e-commerce security patterns
+   - **Documentation Agents** (documentation-coordinator, etc.): Include API documentation patterns
+   - **Utility Agents** (git-commit-message, updater agents): Include project workflow integration
 
-#### **React/Frontend Projects**
-- **Agents**: Reference React testing libraries, component patterns, state management
-- **Discovery**: Include React-specific analysis questions
-- **Planning**: Add component architecture planning patterns
-- **Quality**: Reference React-specific linting and testing tools
+4. **Extended Context Awareness**:
+   - All agents include fallback logic for missing extended context
+   - Agents can utilize extended context when available
+   - Graceful degradation when extended context doesn't exist yet
+   - Dynamic context loading patterns
 
-#### **Python Projects**  
-- **Agents**: Reference Python frameworks, testing patterns, packaging
-- **Discovery**: Include Python ecosystem analysis
-- **Planning**: Add Python project structure patterns
-- **Quality**: Reference Python-specific tools (black, mypy, pytest)
+### Phase 4: Implementation Process
 
-#### **Microservices Architecture**
-- **Agents**: Include service coordination and API design patterns
-- **Discovery**: Add distributed systems analysis
-- **Planning**: Include service boundary and deployment patterns
-- **Quality**: Reference microservices testing strategies
+1. **Read Index and Source Agents**:
+   - Use Read tool to load source index: `/.claude/agents/claudio/index.md`
+   - Parse command-agent dependency tree to identify ALL required agents
+   - Use LS and Glob tools to list all source agents  
+   - Read each required agent file to understand purpose and responsibilities
+   - Skip agents marked with `system: claudio-system`
+   - Ensure all agents from dependency analysis are included
 
-#### **Node.js/Express Projects**
-- **Agents**: Reference Node.js ecosystem tools and patterns
-- **Discovery**: Include Node.js-specific analysis
-- **Planning**: Add npm/yarn workflow patterns
-- **Quality**: Reference Node.js testing and quality tools
+2. **Apply Project Context** (following test-command-generator pattern):
+   - Extract technology stack from discovery analysis
+   - Identify project domain and architecture patterns
+   - Determine appropriate tool integrations and examples
 
-## Agent Filtering and Installation Logic:
+3. **Generate Localized Agents** (for each discovered user agent):
+   - **Keep agent structure**: Preserve name, description, and core functionality
+   - **Add extended context awareness**: Include graceful fallback when context missing
+   - **Localize capabilities**: Add Node.js/microservices/e-commerce specific capabilities
+   - **Update tool references**: Include project-appropriate tools and frameworks
+   - **Add project examples**: Include relevant usage patterns and integration points
 
-### Core Agents to Localize (User-Facing)
-- **discovery-agent**: Project analysis and technology detection
-- **prd-agent**: Requirements gathering and specification
-- **plan-agent**: Implementation planning and strategy
-- **task-agent**: Task breakdown and organization
-- **code-quality-analyzer**: Code quality assessment
-- **test-command-generator**: Test framework integration
-- **design-analyzer**: UI/UX and design evaluation
-- **documentation-coordinator**: Documentation generation
+4. **Extended Context Integration**:
+   - Agents check for extended context availability before using it
+   - Fallback to built-in knowledge when extended context not available
+   - Dynamic context loading when context becomes available
+   - Graceful degradation patterns for partial context
 
-### Agents to Exclude (System Only)
-- **Installation System**: install-*, upgrade-* agents (marked `system: claudio-system`)
-- **System Testing**: Internal validation and testing agents
-- **System Coordination**: Internal orchestration and management tools
+5. **Write Localized Agents**:
+   - Create each agent file in `{project_path}/.claude/agents/claudio/`
+   - Ensure all agents have extended context awareness
+   - Include project-specific capabilities and examples
 
-## Technology-Specific Agent Examples:
+6. **Create Agent Index**:
+   - Create `{project_path}/.claude/agents/claudio/index.md` following Claudio pattern
+   - List all installed agents with their descriptions and purposes
+   - Include dependency information for future validation and upgrades
+   - Document which agents are available for command references
+
+## Localization Examples for Current Project (ShopFlow E-commerce):
+
+### **Node.js/Microservices Specialization**
+Based on discovery analysis showing Node.js microservices architecture:
+- **Workflow agents**: Include service boundary analysis and API contract planning
+- **Development agents**: Include npm/yarn workflows, Express.js patterns, PostgreSQL integration
+- **Security agents**: Include e-commerce security patterns and PCI compliance considerations
+- **Documentation agents**: Include API documentation for microservices
 
 ### **React Project - discovery-agent.md**
 ```markdown

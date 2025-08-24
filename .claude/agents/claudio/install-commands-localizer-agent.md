@@ -35,122 +35,92 @@ The coordinator provides the target project path as an argument:
    - Understand development workflows and build systems
    - Note project scale and complexity indicators
 
-2. **Validate Localized Agents**:
+2. **Command-Agent Validation from Index**:
+   - Load source index: `/.claude/agents/claudio/index.md`
+   - Extract command → agent → subagent dependency mappings
+   - Parse "Command Architecture Overview" tree structure
+   - Build command-agent reference map for validation
+
+3. **Validate Localized Agents**:
    - Verify localized agents exist in `{project_path}/.claude/agents/claudio/`
-   - Confirm key agents are available (discovery-agent, prd-agent, plan-agent, task-agent)
-   - Check for technology-specific agents (code-quality-analyzer, test-command-generator)
-   - Ensure agent references in commands will be valid
+   - For each command being localized, check index requirements:
+     * Confirm ALL required agents from index are available
+     * Verify coordinator agents have all their required subagents
+     * Validate complete dependency chains (command → agent → subagent)
+   - Report missing agents before proceeding with command creation
+   - Ensure agent references in commands will be valid per index specifications
 
-### Phase 2: Core Workflow Command Localization
-1. **claudio.md**:
-   - Customize workflow examples for project architecture
-   - Reference localized agents with proper subagent_type names
-   - Include project-specific workflow patterns
-   - Adapt examples to detected technology stack
+### Phase 2: Dynamic Command Discovery and Localization
 
-2. **discovery.md**:
-   - Add project-type-specific analysis patterns
-   - Reference localized discovery-agent
-   - Include technology-specific discovery examples
-   - Customize for detected project structure
+1. **Discover All User Commands**:
+   - Read source command directory: `/.claude/commands/claudio/`
+   - Filter out commands with `system: claudio-system` frontmatter
+   - Create list of ALL user commands that need localization
 
-3. **prd.md**:
-   - Tailor requirements templates to project domain
-   - Reference localized prd-agent
-   - Include domain-specific requirement examples
-   - Adapt to project business context
+2. **Generate Localized Version of Each User Command**:
+   For each discovered user command:
+   - Read original command template
+   - Extract command purpose and argument patterns
+   - Generate project-specific localized version with:
+     * Technology-specific examples (Node.js/microservices for current project)
+     * References to localized agents (not generic agents)  
+     * Project-specific usage patterns and workflows
+     * Domain-appropriate examples (e-commerce for current project)
 
-4. **plan.md**:
-   - Adapt planning approaches for detected architecture
-   - Reference localized plan-agent
-   - Include architecture-specific planning examples
-   - Customize for project development methodology
+3. **Command Localization Patterns**:
+   - **Workflow Commands** (discovery, prd, plan, task, claudio): Include project architecture examples
+   - **Development Commands** (code-quality, documentation, research): Include technology stack examples
+   - **Security Commands** (security-review): Include project-specific security patterns
+   - **Utility Commands** (update-docs, implement): Include project workflow integration
 
-5. **task.md**:
-   - Optimize task breakdown for project structure
-   - Reference localized task-agent
-   - Include project-specific task examples
-   - Adapt to detected build and deployment systems
+### Phase 3: Implementation Process
 
-### Phase 3: Development Tool Command Localization
-1. **test.md**:
-   - Adapt to discovered testing frameworks and patterns
-   - Reference localized test-command-generator
-   - Include framework-specific test examples
-   - Customize for project testing workflow
+1. **Read Index and Source Commands**:
+   - Use Read tool to load source index: `/.claude/agents/claudio/index.md`  
+   - Parse command-agent mappings to understand requirements
+   - Use LS and Glob tools to list all source commands
+   - Read each command file to understand structure and purpose
+   - Skip commands marked with `system: claudio-system`
+   - Cross-reference commands with available localized agents
 
-2. **code-quality.md**:
-   - Reference discovered linters and quality tools
-   - Reference localized code-quality-analyzer
-   - Include language-specific quality examples
-   - Adapt to project quality standards
+2. **Apply Project Context** (following test-command-generator pattern):
+   - Extract technology stack from discovery analysis
+   - Identify project domain and architecture patterns
+   - Determine appropriate examples and workflows
 
-3. **documentation.md**:
-   - Align with project documentation patterns
-   - Reference localized documentation-coordinator
-   - Include project-specific documentation examples
-   - Adapt to detected documentation tools
+3. **Generate Localized Commands** (for each discovered user command):
+   - **Keep command structure**: Preserve description and argument-hint
+   - **Localize content**: Replace generic examples with project-specific ones
+   - **Update agent references**: Reference localized agents (e.g., `discovery-agent` not generic)
+   - **Add project examples**: Include Node.js/microservices/e-commerce examples
+   - **Technology integration**: Include npm, Docker, PostgreSQL examples where relevant
 
-4. **research.md**:
-   - Include domain-specific research capabilities
-   - Reference localized research-specialist
-   - Customize research patterns for project domain
-   - Add technology-specific research examples
+4. **Write Localized Commands**:
+   - Create each command file in `{project_path}/.claude/commands/claudio/`
+   - Ensure all commands reference available localized agents
+   - Include project-specific usage patterns and examples
 
-### Phase 4: Project-Specific Command Customizations
+5. **Create Command Index**:
+   - Create `{project_path}/.claude/commands/claudio/index.md` following Claudio pattern  
+   - List all installed commands with their agent dependencies
+   - Document command-agent relationships for validation
+   - Include project-specific command capabilities and integration patterns
 
-#### **React/Frontend Projects**
-- **Commands**: Include React-specific examples, component patterns, npm/yarn usage
-- **Examples**: 
-  ```bash
-  /claudio:test # Runs npm test with Jest and React Testing Library
-  /claudio:code-quality # Runs ESLint, Prettier, and React-specific linters
-  ```
-- **Workflows**: Component development, state management, build optimization
+## Localization Examples for Current Project (ShopFlow E-commerce):
 
-#### **Python Projects**  
-- **Commands**: Include Python tooling (pip, poetry, pytest examples)
-- **Examples**:
-  ```bash
-  /claudio:test # Runs python -m pytest with coverage reporting
-  /claudio:code-quality # Runs black, flake8, mypy for Python code quality
-  ```
-- **Workflows**: Package development, virtual environments, dependency management
+### **Node.js/Microservices Specialization**
+Based on discovery analysis showing Node.js microservices architecture:
 
-#### **Node.js/Express Projects**
-- **Commands**: Include npm/yarn examples, Express patterns, Node.js workflows
-- **Examples**:
-  ```bash
-  /claudio:test # Runs npm test with Jest for Node.js backend testing
-  /claudio:plan # Plans API development with Express routing patterns
-  ```
-- **Workflows**: API development, middleware patterns, database integration
+- **Commands with microservices examples**: Service boundaries, API contracts, distributed system planning
+- **Commands with Node.js examples**: npm/yarn workflows, Express.js patterns, PostgreSQL integration
+- **Commands with e-commerce examples**: Order processing, payment systems, inventory management
+- **Agent references**: All commands reference localized agents with project-aware capabilities
 
-#### **Microservices Architecture**
-- **Commands**: Adapt planning for distributed systems, service coordination
-- **Examples**:
-  ```bash
-  /claudio:plan # Plans service boundaries and API contracts
-  /claudio:task # Breaks down distributed system implementation
-  ```
-- **Workflows**: Service development, API contracts, deployment orchestration
-
-## Technology-Aware Command Examples:
-
-### **Test Command Localization**
-**Generic**: Use the test-command-generator subagent to generate test commands
-**React Localized**: Use the test-command-generator subagent to generate React component test commands with Jest and React Testing Library
-**Python Localized**: Use the test-command-generator subagent to generate pytest commands with coverage reporting and fixtures
-
-### **Planning Command Localization**
-**Generic**: Use the plan-agent subagent to create implementation plans
-**React Localized**: Use the plan-agent subagent to create React component architecture and state management plans
-**Microservices Localized**: Use the plan-agent subagent to create service boundary and API contract plans
-
-### **Quality Command Localization**
-**Generic**: Use the code-quality-analyzer subagent to assess code quality
-**Python Localized**: Use the code-quality-analyzer subagent to run black, flake8, mypy, and pytest quality checks
-**JavaScript Localized**: Use the code-quality-analyzer subagent to run ESLint, Prettier, and Jest quality checks
+### **Technology Stack Integration**
+- **Database commands**: PostgreSQL and MongoDB examples
+- **Container commands**: Docker and Kubernetes deployment examples  
+- **Testing commands**: Jest and testing framework integration
+- **Quality commands**: ESLint, Prettier, and Node.js quality tools
 
 ## Agent Reference Validation:
 

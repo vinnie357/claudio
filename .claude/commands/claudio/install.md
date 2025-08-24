@@ -29,11 +29,17 @@ I will use TodoWrite to track progress, then make parallel Task calls:
 **Sequential Discovery Consolidation**:
 - Task with subagent_type: "discovery-consolidator" - pass the project_path argument for consolidating discovery analyses
 
-**Parallel Localization** (Run multiple Task invocations in SINGLE message):
-- Task with subagent_type: "install-agents-localizer" - pass the project_path argument for agent localization
+**Parallel Command Generation** (Run multiple Task invocations in SINGLE message):
 - Task with subagent_type: "install-commands-localizer" - pass the project_path argument for command localization
+- Task with subagent_type: "test-command-generator" - pass the project_path argument for test command generation
+
+**Sequential Agent Generation**:
+- Task with subagent_type: "install-agents-localizer" - pass the project_path argument for agent localization (with extended context awareness)
+
+**Sequential Context & Documentation Generation**:
 - Task with subagent_type: "install-extended-context-generator" - pass the project_path argument for context creation
-- Task with subagent_type: "claude-md-generator" - pass the project_path argument for CLAUDE.md generation
+- Task with subagent_type: "claude-md-generator" - pass the project_path argument for AI-focused CLAUDE.md generation
+- Task with subagent_type: "user-readme-generator" - pass the project_path argument for user documentation creation
 
 **Sequential Completion**:
 - Task with subagent_type: "install-validator" - pass the project_path argument for final validation
@@ -64,21 +70,28 @@ This demonstrates the correct pattern: direct agent invocation with parallel exe
 **Sequential Discovery Consolidation**:
 7. **Discovery Consolidation**: Combine all analysis outputs into comprehensive discovery.md
 
-**Parallel Localization** (Run multiple Task invocations in SINGLE message):
-8. **Agent Localization**: Generate discovery-based localized agents
-9. **Command Localization**: Generate localized commands that reference agents
-10. **Extended Context**: Generate project-specific extended contexts
-11. **CLAUDE.md Generation**: Create project integration documentation
+**Parallel Command Generation** (Run multiple Task invocations in SINGLE message):
+8. **Command Localization**: Generate localized commands based on discovery
+9. **Test Command Generation**: Generate project-specific /claudio:test and /claudio:test-g commands
+
+**Sequential Agent Generation**:
+10. **Agent Localization**: Generate discovery-based localized agents (with extended context awareness)
+
+**Sequential Context & Documentation Generation**:
+11. **Extended Context Generation**: Generate project-specific extended contexts (supports all commands and agents)
+12. **AI-focused CLAUDE.md Generation**: Create AI context documentation with agent listings and project patterns
+13. **User Documentation Generation**: Create user-facing README.md with command examples and workflows
 
 **Sequential Completion**:
-12. **Installation Validation**: Verify complete functional system
+14. **Installation Validation**: Verify complete functional system
 
 ## Installation Creates
 
 **Project Path Target Structure:**
 - `{project_path}/.claude/` directory with commands, agents, and extended context
-- `{project_path}/.claudio/` directory with workflow documents and project analysis  
-- `{project_path}/CLAUDE.md` with project-specific integration guidance
+- `{project_path}/.claudio/` directory with workflow documents and project analysis
+- `{project_path}/.claudio/docs/README.md` with user-facing command examples and workflows
+- `{project_path}/CLAUDE.md` with AI-focused project context and agent listings
 - Project-specific localization based on discovery analysis
 
 **Path Resolution:**

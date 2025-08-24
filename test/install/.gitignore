@@ -21,3 +21,4 @@ Thumbs.db
 # Claudio workflow outputs (optional)
 .claudio/
 .claude/
+CLAUDE.md

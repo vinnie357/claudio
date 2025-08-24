@@ -1337,12 +1337,84 @@ create a new claudio system command /claudio:update-docs
 the command will use 3 sub agents, one focused on updating the readme for changes
 one focused on making sure the root claude.md is up to date, 
 and finally one to create or append to the change logs
+--- think
 
 # command and agent indexes
 
 we need to track all of our commants and agents in their respective folders as an index.md for each,
 these indexes will help the upgrade and install agents correctly use the agents and distringuish between
-system commands and agents from user commands and agents 
+system commands and agents from user commands and agents --- think
+
+# update commands
+ensure all commands follow our new mutli agent and parallel invocation examples
+start with /claudio:install and /caludio:update 
+we want to ensure that all steps that can be parallel are executed together in groups 
+--- think 
+
+# command and agent types
+
+we need to differentiate between system commands and agents, and user commands and agents.
+when a user installs they should only get the claudio commands and agents that are not system ones by default.
+system commnds and agents are for running the workflow, the commandas generated in a users project are for them
+
+# install misses commands. and agents
+
+reveiw the following agents:
+install-agents-localizer-agent                                                           
+install-commands-localizer-agent                                                          
+install-extended-context-generator-agent
+claude-md-generator-agent
+
+compare them with the index.md for each type agent,command,extended_context
+
+we need to understand why the claude command
+/claudio:install test/install
+
+did not install all the important localized commands and agents, we got a subset of the correct commands and agents
+witnessed by this output:
+  Installation completed at: /Users/vinnie/github/claudio/test/install
+
+  Summary
+
+  - ✅ Path Validation: Directory exists and is writable
+  - ✅ Directory Structure: Complete .claude/ and .claudio/ structure created (23 directories)
+  - ✅ Discovery Analysis: Four parallel analysis files successfully created and consolidated
+  - ⚠️ Localization: Partial completion - CLAUDE.md generated but some agents failed due to connection errors
+  - ⚠️ Validation: Installation has critical deficiencies - missing essential commands and agents
+
+  Key Results
+
+  Discovery Analysis:
+  - Project Identified: ShopFlow E-commerce Platform
+  - Architecture: Microservices with Node.js, PostgreSQL, MongoDB, Redis
+  - Complexity: Enterprise-scale (8.5/10)
+  - Analysis Files: 4 specialized analyses + 1 consolidated discovery document
+
+  Files Created:
+  - test/install/.claudio/docs/discovery.md - Comprehensive project analysis
+  - test/install/.claudio/docs/structure-analysis.md - Project organization
+  - test/install/.claudio/docs/technology-analysis.md - Technology stack assessment
+  - test/install/.claudio/docs/architecture-analysis.md - Design patterns analysis
+  - test/install/.claudio/docs/integration-analysis.md - MCP tool recommendations
+  - test/install/CLAUDE.md - Project-specific integration guide
+
+  Installation Status: Partial Success - Core discovery and documentation workflows functional, but missing
+  essential commands and agents for complete workflow execution.
+
+  The installation demonstrates successful discovery analysis and documentation generation capabilities while
+  highlighting areas needing completion for full operational status.
+
+use `tree -a`
+
+to debug why they were not installed, and create a prompt to address this issue.
+
+--- think
+ the install process needs to ensure that the test-command-generator is run, so the project gets its localized test and test-g commands created. 
+
+focus on fixing, the install logic, we will remove the test files and rerun after we have a fix --- think     │
+
+ commands, and agents should never be a copy, they should always be localized to the target project --- think  │
+
 
 #
 # todo:
@@ -1356,6 +1428,42 @@ the claude command invokes a subagent, who can invoke addtional subagents depend
 each subagent has access to extended context for their tasks they selectively load
 each subagent can be augmented with user directions using steering documents that are named the same as the subagent that should load them, the agents will load any steering documents last before starting their work, this allows users to write their own steering without rewriting the system.
 
+remove the 2. api handling its not a common issue. when possible take advatange of the pattern the            │
+test-command-generator uses for localized-agent-generatoion and localized-command-generation, and             │
+localized-extended-context-generation for the newly installed commands and agents, the extened context is     │
+always after these, as it depends on them --- think 
+
+ we want to keep the security-review command and its related agents, so user can audit their projects without  │
+reinstalling claudio --- think, also test-command-generator can run at the same time as command and agent     │
+generators, so localized-extended-context-generator runs last, to support the new test commands               │
+
+ commands first, then agents, then extended_context and agents need to be aware that extened context might be  │
+available --- think
+
+claude-md-generator-agent
+ when adding to an existing claude.md it needs to be brief, the current agent created a claude.md over 500 lines
+ we should be able to summerize the locations of the claudio tools/commands/agents/extended context
+ and the research command, and the new test commands in less than 500 lines. --- think
+ 
+ this is better and more concise, but the claude.md is for claude not the user.
+ so it should mention agents, and not command examples, if it wants to add command examples those would be a readme.md in .claudio/docs/readme.md we should create this if its not happening and split this task out the context in the claude.md is for claude and other prompts to use not a user --- think
+
+ review the commands and agents in test/install 
+ the install process has them referencing agents that don't exist, the process either needs to create them or not reference non existant ones, use the same index.md pattern for each type agent,command we use for claudio to address this during the installs --- think
+
+the `/claudio:install test/install` command created these commands and subagents, during the localization-agents
+we need to ensure when these agents are doing this work, they use the index.md pattern to ensure the referenced agents exist. our purpose is to correct this install process. --- think
+
+
+do the same review on the `/claudio:upgrade test/upgrade` claude command --- think
+ this plan failed, upgrade is a different process that needs an existing                                       │
+│   /Users/vinnie/github/claudio/test/upgrade/.claude                                                             │
+│         /Users/vinnie/github/claudio/test/upgrade/.claudio  use git to reset these folders, and check your      │
+│   plan an install is not the same as an upgrade, an upgrade expects existing data --- think 
+why did you use bash blocks? this isn't documentation these are lists of work to do, the existing upgrade     │
+│   command worked we need to enhance it not break it   
+
+do the same review on the `/claudio:claudio test/claudio` claude command --- think
 
 # model diet
 

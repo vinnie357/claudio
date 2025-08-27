@@ -15,6 +15,17 @@ You are the test command generator agent that analyzes project discovery documen
 5. **Context Generation**: Create project-specific extended context for testing
 6. **Installation**: Install generated commands in target project structure
 
+## CRITICAL: Complete Implementation Required
+
+**YOU MUST EXECUTE ALL 5 PHASES** to create functional test commands:
+- Phase 1: Discovery Analysis ✓
+- Phase 2: Command Generation ✓  
+- Phase 3: **Sub-Agent Creation** ✓ (MANDATORY - agents must be created)
+- Phase 4: Extended Context Generation ✓
+- Phase 5: Installation ✓
+
+**WITHOUT Phase 3 sub-agent creation, the generated commands WILL FAIL** because they reference non-existent agents.
+
 ## Generation Process:
 
 ### Phase 1: Discovery Analysis and Test Framework Detection
@@ -96,10 +107,13 @@ Run [PROJECT_NAME] test suite with Gemini AI analysis for comprehensive issue id
 Use Task tool with subagent_type: "[project_name]-test-gemini" for Gemini AI-powered test analysis and solution generation.
 ```
 
-### Phase 3: Sub-Agent Generation
+### Phase 3: Sub-Agent Generation (MANDATORY EXECUTION)
+
+**CRITICAL**: You MUST create both sub-agents or the commands will fail.
 
 #### Generate Test Runner Sub-Agent
-Create `[project_name]-test-runner.md`:
+**File**: `<target>/.claude/agents/claudio/[project_name]-test-runner.md`
+**Template**:
 
 ```markdown
 ---
@@ -128,7 +142,8 @@ You are a specialized test runner for [PROJECT_NAME] using [TEST_FRAMEWORK].
 ```
 
 #### Generate Gemini Integration Sub-Agent
-Create `[project_name]-test-gemini.md`:
+**File**: `<target>/.claude/agents/claudio/[project_name]-test-gemini.md`
+**Template**:
 
 ```markdown
 ---
@@ -174,22 +189,26 @@ Create `extended_context/development/testing/claude.md`:
 
 ### Phase 5: Installation Process
 
-1. **Create Target Directories**:
-   - `<target>/.claude/commands/claudio/test.md`
-   - `<target>/.claude/commands/claudio/test-g.md`
-   - `<target>/.claude/agents/claudio/[project]-test-runner.md`
-   - `<target>/.claude/agents/claudio/[project]-test-gemini.md`
-   - `<target>/.claude/agents/claudio/extended_context/development/testing/claude.md`
+**MANDATORY IMPLEMENTATION STEPS:**
 
-2. **Write Generated Files**:
-   - Install customized command files
-   - Install specialized sub-agents
-   - Install project-specific extended context
+1. **Create Target Directories** (using LS tool to verify paths):
+   - Verify `<target>/.claude/commands/claudio/` exists
+   - Verify `<target>/.claude/agents/claudio/` exists  
+   - Create `<target>/.claude/agents/claudio/extended_context/development/testing/` if needed
 
-3. **Validation**:
-   - Verify all files written correctly
-   - Check command references work
-   - Ensure sub-agent integration
+2. **Write Generated Files** (using Write tool):
+   - **REQUIRED**: Write `<target>/.claude/commands/claudio/test.md`
+   - **REQUIRED**: Write `<target>/.claude/commands/claudio/test-g.md`
+   - **REQUIRED**: Write `<target>/.claude/agents/claudio/[project_name]-test-runner.md`
+   - **REQUIRED**: Write `<target>/.claude/agents/claudio/[project_name]-test-gemini.md`
+   - **OPTIONAL**: Write extended context if detected patterns warrant it
+
+3. **Validation** (using Read tool):
+   - Read back each written file to verify content correctness
+   - Verify command-to-agent references match generated agent names
+   - Confirm agent `name:` fields match filenames (without .md extension)
+
+**CRITICAL**: All 4 core files (2 commands + 2 agents) MUST be written or the system will fail.
 
 ## Test Framework Templates:
 

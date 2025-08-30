@@ -1415,6 +1415,66 @@ focus on fixing, the install logic, we will remove the test files and rerun afte
 
  commands, and agents should never be a copy, they should always be localized to the target project --- think  │
 
+# documentation cleanup
+review our root readme.md with the documentation-readme-creator agent, we want to move the quick start
+section to after "what is claudio" section and before the key features. we also want to address redundant 
+sections it appears there at least 3 quick start sections. the project structure trees also aren't showing
+the index.md. we also want to remove fabricated performance claims like 5x performance
+│ > also have the agent suggest more consolidations                                                       
+
+│ > requirements should be with quickstart, so  - what is claudio, - requirements - quickstart,           
+
+│ > it should also have a table of contents after the primary #claudio section                            
+
+the toc should be a single line style, as links like section1 | section 2| section 3, also the project
+structure doesn't need to list every single file, it should talk about .claude/agents/claudio , .claudio  
+,.claude/commands/  the extended_context and readme patterns   
+
+
+ we need to correct the quick start option examples. # 1. Clone Claudio                                
+git clone <this-repo>                                                                                 
+cd claudio                                                                                            
+                                                                                                      
+# 2. Start Claude with directory access                                                               
+claude --add-dir /path/to/my-code                                                                     
+# or with relative paths:                                                                             
+claude --add-dir ../my-code                                                                           
+                                                                                                      
+# 3. Analyze the external project                                                                     
+/claudio:claudio /path/to/my-code                                                                     
+                                                                                                      
+# 4. Update project documentation with parallel coordination                                          
+/claudio:update-docs "enhanced discovery system"                                                      
+                                                                                                      
+# 5. Optional: Execute implementation when ready                                                      
+/claudio:implement /path/to/my-code   ---  we would clone the software, change directory to it, then start
+the interactive cluade session with the --add-dir /path/to/mycode, once in the session the user can either. 
+run /claudio:install /path/to/my-code or /claudio:claudio /path/to/mycode, once the process is complete they
+exit the session, and change directory to /path/to/mycode, upon starting the new session they can run 
+claudio commands like /claudio:implement, or /claudio:plan feature "my new feature, add to project phases"
+and the /claudio:test commands.   
+
+the setup phase, from the claudio directory can use the /claudio:claudio command or the /claudio:install  
+commands. also as a informational, banner in italics let the user know that where they start the claude   
+session impacts the automatic loading of project memory from claude.md which we are taking advantage of,  
+until claude supports a way to use it without starting the session there.
+combine "option1 and option2" into , setup and usage phases. the install is just an optional command vs the 
+claudio command         
+
+ in usage phase, 3. note that the plan command is optional and the implenent will follow the plans created by
+the claudio workflow or install                                                                               
+
+
+review our root readme.md with the documentation-readme-creator agent, we need to add an upgrade section to the quickstart,
+it should show the, git submodule update from the project directory, or git pull from the claudio directory
+it will then have a similar setup phase, with cd claudio, claude --add-dir /path/to/mycode, and /claudio:upgrade /path/to/mycode
+note the pwd command can help here.  
+
+# anti-fabrication rules
+
+ensure that all the agents are aware of the anti-fabrication rules, also ensure that the 
+claude-md-updater-agent is aware it is managing the claude.md for an agent and not creating documentation
+for users. this is strictly instructions for agents using the project 
 
 #
 # todo:

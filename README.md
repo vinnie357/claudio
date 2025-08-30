@@ -1,14 +1,14 @@
 # Claudio
 
-A comprehensive project analysis, planning, and implementation system for Claude Code that transforms any codebase into an organized, trackable development process through intelligent project localization and discovery-based workflows.
+A project analysis and planning system that transforms any codebase into an organized, trackable development process through specialized AI agents and project localization.
 
 ## What is Claudio?
 
 <img src="docs/images/claudio.png" alt="Claudio System" width="600" height="auto">
 
-Claudio is a comprehensive project analysis system built on specialized AI agents that work together to **discover, plan, and implement** project solutions through intelligent localization and enhanced workflow execution. The system uses an **agent-based architecture** where specialized agents are **automatically customized for each project** based on comprehensive discovery analysis of technology stack, architecture patterns, and project requirements.
+Claudio orchestrates discovery, requirements, planning, and task organization through specialized AI agents that work together to **analyze, plan, and implement** project solutions. The system uses an **agent-based architecture** where components are **customized for each project** based on discovery analysis of technology stack, architecture patterns, and project requirements.
 
-The default workflow combines **discovery and planning** into a unified process with optional **implementation execution**.
+The system transforms ad-hoc development into systematic, trackable, and collaborative project execution through project localization and workflow automation.
 
 ## Requirements
 
@@ -16,7 +16,16 @@ The default workflow combines **discovery and planning** into a unified process 
 - The Claude Code CLI provides the runtime environment and tools that Claudio agents use
 - No additional installations required - Claudio works within your existing Claude Code setup
 
-**Table of Contents:** [What is Claudio?](#what-is-claudio) | [Requirements](#requirements) | [Quick Start](#quick-start) | [Key Features](#key-features) | [Commands](#commands) | [Installation](#installation) | [Project Structure](#project-structure) | [Advanced Features](#advanced-features) | [Development](#development) | [Troubleshooting](#troubleshooting)
+## Documentation
+
+### Core Documentation
+- **[Usage Guide](docs/usage-guide.md)** - Complete command reference, workflow examples, and practical usage patterns
+- **[System Architecture](docs/system-architecture.md)** - Extended context structure, agent integration, and technical implementation details
+- **[Specialized Features](docs/specialized-features.md)** - Research system, Claude SDK capabilities, and advanced features
+- **[Best Practices](docs/best-practices.md)** - Development workflows, context management, and integration guidance
+- **[Changelog Management](docs/changelog-management.md)** - Maintenance protocol and update procedures
+
+**Table of Contents:** [What is Claudio?](#what-is-claudio) | [Documentation](#documentation) | [Requirements](#requirements) | [Quick Start](#quick-start) | [Key Features](#key-features) | [Commands](#commands) | [Installation](#installation) | [Project Structure](#project-structure) | [Advanced Features](#advanced-features) | [Development](#development) | [Troubleshooting](#troubleshooting)
 
 ## Quick Start
 
@@ -56,45 +65,67 @@ claude
 # Natural language: "use the claudio workflow to add my new feature to the phased planning documents"
 ```
 
+### Upgrade Phase
+```bash
+# 1. Update Claudio (choose one method)
+# From your project directory:
+git submodule update --remote
+# OR from the claudio directory:
+cd claudio && git pull
+
+# 2. Navigate to Claudio directory
+cd claudio
+# Note: Use `pwd` to verify your current directory
+
+# 3. Start Claude with directory access to your project
+claude --add-dir /path/to/my-code
+
+# 4. Run Claudio upgrade command
+/claudio:upgrade /path/to/my-code
+
+# 5. Exit Claude session
+exit
+```
+
 ## Key Features
 
-### Enhanced Discovery System
-- **Parallel Specialist Agents**: Enhanced performance through simultaneous analysis (structure, technology, architecture, integration, consolidation)
-- **Technology Stack Detection**: Automatic framework identification and dependency analysis
-- **Architecture Analysis**: Design patterns, structural relationships, and architectural style evaluation
-- **Integration Assessment**: Tool compatibility, API analysis, and workflow recommendations
+### Discovery System
+- **Parallel Analysis Architecture**: 5 specialized agents analyze project structure, technology stack, architecture patterns, integration opportunities, and consolidate findings simultaneously
+- **Technology Stack Detection**: Automatic framework identification, dependency analysis, and build system assessment
+- **Architecture Analysis**: Design patterns, component relationships, and structural analysis with integration recommendations
+- **Project Classification**: Smart categorization with localization recommendations for optimal workflow customization
 
-### Intelligent Localization
-- **Project-Specific Customization**: Components automatically adapt to specific project context through discovery analysis
-- **Technology Stack-Aware Workflows**: Framework-specific commands and procedures tailored to your stack
-- **Auto-Generated Test Commands**: Project-specific test execution based on detected testing frameworks
-- **System Component Classification**: Automatic filtering between system and user components for optimized installations
+### Project Localization
+- **Component Customization**: Agents and commands adapt to specific project context through discovery analysis
+- **Technology-Aware Workflows**: Framework-specific procedures and commands tailored to detected technology stack
+- **Generated Test Integration**: Project-specific test commands created during installation based on detected testing frameworks
+- **System vs User Components**: Smart filtering ensures only workflow-relevant components are installed to user projects
 
-### Documentation System
-- **Project-Specific README Generation**: Automated documentation with technology stack-aware content
-- **CLAUDE.md Integration Guidance**: Technology stack-aware Claudio workflow integration
-- **Parallel Documentation Updates**: Coordinated maintenance for README, CLAUDE.md, and changelogs
-- **Research System**: Complexity-aware topic research with adaptive thinking modes
+### Documentation & Research
+- **Project-Specific Documentation**: README and CLAUDE.md generation with technology stack-aware content and integration guidance
+- **Research System**: Topic research with complexity assessment, adaptive thinking modes (Think/Ultrathink), and authoritative source integration
+- **Parallel Documentation Updates**: Coordinated maintenance through specialized agents (readme-updater, claude-md-updater, changelog-updater)
+- **Quality Documentation**: Discovery-driven documentation generation with validation and accuracy checks
 
-### Quality Assurance
-- **Validation System**: Comprehensive quality assurance framework with specialized validators
-- **Security Analysis**: STRIDE-based security review with technology-specific threat modeling
-- **Code Quality Assessment**: Language and framework-specific quality analysis
-- **Testing Integration**: Intelligent test execution with auto-remediation capabilities
+### Quality Assurance & Security
+- **Comprehensive Validation**: Quality assurance framework with specialized validators for discovery, workflow, installation, and command generation
+- **Security Analysis**: STRIDE-based security review with visual threat modeling and technology-specific assessments
+- **Code Quality Assessment**: Language and framework-specific analysis with detailed reporting and remediation suggestions
+- **Testing Integration**: Intelligent test execution with failure analysis, fix capabilities, and project-specific test command generation
 
-### Development Tools
-- **Custom Command Generation**: Research-driven command creation from documentation sources
-- **Claude SDK Development**: Analysis and improvement of Claude Code implementations
-- **Git Integration**: Intelligent commit message generation following project conventions
-- **System Management**: Parallel upgrade system with backup management and version tracking
+### System Management & Development
+- **Parallel Upgrade System**: 7 specialized agents handle discovery analysis, legacy cleanup, template analysis, backup management, component localization, and validation
+- **Custom Command Generation**: Complete command system creation (command + sub-agent + context) from research sources with Claudio integration
+- **Claude SDK Development**: Analysis and improvement of Claude Code implementations with cross-system comparison capabilities
+- **Git Integration**: Intelligent commit message generation following project conventions and change analysis
 
 ## Commands
 
 ### Core Workflow Commands
 | Command | Purpose | Example |
 |---------|---------|---------|
-| `/claudio:claudio` | Complete discovery & planning | `/claudio:claudio ../my-app` |
-| `/claudio:discovery` | Enhanced project analysis | `/claudio:discovery ./backend` |
+| `/claudio:claudio` | Project discovery & planning | `/claudio:claudio ../my-app` |
+| `/claudio:discovery` | Parallel project analysis using 5 agents | `/claudio:discovery ./backend` |
 | `/claudio:documentation` | Generate docs | `/claudio:documentation api ./my-api` |
 | `/claudio:prd` | Create requirements | `/claudio:prd feature chat-system` |
 | `/claudio:plan` | Implementation planning | `/claudio:plan project app "12 weeks"` |
@@ -244,9 +275,9 @@ Generate complete command systems (command + sub-agent + context) from research 
 
 Claudio automatically generates customized test commands for each project:
 
-- **Framework Detection**: Automatic detection of testing frameworks (Jest, pytest, ExUnit, Go test, etc.)
-- **Intelligent Reporting**: Comprehensive test result analysis and failure diagnosis
-- **Fix Capabilities**: Automatic failure analysis and repair suggestions with `--fix` flag
+- **Framework Detection**: Detection of testing frameworks (Jest, pytest, ExUnit, Go test, etc.)
+- **Test Reporting**: Test result analysis and failure diagnosis
+- **Fix Capabilities**: Failure analysis and repair suggestions with `--fix` flag
 - **Project-Specific Commands**: Generated test commands during installation based on discovery analysis
 
 ### Research System
@@ -258,9 +289,9 @@ Create structured documentation with complexity-aware analysis:
 ```
 
 **Features**:
-- **Complexity Assessment**: Automatic evaluation with Think/Ultrathink modes for advanced topics
-- **Quality Standards**: Includes authoritative sources, practical examples, and appropriate analysis depth
-- **Context Detection**: Automatically determines proper file placement for direct vs subagent usage
+- **Complexity Assessment**: Evaluation with Think/Ultrathink modes for topics
+- **Quality Standards**: Includes sources, practical examples, and analysis depth
+- **Context Detection**: Determines proper file placement for direct vs subagent usage
 
 ### Implementation Execution
 
@@ -287,40 +318,40 @@ Beyond planning, Claudio can execute your implementation plans:
 
 Claudio employs specialized AI agents that orchestrate different aspects of project analysis:
 
-#### Enhanced Discovery System (Parallel Architecture)
-- **discovery-agent**: Orchestrates parallel project analysis with specialized analyzers
+#### Discovery System (Parallel Architecture)
+- **discovery-agent**: Orchestrates parallel project analysis using 5 specialized analyzers
 - **discovery-structure-analyzer**: Project organization, file patterns, hierarchy mapping
 - **discovery-tech-analyzer**: Technology stack detection, framework identification
 - **discovery-architecture-analyzer**: Design patterns, architectural style, component relationships
 - **discovery-integration-analyzer**: Tool integration opportunities, API analysis
-- **discovery-consolidator**: Analysis integration, comprehensive report generation
+- **discovery-consolidator**: Analysis integration and report generation
 
 #### Quality Assurance & Security
 - **security-review-coordinator**: STRIDE-based security analysis with visual threat modeling
-- **code-quality-analyzer**: Comprehensive code quality assessment with reporting
-- **discovery-validator**: Ensures discovery document quality and analysis depth
-- **workflow-validator**: Validates complete workflow output and document completeness
+- **code-quality-analyzer**: Code quality assessment with reporting
+- **discovery-validator**: Validates discovery document quality and analysis depth
+- **workflow-validator**: Validates workflow output and document completeness
 
 #### Documentation & Research
-- **documentation-coordinator**: Generates comprehensive documentation (README, API docs, user guides)
+- **documentation-coordinator**: Generates documentation (README, API docs, user guides)
 - **user-readme-generator-agent**: Creates project-specific README documentation with technology stack-aware content
 - **claude-md-generator-agent**: Generates technology stack-aware project-specific CLAUDE.md
-- **research-specialist**: Conducts complexity-aware topic research with adaptive thinking modes
+- **research-specialist**: Conducts topic research with complexity assessment and adaptive thinking modes
 
 #### System Management
-- **install-full-workflow-agent**: Manages complete Claudio installation with project-specific customization
-- **Parallel Upgrade System**: Specialized subagents for discovery analysis, legacy cleanup, template analysis, backup management, localization, and validation
+- **install-full-workflow-agent**: Manages Claudio installation with project-specific customization
+- **Parallel Upgrade System**: 7 specialized agents for discovery analysis, legacy cleanup, template analysis, backup management, localization, and validation
 
 ### Validation System
 
-Claudio includes a comprehensive quality assurance framework:
+Claudio includes a quality assurance framework:
 
 - **Discovery Validator**: Validates discovery document quality and analysis depth
-- **Workflow Validator**: Validates complete Claudio workflow output quality
+- **Workflow Validator**: Validates Claudio workflow output quality
 - **Install Validator**: Validates installation completeness and functionality
 - **New Command Validator**: Validates custom command generation quality
 
-Each validator generates detailed reports with pass/fail status, detailed findings, recommendations, and quality metrics.
+Each validator generates reports with pass/fail status, findings, recommendations, and quality metrics.
 
 ## Troubleshooting
 
@@ -344,4 +375,4 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 - **Installation Help**: Use `/claudio:install --help` or `/claudio:upgrade --help`
 - **Status Checking**: Use `/claudio:upgrade --status` to verify your installation
 
-Start by simply telling Claude: **"Please use claudio:claudio on /path/to/my/project"** and experience the enhanced parallel specialist agent discovery system with comprehensive project understanding!
+Start by telling Claude: **"Please use claudio:claudio on /path/to/my/project"** and use the parallel specialist agent discovery system with project understanding!

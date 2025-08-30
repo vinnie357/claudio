@@ -1,6 +1,6 @@
 # Claudio System Documentation
 
-Claudio is a comprehensive project analysis and planning system that transforms any codebase into an organized, trackable development process. This system orchestrates discovery, requirements, planning, and task organization through specialized AI agents.
+Claudio is a project analysis and planning system that transforms any codebase into an organized, trackable development process. This system orchestrates discovery, requirements, planning, and task organization through specialized AI agents.
 
 ## Documentation Structure
 
@@ -11,16 +11,20 @@ Claudio is a comprehensive project analysis and planning system that transforms 
 - **[Best Practices](docs/best-practices.md)** - Development workflows, context management, and integration guidance
 - **[Changelog Management](docs/changelog-management.md)** - Maintenance protocol and update procedures
 
+### Additional Documentation
+- **[Session Summaries](docs/)** - Development session documentation and progress tracking
+- **[Documentation Updates](docs/documentation_update_summary.md)** - System documentation update history
+
 ### Quick Reference
 Essential information you need right now:
 
 **🚨 CRITICAL: ALL agent names use lowercase-hyphen format:** `agent-name`
 
-**🚀 PERFORMANCE: Use sub-agent chaining when possible:** `First use the X subagent to..., then use the Y subagent to...`
+**🚀 PERFORMANCE: Use parallel execution when possible:** `Run multiple Task invocations in a SINGLE message`
 
-**🔧 INTEGRATION: Subagents MUST use Claude Code natural language pattern:** `Use the agent-name subagent to [action]`
+**🔧 INTEGRATION: Commands use Task tool pattern:** `Task with subagent_type: "agent-name" - pass arguments`
 
-**⚠️ CRITICAL: NEVER use Task tool patterns for sub-agent invocation** - use natural language following Claude Code standards
+**⚠️ CRITICAL: NEVER wrap Task tool invocations in bash code blocks** - use plain text format only
 
 ## Command Development Standards
 
@@ -48,7 +52,7 @@ I will use TodoWrite to track progress, then make parallel Task calls:
 - Task with subagent_type: "agent2" - pass the input-value argument for processing
 - Task with subagent_type: "agent3" - pass the input-value argument for processing
 
-Then read outputs from [output files], validate them, and create comprehensive report.
+Then read outputs from [output files], validate them, and create complete report.
 
 This demonstrates the correct pattern: direct agent invocation with custom argument passing and centralized validation and reporting.
 ```
@@ -64,7 +68,7 @@ I will use TodoWrite to track progress, then make parallel Task calls:
 - Task with subagent_type: "agent1" - pass the input-value argument for processing
 - Task with subagent_type: "agent2" - pass the input-value argument for processing
 
-Then read outputs, validate them, and create comprehensive report.
+Then read outputs, validate them, and create complete report.
 ```
 
 **✅ REQUIRED Elements:**
@@ -73,7 +77,7 @@ Then read outputs, validate them, and create comprehensive report.
 - **Multiple Task calls**: List each agent with custom arguments
 - **Custom arguments**: Pass meaningful context to each agent
 - **Output validation**: Read and validate actual outputs
-- **Comprehensive report**: Centralized result compilation
+- **Complete report**: Centralized result compilation
 
 ### **⚡ Performance Requirements**
 - **Parallel Execution**: Run as many Task calls as possible in parallel
@@ -122,14 +126,14 @@ Components marked with `system: claudio-system` are excluded from user installat
 - **`/claudio:install-commands`**: Commands-only installation coordination
 - **`/claudio:generate-test-commands`**: Project-specific test command generation system
 
-**System Agents (45+ components):**
+**System Agents (50+ components):**
 - **Installation Agents**: `install-*` (path validation, directory creation, component localization)
-- **Enhanced Discovery System**: `discovery-*` agents with parallel analysis capabilities:
+- **Discovery System**: `discovery-*` agents with parallel analysis capabilities:
   - `discovery-structure-analyzer`: Project organization and file pattern analysis with hierarchy mapping
   - `discovery-tech-analyzer`: Technology stack detection, framework identification, and dependency analysis
   - `discovery-architecture-analyzer`: Architecture patterns, design principles, and structural analysis
   - `discovery-integration-analyzer`: Integration assessment, API analysis, and MCP recommendations
-  - `discovery-consolidator`: Analysis consolidation, report generation, and comprehensive summary creation
+  - `discovery-consolidator`: Analysis consolidation, report generation, and summary creation
 - **Documentation Agents**: `*-updater`, `claude-md-generator`, `readme-updater`, `changelog-updater`, `user-readme-generator` (parallel documentation maintenance with project-specific documentation generation)
 - **Upgrade Agents**: `upgrade-*` (discovery analysis, backup management, template analysis, component localization, legacy cleanup, installation validation)
 - **Validation Agents**: `*-validator`, `*-test` (system integrity, integration testing, workflow validation)
@@ -139,15 +143,15 @@ Components marked with `system: claudio-system` are excluded from user installat
 #### **User Components (Workflow Execution)**
 Components without the system tag are installed to user projects and provide workflow functionality:
 
-**User Commands (18 components):**
+**User Commands (19 components):**
 - **Core Workflow**: `/claudio:discovery`, `/claudio:prd`, `/claudio:plan`, `/claudio:task`, `/claudio:claudio`
-- **Testing**: `/claudio:test`, `/claudio:test-g` (project-specific test commands generated during installation)
-- **Analysis Tools**: `/claudio:code-quality`, `/claudio:security-review`, `/claudio:design`, `/claudio:test-review`
+- **Testing**: `/claudio:test`, `/claudio:test-g`, `/claudio:test-review` (project-specific test commands generated during installation)
+- **Analysis Tools**: `/claudio:code-quality`, `/claudio:security-review`, `/claudio:design`
 - **Documentation**: `/claudio:documentation`, `/claudio:research`, `/claudio:update-docs`
 - **Development**: `/claudio:claude-sdk`, `/claudio:phoenix-dev`, `/claudio:implement`, `/claudio:newprompt`, `/claudio:new-command`
 - **Specialized**: `/claudio:gcms` (Git commit message generation)
 
-**User Agents (33+ components):**
+**User Agents (25+ components):**
 - **Workflow Agents**: `discovery-agent`, `prd-agent`, `plan-agent`, `task-agent`, `claudio-coordinator-agent`
 - **Analysis Agents**: `code-quality-analyzer`, `security-review-coordinator`, `design-analyzer`
 - **Security Specialists**: `vulnerability-assessment-specialist`, `security-architecture-analyst`, `security-threat-modeler`, `security-diagram-generator`
@@ -168,7 +172,7 @@ This ensures users receive only workflow-relevant components while keeping syste
 
 ### Commands
 - **`/claudio:research`**: Create research documentation with overview and troubleshooting guides
-- **`/claudio:discovery`**: Analyze project structure and capabilities with enhanced parallel analysis system (5 specialized agents)
+- **`/claudio:discovery`**: Analyze project structure and capabilities with parallel analysis system (5 specialized agents)
 - **`/claudio:documentation`**: Create project documentation
 - **`/claudio:prd`**: Generate Product Requirements Documents
 - **`/claudio:plan`**: Create implementation plans
@@ -195,7 +199,7 @@ This ensures users receive only workflow-relevant components while keeping syste
 
 ### Individual Commands
 ```bash
-/claudio:discovery ./my-project        # Comprehensive project analysis with parallel specialist agents
+/claudio:discovery ./my-project        # Project analysis with parallel specialist agents
 /claudio:research backend nodejs       # Create research docs in .claudio/research/backend/nodejs/
 /claudio:prd feature user-auth         # Create requirements
 /claudio:plan feature user-auth "4w"   # Plan implementation
@@ -222,7 +226,7 @@ This ensures users receive only workflow-relevant components while keeping syste
 - **Project-specific CLAUDE.md with integration guidance** (generated based on discovery analysis, technology stack-aware workflows)
 - **Project-specific README documentation** (generated by user-readme-generator agent based on discovery analysis and technology stack)
 - **Project-specific test commands** (`/claudio:test`, `/claudio:test-g`) based on detected testing frameworks
-- Comprehensive project discovery and technology analysis using parallel analysis system
+- Project discovery and technology analysis using parallel analysis system
 
 ### System Upgrade and Cleanup
 ```bash
@@ -239,9 +243,14 @@ This ensures users receive only workflow-relevant components while keeping syste
 - **Component Localizer**: Project-specific template application and test command coordination
 - **Installation Validator**: Integrity verification and completion reporting
 
-**Performance Optimization**: Parallel batch execution (Phase 2: template analysis + backup creation, Phase 3: localization + validation) provides improved efficiency while maintaining safety guarantees.
+**Performance Optimization**: Parallel batch execution (Phase 2: template analysis + backup creation, Phase 3: localization + validation) provides efficiency while maintaining safety guarantees.
 
-**Recent System Improvements**: Fixed 15+ subagent_type references in upgrade, install, and claudio commands to match actual agent files, ensuring reliable command execution with accurate agent mappings.
+**Recent System Improvements**: 
+- **Agent Mapping Validation**: Fixed 15+ subagent_type references in upgrade, install, and claudio commands to match actual agent files
+- **Parallel Discovery System**: Implemented parallel analysis architecture with 5 specialized discovery agents
+- **Documentation Generation**: Enhanced project-specific documentation generation with technology-aware content
+- **System Reliability**: Improved error handling, file operation safety, and validation chains
+- **Performance Optimization**: Direct coordination patterns and parallel execution capabilities
 
 ### Claude Code Development
 ```bash
@@ -251,9 +260,9 @@ This ensures users receive only workflow-relevant components while keeping syste
 
 **Sequential Analysis**: The Claude SDK architect analyzes one command at a time, evaluating the command structure first, then each individual subagent separately to prevent system overload and ensure focused analysis. The system includes specialized analysts for both command structures and subagent architectures.
 
-### Enhanced Discovery System
+### Discovery System
 ```bash
-/claudio:discovery ./my-project         # Comprehensive project analysis with parallel specialist agents
+/claudio:discovery ./my-project         # Project analysis with parallel specialist agents
 ```
 
 **Parallel Analysis Architecture**: The discovery system uses 5 specialized analysis agents running in parallel:
@@ -261,15 +270,15 @@ This ensures users receive only workflow-relevant components while keeping syste
 - **Technology Analyzer**: Technology stack detection, framework identification, dependency analysis, and package management assessment
 - **Architecture Analyzer**: Design patterns, architectural style, component relationships, and structural analysis
 - **Integration Analyzer**: Tool integration opportunities, API analysis, MCP recommendations, development workflow compatibility, and CI/CD analysis
-- **Consolidator**: Analysis integration, comprehensive report generation, and project classification
+- **Consolidator**: Analysis integration, report generation, and project classification
 
-**Analysis Consolidation**: After parallel analysis completion, a consolidation agent combines all findings into a comprehensive discovery document with:
+**Analysis Consolidation**: After parallel analysis completion, a consolidation agent combines all findings into a discovery document with:
 - **Executive Summary**: Technology stack overview and project classification
 - **Localization Recommendations**: Optimal agent and command selections for the project
 - **Integration Guidance**: Project-specific workflow and tool integration suggestions
 - **Quality Assessment**: Analysis completeness and recommendation confidence levels
 
-**Performance Benefits**: Parallel analysis provides 5x faster discovery compared to sequential analysis while maintaining comprehensive coverage and improved accuracy through specialized agent expertise.
+**Performance Benefits**: Parallel analysis provides faster discovery compared to sequential analysis while maintaining coverage and accuracy through specialized agent expertise.
 
 ### Testing System
 ```bash
@@ -281,14 +290,14 @@ This ensures users receive only workflow-relevant components while keeping syste
 
 **Project-Specific Test Integration**: The testing system provides:
 - **Framework Detection**: Automatic detection of testing frameworks (Jest, pytest, ExUnit, Go test, etc.)
-- **Intelligent Reporting**: Comprehensive test result analysis and failure diagnosis
+- **Intelligent Reporting**: Test result analysis and failure diagnosis
 - **Fix Capabilities**: Automatic failure analysis and repair suggestions with `--fix` flag
 - **Project-Specific Commands**: Generated test commands during installation based on discovery analysis
 - **Fallback Execution**: Direct framework detection when project-specific commands aren't available
 
 **Generated Test Commands**: During installation, project-specific test commands are created:
-- **`/claudio:test`**: Project-tailored test execution with sophisticated reporting
-- **`/claudio:test-g`**: Gemini-integrated testing for advanced analysis (requires gemini-cli)
+- **`/claudio:test`**: Project-tailored test execution with detailed reporting
+- **`/claudio:test-g`**: Gemini-integrated testing for analysis (requires gemini-cli)
 
 ### Research System
 ```bash
@@ -303,14 +312,14 @@ This ensures users receive only workflow-relevant components while keeping syste
 - **Quality Standards**: Includes authoritative sources, practical examples, and complexity-appropriate analysis
 
 **Research Features**:
-- **Complexity Assessment**: Automatic evaluation (1-10 scale) with Think/Ultrathink modes for advanced topics
+- **Complexity Assessment**: Automatic evaluation (1-10 scale) with Think/Ultrathink modes for complex topics
 - **Thinking Modes**: Standard (4-5), Think (6-8), Ultrathink (9-10) with multi-perspective analysis
-- **Manual Override**: `--complexity=high` forces advanced analysis mode
+- **Manual Override**: `--complexity=high` forces detailed analysis mode
 - **Context Detection**: Automatically determines direct vs subagent usage for proper file placement
 
 ### Documentation Generation System
 ```bash
-/claudio:documentation ./my-project         # Generate comprehensive project documentation
+/claudio:documentation ./my-project         # Generate project documentation
 /claudio:update-docs                        # Update all documentation with parallel agents
 ```
 
@@ -344,9 +353,9 @@ When you say **"use claudio on ../my-project"**, you're requesting:
    - **`.claudio/status.md`**: Progress tracking and workflow status
    - **Documentation**: API docs, README, user guides (parallel generation)
    - **Quality analysis**: Security review, code quality assessment, design evaluation
-   - **Validation**: Mandatory workflow quality validation ensuring all documents meet standards
+   - **Validation**: Workflow quality validation ensuring all documents meet standards
 
-This transforms your existing codebase into an organized, trackable development process with clear next steps and **validated quality assurance**.
+This transforms your existing codebase into an organized, trackable development process with clear next steps and validated quality assurance.
 
 **[→ See workflow examples in Usage Guide](docs/usage-guide.md#claudio-workflow)**
 
@@ -356,9 +365,9 @@ The Claudio system integrates with existing development practices:
 - **Version Control**: All `.claudio/` content can be committed to git
 - **Self-Documenting Projects**: Each project maintains its own Claudio integration guide (CLAUDE.md) and README documentation generated based on discovery analysis and technology stack
 - **Technology-Specific Guidance**: Framework-specific commands and workflows tailored to your stack, including project-specific test commands
-- **Parallel Analysis**: Enhanced discovery system provides comprehensive project understanding in optimal time
+- **Parallel Analysis**: Discovery system provides project understanding in optimal time
 - **Team Onboarding**: Project-aware documentation for immediate productivity with technology-specific examples and auto-generated README guidance
-- **Team Collaboration**: Shared context enables consistent development approach with project-tailored workflows and comprehensive documentation
+- **Team Collaboration**: Shared context enables consistent development approach with project-tailored workflows and documentation
 - **Project Management**: Progress tracking provides visibility into development status
 - **Quality Assurance**: Task contexts include testing and review requirements with automated test execution capabilities
 
@@ -396,7 +405,7 @@ Run multiple Task invocations in a SINGLE message:
 **✅ CORRECT - Documentation & Quality Batch (Parallel):**
 ```
 Run multiple Task invocations in a SINGLE message:
-- Task with documentation-coordinator for comprehensive docs
+- Task with documentation-coordinator for project docs
 - Task with user-readme-generator for project-specific README documentation
 - Task with code-quality-analyzer for quality assessment
 - Task with test-command-generator for project-specific tests
@@ -488,16 +497,16 @@ The Claudio system handles missing extended context gracefully:
 - **User Guidance**: Clear instructions for creating missing documentation with authoritative sources
 - **Memory Efficient**: No continuous searching for non-existent files prevents memory leaks
 
-### **Enhanced Error Handling and File Management**
+### **Error Handling and File Management**
 
 **File Operation Safety:**
 - **File Termination Validation**: All file operations include proper termination checks and integrity validation
-- **Error Recovery**: Comprehensive error detection, recovery mechanisms, and graceful handling of incomplete operations
+- **Error Recovery**: Error detection, recovery mechanisms, and graceful handling of incomplete operations
 - **Data Integrity**: Mandatory validation of file completeness and proper data termination before workflow progression
 - **Cleanup Mechanisms**: Automatic cleanup of incomplete or corrupted files with rollback capabilities
 
 **Robust Operation Patterns:**
-- **Validation Chains**: Enhanced validation at each workflow stage with comprehensive completeness checks
+- **Validation Chains**: Validation at each workflow stage with completeness checks
 - **Recovery Mechanisms**: Graceful handling of partial results, incomplete analysis, and system interruptions  
 - **Status Verification**: Mandatory verification that all operations complete successfully before signaling completion
 - **Safety Guarantees**: Multi-layer safety mechanisms prevent data loss and ensure system integrity
@@ -506,15 +515,17 @@ The Claudio system handles missing extended context gracefully:
 
 **Recent Critical Fixes**:
 - **Command→Agent Mapping Validation**: Fixed 15+ subagent_type references to match actual agent files
-- **Agent Count Accuracy**: Corrected system statistics to reflect actual 78 agents (23 commands, 18 user + 5 system)
+- **Agent Count Accuracy**: Corrected system statistics to reflect actual 75+ agents (24 commands, 19 user + 5 system)
 - **Index Synchronization**: Updated both agent and commands indexes with accurate component counts and mappings
 - **Direct Coordination Migration**: Completed migration for 8 commands eliminating coordinator overhead
 - **Agent Reference Consistency**: Ensured proper -agent suffixes and lowercase-hyphen naming throughout system
+- **Parallel Discovery Architecture**: Implemented 5-agent parallel analysis system with specialized expertise
+- **Documentation Generation**: Enhanced project-specific documentation with user-readme-generator integration
 
 **Integration Pattern Enhancements**:
-- **Proven Direct Coordination**: 8 commands now use direct coordination pattern for improved performance
+- **Direct Coordination**: 8 commands now use direct coordination pattern for performance
 - **Accurate Agent References**: All subagent_type references validated against actual implementation files
-- **System Reliability**: Enhanced command execution reliability through proper agent mapping
+- **System Reliability**: Command execution reliability through proper agent mapping
 - **Documentation Accuracy**: Technical documentation now matches actual system implementation
 
 ## Important Instructions
@@ -527,7 +538,7 @@ The Claudio system handles missing extended context gracefully:
 - **NEVER fabricate security review contents**: Only report actual vulnerabilities found through tool execution
 - **NEVER fabricate code quality metrics**: Base assessments on real linter/analyzer outputs
 - **NEVER fabricate task status**: Tasks are only complete when tests pass and acceptance criteria are met
-- **NEVER add superlatives to descriptions**: Avoid "comprehensive", "excellent", "amazing" - use factual language
+- **NEVER add superlatives to descriptions**: Avoid "comprehensive", "excellent", "amazing", "advanced" - use factual language
 - **NEVER create sample data as real data**: Clearly mark all examples, templates, and placeholders
 - **NEVER assume test results**: Execute tests and report actual outcomes only
 - **NEVER fabricate documentation quality**: Base README and documentation assessments on actual project analysis
@@ -542,7 +553,7 @@ The Claudio system handles missing extended context gracefully:
 - Report actual file contents, not assumed or fabricated content
 - Execute tests before marking tasks complete
 - Use actual tool outputs for quality and security assessments
-- Generate documentation only after comprehensive discovery analysis
+- Generate documentation only after discovery analysis
 - Validate integration recommendations through actual framework detection
 
 ### **CRITICAL: Lowercase-Hyphen Naming Convention**

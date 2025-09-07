@@ -2,6 +2,7 @@
 name: newprompt-command-creator
 description: "Creates command files following Claudio patterns with proper sub-agent integration"
 tools: Write, Read, Glob
+model: sonnet
 system: claudio-system
 ---
 

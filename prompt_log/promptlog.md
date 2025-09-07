@@ -1476,9 +1476,44 @@ ensure that all the agents are aware of the anti-fabrication rules, also ensure 
 claude-md-updater-agent is aware it is managing the claude.md for an agent and not creating documentation
 for users. this is strictly instructions for agents using the project 
 
+# test-g command
+
+command for tests to use gemini-cli to run the tests, and claude to implement the fixes
+
+# model diet
+
+use hakiu where possible for subagent work
+use opus where needed for research command
+allow research command to think and deep think
+
+prune sub agent context, rely on extended context files more, and sub section them into
+general
+troubleshooting
+specific-topics
+
 #
 # todo:
 #
+
+
+# claudini  user command
+
+command for claude to use gemini for generic tasks with extended context
+
+
+
+# enhance parallel with worktrees
+
+ Tip: Use git worktrees to run multiple Claude sessions in parallel. Learn more (https://docs.anthropic.com/s/claude-code-worktrees)
+
+# checkout gpt-5 for planning tasks and command and subagent creation
+
+similar to our gemini workflow that takes advatange of the large context window for research and debugging of gemini
+
+the gpt-5 workflow appears to accell at project planing, requirements documents and prds.
+
+
+
 
 # flows
 each test should adress one flow
@@ -1524,34 +1559,4 @@ why did you use bash blocks? this isn't documentation these are lists of work to
 │   command worked we need to enhance it not break it   
 
 do the same review on the `/claudio:claudio test/claudio` claude command --- think
-
-# model diet
-
-use hakiu where possible for subagent work
-use opus where needed for research command
-allow research command to think and deep think
-
-prune sub agent context, rely on extended context files more, and sub section them into
-general
-troubleshooting
-specific-topics
-
-
-# claudini command
-
-command for claude to use gemini for generic tasks with extended context
-
-# test-g command
-
-command for tests to use gemini-cli to run the tests, and claude to implement the fixes
-
-# enhance parallel with worktrees
-
- Tip: Use git worktrees to run multiple Claude sessions in parallel. Learn more (https://docs.anthropic.com/s/claude-code-worktrees)
-
-# checkout gpt-5 for planning tasks and command and subagent creation
-
-similar to our gemini workflow that takes advatange of the large context window for research and debugging of gemini
-
-the gpt-5 workflow appears to accell at project planing, requirements documents and prds.
 

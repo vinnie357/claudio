@@ -2,6 +2,7 @@
 name: install-system-localizer-agent
 description: "Localizes Claudio system components based on project discovery for technology-aware installations"
 tools: Write, Read, Bash, LS, Glob
+model: sonnet
 system: claudio-system
 ---
 

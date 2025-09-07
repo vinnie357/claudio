@@ -2,6 +2,7 @@
 name: install-system-installer
 description: "Handles file copying and directory creation for Claudio system installations"
 tools: Write, Read, Bash, LS
+model: sonnet
 system: claudio-system
 ---
 
@@ -333,43 +334,32 @@ Reference extended context locations based on installation context:
 ## Mode-Specific Component Operations:
 
 ### Directory Creation
-```bash
-# User mode
-mkdir -p ~/.claude/commands/claudio
-mkdir -p ~/.claude/agents/claudio
-mkdir -p ~/.claude/agents/claudio/extended_context
-
-# Project/Path mode
-mkdir -p <target>/.claude/commands/claudio
-mkdir -p <target>/.claude/agents/claudio
-mkdir -p <target>/.claude/agents/claudio/extended_context
-```
+Create directory structure based on installation mode:
+- **User mode**: Create directories under ~/.claude/commands/claudio and ~/.claude/agents/claudio and ~/.claude/agents/claudio/extended_context
+- **Project/Path mode**: Create directories under <target>/.claude/commands/claudio and <target>/.claude/agents/claudio and <target>/.claude/agents/claudio/extended_context
+- Ensure parent directories are created recursively for both modes
+- Verify directory creation succeeds before proceeding
 
 ### User Mode - Direct Template Copying
-```bash
-# Copy generic templates to user installation
-cp source/.claude/commands/*.md ~/.claude/commands/claudio/
-cp source/.claude/agents/*.md ~/.claude/agents/claudio/
-cp -r source/extended_context/* ~/.claude/agents/claudio/extended_context/
-```
+Copy generic template files directly to user installation:
+- Copy all command files from source/.claude/commands/ to ~/.claude/commands/claudio/
+- Copy all agent files from source/.claude/agents/ to ~/.claude/agents/claudio/
+- Copy entire extended_context directory structure recursively from source/extended_context/ to ~/.claude/agents/claudio/extended_context/
+- Preserve file permissions and directory structure during copying
 
 ### Project/Path Mode - Localized Component Generation
-```bash
-# Generate project-specific components based on discovery
-# Commands: Individual command files directly under commands/claudio/
-generate_localized_command(discovery_data, template) -> <target>/.claude/commands/claudio/command-name.md
-
-# Agents: Individual agent files directly under agents/claudio/ (FLAT structure)
-generate_localized_agent(discovery_data, template) -> <target>/.claude/agents/claudio/agent-name.md
-
-# Extended Context: Category/topic structure under agents/claudio/extended_context/
-generate_localized_context(discovery_data, template) -> <target>/.claude/agents/claudio/extended_context/category/topic/overview.md
-```
+Generate project-specific components based on discovery analysis:
+- **Commands**: Generate individual command files directly under <target>/.claude/commands/claudio/ using discovery data and templates to create command-name.md files
+- **Agents**: Generate individual agent files directly under <target>/.claude/agents/claudio/ using flat structure to create agent-name.md files  
+- **Extended Context**: Generate category/topic directory structure under <target>/.claude/agents/claudio/extended_context/ creating category/topic/overview.md files
+- Base all generation on discovery data analysis and corresponding template files
+- Ensure generated components are customized for the specific project technology stack
 
 ### Permission Setting
-```bash
-chmod -R 755 <target>/.claude/
-```
+Set appropriate permissions on installed directory structure:
+- Apply read, write, and execute permissions recursively to <target>/.claude/ directory
+- Ensure proper access permissions for all installed files and subdirectories
+- Verify permissions are set correctly for both user and project/path installations
 
 ## Error Handling:
 

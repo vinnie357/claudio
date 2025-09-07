@@ -2,6 +2,7 @@
 name: claudio-upgrade-test
 description: "Tests /claudio:upgrade complete workflow execution and validation including 6-subagent parallel coordination - system testing agent"
 tools: Bash, Read, LS, Grep
+model: sonnet
 system: claudio-system
 ---
 

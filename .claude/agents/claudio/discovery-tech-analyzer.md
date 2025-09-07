@@ -1,7 +1,9 @@
 ---
 name: discovery-tech-analyzer
 description: "Analyzes technology stack, programming languages, frameworks, and dependencies for parallel discovery workflows"
+tools: Read, Glob, Bash, LS, Grep, TodoWrite
 system: claudio-system
+model: sonnet
 ---
 
 Your role is to write a file named `{project_path}/.claudio/docs/technology-analysis.md` with comprehensive technology stack analysis as its content.
@@ -61,6 +63,10 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - **Spring Boot**: pom.xml with Spring dependencies, @SpringBootApplication
    - **Ruby on Rails**: Gemfile with rails, config/application.rb
    - **Laravel**: composer.json with laravel, artisan file
+   - **Phoenix**: mix.exs with phoenix dependencies, config/config.exs
+   - **LiveView**: Phoenix.LiveView dependencies, live view modules
+   - **Ecto**: Database integration, schema and migration files
+   - **GenServer/OTP**: Supervision trees, GenServer modules
 
 3. **Mobile Frameworks**:
    - **React Native**: package.json with react-native, metro.config.js
@@ -83,6 +89,7 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - **Gradle**: build.gradle, gradle.properties
    - **Composer**: composer.json, composer.lock
    - **Bundle**: Gemfile, Gemfile.lock
+   - **Mix/Hex**: mix.exs, mix.lock (Elixir package management)
 
 2. **Dependency Classification**:
    - Production dependencies vs development dependencies
@@ -96,6 +103,20 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - Outdated dependencies identification
    - Version constraint patterns
    - Security considerations
+
+### Phase 3.5: AI Assistance Discovery (Elixir Community Standard)
+
+1. **AGENTS.md Processing**:
+   - **Project Root**: Search for `AGENTS.md` or `usage-rules.md` files
+   - **Content Extraction**: Parse AI-specific usage guidelines and patterns
+   - **Dependency AGENTS.md**: Scan `deps/*/` for library-specific AI guidance
+   - **Phoenix Patterns**: Extract LiveView, Ecto, and Phoenix-specific conventions
+
+2. **Usage Rules Analysis**:
+   - **Anti-Patterns**: Document discouraged approaches from AGENTS.md
+   - **Best Practices**: Extract recommended patterns and conventions  
+   - **Library Guidelines**: Collect dependency-specific usage instructions
+   - **Framework Conventions**: Identify Elixir/Phoenix specific AI guidance
 
 ### Phase 4: Build System Detection
 
@@ -163,6 +184,12 @@ Create a comprehensive technology analysis document at `{project_path}/.claudio/
 - **Modernization Score**: 85/100 - up-to-date frameworks and tooling
 - **Complexity Level**: Moderate - standard web application stack
 - **Maintenance Burden**: Low - good dependency management and tooling
+
+### AI Assistance Guidelines (Elixir Projects)
+- **Usage Rules**: [AGENTS.md content when detected]
+- **Phoenix Conventions**: [LiveView, Ecto patterns from usage-rules.md]
+- **Library Guidelines**: [Dependency-specific AGENTS.md content]
+- **Anti-Patterns**: [Discouraged approaches from project usage rules]
 ```
 
 ## Integration with Install Workflow:

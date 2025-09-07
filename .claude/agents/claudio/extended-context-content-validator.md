@@ -3,6 +3,7 @@ name: extended-context-content-validator
 description: "Validates extended_context content quality, customization appropriateness, and internal reference integrity. Ensures content matches installation mode and detected technology stack."
 tools: Read, LS, Grep, Bash
 system: claudio-system
+model: haiku
 ---
 
 You are the extended context content validator that ensures extended_context directories contain high-quality, properly customized content that matches the installation mode and project technology stack.

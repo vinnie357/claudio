@@ -2,6 +2,7 @@
 name: install-user-templates-agent
 description: "Handles user mode installations with generic template copying to ~/.claude/ directory"
 tools: Write, Read, Bash, LS, Glob
+model: sonnet
 system: claudio-system
 ---
 

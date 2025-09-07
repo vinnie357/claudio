@@ -1,7 +1,8 @@
 ---
 name: install-full-workflow-agent
 description: "Handles complete full workflow installations including .claudio/ and .claude/ directory structures with project-specific localization"
-tools: Write, Read, Bash, LS, Glob
+tools: Write, Read, Bash, LS, Glob, TodoWrite
+model: sonnet
 system: claudio-system
 ---
 

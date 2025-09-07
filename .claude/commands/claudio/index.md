@@ -1,7 +1,7 @@
 # Claudio System Commands Index
 
 **Total Commands**: 23 (18 User + 5 System)  
-**Last Updated**: 2025-08-24  
+**Last Updated**: 2025-09-06  
 **Component Classification**: System commands marked with `system: claudio-system`  
 
 ## Command Categories
@@ -9,64 +9,70 @@
 ### Core Workflow Commands (5)
 **Purpose**: Complete project analysis and planning workflows
 
-| Command | Description | Arguments | Agent |
-|---------|-------------|-----------|-------|
-| `claudio` | Comprehensive project analysis and planning system with direct agent coordination | `<target_project_path> [--implement]` | Direct coordination (no coordinator agent) |
-| `discovery` | Analyze project structure and capabilities | `<target_project_path>` | discovery-agent |
-| `prd` | Generate Product Requirements Documents | `<project_context> [requirements]` | prd-agent |
-| `plan` | Create implementation plans | `<requirements_context> [timeline]` | plan-agent |
-| `task` | Break down plans into executable tasks | `<plan_context> [phase]` | task-agent |
+| Command | Type | Description | Arguments | Agent |
+|---------|------|-------------|-----------|-------|
+| `claudio` | User | Comprehensive project analysis and planning system with direct agent coordination | `<target_project_path> [--implement]` | Direct coordination (no coordinator agent) |
+| `discovery` | User | Analyze project structure and capabilities | `<target_project_path>` | discovery-agent |
+| `prd` | User | Generate Product Requirements Documents | `<project_context> [requirements]` | prd-agent |
+| `plan` | User | Create implementation plans | `<requirements_context> [timeline]` | plan-agent |
+| `task` | User | Break down plans into executable tasks | `<plan_context> [phase]` | task-agent |
 
 ### System Commands (5)
 **Purpose**: Internal system operations (excluded from user installations)
 **System Marker**: `system: claudio-system`
 
-| Command | Description | Arguments | Agent |
-|---------|-------------|-----------|-------|
-| `install` | Install Claudio system with project integration | `[target_path] [mode]` | Direct coordination (14 agents) |
-| `install-commands` | Install commands-only version | `[target_path]` | install-commands-coordinator-agent |
-| `upgrade` | Parallel upgrade system using 7 specialized subagents | `[target_path] [--check\|--force]` | Direct coordination (7 agents) |
-| `test` | Execute system test suites with validation | `[test_type]` | project-test-runner |
-| `generate-test-commands` | Generate project-specific test commands | `[target_path]` | test-command-generator |
+| Command | Type | Description | Arguments | Agent |
+|---------|------|-------------|-----------|-------|
+| `install` | System | Install Claudio system with project integration | `[target_path] [mode]` | Direct coordination (14 agents) |
+| `install-commands` | System | Install commands-only version | `[target_path]` | install-commands-coordinator-agent |
+| `upgrade` | System | Parallel upgrade system using 7 specialized subagents | `[target_path] [--check\|--force]` | Direct coordination (7 agents) |
+| `test` | System | Execute project test suite with intelligent analysis and optional fixes | `[test_pattern] [--fix]` | project-test-runner |
+| `generate-test-commands` | System | Generate project-specific test commands | `[target_path]` | test-command-generator |
 
 ### Analysis & Quality (3)
 **Purpose**: Code quality, security, and design analysis
 
-| Command | Description | Arguments | Agent |
-|---------|-------------|-----------|-------|
-| `code-quality` | Analyze code quality and generate improvement recommendations | `[target_path] [--fix]` | code-quality-analyzer |
-| `security-review` | Comprehensive security analysis using STRIDE methodology with Mermaid visualization | `<target_path_or_instruction> [security_framework]` | Direct coordination (1 agent) |
-| `design` | Analyze UX/UI design systems and accessibility compliance | `[target_path] [--components]` | design-analyzer |
+| Command | Type | Description | Arguments | Agent |
+|---------|------|-------------|-----------|-------|
+| `code-quality` | User | Analyze code quality and generate improvement recommendations | `[target_path] [--fix]` | code-quality-analyzer |
+| `security-review` | User | Comprehensive security analysis using STRIDE methodology with Mermaid visualization | `<target_path_or_instruction> [security_framework]` | Direct coordination (1 agent) |
+| `design` | User | Analyze UX/UI design systems and accessibility compliance | `[target_path] [--components]` | design-analyzer |
 
 ### Development Tools (5)
 **Purpose**: Documentation, testing, and development assistance
 
-| Command | Description | Arguments | Agent |
-|---------|-------------|-----------|-------|
-| `documentation` | Create comprehensive project documentation | `[target_path] [--type=all\|api\|user]` | documentation-coordinator |
-| `test-review` | Review testing suite tools and provide recommendations | `[target_path]` | test-review |
-| `update-docs` | Updates project documentation including README, CLAUDE.md, and changelogs | `[changes-description]` | Direct coordination (3 agents) |
-| `research` | Create research documentation with overview and troubleshooting guides | `<category> <topic> [--complexity=level]` | research-specialist |
-| `phoenix-dev` | Analyze and optimize Elixir Phoenix development workflows | `[target_path]` | phoenix-dev-executor |
+| Command | Type | Description | Arguments | Agent |
+|---------|------|-------------|-----------|-------|
+| `documentation` | User | Create comprehensive project documentation | `[target_path] [--type=all\|api\|user]` | documentation-coordinator |
+| `test-review` | User | Review testing suite tools and provide recommendations | `[target_path]` | test-review |
+| `update-docs` | User | Updates project documentation including README, CLAUDE.md, and changelogs | `[changes-description]` | Direct coordination (3 agents) |
+| `research` | User | Create research documentation with overview and troubleshooting guides | `<category> <topic> [--complexity=level]` | research-specialist |
+| `phoenix-dev` | User | Analyze and optimize Elixir Phoenix development workflows | `[target_path]` | phoenix-dev-executor |
 
 ### System & SDK (5)  
 **Purpose**: Claude Code integration, command generation, and system tools
 
-| Command | Description | Arguments | Agent |
-|---------|-------------|-----------|-------|
-| `claude-sdk` | Analyze and improve Claude Code implementations | `[command_name] [--cross-system]` | claudio-claude-sdk-architect |
-| `new-command` | Generate custom commands with sub-agents and extended context | `<command_name> [description]` | Direct coordination (3 agents) |
-| `newprompt` | Create comprehensive agent prompts following Claudio conventions | `<agent_name> [purpose]` | Direct coordination (3 agents) |
-| `implement` | Execute implementation plans with systematic task coordination | `[target_path] [--phase=N]` | Direct coordination (1 agent) |
-| `gcms` | Generate conventional commit messages from git status and changes | `[--scope] [--type]` | git-commit-message |
+| Command | Type | Description | Arguments | Agent |
+|---------|------|-------------|-----------|-------|
+| `claude-sdk` | User | Comprehensive Claude Code SDK architect for command creation, agent setup, and cross-system analysis | `[--analyze-commands] [--analyze-agents] [--cross-system] [--create-command <name>] [--setup-agent <name>]` | claudio-claude-sdk-architect |
+| `new-command` | User | Generate custom commands with sub-agents and extended context | `<command_name> [description]` | Direct coordination (3 agents) |
+| `newprompt` | User | Create comprehensive agent prompts following Claudio conventions | `<agent_name> [purpose]` | Direct coordination (3 agents) |
+| `implement` | User | Execute implementation plans with systematic task coordination | `[target_path] [--phase=N]` | Direct coordination (1 agent) |
+| `gcms` | User | Generate brief conventional commit message suggestions | `` | git-commit-message |
 
 ## System Metadata
 
 ### Component Classification
-- **System Commands (5)**: Marked with `system: claudio-system`, excluded from user installations
-- **User Commands (18)**: Installed in user projects for workflow execution
-- **System Agents (45+)**: Installation, validation, and testing agents (excluded from user installations)  
-- **User Agents (33+)**: Workflow execution agents (included in user installations)
+
+#### Type Definitions
+- **System**: Internal operations, marked with `system: claudio-system`, excluded from user installations
+- **User**: Workflow execution, installed in user projects for development workflows
+
+#### Component Counts
+- **System Commands (5)**: Installation, upgrade, testing, and system management operations
+- **User Commands (18)**: Project analysis, development tools, documentation, and workflow execution
+- **System Agents (43)**: Installation, validation, upgrade, and testing agents (excluded from user installations)  
+- **User Agents (36)**: Workflow execution agents (included in user installations)
 
 ### For Upgrade Agents
 - **System Components**: Commands and agents marked with `system: claudio-system`

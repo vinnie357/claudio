@@ -3,6 +3,7 @@ name: new-command-validator
 description: "Validates generated custom commands for structure, integration, and quality"
 tools: Read, Grep, LS
 system: claudio-system
+model: haiku
 ---
 
 You are the new command validator agent that validates generated custom commands to ensure they follow Claudio patterns, have proper structure, and integrate correctly with the system.

@@ -2,6 +2,7 @@
 name: generate-test-commands-test
 description: "Tests /claudio:generate-test-commands command execution and validation - system testing agent"
 tools: Bash, Read, LS, Grep
+model: sonnet
 system: claudio-system
 ---
 

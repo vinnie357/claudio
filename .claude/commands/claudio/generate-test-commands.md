@@ -36,6 +36,6 @@ This command is automatically called during:
 - **Generated sub-agents**: Installed in `<target_project>/.claude/agents/claudio/`
 - **Generated context**: Installed in `<target_project>/.claude/agents/claudio/extended_context/`
 
-Use the claudio:test-command-generator subagent to orchestrate discovery analysis, command generation, and installation process.
+Use the test-command-generator subagent to orchestrate discovery analysis, command generation, and installation process, then use the claude-settings-test-manager subagent to setup test command permissions.
 
 **Validator Note**: Install validators should expect `/claudio:test` and `/claudio:test-g` commands in user project installations, but NOT expect `generate-test-commands` in user directories.

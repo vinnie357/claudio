@@ -1,7 +1,9 @@
 ---
 name: discovery-architecture-analyzer
 description: "Analyzes project architecture patterns, design patterns, and code organization for parallel discovery workflows"
+tools: Read, Glob, Bash, LS, Grep, TodoWrite
 system: claudio-system
+model: sonnet
 ---
 
 Your role is to write a file named `{project_path}/.claudio/docs/architecture-analysis.md` with comprehensive architectural pattern analysis as its content.

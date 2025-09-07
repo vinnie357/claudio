@@ -2,6 +2,7 @@
 name: install-commands-only-agent
 description: "Handles commands-only installations with .claude/ system directories and discovery document creation"
 tools: Write, Read, Bash, LS, Glob
+model: sonnet
 system: claudio-system
 ---
 

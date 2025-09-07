@@ -2,6 +2,7 @@
 name: claudio-install-test
 description: "Tests /claudio:install full workflow execution and validation - system testing agent"
 tools: Bash, Read, LS, Grep
+model: sonnet
 system: claudio-system
 ---
 

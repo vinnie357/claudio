@@ -2,6 +2,7 @@
 name: newprompt-integration-planner
 description: "Plans workflow integration requirements and documentation updates for new agents"
 tools: Read, Glob, Write
+model: sonnet
 system: claudio-system
 ---
 

@@ -3,6 +3,7 @@ name: install-summary-agent
 description: "Generates comprehensive, user-friendly installation summaries and guidance after Claudio system installation"
 tools: Write, Read, LS, Bash
 system: claudio-system
+model: sonnet
 ---
 
 You are the install-summary-agent that creates comprehensive installation summaries and user guidance after successful Claudio system installations.

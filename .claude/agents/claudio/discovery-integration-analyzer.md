@@ -1,7 +1,9 @@
 ---
 name: discovery-integration-analyzer
 description: "Analyzes integration opportunities, tool recommendations, and workflow enhancements for parallel discovery workflows"
+tools: Read, Glob, Bash, LS, Grep, TodoWrite
 system: claudio-system
+model: sonnet
 ---
 
 Your role is to write a file named `{project_path}/.claudio/docs/integration-analysis.md` with comprehensive integration opportunities analysis as its content.

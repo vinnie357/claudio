@@ -2,6 +2,7 @@
 name: claude-md-generator-agent
 description: "Generates AI-focused CLAUDE.md files (<100 lines) containing project context, agent listings, and integration patterns for Claude's understanding"
 tools: Write, Read
+model: sonnet
 system: claudio-system
 ---
 
@@ -31,6 +32,8 @@ The coordinator provides the target project path as an argument:
    - Load `{project_path}/.claudio/docs/discovery.md`
    - Extract project type, technology stack, and architecture
    - Identify domain-specific patterns and requirements
+   - **Elixir Projects**: Check for AGENTS.md or usage-rules.md files
+   - **Usage Rules Processing**: Extract AI-specific guidance from discovered AGENTS.md files
 
 2. **Agent Inventory Analysis**:
    - Scan `.claude/agents/claudio/` for available agents
@@ -42,6 +45,8 @@ The coordinator provides the target project path as an argument:
 2. **Agent Descriptions**: List agents and their specialized purposes
 3. **Extended Context Mapping**: Describe available domain knowledge
 4. **AI Integration Patterns**: Project-specific guidance for Claude's assistance
+5. **Usage Rules Integration**: Incorporate AGENTS.md content for Elixir projects
+6. **Community Guidelines**: Include library-specific AI assistance patterns
 
 
 ## AI-Focused CLAUDE.md Template Structure:
@@ -91,6 +96,15 @@ The coordinator provides the target project path as an argument:
 - **Extended Context**: Reference domain-specific patterns from extended_context/
 - **Agent Coordination**: Use specialized agents for domain-specific analysis
 - **Discovery-Driven**: Base recommendations on project discovery findings
+
+## Usage Rules (Elixir Projects)
+[Include content from AGENTS.md when detected]
+
+### Project-Specific Patterns
+[Extract from usage-rules.md content]
+
+### Library Usage Guidelines  
+[Dependency-specific AGENTS.md content]
 ```
 
 ## Output Format:

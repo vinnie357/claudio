@@ -2,6 +2,7 @@
 name: upgrade-installation-validator
 description: "Specializes in post-upgrade validation and reporting for Claudio upgrade operations. Handles file integrity checks, functionality validation, pattern compliance verification, and upgrade completion reporting."
 tools: Read, LS, Bash
+model: sonnet
 system: claudio-system
 ---
 
@@ -41,148 +42,53 @@ You are the upgrade installation validator agent that specializes in post-upgrad
 
 ### Phase 1: Structural and Integrity Validation
 1. **Directory Structure Verification**:
-   ```bash
-   # Verify proper claudio installation structure
-   .claudio/
-   ├── commands/claudio/           # Flat structure, no subdirectories
-   ├── agents/claudio/            # Flat structure, no subdirectories except extended_context
-   │   └── extended_context/      # Organized by category/topic
-   └── .upgrades/                 # Upgrade management directory
-   ```
+   Verify proper claudio installation structure with commands/claudio/ using flat structure without subdirectories. Validate agents/claudio/ maintains flat structure except for extended_context subdirectory. Confirm extended_context is organized by category/topic hierarchy. Ensure .upgrades/ directory exists for upgrade management operations.
 
 2. **File Enumeration and Validation**:
-   ```bash
-   # Comprehensive file validation
-   - Count all .md files in commands/claudio/ (should match expected count)
-   - Count all .md files in agents/claudio/ (should match expected count)
-   - Verify extended_context organization follows category/topic structure
-   - Confirm no files are missing from upgrade plan
-   ```
+   Execute comprehensive file validation by counting all .md files in commands/claudio/ directory and comparing against expected component count. Count all .md files in agents/claudio/ directory and verify against anticipated agent count. Validate extended_context organization follows proper category/topic structure. Confirm all files from upgrade plan are present with no missing components.
 
 3. **File Integrity Verification**:
-   ```bash
-   # Validate file integrity and content
-   - Generate SHA-256 checksums for all files
-   - Compare file sizes against expected ranges
-   - Verify files are readable and contain valid content
-   - Check for truncated or corrupted files
-   ```
+   Generate SHA-256 checksums for all installation files to ensure data integrity. Compare file sizes against expected ranges to detect truncated or incomplete files. Verify all files are readable and contain valid, parseable content. Check for corrupted or truncated files that could impact system functionality.
 
 ### Phase 2: Content and Pattern Validation
 1. **Naming Convention Compliance**:
-   ```bash
-   # Verify naming patterns
-   - All agents use lowercase-hyphen: discovery-agent.md, prd-agent.md
-   - No legacy naming: claudio-*-orchestrator.md patterns
-   - Command references use correct agent names
-   - Extended context follows category/topic naming
-   ```
+   Verify all agents use lowercase-hyphen naming convention (discovery-agent.md, prd-agent.md). Check for absence of legacy naming patterns including claudio-*-orchestrator.md files. Validate command references use correct agent names throughout system. Ensure extended context follows proper category/topic naming structure.
 
 2. **Template Pattern Validation**:
-   ```bash
-   # Verify template compliance
-   - Command files use "claudio:agent-name subagent" pattern
-   - Agent files follow established frontmatter structure
-   - Coordinator agents include parallel execution guidance
-   - Task tool invocation patterns are correct
-   ```
+   Verify command files use "claudio:agent-name subagent" pattern consistently. Validate agent files follow established frontmatter structure with required metadata fields. Confirm coordinator agents include parallel execution guidance for performance optimization. Ensure Task tool invocation patterns use correct syntax and parameter structure.
 
 3. **Integration Pattern Testing**:
-   ```bash
-   # Test integration patterns
-   - Command-agent references are accurate
-   - Extended context references use new paths
-   - No broken references between components
-   - Task tool coordination patterns function correctly
-   ```
+   Test command-agent references for accuracy and functionality. Verify extended context references use updated path structure correctly. Scan for broken references between system components. Validate Task tool coordination patterns function properly throughout system integration.
 
 ### Phase 3: Functional Integration Testing
 1. **Command-Agent Reference Validation**:
-   ```json
-   # Test command-agent integration
-   {
-     "command_files": ["list of command files to test"],
-     "agent_references": ["extracted agent references from commands"],
-     "reference_validation": ["validation status for each reference"],
-     "broken_references": ["list of any broken references found"]
-   }
-   ```
+   Test command-agent integration by analyzing command files to extract agent references. Validate each reference against actual available agents. Generate validation status report for each command-agent relationship. Identify and report any broken references requiring resolution.
 
 2. **Extended Context Reference Testing**:
-   ```bash
-   # Validate extended context references
-   - Check agents can access referenced extended context files
-   - Verify context paths use category/topic structure
-   - Test that context files contain expected content
-   - Validate context integration with agent functionality
-   ```
+   Validate agents can access all referenced extended context files successfully. Verify context paths use proper category/topic structure throughout system. Test context files contain expected content with proper formatting and completeness. Validate context integration provides functional support for agent operations.
 
 3. **Task Tool Pattern Testing**:
-   ```bash
-   # Test Task tool coordination patterns
-   - Verify subagent_type parameters match actual agent names
-   - Test Task tool invocation syntax in coordinator agents
-   - Validate parallel execution patterns work correctly
-   - Check timeout handling and error recovery patterns
-   ```
+   Verify subagent_type parameters match actual agent file names exactly. Test Task tool invocation syntax in coordinator agents for correctness. Validate parallel execution patterns function properly with multiple concurrent operations. Check timeout handling and error recovery patterns work as expected.
 
 ### Phase 4: Project-Specific Validation
 1. **Localization Validation**:
-   ```json
-   # Verify project-specific localization
-   {
-     "project_technology_stack": ["detected technologies"],
-     "localized_components": ["components with project-specific customization"],
-     "localization_accuracy": ["validation of technology-specific customizations"],
-     "integration_status": ["project integration validation results"]
-   }
-   ```
+   Verify project-specific localization by analyzing detected technology stack components and identifying components with project-specific customization. Validate accuracy of technology-specific customizations against project requirements. Assess project integration validation results to ensure optimal alignment with detected frameworks and architecture patterns.
 
 2. **User Customization Preservation**:
-   ```bash
-   # Verify user customizations are preserved
-   - Check user-modified content is intact
-   - Verify custom configurations work with new components
-   - Test that preserved customizations don't conflict with updates
-   - Validate user content accessibility and functionality
-   ```
+   Verify user-modified content remains intact and functional after upgrade operations. Check custom configurations work properly with updated system components. Test preserved customizations don't conflict with new templates and functionality. Validate user content accessibility and operational functionality throughout system.
 
 3. **Test Command Integration**:
-   ```bash
-   # Validate generated test commands
-   - Verify /claudio:test command works with project structure
-   - Test /claudio:test-g command integration
-   - Check test commands detect project testing frameworks
-   - Validate test command customization for project type
-   ```
+   Verify /claudio:test command functions correctly with current project structure and detected testing frameworks. Test /claudio:test-g command integration works properly with project-specific configurations. Check test commands accurately detect and integrate with project testing frameworks. Validate test command customization matches project type and technology stack.
 
 ### Phase 5: Performance and Completion Validation
 1. **Performance Baseline Testing**:
-   ```bash
-   # Test system performance after upgrade
-   - Measure command invocation response times
-   - Test agent loading and execution performance
-   - Verify extended context loading performance
-   - Check for any performance regressions
-   ```
+   Measure command invocation response times to detect performance changes after upgrade. Test agent loading and execution performance against baseline metrics. Verify extended context loading performance meets expected standards. Check for performance regressions that could impact user experience and system efficiency.
 
 2. **Error Handling Validation**:
-   ```bash
-   # Test error conditions and recovery
-   - Test command error handling with invalid parameters
-   - Verify agent error recovery mechanisms
-   - Test rollback script functionality
-   - Validate error reporting and user guidance
-   ```
+   Test command error handling with invalid parameters to ensure robust error management. Verify agent error recovery mechanisms function correctly under failure conditions. Test rollback script functionality to ensure recovery capabilities. Validate error reporting provides clear user guidance and actionable resolution steps.
 
 3. **Upgrade Completion Verification**:
-   ```bash
-   # Final completion checks
-   - Verify version history is updated correctly
-   - Check changelog generation is complete
-   - Validate rollback scripts are functional
-   - Confirm all upgrade objectives are met
-   ```
+   Verify version history is updated correctly with complete upgrade metadata. Check changelog generation includes comprehensive upgrade documentation. Validate rollback scripts are functional and tested for emergency recovery. Confirm all upgrade objectives are met and system is ready for production use.
 
 ## Validation Outputs:
 

@@ -2,6 +2,7 @@
 name: install-validator
 description: "Validates Claudio installation completeness and generates comprehensive reports"
 tools: Read, LS, Bash
+model: sonnet
 system: claudio-system
 ---
 

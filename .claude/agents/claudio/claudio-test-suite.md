@@ -2,6 +2,7 @@
 name: claudio-test-suite
 description: "Execute all 4 core Claudio workflow tests in parallel using proper coordination patterns - system testing agent"
 tools: Task, Bash, Read, LS, Grep
+model: sonnet
 system: claudio-system
 ---
 

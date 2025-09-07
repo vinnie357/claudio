@@ -12,9 +12,11 @@ I am a comprehensive project analysis and planning system that directly coordina
 
 ## Implementation
 
-I will use TodoWrite to track progress, then execute the smart conditional workflow:
+I will use TodoWrite to track progress through managed phases:
 
 ### Phase 1: Installation Check and Conditional Setup
+
+Use TodoWrite to start Phase 1 - Installation and Discovery Foundation.
 
 **Check Installation Status**:
 - Use LS tool to check if .claude/agents/claudio/ directory exists
@@ -35,25 +37,33 @@ I will use TodoWrite to track progress, then execute the smart conditional workf
 **Sequential Discovery Consolidation**:
 - Task with subagent_type: "discovery-consolidator" - pass the project_path argument for consolidating analyses
 
-**Parallel Command Generation**:
-- Task with subagent_type: "install-commands-localizer-agent" - pass the project_path argument for command localization
+**Setup Generation Tracking**:
+- Ensure `.claudio/shared/` directory exists for generation tracking
+- Initialize tracking directory with proper permissions
+
+**Sequential Generation Chain with Tracking** (Following discovery → commands → agents → context dependency chain):
+- Task with subagent_type: "install-commands-localizer-agent" - pass the project_path argument for discovery-driven command generation and tracking
 - Task with subagent_type: "test-command-generator" - pass the project_path argument for test command generation
+- Task with subagent_type: "claude-settings-test-manager" - pass the project_path argument for test permissions setup
+- Task with subagent_type: "install-agents-localizer-agent" - pass the project_path argument for agents generation based on commands tracking
+- Task with subagent_type: "install-extended-context-generator-agent" - pass the project_path argument for context generation based on agents tracking
 
-**Sequential Agent Generation**:
-- Task with subagent_type: "install-agents-localizer-agent" - pass the project_path argument for agent localization
-
-**Sequential Context & Documentation**:
-- Task with subagent_type: "install-extended-context-generator-agent" - pass the project_path argument for context creation
+**Sequential Documentation Generation**:
 - Task with subagent_type: "claude-md-generator-agent" - pass the project_path argument for CLAUDE.md generation
 - Task with subagent_type: "user-readme-generator-agent" - pass the project_path argument for user documentation
 
-**Sequential Validation**:
-- Task with subagent_type: "install-validator" - pass the project_path argument for validation
+**Sequential Generation Tracking Validation**:
+- Task with subagent_type: "generation-tracking-validator" - pass the project_path argument for generation tracking validation
+- Task with subagent_type: "install-validator" - pass the project_path argument for final installation validation
 
 **If Installation Found** (refresh discovery only):
 - Task with subagent_type: "discovery-agent" - pass the project_path argument to refresh discovery analysis
 
+Use TodoWrite to complete Phase 1 - Installation and Discovery Foundation.
+
 ### Phase 2: Workflow Generation (ALWAYS RUN)
+
+Use TodoWrite to start Phase 2 - Workflow Generation.
 
 **Parallel Workflow Generation** (Run multiple Task invocations in SINGLE message):
 - Task with subagent_type: "prd-agent" - pass the project_path argument for requirements (uses discovery from Phase 1)
@@ -62,6 +72,8 @@ I will use TodoWrite to track progress, then execute the smart conditional workf
 
 **Sequential Finalization**:
 - Task with subagent_type: "claudio-structure-creator-agent" - pass the project_path argument for finalization
+
+Use TodoWrite to complete Phase 2 - Workflow Generation.
 
 Then read outputs from .claudio/docs/ files, validate them, and create comprehensive workflow report.
 

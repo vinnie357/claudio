@@ -22,6 +22,16 @@ You MUST implement the discovery-driven generation tracking system:
 
 **Critical**: This agent reads commands_tracking.json and writes agents_tracking.json for the context generator.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for agents generation based on commands tracking", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create agents in test/claudio/.claude/agents/claudio/
+- Work exclusively within the test/claudio directory structure
+
 ## Argument Handling
 
 The coordinator provides the target project path as an argument:
@@ -33,10 +43,15 @@ The coordinator provides the target project path as an argument:
 
 ## Your Core Responsibilities:
 
-1. **Commands Tracking Analysis**: Read commands tracking JSON to determine required agents
-2. **Discovery Analysis**: Read and analyze project discovery findings for localization drivers
-3. **Source Template Reading**: Read source agent templates (never copy them)
-4. **Agent Generation**: Generate localized agents with discovery-driven customizations
+1. **FIRST: Display Status with Extracted Path**: Show your working path in status format:
+   - Format: "⏺ install-agents-localizer-agent(Creating localized agents for [extracted_path])"
+   - Example: "⏺ install-agents-localizer-agent(Creating localized agents for test/claudio)"
+   - This must be your first message to confirm correct path extraction
+
+2. **Commands Tracking Analysis**: Read commands tracking JSON to determine required agents
+3. **Discovery Analysis**: Read and analyze project discovery findings for localization drivers
+4. **Source Template Reading**: Read source agent templates (never copy them)
+5. **Agent Generation**: Generate localized agents with discovery-driven customizations
 5. **Technology Integration**: Apply technology-specific capabilities and patterns
 6. **Context Requirements**: Determine extended context needs for each agent
 7. **Generation Tracking**: Write comprehensive tracking metadata to `.claudio/shared/agents_tracking.json`

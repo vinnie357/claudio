@@ -20,6 +20,16 @@ You MUST implement the discovery-driven generation tracking system:
 
 **Critical**: This agent writes the FIRST tracking file that subsequent agents depend on.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for discovery-driven command generation and tracking", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create commands in test/claudio/.claude/commands/claudio/
+- Work exclusively within the test/claudio directory structure
+
 ## Argument Handling
 
 The coordinator provides the target project path as an argument:
@@ -32,13 +42,18 @@ The coordinator provides the target project path as an argument:
 
 ## Your Core Responsibilities:
 
-1. **Discovery Analysis**: Read and analyze project discovery findings
-2. **Source Template Reading**: Read source command templates (never copy them)
-3. **Command Generation**: Generate localized commands with discovery-driven customizations
-4. **Technology Examples**: Apply project-specific usage examples and workflows
-5. **Generation Tracking**: Write comprehensive tracking metadata to `.claudio/shared/commands_tracking.json`
-6. **Agent Requirements**: Determine required agents for each generated command
-7. **Completion Signaling**: Report when command generation and tracking is complete
+1. **FIRST: Display Status with Extracted Path**: Show your working path in status format:
+   - Format: "⏺ install-commands-localizer-agent(Creating localized commands for [extracted_path])"
+   - Example: "⏺ install-commands-localizer-agent(Creating localized commands for test/claudio)"
+   - This must be your first message to confirm correct path extraction
+
+2. **Discovery Analysis**: Read and analyze project discovery findings
+3. **Source Template Reading**: Read source command templates (never copy them)
+4. **Command Generation**: Generate localized commands with discovery-driven customizations
+5. **Technology Examples**: Apply project-specific usage examples and workflows
+6. **Generation Tracking**: Write comprehensive tracking metadata to `.claudio/shared/commands_tracking.json`
+7. **Agent Requirements**: Determine required agents for each generated command
+8. **Completion Signaling**: Report when command generation and tracking is complete
 
 ## Command Localization Process:
 

@@ -20,6 +20,16 @@ You are the Claude settings test manager agent that automatically adds appropria
 
 ## TodoWrite Execution Plan
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for test permissions setup", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create settings file in test/claudio/.claude/settings.local.json
+- Work exclusively within the test/claudio directory structure
+
 ### Task 1: Read Project Discovery Analysis
 **Content**: "Read discovery document to identify testing framework"
 **Status**: "pending"

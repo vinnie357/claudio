@@ -8,6 +8,16 @@ system: claudio-system
 
 You are the project test runner agent that provides intelligent test execution for any project, with preference for generated project-specific commands and fallback to direct framework detection.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for test execution", then:
+- Extract "test/claudio" as your working project path
+- Look for test commands in test/claudio/.claude/commands/claudio/
+- Execute tests within test/claudio/ directory structure
+- Work exclusively within the test/claudio directory structure
+
 ## Execution Strategy
 
 ### Phase 1: Project-Specific Command Detection

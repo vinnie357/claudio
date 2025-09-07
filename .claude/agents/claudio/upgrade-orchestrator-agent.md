@@ -7,6 +7,15 @@ model: opus
 
 You are the upgrade orchestrator agent that coordinates Claudio upgrade operations by executing 6 specialized subagents. Your role is to execute the upgrade process using proper Task tool invocations with sequential foundation and parallel batch patterns.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations and sub-agent invocations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for upgrade operations", then:
+- Extract "test/claudio" as your working project path
+- Pass project_path to all sub-agents: "pass the project_path argument test/claudio for [operation]"
+- Work exclusively within the test/claudio directory structure
+
 ## ⚠️ CRITICAL EXECUTION REQUIREMENTS
 
 **MANDATORY TASK TOOL USAGE:**
@@ -59,12 +68,12 @@ Let me start the upgrade process:
 
 2. **Discovery Analysis** (Sequential - Required First):
    
-   Use Task tool with subagent_type: "upgrade-discovery-analyzer" to analyze project discovery and installation status, including path resolution, installation detection, and compatibility assessment for the upgrade operation
+   Use Task tool with subagent_type: "upgrade-discovery-analyzer" - pass the project_path argument {project_path} for analyzing project discovery and installation status, including path resolution, installation detection, and compatibility assessment for the upgrade operation
 
 3. **Legacy Cleanup** (Sequential - If Required):
    
    Only execute if legacy patterns detected in discovery analysis:
-   Use Task tool with subagent_type: "upgrade-legacy-cleaner" to perform Phase 0 legacy pattern cleanup, including deprecated structure removal and modernization while preserving all user content
+   Use Task tool with subagent_type: "upgrade-legacy-cleaner" - pass the project_path argument {project_path} for performing Phase 0 legacy pattern cleanup, including deprecated structure removal and modernization while preserving all user content
 
 ### Phase 2: Parallel Analysis Batch
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for optimal performance:
@@ -72,10 +81,10 @@ Let me start the upgrade process:
 **⚠️ USE TASK TOOL PATTERNS - NEVER BASH COMMANDS**
 
 **Template Analysis Task**:
-Use Task tool with subagent_type: "upgrade-template-analyzer" to analyze template differences, detect conflicts, and plan localization strategy based on discovery results
+Use Task tool with subagent_type: "upgrade-template-analyzer" - pass the project_path argument {project_path} for analyzing template differences, detecting conflicts, and planning localization strategy based on discovery results
 
 **Backup Management Task**:
-Use Task tool with subagent_type: "upgrade-backup-manager" to create comprehensive timestamped backups, generate changelogs, and prepare rollback scripts for safe upgrade operations
+Use Task tool with subagent_type: "upgrade-backup-manager" - pass the project_path argument {project_path} for creating comprehensive timestamped backups, generating changelogs, and preparing rollback scripts for safe upgrade operations
 
 ### Phase 3: Parallel Execution Batch  
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for optimal performance:
@@ -83,10 +92,10 @@ Use Task tool with subagent_type: "upgrade-backup-manager" to create comprehensi
 **⚠️ USE TASK TOOL PATTERNS - NEVER BASH COMMANDS**
 
 **Component Localization Task**:
-Use Task tool with subagent_type: "upgrade-component-localizer" to execute localization plan, apply template updates, coordinate test command generation, and preserve user customizations
+Use Task tool with subagent_type: "upgrade-component-localizer" - pass the project_path argument {project_path} for executing localization plan, applying template updates, coordinating test command generation, and preserving user customizations
 
 **Installation Validation Task**:
-Use Task tool with subagent_type: "upgrade-installation-validator" to validate file integrity, verify pattern compliance, test functionality, and generate completion reports as components are updated
+Use Task tool with subagent_type: "upgrade-installation-validator" - pass the project_path argument {project_path} for validating file integrity, verifying pattern compliance, testing functionality, and generating completion reports as components are updated
 
 ## Upgrade Mode Handling (Task Tool Execution Patterns):
 

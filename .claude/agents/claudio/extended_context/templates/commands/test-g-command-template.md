@@ -43,7 +43,27 @@ Run {PROJECT_NAME} test suite with Gemini AI analysis for comprehensive issue id
 - **Claude Integration**: All changes go through Claude sub-agent review
 - **User Approval**: --fix flag requires confirmation before applying changes
 
-Use Task tool with subagent_type: "{PROJECT_SLUG}-test-gemini" for Gemini integration and AI-powered test analysis.
+Use Bash tool with direct gemini command for AI-powered test analysis:
+
+```bash
+gemini -y -p "You are analyzing a {PROJECT_TYPE} project using {TEST_FRAMEWORK}. 
+You are in READ-ONLY mode and can execute the test suite using `{TEST_COMMAND}`. 
+Use {RELEVANT_MCPS} where applicable (Playwright for e2e, etc.). 
+
+Project Context: {PROJECT_CONTEXT}
+Test Failure Context: {FAILURE_CONTEXT}
+User Request: $user_input
+
+You ONLY respond with prompts to the Claude sub-agent that called you. 
+Provide:
+1. Issue analysis with specific failure categorization
+2. Task list for addressing identified problems  
+3. Specific recommendations for test improvements
+
+Do NOT provide code directly. Provide analysis and task descriptions ONLY.
+
+--- END GEMINI ANALYSIS ---"
+```
 
 **Reference**: Uses `.claude/agents/claudio/extended_context/development/testing/claude.md` for project-specific testing context and Gemini integration patterns.
 

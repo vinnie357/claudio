@@ -21,6 +21,16 @@ You MUST implement the discovery-driven generation tracking system:
 
 **Critical**: This agent reads agents_tracking.json and writes the FINAL tracking file in the sequential chain.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for context generation based on agents tracking", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create context files in test/claudio/.claude/agents/claudio/extended_context/
+- Work exclusively within the test/claudio directory structure
+
 ## Argument Handling
 
 The coordinator provides the target project path as an argument:

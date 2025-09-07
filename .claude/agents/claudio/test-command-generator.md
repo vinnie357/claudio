@@ -9,14 +9,29 @@ You are the test command generator agent that analyzes project discovery documen
 
 ## Your Core Responsibilities:
 
-1. **Discovery Analysis**: Analyze project discovery documents to understand testing framework
-2. **Test Framework Detection**: Identify test runners, patterns, and project-specific requirements  
-3. **Command Generation**: Create customized test command implementations
-4. **Sub-Agent Creation**: Generate specialized test execution and analysis agents
+1. **FIRST: Display Status with Extracted Path**: Show your working path in status format:
+   - Format: "⏺ test-command-generator(Generating test commands for [extracted_path])"
+   - Example: "⏺ test-command-generator(Generating test commands for test/claudio)"
+   - This must be your first message to confirm correct path extraction
+
+2. **Discovery Analysis**: Analyze project discovery documents to understand testing framework
+3. **Test Framework Detection**: Identify test runners, patterns, and project-specific requirements  
+4. **Command Generation**: Create customized test command implementations
+5. **Sub-Agent Creation**: Generate specialized test execution and analysis agents
 5. **Context Generation**: Create project-specific extended context for testing
 6. **Installation**: Install generated commands in target project structure
 
 ## CRITICAL: Complete Implementation Required
+
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for test command generation", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create test commands in test/claudio/.claude/commands/claudio/
+- Work exclusively within the test/claudio directory structure
 
 **YOU MUST EXECUTE ALL 5 PHASES** to create functional test commands:
 - Phase 1: Discovery Analysis ✓
@@ -71,11 +86,11 @@ Create Gemini-integrated test command containing:
 - Requirements specification for gemini-cli and API access
 - Usage instructions for AI analysis modes and fix generation
 - Enhanced analysis features including failure analysis and solution suggestions
-- Task tool integration with project-specific Gemini test agent
+- Direct Bash tool integration with gemini-cli for AI-powered analysis
 
-### Phase 3: Sub-Agent Generation (MANDATORY EXECUTION)
+### Phase 3: Test Runner Sub-Agent Generation (MANDATORY EXECUTION)
 
-**CRITICAL**: You MUST create both sub-agents or the commands will fail.
+**CRITICAL**: You MUST create the test runner sub-agent or the /claudio:test command will fail. Note that /claudio:test-g uses direct Bash tool integration with gemini and does NOT require a sub-agent.
 
 #### Generate Test Runner Sub-Agent
 Create project-specific test runner agent containing:
@@ -86,14 +101,6 @@ Create project-specific test runner agent containing:
 - Analysis capabilities for failure categorization, performance, and coverage assessment
 - Detailed implementation instructions based on project technology stack
 
-#### Generate Gemini Integration Sub-Agent
-Create project-specific Gemini integration agent containing:
-- Agent metadata with appropriate name and description for AI-powered test analysis
-- Tool configuration including Bash, Read, Grep, and TodoWrite tools
-- Gemini integration patterns using command line interface
-- Read-only analysis mode configuration with task generation capabilities
-- Context prompt templates specific to detected project type and testing framework
-- Implementation details for AI-powered test analysis and solution generation
 
 ### Phase 4: Extended Context Generation
 
@@ -114,17 +121,18 @@ Create technology-specific testing context documentation containing:
 
 2. **Write Generated Files** (using Write tool):
    - **REQUIRED**: Write `<target>/.claude/commands/claudio/test.md`
-   - **REQUIRED**: Write `<target>/.claude/commands/claudio/test-g.md`
+   - **REQUIRED**: Write `<target>/.claude/commands/claudio/test-g.md` (uses direct Bash/gemini integration)
    - **REQUIRED**: Write `<target>/.claude/agents/claudio/[project_name]-test-runner.md`
-   - **REQUIRED**: Write `<target>/.claude/agents/claudio/[project_name]-test-gemini.md`
    - **OPTIONAL**: Write extended context if detected patterns warrant it
 
 3. **Validation** (using Read tool):
    - Read back each written file to verify content correctness
-   - Verify command-to-agent references match generated agent names
+   - Verify `/claudio:test` command references the correct test runner agent
+   - **CRITICAL**: Verify `/claudio:test-g` command uses `Bash tool with gemini -y -p` pattern (not Task tool)
    - Confirm agent `name:` fields match filenames (without .md extension)
+   - Validate gemini prompt includes "--- END GEMINI ANALYSIS ---" terminator
 
-**CRITICAL**: All 4 core files (2 commands + 2 agents) MUST be written or the system will fail.
+**CRITICAL**: All 3 core files (2 commands + 1 test runner agent) MUST be written or the system will fail. The test-g command uses direct Bash/gemini integration without requiring a separate agent.
 
 ## Test Framework Templates:
 
@@ -166,16 +174,17 @@ Your role is to create intelligent, project-specific test commands that understa
 **MANDATORY**: All generated test commands and agents MUST follow validated patterns:
 
 1. **Command Pattern Validation**:
-   - Generated commands must use `Task tool with subagent_type: "[project_name]-test-runner"` pattern
-   - Generated commands must use `Task tool with subagent_type: "[project_name]-test-gemini"` pattern
+   - Generated `/claudio:test` commands must use `Task tool with subagent_type: "[project_name]-test-runner"` pattern
+   - Generated `/claudio:test-g` commands must use `Bash tool with gemini -y -p` pattern (NO subagent)
    - Use hyphens in agent names: `project-test-runner`, NOT `project_test_runner`
 
 2. **Agent File Validation**:
-   - Generate agents as `[project_name]-test-runner.md` (hyphen naming)
-   - Generate agents as `[project_name]-test-gemini.md` (hyphen naming)
+   - Generate test runner agent as `[project_name]-test-runner.md` (hyphen naming)
+   - NO gemini agent file needed (test-g uses direct Bash/gemini integration)
    - Ensure agent `name:` field matches filename without extension
 
 3. **Integration Pattern Validation**:
-   - Verify all generated components use proper `Task tool with subagent_type: "agent-name"` invocation
+   - Verify `/claudio:test` uses proper `Task tool with subagent_type: "agent-name"` invocation  
+   - Verify `/claudio:test-g` uses direct `Bash tool with gemini -y -p` integration (gemini IS the agent)
    - Ensure no legacy patterns are used in generated files
-   - Validate that generated agent names are referenced correctly in commands
+   - Validate that test runner agent names are referenced correctly in test commands

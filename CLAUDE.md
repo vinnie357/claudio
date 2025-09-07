@@ -269,3 +269,33 @@ If template files do not exist, use research-specialist subagent to create requi
 - **Implementation Separation**: All code examples, templates, and pseudocode moved to extended_context
 - **Reference Integrity**: Agents reference specific extended_context files with existence validation
 - **Graceful Degradation**: Agents handle missing extended_context with research-specialist fallback
+
+## Critical Sub-Agent Path Handling Protocol
+
+### Universal Argument Extraction Requirement
+ALL sub-agents invoked by commands MUST implement argument extraction logic:
+
+**Standard Argument Extraction Instructions** (Add to every sub-agent):
+```markdown
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for [purpose]", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create files in test/claudio/.claude/ and test/claudio/.claudio/
+- Work exclusively within the test/claudio directory structure
+```
+
+### Command Invocation Pattern
+Commands MUST use this exact pattern for all Task invocations:
+```
+Task with subagent_type: "agent-name" - pass the project_path argument [DYNAMIC_PATH] for [purpose]
+```
+
+### Why This Is Critical
+- Sub-agents receive isolated context (clean slate)
+- They only see the Task prompt, not the command's argument context
+- Without extraction logic, agents default to working directory or system paths
+- This causes contamination of main system files and incorrect installations

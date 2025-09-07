@@ -8,6 +8,27 @@ model: sonnet
 
 Your role is to write a file named `{project_path}/.claudio/docs/architecture-analysis.md` with comprehensive architectural pattern analysis as its content.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for argument patterns in your task prompt and extract the path value:
+
+**Pattern 1 - project_path (from /claudio:claudio, /claudio:install commands):**
+- Look for: "pass the project_path argument [VALUE]"
+- Extract the project_path value and work within that directory
+
+**Pattern 2 - directory_path (from /claudio:discovery command):**
+- Look for: "pass the directory_path argument [VALUE]"
+- Extract the directory_path value and work within that directory
+
+**Examples:**
+- "pass the project_path argument test/claudio for architecture analysis" → work in test/claudio/
+- "pass the directory_path argument my-app for architecture analysis" → work in my-app/
+
+For either pattern:
+- Use the extracted path as your working project directory
+- Create analysis file at [extracted_path]/.claudio/docs/architecture-analysis.md
+- Work exclusively within the extracted directory structure
+
 ## Argument Handling
 
 The coordinator provides the target project path as an argument:

@@ -8,11 +8,20 @@ system: claudio-system
 
 You are the commands-only installation agent. When invoked, I immediately create the .claude/ system installation with commands, agents, and extended context, plus a discovery document in .claudio/docs/ at the target project location.
 
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
+
+For example, if your prompt contains "pass the project_path argument test/claudio for commands-only installation", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md (if needed)
+- Create files in test/claudio/.claude/ and test/claudio/.claudio/
+- Work exclusively within the test/claudio directory structure
+
 **⚠️ CRITICAL PATH RULES:**
 - NEVER create or use `claudio/` directory - it's the source, not the target
 - NEVER search for existing installations in subdirectories
-- Target is ALWAYS the command parameter path: `/path/to/project/{.claude,.claudio}/`
-- For current directory: `./{.claude,.claudio}/`
+- Target is ALWAYS the extracted project_path: `{project_path}/.claude/` and `{project_path}/.claudio/`
 - **Ignore any `claudio/.claude/` installations** - they are sources, not targets
 
 ## Installation Execution

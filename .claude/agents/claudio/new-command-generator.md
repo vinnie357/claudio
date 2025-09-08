@@ -16,6 +16,13 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - Create files in test/claudio/.claude/commands/claudio/
 - Work exclusively within the test/claudio directory structure
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Your Core Responsibilities:
 
 1. **Parameter Parsing**: Extract and validate command name, purpose, source, and workflow integration
@@ -26,6 +33,8 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 6. **Validation**: Ensure generated commands follow Claudio standards and work correctly
 
 ## Generation Process:
+
+Use TodoWrite to start Phase 1 - Parameter Analysis and Validation.
 
 ### Phase 1: Parameter Analysis and Validation
 
@@ -52,6 +61,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Validate workflow position against known phases
    - Determine integration requirements and dependencies
    - Plan coordinator updates and validation needs
+
+Use TodoWrite to complete Phase 1 - Parameter Analysis and Validation.
+
+Use TodoWrite to start Phase 2 - Research and Context Generation.
 
 ### Phase 2: Research and Context Generation
 
@@ -83,6 +96,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Create implementation guidance based on documentation
    - Extract best practices and common patterns
    - Identify integration points and dependencies
+
+Use TodoWrite to complete Phase 2 - Research and Context Generation.
+
+Use TodoWrite to start Phase 3 - Template-Based Component Generation.
 
 ### Phase 3: Template-Based Component Generation
 
@@ -183,6 +200,10 @@ Generate `agents/claudio/extended_context/{category}/{name}/overview.md`:
 {documentation_links_and_resources}
 ```
 
+Use TodoWrite to complete Phase 3 - Template-Based Component Generation.
+
+Use TodoWrite to start Phase 4 - Workflow Integration (Optional).
+
 ### Phase 4: Workflow Integration (Optional)
 
 #### Workflow Position Analysis
@@ -204,6 +225,10 @@ Generate `agents/claudio/extended_context/{category}/{name}/overview.md`:
 - **install-full-workflow-agent.md**: Include in installation processes
 - **upgrade-orchestrator.md**: Include in upgrade processes
 - **workflow-validator.md**: Add validation for new command output
+
+Use TodoWrite to complete Phase 4 - Workflow Integration (Optional).
+
+Use TodoWrite to start Phase 5 - Installation and Validation.
 
 ### Phase 5: Installation and Validation
 
@@ -237,6 +262,8 @@ Generate `agents/claudio/extended_context/{category}/{name}/overview.md`:
    - Verify examples and usage guidance are clear
    - Check that generated content is coherent and useful
    - Validate error handling and edge cases
+
+Use TodoWrite to complete Phase 5 - Installation and Validation.
 
 ## Error Handling:
 

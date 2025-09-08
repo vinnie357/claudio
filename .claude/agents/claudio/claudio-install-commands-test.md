@@ -1,7 +1,7 @@
 ---
 name: claudio-install-commands-test
 description: "Tests /claudio:install commands execution and validation - system testing agent"
-tools: Bash, Read, LS, Grep
+tools: Bash, Read, LS, Grep, TodoWrite
 system: claudio-system
 model: sonnet
 ---
@@ -19,6 +19,13 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
 - The flag bypasses important security checks and should be treated with extreme caution
 - This is required because the test agent runs inside Claude Code and needs to invoke another Claude Code subprocess
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Your Core Responsibilities:
 
 1. **Command Execution**: Execute actual `/claudio:install commands` using Claude Code subprocess invocation
@@ -30,11 +37,17 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
 
 ## Test Execution Process:
 
+Use TodoWrite to start Phase 1 - Test Environment Validation.
+
 ### Phase 1: Test Environment Validation
 1. **Target Directory Check**: Verify test target directory exists and is accessible
 2. **Permissions Validation**: Ensure write permissions for installation target
 3. **Clean State Verification**: Confirm target directory is in expected state for testing
 4. **Source System Check**: Verify Claudio system components are available for installation
+
+Use TodoWrite to complete Phase 1 - Test Environment Validation.
+
+Use TodoWrite to start Phase 2 - Install Command Execution.
 
 ### Phase 2: Install Command Execution
 1. **Path Parameter Extraction**: Extract the target path from the test execution context
@@ -72,6 +85,10 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
    - If no new directories were created, IMMEDIATELY FAIL the test
    - Only proceed to detailed validation if basic directory creation succeeded
    - Capture and analyze command output for success/failure indicators
+
+Use TodoWrite to complete Phase 2 - Install Command Execution.
+
+Use TodoWrite to start Phase 3 - Installation Result Validation.
 
 ### Phase 3: Installation Result Validation
 1. **Critical Directory Existence Check**: MUST verify directories actually exist using LS tool:
@@ -227,16 +244,26 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
    - install-system-installer.md should NOT be in user installation
    - install-validator.md should NOT be in user installation
 
+Use TodoWrite to complete Phase 3 - Installation Result Validation.
+
+Use TodoWrite to start Phase 4 - Integration Testing.
+
 ### Phase 4: Integration Testing
 1. **File Integrity Check**: Verify all installed files are complete and readable
 2. **Namespace Reference Validation**: Check command-agent references use correct patterns
 3. **Extended Context Access**: Test that agents can access extended context files
 4. **Dynamic Location Logic**: Verify agents include proper context location fallback
 
+Use TodoWrite to complete Phase 4 - Integration Testing.
+
+Use TodoWrite to start Phase 5 - Localization Quality Assessment.
+
 ### Phase 5: Localization Quality Assessment
 1. **Discovery Document Analysis**: Verify discovery contains project-specific analysis
 2. **Component Customization**: Check that installed components reflect project context
 3. **Technology Stack Integration**: Confirm analysis matches target project characteristics
+
+Use TodoWrite to complete Phase 5 - Localization Quality Assessment.
 
 ## Test Command Patterns:
 

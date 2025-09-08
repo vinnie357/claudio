@@ -1,7 +1,7 @@
 ---
 name: install-agents-localizer-agent
 description: "Creates localized Claudio agents based on project discovery for technology-aware installations"
-tools: Write, Read, Bash, LS, Glob
+tools: Write, Read, Bash, LS, Glob, TodoWrite
 model: sonnet
 system: claudio-system
 ---
@@ -21,6 +21,13 @@ You MUST implement the discovery-driven generation tracking system:
 7. **Write Tracking JSON**: Create `.claudio/shared/agents_tracking.json` with complete generation metadata
 
 **Critical**: This agent reads commands_tracking.json and writes agents_tracking.json for the context generator.
+
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 ## Argument Extraction Instructions
 
@@ -48,23 +55,25 @@ The coordinator provides the target project path as an argument:
    - Example: "⏺ install-agents-localizer-agent(Creating localized agents for test/claudio)"
    - This must be your first message to confirm correct path extraction
 
-2. **Commands Tracking Analysis**: Read commands tracking JSON to determine required agents
+2. **Commands Tracking Analysis**: Read commands tracking JSON to get required_agents array
 3. **Discovery Analysis**: Read and analyze project discovery findings for localization drivers
 4. **Source Template Reading**: Read source agent templates (never copy them)
 5. **Agent Generation**: Generate localized agents with discovery-driven customizations
 5. **Technology Integration**: Apply technology-specific capabilities and patterns
-6. **Context Requirements**: Determine extended context needs for each agent
-7. **Generation Tracking**: Write comprehensive tracking metadata to `.claudio/shared/agents_tracking.json`
+6. **Context Requirements**: Determine required context directory paths for all agents
+7. **Generation Tracking**: Write simplified tracking with agents_generated and required_contexts arrays
 8. **Completion Signaling**: Report when agent generation and tracking is complete
 
 ## Agent Localization Process:
 
+Use TodoWrite to start Phase 1 - Tracking and Discovery Analysis.
+
 ### Phase 1: Tracking and Discovery Analysis
 1. **Read Commands Tracking JSON**:
    - Load `{project_path}/.claudio/shared/commands_tracking.json`
-   - Extract required agents list from each generated command
+   - Extract required_agents array (single consolidated list)
    - Validate JSON structure and required fields
-   - **Build comprehensive list of agents that need to be generated**
+   - **Use required_agents array as the complete list of agents to generate**
 
 2. **Read Discovery Document**:
    - Load `{project_path}/.claudio/docs/discovery.md` created by discovery agent
@@ -82,6 +91,10 @@ The coordinator provides the target project path as an argument:
    - **Testing Frameworks**: Jest, pytest, JUnit, Go test, RSpec
    - **Build Systems**: Webpack, Vite, npm/yarn, pip, Maven, Gradle
 
+Use TodoWrite to complete Phase 1 - Tracking and Discovery Analysis.
+
+Use TodoWrite to start Phase 2 - Source Template Analysis and Agent Generation.
+
 ### Phase 2: Source Template Analysis and Agent Generation
 
 1. **Source Template Reading**:
@@ -92,28 +105,25 @@ The coordinator provides the target project path as an argument:
    - Skip agents marked with `system: claudio-system`
 
 2. **Generate Project-Specific Agents**:
-   For each required agent from commands tracking:
-   - **Read source template** (record path for tracking)
+   For each agent in required_agents array:
+   - **Read source template**
    - Extract agent capabilities and tool requirements
    - **Generate project-specific version** with:
      * Technology-specific analysis capabilities
      * Framework-aware tool integrations
      * Project domain expertise
      * Architecture-specific patterns
-   - **Track localizations applied** (patterns, customizations, capabilities added)
-   - **Determine extended context requirements** for each agent
-   - Add all subagents referenced by commands:
-     * claudio-structure-creator-agent (for /claudio:claudio)
-     * documentation-*-creator agents (for documentation-coordinator)  
-     * security-threat-modeler, security-diagram-generator (for security-review-coordinator)
-     * vulnerability-assessment-specialist, security-architecture-analyst (for security-review-coordinator)
-   - Include sub-subagents referenced by coordinator agents
-   - Ensure complete coverage of all dependencies from index
+   - **Add to agents_generated array when complete**
+   - **Determine required context directories** for context tracking
 
 3. **Validate Dependency Completeness**:
    - Cross-reference index tree with available source agents
    - Report any missing source agents that are required
    - Create comprehensive agent installation list ensuring no orphaned references
+
+Use TodoWrite to complete Phase 2 - Source Template Analysis and Agent Generation.
+
+Use TodoWrite to start Phase 3 - Agent Generation and Context Requirements.
 
 ### Phase 3: Agent Generation and Context Requirements
 
@@ -121,17 +131,16 @@ The coordinator provides the target project path as an argument:
    - Create each agent file in `{project_path}/.claude/agents/claudio/`
    - Ensure all agents include appropriate technology capabilities
    - Include project-specific patterns and examples
-   - **Record generated file paths for tracking**
+   - **Add agent name to agents_generated array when written**
 
-2. **Determine Extended Context Requirements**:
-   For each generated agent:
-   - Analyze agent capabilities and responsibilities
-   - Determine required extended context categories:
-     * **Workflow contexts**: discovery, prd, planning, task execution
-     * **Development contexts**: code quality, testing, design patterns
-     * **Security contexts**: threat modeling, vulnerability analysis
-     * **Documentation contexts**: API documentation, user guides
-   - **Record context requirements for tracking JSON**
+2. **Determine Required Context Directories**:
+   For all generated agents collectively:
+   - Analyze technology stack and project needs
+   - Determine required context directory paths:
+     * **workflow/** (discovery, prd, planning, task execution)
+     * **development/** (nodejs, quality, testing, security)
+     * **infrastructure/** (aws, containers, monitoring)
+   - **Add directory paths to required_contexts array**
 
 3. **Agent Localization Patterns**:
    - **Workflow Agents** (discovery, prd, plan, task): Include microservices architecture patterns
@@ -146,6 +155,10 @@ The coordinator provides the target project path as an argument:
    - Graceful degradation when extended context doesn't exist yet
    - Dynamic context loading patterns
 
+Use TodoWrite to complete Phase 3 - Agent Generation and Context Requirements.
+
+Use TodoWrite to start Phase 4 - Generation Tracking and Completion.
+
 ### Phase 4: Generation Tracking and Completion
 
 1. **Write Generation Tracking JSON**:
@@ -153,11 +166,8 @@ The coordinator provides the target project path as an argument:
      * Timestamp and project path
      * Commands tracking input source
      * Discovery source path and drivers used
-     * For each agent generated:
-       - Source template path (what was read)
-       - Generated file path (what was created)
-       - Localizations applied (what customizations)
-       - Extended context requirements (what contexts needed)
+     * Simple agents_generated array (list of agent names created)
+     * Simple required_contexts array (list of context directory paths needed)
    - **This JSON file is required input for the context generator agent**
 
 2. **Create Agent Index**:
@@ -184,44 +194,19 @@ The coordinator provides the target project path as an argument:
    - Include dependency information for future validation and upgrades
    - Document which agents are available for command references
 
-## Localization Examples for Current Project (ShopFlow E-commerce):
+## Agent Localization Process
 
-### **Node.js/Microservices Specialization**
-Based on discovery analysis showing Node.js microservices architecture:
-- **Workflow agents**: Include service boundary analysis and API contract planning
-- **Development agents**: Include npm/yarn workflows, Express.js patterns, PostgreSQL integration
-- **Security agents**: Include e-commerce security patterns and PCI compliance considerations
-- **Documentation agents**: Include API documentation for microservices
+Generate localized agents using patterns referenced in extended_context/installation/ documents. Validate file existence before referencing extended_context documents using Read or LS tools. If template files do not exist, use research-specialist subagent to create required documentation.
 
-### **React Project - discovery-agent.md**
-```markdown
-Include React-specific analysis:
-- Component architecture patterns
-- State management solutions (Redux, Context, Zustand)
-- Testing setup (Jest, React Testing Library)
-- Build configuration (Vite, Create React App, Webpack)
-- UI framework integration (Material-UI, Chakra, Tailwind)
-```
+### **Technology Integration Patterns**
+Based on discovery analysis, apply appropriate localization patterns for:
+- **Workflow agents**: Domain-specific workflow patterns and architecture considerations
+- **Development agents**: Technology stack workflows, framework patterns, database integration
+- **Security agents**: Domain security patterns and compliance considerations  
+- **Documentation agents**: Technology-appropriate documentation patterns
 
-### **Python Project - code-quality-analyzer.md**
-```markdown
-Configure for Python ecosystem:
-- Linting: flake8, pylint, ruff
-- Formatting: black, yapf, autopep8
-- Type checking: mypy, pyright
-- Testing: pytest, unittest
-- Dependencies: pip, poetry, pipenv
-```
-
-### **Microservices - plan-agent.md**
-```markdown
-Adapt for distributed architecture:
-- Service boundary definition
-- API contract specification
-- Database per service patterns
-- Event-driven communication
-- Deployment orchestration
-```
+### **Framework Specialization**
+Apply framework-specific capabilities by consulting extended context references for technology mapping and specialization patterns. Each agent includes appropriate technology capabilities based on discovery findings.
 
 ## Generation Tracking JSON Format:
 
@@ -233,22 +218,19 @@ Create `{project_path}/.claudio/shared/agents_tracking.json`:
   "project_path": "./my-project",
   "input_source": ".claudio/shared/commands_tracking.json",
   "discovery_source": ".claudio/docs/discovery.md",
-  "agents_generated": [
-    {
-      "agent": "discovery-agent",
-      "source_template": "/.claude/agents/claudio/discovery-agent.md",
-      "generated_at": "./my-project/.claude/agents/claudio/discovery-agent.md", 
-      "localizations_applied": ["nodejs_analysis", "microservices_discovery", "ecommerce_patterns"],
-      "extended_context_requirements": [
-        "workflow/discovery/overview.md",
-        "workflow/discovery/troubleshooting.md"
-      ]
-    }
-  ]
+  "discovery_drivers": {
+    "technology_stack": ["nodejs", "react", "postgresql"],
+    "architecture": "microservices",
+    "project_domain": "ecommerce"
+  },
+  "agents_generated": ["discovery-agent", "prd-agent", "plan-agent", "task-agent", "code-quality-analyzer"],
+  "required_contexts": ["workflow/discovery/", "workflow/prd/", "workflow/planning/", "development/nodejs/", "development/quality/", "development/testing/", "development/security/"]
 }
 ```
 
 ## Output Format:
+
+Use TodoWrite to complete Phase 4 - Generation Tracking and Completion.
 
 When agent generation and tracking is complete, signal to the coordinator:
 - **Success**: "Agents generated with tracking for [project_type] at [project_path]"

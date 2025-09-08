@@ -40,5 +40,5 @@ When you reference research (e.g., "use research on caching"), the plan automati
 - Incorporates research findings into task contexts
 - References research in implementation guidance
 
-Use the plan-agent subagent to transform any planning input into organized, actionable phase/task structures ready for immediate development execution.
+Task with subagent_type: "plan-agent" - pass the project_path argument to transform any planning input into organized, actionable phase/task structures ready for immediate development execution.
 

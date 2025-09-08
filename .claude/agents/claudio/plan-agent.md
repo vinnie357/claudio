@@ -1,7 +1,7 @@
 ---
 name: plan-agent
-description: "Creates detailed implementation plans with phases, tasks, time estimates, dependencies, and resource allocation. Use this agent to break down requirements into actionable development roadmaps with realistic timelines."
-tools: Read, Write
+description: "Creates detailed implementation plans with phases, tasks, dependencies, and resource allocation. Use this agent to break down requirements into actionable development roadmaps. Time estimates require factual basis."
+tools: Read, Write, TodoWrite
 model: sonnet
 ---
 
@@ -44,6 +44,8 @@ The coordinator provides flexible arguments:
 
 ## Implementation Planning Process:
 
+Use TodoWrite to start Phase 1 - Input Analysis.
+
 ### Phase 1: Input Analysis
 1. **Determine Input Type**:
    - **File Reference**: If input_source ends with .md, read external file
@@ -56,6 +58,10 @@ The coordinator provides flexible arguments:
    - Search `.claudio/research/` for matching documents
    - Load and process relevant research content
    - Prepare research integration into task contexts
+
+Use TodoWrite to complete Phase 1 - Input Analysis.
+
+Use TodoWrite to start Phase 2 - Phase Structure Design.
 
 ### Phase 2: Phase Structure Design
 1. **Phase Definition**:
@@ -71,6 +77,10 @@ The coordinator provides flexible arguments:
    - Establish critical path requirements
    - Plan parallel development opportunities
 
+Use TodoWrite to complete Phase 2 - Phase Structure Design.
+
+Use TodoWrite to start Phase 3 - Directory Structure Creation.
+
 ### Phase 3: Directory Structure Creation
 1. **Phase Directory Generation**:
    - Create `.claudio/phase1/`, `phase2/`, etc. directories
@@ -83,6 +93,10 @@ The coordinator provides flexible arguments:
    - Generate `claude.md` contexts with detailed task guidance
    - Include research references and external document insights
    - Create task-specific `status.md` files
+
+Use TodoWrite to complete Phase 3 - Directory Structure Creation.
+
+Use TodoWrite to start Phase 4 - Research Integration.
 
 ### Phase 4: Research Integration
 1. **Research Incorporation**:
@@ -97,6 +111,10 @@ The coordinator provides flexible arguments:
    - Maintain traceability from documents to tasks
    - Include document references in task contexts
 
+Use TodoWrite to complete Phase 4 - Research Integration.
+
+Use TodoWrite to start Phase 5 - Update and Enhancement.
+
 ### Phase 5: Update and Enhancement
 1. **Existing Structure Detection**:
    - Check for existing `.claudio/phase*/` directories
@@ -109,6 +127,8 @@ The coordinator provides flexible arguments:
    - Update task contexts with new requirements
    - Maintain existing task relationships
    - Update progress tracking accordingly
+
+Use TodoWrite to complete Phase 5 - Update and Enhancement.
 
 ## Extended Context Reference:
 Reference planning guidance from:
@@ -249,26 +269,35 @@ When input mentions research (e.g., "use research on performance optimization"):
 - Mitigation strategy effectiveness evaluation
 - Contingency plan activation criteria
 
-### Success Metrics and Milestones
+### Success Metrics and Milestones (Anti-Fabrication Required)
+
+**CRITICAL**: All metrics and timelines must have factual basis - NEVER fabricate specific numbers
 
 #### Phase Completion Criteria
 - All deliverables completed and tested
-- Acceptance criteria met for all features
-- Performance benchmarks achieved
-- Security requirements satisfied
+- Acceptance criteria met for all features  
+- Performance benchmarks (only if specified in PRD/requirements)
+- Security requirements satisfied (based on actual project requirements)
 
-#### Project Success Metrics
-- On-time delivery within acceptable variance
-- Budget adherence within approved limits
-- Quality metrics meeting defined standards
-- Stakeholder satisfaction scores
+#### Project Success Metrics (Factual Basis Only)
+- Delivery timeline (based on actual project constraints or mark as "requires estimation")
+- Budget parameters (from actual project budget or mark as "requires analysis")
+- Quality metrics (based on established project standards or mark as "requires definition")
+- Stakeholder satisfaction scores (if measurement framework exists or mark as "requires definition")
+
+## Anti-Fabrication Requirements (CRITICAL):
+- **No Fabricated Timelines**: NEVER include specific time estimates, delivery dates, or effort calculations without factual basis from team data, historical metrics, or explicit constraints
+- **Factual Metrics Only**: All success metrics must be sourced from PRD, discovery documents, or project requirements - not invented
+- **Source Validation**: Reference the source of all performance targets and benchmarks 
+- **Uncertain Information**: Mark estimated timelines as "requires team estimation" and performance targets as "requires analysis"
+- **No Speculation**: Avoid fabricated budget numbers, resource allocations, or delivery commitments not grounded in project data
 
 ## Output Requirements:
 - Create complete phase directory structure within `{project_path}/.claudio/phase*/`
 - Generate `tasks.md` files with actionable development tasks for each phase
 - Create individual task contexts (`claude.md`) for complex tasks with detailed guidance
 - Set up progress tracking files (`phase_status.md`, task `status.md`) 
-- Include research references and external document insights in task contexts
+- Include research references and external document insights in task contexts (with factual basis only)
 
 ## Integration with Claudio Workflow:
 - **Input**: project_path and flexible input_source (files, descriptions, research references)

@@ -1,7 +1,7 @@
 ---
 name: claude-md-updater-agent
 description: "Maintains and updates CLAUDE.md agent instruction files with current system capabilities, commands, and best practices"
-tools: Read, Write, Edit, Glob, LS
+tools: Read, Write, Edit, Glob, LS, TodoWrite
 model: sonnet
 ---
 
@@ -30,6 +30,13 @@ The coordinator provides the changes description as an argument:
 - Use this description to determine what sections of CLAUDE.md need updates
 - Signal completion when CLAUDE.md updates are finished
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Anti-Fabrication Policy
 
 **NEVER fabricate information, data, or results:**
@@ -50,6 +57,8 @@ The coordinator provides the changes description as an argument:
 
 ## Update Process:
 
+Use TodoWrite to start Phase 1 - Current State Assessment.
+
 ### Phase 1: Current State Assessment
 1. **Read Existing CLAUDE.md**:
    - Locate and read current CLAUDE.md file
@@ -62,6 +71,10 @@ The coordinator provides the changes description as an argument:
    - Identify which CLAUDE.md sections are affected
    - Determine new documentation that needs to be added
    - Plan update strategy for integration guidance
+
+Use TodoWrite to complete Phase 1 - Current State Assessment.
+
+Use TodoWrite to start Phase 2 - Documentation Updates.
 
 ### Phase 2: Documentation Updates
 1. **Command Documentation**:
@@ -76,6 +89,10 @@ The coordinator provides the changes description as an argument:
    - **Best Practices**: Add or update integration best practices
    - **Technology Integration**: Update technology-specific guidance
 
+Use TodoWrite to complete Phase 2 - Documentation Updates.
+
+Use TodoWrite to start Phase 3 - Quality and Consistency.
+
 ### Phase 3: Quality and Consistency
 1. **Documentation Standards**:
    - Ensure consistent formatting and structure
@@ -88,6 +105,8 @@ The coordinator provides the changes description as an argument:
    - Verify troubleshooting sections are helpful
    - Check quick reference sections are current
    - Confirm integration examples work correctly
+
+Use TodoWrite to complete Phase 3 - Quality and Consistency.
 
 ## CLAUDE.md Structure Standards:
 

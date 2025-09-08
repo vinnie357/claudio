@@ -6,9 +6,9 @@ A project analysis and planning system that transforms any codebase into an orga
 
 <img src="docs/images/claudio.png" alt="Claudio System" width="600" height="auto">
 
-Claudio orchestrates discovery, requirements, planning, and task organization through specialized AI agents that work together to **analyze, plan, and implement** project solutions. The system uses an **agent-based architecture** where components are **customized for each project** based on discovery analysis of technology stack, architecture patterns, and project requirements.
+Claudio orchestrates discovery, requirements, planning, and task organization through 77+ specialized AI agents with standardized coordination patterns that work together to **analyze, plan, and implement** project solutions. The system uses a **mature agent-based architecture** with universal argument extraction where components are **intelligently customized for each project** based on comprehensive discovery analysis of technology stack, architecture patterns, and project requirements.
 
-The system transforms ad-hoc development into systematic, trackable, and collaborative project execution through project localization and workflow automation.
+The system transforms ad-hoc development into systematic, trackable, and collaborative project execution through intelligent project localization, anti-fabrication policies, and comprehensive workflow automation.
 
 ## Requirements
 
@@ -89,6 +89,12 @@ exit
 
 ## Key Features
 
+### Agent Coordination System
+- **Universal Argument Extraction**: All 77+ agents implement standardized argument extraction logic for consistent project path handling and cross-agent communication
+- **Anti-Fabrication Standards**: System-wide policies ensure outputs are based on actual project analysis with factual, measurable results
+- **Template System**: Comprehensive template library in extended_context/templates/ provides consistent patterns for agent and command development
+- **Project Path Isolation**: Robust path handling prevents system contamination during multi-project workflows
+
 ### Discovery System
 - **Parallel Analysis Architecture**: 5 specialized agents analyze project structure, technology stack, architecture patterns, integration opportunities, and consolidate findings simultaneously
 - **Technology Stack Detection**: Automatic framework identification, dependency analysis, and build system assessment
@@ -140,7 +146,7 @@ exit
 |---------|---------|---------|
 | `/claudio:implement` | Execute implementation plans | `/claudio:implement ../my-project` |
 | `/claudio:test` | Run project tests with analysis | `/claudio:test` or `/claudio:test --fix` |
-| `/claudio:test-g` | Gemini-integrated testing | `/claudio:test-g` |
+| `/claudio:test-g` | Gemini-enhanced testing with coordinator workflow | `/claudio:test-g` |
 
 ### System Management
 | Command | Purpose | Example |
@@ -162,7 +168,7 @@ exit
 
 ### Installing Claudio Components
 
-Claudio supports multiple installation modes to fit different workflows:
+Claudio provides mature installation workflows with standardized component management and intelligent project localization:
 
 #### Installation Modes
 
@@ -174,14 +180,14 @@ Claudio supports multiple installation modes to fit different workflows:
 # Install localized commands only in current project  
 /claudio:install commands
 ```
-Creates `.claude/` folder in current directory with project-localized Claudio system based on discovery analysis.
+Creates `.claude/` folder in current directory with project-localized Claudio system featuring technology-aware customization through discovery analysis.
 
 **User Mode** (Global Installation):
 ```bash
 # Install generic commands globally for user
 /claudio:install commands user
 ```
-Installs generic Claudio templates to `~/.claude/` for system-wide access.
+Installs standardized Claudio templates to `~/.claude/` for system-wide access across all projects.
 
 **Custom Path Mode**:
 ```bash
@@ -189,7 +195,7 @@ Installs generic Claudio templates to `~/.claude/` for system-wide access.
 /claudio:install /path/to/project
 /claudio:install commands /path/to/custom/location
 ```
-Installs project-localized Claudio system to any specified directory after discovery analysis.
+Installs fully customized Claudio system to any specified directory with comprehensive discovery analysis and technology-specific localization.
 
 ### Upgrading Claudio
 
@@ -333,6 +339,29 @@ Create structured documentation with complexity-aware analysis:
 - **Quality Standards**: Includes sources, practical examples, and analysis depth
 - **Context Detection**: Determines proper file placement for direct vs subagent usage
 
+### Template System
+
+Comprehensive template library provides consistent patterns for system development:
+
+```
+.claude/agents/claudio/extended_context/templates/
+├── agents/                          # Agent development templates
+│   ├── analysis-agent-template.md   # Analysis specialist patterns
+│   ├── orchestrator-agent-template.md # Coordinator patterns
+│   ├── specialist-agent-template.md # Domain specialist patterns
+│   └── validation-agent-template.md # Quality assurance patterns
+├── commands/                        # Command development templates
+│   └── test-g-command-template.md   # Test command patterns
+└── meta/                           # Meta-development templates
+    └── claude/commands/templates/   # Complete command system templates
+```
+
+**Template Features**:
+- **Standardized Patterns**: Consistent structure across all agents and commands
+- **Anti-Fabrication Integration**: Built-in factual output requirements
+- **Argument Extraction**: Universal argument handling patterns
+- **Quality Standards**: Comprehensive validation and reporting templates
+
 ### Implementation Execution
 
 Beyond planning, Claudio can execute your implementation plans:
@@ -356,7 +385,13 @@ Beyond planning, Claudio can execute your implementation plans:
 
 ### Agent-Based Architecture
 
-Claudio employs specialized AI agents that orchestrate different aspects of project analysis:
+Claudio employs a comprehensive system of 77+ specialized AI agents with standardized coordination patterns and universal argument extraction for reliable project analysis:
+
+#### Standardized Agent Patterns
+- **Universal Argument Extraction**: All agents implement consistent argument parsing for project path handling
+- **Anti-Fabrication Compliance**: Agents produce factual outputs based on actual project analysis
+- **Template Integration**: Agents reference comprehensive template library in extended_context/templates/
+- **Model Optimization**: Strategic model distribution across Haiku (11), Sonnet 4 (58), and Opus 4.1 (8) agents
 
 #### Discovery System (Parallel Architecture)
 - **discovery-agent**: Orchestrates parallel project analysis using 5 specialized analyzers

@@ -34,4 +34,4 @@ Research a topic and create comprehensive documentation with complexity assessme
 - `overview.md`: Comprehensive topic analysis with best practices and implementation patterns
 - `troubleshooting.md`: Common issues, solutions, diagnostic tools, and escalation guidance
 
-Use the research-specialist subagent to conduct comprehensive research and create structured documentation following established Claudio templates.
+Task with subagent_type: "research-specialist" - pass the project_path argument to conduct comprehensive research and create structured documentation following established Claudio templates.

@@ -1,7 +1,7 @@
 ---
 name: claudio-upgrade-test
 description: "Tests /claudio:upgrade complete workflow execution and validation including 6-subagent parallel coordination - system testing agent"
-tools: Bash, Read, LS, Grep
+tools: Bash, Read, LS, Grep, TodoWrite
 model: sonnet
 system: claudio-system
 ---
@@ -19,6 +19,13 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
 - The flag bypasses important security checks and should be treated with extreme caution
 - This is required because the test agent runs inside Claude Code and needs to invoke another Claude Code subprocess
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Your Core Responsibilities:
 
 1. **Command Execution**: Execute actual `/claudio:upgrade` commands using Claude Code subprocess invocation
@@ -31,12 +38,18 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
 
 ## Test Execution Process:
 
+Use TodoWrite to start Phase 1 - Test Environment Validation.
+
 ### Phase 1: Test Environment Validation
 1. **Target Directory Check**: Verify test upgrade target directory exists and contains legacy installation
 2. **Legacy Installation Verification**: Confirm existing Claudio installation is present for upgrade
 3. **Permissions Validation**: Ensure write permissions for upgrade operations
 4. **Backup Space Check**: Verify sufficient disk space for backup creation
 5. **Source System Check**: Verify current Claudio system components are available for upgrade
+
+Use TodoWrite to complete Phase 1 - Test Environment Validation.
+
+Use TodoWrite to start Phase 2 - Upgrade Command Execution.
 
 ### Phase 2: Upgrade Command Execution
 1. **Path Parameter Extraction**: Extract the target path from the test execution context
@@ -80,6 +93,10 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
    - If no changes were made or backup files were not created, IMMEDIATELY FAIL the test
    - Only proceed to detailed validation if basic upgrade operations succeeded
    - Capture and analyze command output for upgrade success/failure indicators
+
+Use TodoWrite to complete Phase 2 - Upgrade Command Execution.
+
+Use TodoWrite to start Phase 3 - Upgrade Result Validation.
 
 ### Phase 3: Upgrade Result Validation
 1. **Critical Upgrade Validation**: MUST verify upgrade actually occurred using LS tool:
@@ -208,6 +225,10 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
    fi
    ```
 
+Use TodoWrite to complete Phase 3 - Upgrade Result Validation.
+
+Use TodoWrite to start Phase 4 - Parallel Upgrade Subagent Orchestration Testing.
+
 ### Phase 4: Parallel Upgrade Subagent Orchestration Testing
 **Test the upgrade orchestrator's parallel execution capabilities:**
 
@@ -226,6 +247,10 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
 
 **Installation Validation Orchestration Test**:
 "Use the claudio:upgrade-installation-validator subagent to validate file integrity and pattern compliance for the upgrade test target path ${TARGET_PATH}"
+
+Use TodoWrite to complete Phase 4 - Parallel Upgrade Subagent Orchestration Testing.
+
+Use TodoWrite to start Phase 5 - Integration and Functionality Testing.
 
 ### Phase 5: Integration and Functionality Testing
 1. **Component Integration Test**: Verify upgraded components work together
@@ -267,6 +292,10 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
    fi
    ```
 
+Use TodoWrite to complete Phase 5 - Integration and Functionality Testing.
+
+Use TodoWrite to start Phase 6 - Performance and Safety Validation.
+
 ### Phase 6: Performance and Safety Validation
 1. **Safety Feature Verification**: Confirm rollback capability exists
    ```bash
@@ -293,6 +322,8 @@ This agent uses the `--dangerously-skip-permissions` flag to enable nested Claud
    echo "Changelog created: $([ -n "$CHANGELOG_FILE" ] && echo "Yes" || echo "No")"
    echo "Rollback ready: $([ -n "$ROLLBACK_SCRIPT" ] && echo "Yes" || echo "No")"
    ```
+
+Use TodoWrite to complete Phase 6 - Performance and Safety Validation.
 
 ## Performance Expectations:
 

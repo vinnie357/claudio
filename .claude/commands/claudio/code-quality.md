@@ -18,5 +18,5 @@ Execute code quality assessment by running project-specific linting, formatting,
 
 **Note**: Optional command for enhanced project-specific quality analysis.
 
-Use the claudio:code-quality-analyzer subagent with project-aware tool detection to execute appropriate quality tools and generate factual reports based on actual analysis.
+Task with subagent_type: "code-quality-analyzer" - pass the project_path argument for project-aware tool detection to execute appropriate quality tools and generate factual reports based on actual analysis.
 

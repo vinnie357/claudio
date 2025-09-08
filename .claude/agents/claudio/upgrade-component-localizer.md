@@ -17,6 +17,13 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - Create/update files in test/claudio/.claude/ and test/claudio/.claudio/
 - Work exclusively within the test/claudio directory structure
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Primary Responsibilities:
 
 ### 1. Component Re-localization Execution
@@ -51,6 +58,8 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 
 ## Component Localization Process:
 
+Use TodoWrite to start Phase 1 - Localization Plan Execution Preparation.
+
 ### Phase 1: Localization Plan Execution Preparation
 1. **Input Analysis**:
    Analyze comprehensive localization plan from template analyzer including detailed template changes requiring application, project-specific requirements for technology-aware customization, and conflict resolution strategy for handling user customizations. Extract essential template modification requirements and determine project-specific localization parameters.
@@ -63,6 +72,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Prepare temporary workspace for component generation
    - Set up progress tracking and monitoring infrastructure
    - Initialize error handling and recovery mechanisms
+
+Use TodoWrite to complete Phase 1 - Localization Plan Execution Preparation.
+
+Use TodoWrite to start Phase 1.5 - Missing Component Generation Using Install Localizers.
 
 ### Phase 1.5: Missing Component Generation Using Install Localizers
 1. **Gap Analysis**:
@@ -100,6 +113,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Confirm extended_context structure supports all generated agents
    - Test that generated components are properly localized for project
 
+Use TodoWrite to complete Phase 1.5 - Missing Component Generation Using Install Localizers.
+
+Use TodoWrite to start Phase 2 - Template-Based Component Updates (Existing Components).
+
 ### Phase 2: Template-Based Component Updates (Existing Components)
 1. **Current Installation Analysis**:
    - List existing agents in target/.claude/agents/claudio/
@@ -132,6 +149,8 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Use Read tool to check if CLAUDE.md exists in current directory for update vs create decision
    - Use Read tool to load updated project analysis from .claudio/docs/discovery.md to get current technology stack and architecture insights
    - Use Write tool to update project-specific CLAUDE.md with refreshed technology stack guidance, new Claudio capabilities from upgrade, updated command examples based on current project state, and revised workflow recommendations that reflect both project evolution and new Claudio features
+
+Use TodoWrite to complete Phase 2 - Template-Based Component Updates.
 
 ### Phase 3: Test Command Generation and Integration
 1. **Test Command Generation Coordination**:

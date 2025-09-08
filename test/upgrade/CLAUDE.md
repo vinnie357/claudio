@@ -1,114 +1,74 @@
 # TaskFlow Productivity App - AI Assistant Context
 
 ## Project Overview
-**Technology Stack**: React Native, Node.js, React.js, Electron, Python ML services
-**Architecture**: Microservices with event-driven synchronization and enhanced AI integration
-**Domain**: Advanced productivity application with AI-powered task management, real-time sync across platforms
-**Development Phase**: Mature v2.5 with advanced AI integration, cross-platform optimization, and microservices architecture
+**Technology Stack**: React Native, Node.js, TypeScript, Electron, React.js PWA, PostgreSQL, MongoDB  
+**Architecture**: Microservices with event-driven synchronization and WebSocket real-time communication  
+**Domain**: Cross-platform productivity application with AI-powered task management and analytics  
+**Development Phase**: v2.5 - Production system with advanced AI integration and enhanced synchronization
 
-## Enhanced Claudio Integration
+## Available Agents
 
-### Core Workflow Commands
-- **`/claudio:discovery`**: Comprehensive project analysis with microservices and multi-platform focus, specialized for TaskFlow productivity patterns
-- **`/claudio:prd`**: Requirements generation for productivity application features with cross-platform workflows and AI integration
-- **`/claudio:plan`**: Implementation planning for React Native, Node.js microservices, and Python ML integration
-- **`/claudio:task`**: Task breakdown with microservices patterns, AI feature development, and cross-platform coordination
-- **`/claudio:claudio`**: Complete TaskFlow workflow analysis with parallel agent coordination
+### Workflow Agents
+- **discovery-agent**: TaskFlow-specific discovery with React Native mobile, Node.js backend, and microservices analysis
+- **prd-agent**: Requirements generation focused on productivity app features, cross-platform compatibility, and AI integration
+- **plan-agent**: Implementation planning for React Native development, Node.js API updates, and mobile deployment workflows
+- **task-agent**: Task breakdown with React Native build processes, database migrations, and cross-platform testing patterns
 
-### Testing & Quality Assurance
-- **`/claudio:test`**: TaskFlow-specific test execution across React Native, Node.js microservices, and Python AI services
-- **`/claudio:test --fix`**: Intelligent test failure analysis and automated fix attempts for cross-platform issues
-- **`/claudio:code-quality`**: Multi-language quality analysis (JavaScript/TypeScript, Python) with framework-specific patterns
-- **`/claudio:security-review`**: STRIDE methodology security analysis for productivity apps with data synchronization concerns
+### Specialized Analysis Agents
+- **code-quality-analyzer**: TypeScript/JavaScript quality analysis with React Native linting, Node.js best practices validation
+- **security-review-coordinator**: Mobile app security analysis, API authentication patterns, and data synchronization security
+- **design-analyzer**: Cross-platform UI/UX consistency analysis for mobile, desktop, and web applications
 
-### Documentation & Analysis
-- **`/claudio:documentation`**: Project documentation with mobile, web, desktop, and API focus
-- **`/claudio:update-docs`**: Automated documentation updates for README, CLAUDE.md, and changelogs
-- **`/claudio:design`**: Cross-platform UI/UX consistency analysis for mobile, web, and desktop apps
-- **`/claudio:research`**: Productivity application best practices and real-time synchronization research
-
-### Development Tools
-- **`/claudio:implement`**: TaskFlow feature implementation with microservices and cross-platform patterns
-- **`/claudio:phoenix-dev`**: N/A for TaskFlow (Node.js/React Native focused)
-- **`/claudio:newprompt`**: Create custom agents for TaskFlow-specific development needs
-
-## Available Specialized Agents
-
-### Core Workflow Agents
-- **discovery-agent**: TaskFlow-specialized project analysis with React Native, Node.js microservices, and AI service focus
-- **prd-agent**: Requirements generation optimized for productivity features and cross-platform workflows
-- **plan-agent**: Implementation planning with microservices architecture and AI integration patterns
-- **task-agent**: Task breakdown specialized for mobile, web, desktop, and AI service development
-- **claudio-coordinator-agent**: Enhanced parallel workflow coordination for TaskFlow complexity
-
-### Testing & Validation Agents
-- **taskflow-test-runner**: Multi-framework testing for Jest (React Native/Node.js) and pytest (Python AI)
-- **code-quality-analyzer**: TypeScript/JavaScript and Python quality analysis with productivity app patterns
-- **security-review-coordinator**: Security analysis for task management, synchronization, and AI features
-- **design-analyzer**: Cross-platform design consistency and mobile-first optimization
+### Development & Integration Agents
+- **claude-sdk-architect**: Custom command creation for React Native development workflows and productivity app patterns
+- **git-commit-message**: Conventional commits optimized for mobile app releases and API versioning
+- **implement-agent**: TaskFlow feature implementation with React Native component creation and Node.js service updates
+- **test-command-generator**: React Native testing commands with Jest integration and cross-platform validation
+- **phoenix-dev-executor**: Backend development optimization for Node.js Express services
 
 ### Documentation Agents
-- **documentation-coordinator**: TaskFlow documentation with mobile, API, and AI service focus
-- **research-specialist**: Productivity application research and cross-platform development patterns
+- **documentation-coordinator**: Cross-platform documentation for mobile app stores, API references, and user guides
+- **readme-updater-agent**: TaskFlow project documentation with installation guides for React Native development
+- **changelog-updater-agent**: Version tracking for mobile app releases, API changes, and database migrations
+
+### Project-Specific Agents
+- **test-g-coordinator**: Gemini-enhanced testing for TaskFlow productivity features and AI integration validation
+- **research-specialist**: Productivity app best practices, React Native optimization patterns, and AI/ML integration research
 
 ## Extended Context Structure
+- **workflow/**: React Native development patterns, Node.js microservices workflows, and cross-platform deployment
+- **development/**: TypeScript/JavaScript quality standards, mobile app testing strategies, and database optimization
+- **research/**: Productivity app domain knowledge, task management UX patterns, and AI-powered features analysis
+- **infrastructure/**: Microservices architecture patterns, WebSocket synchronization, and mobile app distribution
 
-### TaskFlow-Optimized Categories
-- **workflow/**: React Native mobile development, Node.js microservices, Python AI service patterns
-- **development/**: Multi-platform testing strategies, cross-platform design consistency, AI/ML integration
-- **research/**: Productivity application best practices, real-time synchronization, conflict resolution
-- **infrastructure/**: Microservices deployment, event-driven architecture, CI/CD for mobile distribution
-- **documentation/**: Cross-platform documentation patterns, API documentation for microservices
-
-## AI Assistant Guidance for TaskFlow v2.5
+## AI Assistant Guidance
 
 ### Project-Specific Focus Areas
-- **Domain Expertise**: Apply productivity application knowledge in task management, AI-powered suggestions, and real-time synchronization
-- **Technology Stack**: Leverage React Native cross-platform, Node.js microservices, Python ML, and event-driven architecture
-- **Architecture Patterns**: Consider microservices maturity, event-driven patterns, and cross-platform consistency
-- **Compliance**: Address data privacy for productivity applications and cross-platform security requirements
+- **Mobile Development**: Apply React Native best practices for iOS and Android platform optimizations
+- **Cross-Platform Consistency**: Maintain UI/UX consistency across mobile, desktop (Electron), and web (PWA) applications
+- **Real-Time Synchronization**: Consider event-driven architecture and WebSocket patterns for task synchronization
+- **AI Integration**: Leverage machine learning capabilities for task estimation, productivity analytics, and smart suggestions
+- **Database Optimization**: Balance PostgreSQL relational data with MongoDB document storage for productivity features
 
-### Enhanced TaskFlow Capabilities
-- **Cross-Platform Sync**: Event-driven architecture achieving 85% conflict reduction for real-time task synchronization
-- **Advanced AI Integration**: Machine learning for task completion prediction, smart categorization, and productivity analytics
-- **Mobile-First Design**: React Native optimization with offline-first capabilities and intelligent sync reconciliation
-- **Microservices Architecture**: Service decomposition, API gateway patterns, and inter-service communication
-- **Performance Optimization**: Database indexing, query optimization, caching strategies, and mobile performance
+### Technology Patterns
+- **React Native**: Platform-specific optimizations, offline-first architecture, and performance optimization
+- **Node.js/Express**: Microservices patterns, API versioning, and real-time WebSocket integration
+- **TypeScript**: Strict typing for cross-platform code sharing and component interface definitions
+- **Database**: PostgreSQL for structured task data, MongoDB for flexible document storage and analytics
 
-### Development Workflow Integration
-- **Testing Strategy**: Comprehensive Jest (React Native/Node.js) and pytest (Python) testing with cross-platform validation
-- **CI/CD Pipeline**: GitHub Actions for mobile app distribution, microservices deployment, and AI model updates
-- **Quality Assurance**: Multi-language code quality analysis, security reviews, and cross-platform design validation
-- **Documentation**: Automated documentation updates for evolving microservices architecture and AI capabilities
+### Architecture Considerations
+- **Microservices**: Service decomposition with task management, synchronization, and AI processing boundaries
+- **Event-Driven**: WebSocket-based real-time updates with advanced conflict resolution mechanisms
+- **Offline-First**: Mobile app resilience with intelligent sync reconciliation and conflict management
+- **AI/ML Integration**: TensorFlow-based services for task completion prediction and productivity insights
 
-### Command Usage Patterns
+### Integration Patterns
+- **Extended Context**: Reference React Native development patterns and Node.js microservices documentation
+- **Agent Coordination**: Use mobile-specific agents for platform optimization and cross-platform validation
+- **Discovery-Driven**: Base architecture recommendations on TaskFlow's current microservices structure and AI capabilities
 
-#### Quick Analysis
-```bash
-/claudio:discovery ./           # TaskFlow-specific project analysis
-/claudio:test                   # Cross-platform test execution
-/claudio:code-quality          # Multi-language quality analysis
-```
-
-#### Complete Workflow
-```bash
-/claudio:claudio ./             # Full TaskFlow workflow analysis
-# Creates comprehensive .claudio/ structure with specialized TaskFlow context
-```
-
-#### Focused Development
-```bash
-/claudio:test mobile           # React Native testing
-/claudio:test backend          # Node.js microservices testing
-/claudio:test ai               # Python AI service testing
-/claudio:security-review       # Productivity app security analysis
-```
-
-### Integration Best Practices
-- **Discovery-Driven Development**: Base all development decisions on TaskFlow v2.5 discovery findings
-- **Cross-Platform Consistency**: Ensure mobile, web, and desktop feature parity and design consistency
-- **Microservices Coordination**: Use event-driven patterns for service communication and data synchronization
-- **AI-Enhanced Features**: Integrate machine learning for task prediction, smart suggestions, and productivity insights
-- **Performance Monitoring**: Implement comprehensive monitoring for mobile apps, microservices, and AI services
-
-This CLAUDE.md configuration optimizes AI assistance for TaskFlow's sophisticated productivity application architecture with enhanced Claudio capabilities.
+### Development Workflow Optimization
+- **Mobile Testing**: Coordinate iOS and Android testing with automated app distribution pipelines
+- **API Development**: Maintain backward compatibility while evolving microservices architecture
+- **Performance Monitoring**: Focus on mobile app responsiveness, database query optimization, and synchronization efficiency
+- **AI Feature Development**: Integrate machine learning capabilities with user privacy and performance considerations

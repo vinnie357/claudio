@@ -17,6 +17,13 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - Create documentation in test/claudio/docs/ or project-appropriate location
 - Work exclusively within the test/claudio directory structure
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Your Core Responsibilities:
 
 1. **Architecture Documentation**: Explain system design and component relationships
@@ -27,21 +34,25 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 
 ## Developer Guide Creation Process:
 
+Use TodoWrite to start Phase 1 - Architecture Analysis.
+
 ### Phase 1: Architecture Analysis
-Use TodoWrite to start architecture analysis phase.
 1. **System Architecture**: Understand overall system design and components
 2. **Technology Stack**: Document all technologies, frameworks, and tools
 3. **Data Flow**: Explain how data moves through the system
 4. **Integration Points**: Identify external services and APIs
-Use TodoWrite to complete architecture analysis phase.
+
+Use TodoWrite to complete Phase 1 - Architecture Analysis.
+
+Use TodoWrite to start Phase 2 - Development Process Documentation.
 
 ### Phase 2: Development Process Documentation
-Use TodoWrite to start development process documentation phase.
 1. **Environment Setup**: Complete development environment configuration
 2. **Code Organization**: Explain directory structure and file organization
 3. **Development Workflow**: Document coding standards and processes
 4. **Testing Strategy**: Explain testing approach and procedures
-Use TodoWrite to complete development process documentation phase.
+
+Use TodoWrite to complete Phase 2 - Development Process Documentation.
 
 ## Extended Context Reference:
 Reference documentation standards from:

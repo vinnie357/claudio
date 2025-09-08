@@ -21,6 +21,13 @@ You MUST implement the discovery-driven generation tracking system:
 
 **Critical**: This agent reads agents_tracking.json and writes the FINAL tracking file in the sequential chain.
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Argument Extraction Instructions
 
 When the coordinator invokes you, look for the phrase "pass the project_path argument" followed by a path value in your task prompt. Extract this path value and use it to replace all references to {project_path} in your file operations.
@@ -52,12 +59,14 @@ The coordinator provides the target project path as an argument:
 
 ## Context Generation Process:
 
+Use TodoWrite to start Phase 1 - Tracking Analysis and Requirements Determination.
+
 ### Phase 1: Tracking Analysis and Requirements Determination
 1. **Read Agents Tracking JSON**:
    - Load `{project_path}/.claudio/shared/agents_tracking.json`
-   - Extract extended context requirements from each generated agent
+   - Extract required_contexts array (list of context directory paths)
    - Validate JSON structure and required fields
-   - **Build comprehensive list of context files that need to be generated**
+   - **Use required_contexts array to determine what context files to generate**
 
 2. **Read Discovery Document**:
    - Load `{project_path}/.claudio/docs/discovery.md`
@@ -67,23 +76,26 @@ The coordinator provides the target project path as an argument:
    - **Store discovery findings as content customization drivers for tracking**
 
 3. **Context Requirements Analysis**:
-   - Parse context requirements from agents tracking (no source templates - pure generation)
-   - Map context file paths to agent requirements
-   - Determine content customization needs based on discovery analysis
-   - Plan technology-specific content for each required context file
+   - Parse required_contexts directory paths from agents tracking
+   - Determine what context files to create in each directory (overview.md, troubleshooting.md)
+   - Plan content customization needs based on discovery analysis
+   - Plan technology-specific content for each required context directory
+
+Use TodoWrite to complete Phase 1 - Tracking Analysis and Requirements Determination.
+
+Use TodoWrite to start Phase 2 - Context File Generation Based on Agent Requirements.
 
 ### Phase 2: Context File Generation Based on Agent Requirements
 
 1. **Generate Required Context Files**:
-   For each context file required by agents tracking:
-   - **Create context file** at specified path in extended_context directory
+   For each directory in required_contexts array:
+   - **Create overview.md and troubleshooting.md files** in each directory
    - **Apply discovery-driven customizations**:
      * Technology-specific patterns and examples
      * Framework-aware content and guidance
      * Architecture-appropriate strategies
      * Project domain-specific templates
-   - **Record content customizations applied** for tracking metadata
-   - **Track which agents require each context file**
+   - **Add generated file paths to contexts_generated array**
 
 2. **Technology-Driven Content Customization**:
    - **Node.js projects**: npm patterns, Express examples, Jest testing guidance
@@ -92,6 +104,10 @@ The coordinator provides the target project path as an argument:
    - **E-commerce domain**: Payment patterns, inventory examples, user management flows
    - **PostgreSQL integration**: Database patterns, migration examples, query optimization
 
+Use TodoWrite to complete Phase 2 - Context File Generation Based on Agent Requirements.
+
+Use TodoWrite to start Phase 3 - Generation Tracking and Completion.
+
 ### Phase 3: Generation Tracking and Completion
 
 1. **Write Generation Tracking JSON**:
@@ -99,18 +115,16 @@ The coordinator provides the target project path as an argument:
      * Timestamp and project path
      * Agents tracking input source
      * Discovery source path and drivers used
-     * For each context file generated:
-       - Context file path (relative to extended_context directory)
-       - Generated file path (absolute path where created)
-       - Content customizations applied (what technology patterns used)
-       - Required by agents (which agents need this context)
+     * Simple contexts_generated array (list of generated context file paths)
    - **This is the FINAL tracking file in the sequential dependency chain**
 
 2. **Validate Generation Completeness**:
-   - Ensure all required context files from agents tracking are created
-   - Verify all content customizations are applied and tracked
-   - Confirm all agent requirements are satisfied
+   - Ensure all required context directories have overview.md and troubleshooting.md files
+   - Verify all content customizations are applied
+   - Confirm contexts_generated array contains all created files
    - Validate tracking JSON structure and completeness
+
+Use TodoWrite to complete Phase 3 - Generation Tracking and Completion.
 
 ### Phase 4: Development Context Generation
 1. **Code Quality Context** (`development/code_quality/`):
@@ -212,14 +226,12 @@ Create `{project_path}/.claudio/shared/extended_context_tracking.json`:
   "project_path": "./my-project",
   "input_source": ".claudio/shared/agents_tracking.json",
   "discovery_source": ".claudio/docs/discovery.md",
-  "context_generated": [
-    {
-      "context_file": "workflow/discovery/overview.md",
-      "generated_at": "./my-project/.claude/agents/claudio/extended_context/workflow/discovery/overview.md",
-      "content_customizations": ["nodejs_discovery_patterns", "microservices_analysis", "ecommerce_focus"],
-      "required_by_agents": ["discovery-agent"]
-    }
-  ]
+  "discovery_drivers": {
+    "technology_stack": ["nodejs", "react", "postgresql"],
+    "architecture": "microservices",
+    "project_domain": "ecommerce"
+  },
+  "contexts_generated": ["workflow/discovery/overview.md", "workflow/prd/overview.md", "development/nodejs/patterns.md", "development/quality/standards.md"]
 }
 ```
 

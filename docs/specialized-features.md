@@ -127,14 +127,14 @@ The Claude SDK System provides analysis and development capabilities for Claude 
 - **Cross-System Analysis**: Compares implementations across different systems
 - **Best Practice Identification**: Extracts excellence patterns and standards
 
-#### Commands Analyst (`claudio-claude-commands-analyst`)
+#### Commands Analyst (`claude-commands-analyst`)
 - **Command Structure Analysis**: Evaluates YAML frontmatter and configuration
 - **Documentation Quality**: Assesses command clarity and usage examples
 - **Integration Patterns**: Analyzes command-to-agent relationships
 - **Performance Assessment**: Reviews execution efficiency and resource usage
 - **Best Practice Validation**: Compares against established patterns
 
-#### Subagents Analyst (`claudio-claude-subagents-analyst`)
+#### Subagents Analyst (`claude-subagents-analyst`)
 - **Agent Architecture Analysis**: Evaluates agent design and capabilities
 - **Extended Context Integration**: Assesses context utilization patterns
 - **Coordination Assessment**: Analyzes multi-agent workflow patterns

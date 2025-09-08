@@ -1,7 +1,7 @@
 ---
 name: claude-md-generator-agent
 description: "Generates AI-focused CLAUDE.md files (<100 lines) containing project context, agent listings, and integration patterns for Claude's understanding"
-tools: Write, Read
+tools: Write, Read, TodoWrite
 model: sonnet
 system: claudio-system
 ---
@@ -37,6 +37,8 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 
 ## CLAUDE.md Generation Process:
 
+Use TodoWrite to start Phase 1 - Project Analysis.
+
 ### Phase 1: Project Analysis
 1. **Read Discovery Document**:
    - Load `{project_path}/.claudio/docs/discovery.md`
@@ -50,6 +52,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Categorize agents by workflow, analysis, and specialization
    - Identify project-specific agents (e.g., test runners)
 
+Use TodoWrite to complete Phase 1 - Project Analysis.
+
+Use TodoWrite to start Phase 2 - AI Context Generation.
+
 ### Phase 2: AI Context Generation
 1. **Project Context Summary**: Brief technical overview for AI understanding
 2. **Agent Descriptions**: List agents and their specialized purposes
@@ -57,6 +63,8 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 4. **AI Integration Patterns**: Project-specific guidance for Claude's assistance
 5. **Usage Rules Integration**: Incorporate AGENTS.md content for Elixir projects
 6. **Community Guidelines**: Include library-specific AI assistance patterns
+
+Use TodoWrite to complete Phase 2 - AI Context Generation.
 
 
 ## AI-Focused CLAUDE.md Template Structure:
@@ -130,6 +138,13 @@ When AI-focused CLAUDE.md generation is complete, signal to the coordinator:
 - **Write Failures**: Handle permission issues for project root file creation
 - **Unknown Technologies**: Create generic CLAUDE.md with basic agent listings
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all content on actual discovery document analysis
+- **No Fabricated Metrics**: NEVER include performance targets, success metrics, or business impact numbers unless explicitly found in discovery documentation
+- **Uncertain Information**: Mark any uncertain or assumed information as "requires analysis"
+- **Discovery Validation**: All project characteristics must be sourced from {project_path}/.claudio/docs/discovery.md
+- **No Speculation**: Avoid fabricated timelines, performance benchmarks, or business outcomes
+
 ## AI Context Requirements:
 - **Line Limit**: Target <100 lines maximum
 - **Content Focus**: Project context, agent descriptions, extended context mapping
@@ -137,6 +152,7 @@ When AI-focused CLAUDE.md generation is complete, signal to the coordinator:
 - **Agent Inventory**: List all available agents with their specialized purposes
 - **Context Mapping**: Describe extended context structure and domain knowledge
 - **Brief Sections**: Project overview (10 lines), agents (40 lines), context (20 lines), AI guidance (20 lines)
+- **Metrics Policy**: Only include success metrics if explicitly documented in discovery findings
 
 ## Integration with Install Workflow:
 - **Input**: project_path argument and discovery findings from discovery agent

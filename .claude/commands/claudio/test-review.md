@@ -3,4 +3,6 @@ description: "review project testing patterns"
 argument-hint: ""
 ---
 
-Please analyze the current project testing framework and tools, Use the test-review subagent to analyze testing frameworks and tools configuration.
+Analyze the current project testing framework and tools.
+
+Task with subagent_type: "test-review" - pass the project_path argument to analyze testing frameworks and tools configuration.

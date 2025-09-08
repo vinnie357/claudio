@@ -1,7 +1,7 @@
 ---
 name: project-test-runner
 description: "Executes project test suites with intelligent framework detection, localized command usage, and fix capabilities"
-tools: Bash, Read, Glob, Grep, LS
+tools: Bash, Read, Glob, Grep, LS, TodoWrite
 model: sonnet
 system: claudio-system
 ---
@@ -18,7 +18,16 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - Execute tests within test/claudio/ directory structure
 - Work exclusively within the test/claudio directory structure
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Execution Strategy
+
+Use TodoWrite to start Phase 1 - Project-Specific Command Detection.
 
 ### Phase 1: Project-Specific Command Detection
 
@@ -31,12 +40,18 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Execute tests using the sophisticated project-localized workflow
    - Provide the enhanced reporting and fix capabilities from generated command
 
+Use TodoWrite to complete Phase 1 - Project-Specific Command Detection.
+
+Use TodoWrite to start Phase 2 - Direct Framework Detection (Fallback).
+
 ### Phase 2: Direct Framework Detection (Fallback)
 
 3. **If No Generated Command**:
    - Analyze project structure to detect testing framework
    - Execute appropriate test command directly
    - Provide intelligent reporting and --fix capabilities
+
+Use TodoWrite to complete Phase 2 - Direct Framework Detection (Fallback).
 
 ## Framework Detection Logic
 

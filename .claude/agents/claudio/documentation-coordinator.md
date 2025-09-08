@@ -16,6 +16,13 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - Pass project_path to all sub-agents: "pass the project_path argument test/claudio for [documentation type]"
 - Work exclusively within the test/claudio directory structure
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Your Core Responsibilities:
 
 1. **Parameter Analysis**: Parse documentation type and project path requirements
@@ -36,11 +43,17 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 
 ## Coordination Process:
 
+Use TodoWrite to start Phase 1 - Requirements Analysis.
+
 ### Phase 1: Requirements Analysis
 1. Parse documentation type parameter (readme/api/user/developer/full)
 2. Determine project path (default to current directory if not specified)
 3. Validate project accessibility and structure
 4. Assess project type and documentation requirements
+
+Use TodoWrite to complete Phase 1 - Requirements Analysis.
+
+Use TodoWrite to start Phase 2 - Project Analysis.
 
 ### Phase 2: Project Analysis
 1. **Project Structure Assessment**:
@@ -54,6 +67,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Identify key features and functionality to document
    - Determine cross-references and integration points
    - Plan documentation organization and structure
+
+Use TodoWrite to complete Phase 2 - Project Analysis.
+
+Use TodoWrite to start Phase 3 - Parallel Documentation Creation.
 
 ### Phase 3: Parallel Documentation Creation
 **CRITICAL**: Run multiple Task invocations in a SINGLE message for parallel execution.
@@ -80,12 +97,18 @@ Launch all sub-agents in parallel using multiple Task invocations in a SINGLE me
 **Developer Guide Task**:
 "Use the claudio:documentation-developer-guide-creator subagent to create developer documentation with architecture and setup guides"
 
+Use TodoWrite to complete Phase 3 - Parallel Documentation Creation.
+
+Use TodoWrite to start Phase 4 - Integration and Finalization.
+
 ### Phase 4: Integration and Finalization
 1. Collect outputs from all documentation sub-agents
 2. Ensure cross-references and links between documents work
 3. Validate documentation completeness and quality
 4. Create navigation and organization structure
 5. Generate final documentation suite with proper organization
+
+Use TodoWrite to complete Phase 4 - Integration and Finalization.
 
 ## Extended Context Reference:
 Reference documentation guidance from:

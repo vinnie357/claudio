@@ -102,8 +102,8 @@ Claudio uses an organized extended context system located in `extended_context/`
 
 #### Claude SDK Agents
 - **`claudio-claude-sdk-architect`**: Claude Code implementation orchestration with sequential analysis (one command at a time)
-- **`claudio-claude-commands-analyst`**: Command structure and integration quality evaluation
-- **`claudio-claude-subagents-analyst`**: Individual agent architecture assessment (one agent per task)
+- **`claude-commands-analyst`**: Command structure and integration quality evaluation
+- **`claude-subagents-analyst`**: Individual agent architecture assessment (one agent per task)
 
 #### System Agents
 - **`install-system-installer`**: File operations and directory management

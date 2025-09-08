@@ -29,9 +29,14 @@ When the coordinator invokes you, look for the phrase "pass the project_path arg
 
 For example, if your prompt contains "pass the project_path argument test/claudio for test command generation", then:
 - Extract "test/claudio" as your working project path
-- Read discovery from test/claudio/.claudio/docs/discovery.md
-- Create test commands in test/claudio/.claude/commands/claudio/
 - Work exclusively within the test/claudio directory structure
+
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 **YOU MUST EXECUTE ALL 5 PHASES** to create functional test commands:
 - Phase 1: Discovery Analysis ✓
@@ -43,6 +48,8 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 **WITHOUT Phase 3 sub-agent creation, the generated commands WILL FAIL** because they reference non-existent agents.
 
 ## Generation Process:
+
+Use TodoWrite to start Phase 1 - Discovery Analysis and Test Framework Detection.
 
 ### Phase 1: Discovery Analysis and Test Framework Detection
 
@@ -70,6 +77,10 @@ For example, if your prompt contains "pass the project_path argument test/claudi
    - Integration with CI/CD
    - Code coverage setup
 
+Use TodoWrite to complete Phase 1 - Discovery Analysis and Test Framework Detection.
+
+Use TodoWrite to start Phase 2 - Test Command Template Generation.
+
 ### Phase 2: Test Command Template Generation
 
 #### Generate `/claudio:test` Command
@@ -88,6 +99,10 @@ Create Gemini-integrated test command containing:
 - Enhanced analysis features including failure analysis and solution suggestions
 - Direct Bash tool integration with gemini-cli for AI-powered analysis
 
+Use TodoWrite to complete Phase 2 - Test Command Template Generation.
+
+Use TodoWrite to start Phase 3 - Test Runner Sub-Agent Generation.
+
 ### Phase 3: Test Runner Sub-Agent Generation (MANDATORY EXECUTION)
 
 **CRITICAL**: You MUST create the test runner sub-agent or the /claudio:test command will fail. Note that /claudio:test-g uses direct Bash tool integration with gemini and does NOT require a sub-agent.
@@ -101,6 +116,9 @@ Create project-specific test runner agent containing:
 - Analysis capabilities for failure categorization, performance, and coverage assessment
 - Detailed implementation instructions based on project technology stack
 
+Use TodoWrite to complete Phase 3 - Test Runner Sub-Agent Generation.
+
+Use TodoWrite to start Phase 4 - Extended Context Generation.
 
 ### Phase 4: Extended Context Generation
 
@@ -109,6 +127,10 @@ Create technology-specific testing context documentation containing:
 - Testing patterns specific to the detected technology stack and framework
 - Common issues and solutions based on discovery analysis and framework documentation
 - Integration points for CI/CD workflows and development environment setup
+
+Use TodoWrite to complete Phase 4 - Extended Context Generation.
+
+Use TodoWrite to start Phase 5 - Installation Process.
 
 ### Phase 5: Installation Process
 
@@ -133,6 +155,8 @@ Create technology-specific testing context documentation containing:
    - Validate gemini prompt includes "--- END GEMINI ANALYSIS ---" terminator
 
 **CRITICAL**: All 3 core files (2 commands + 1 test runner agent) MUST be written or the system will fail. The test-g command uses direct Bash/gemini integration without requiring a separate agent.
+
+Use TodoWrite to complete Phase 5 - Installation Process.
 
 ## Test Framework Templates:
 

@@ -12,7 +12,7 @@ Execute the project's test suite using project-specific testing configuration wi
 **Intelligent Test Execution:**
 1. **Check for generated project-specific test command** in `.claudio/commands/claudio/test.md`
 2. **If project command exists**: Use the localized, sophisticated test runner
-3. **If no project command**: Use the project-test-runner subagent for direct framework detection and execution
+3. **If no project command**: Task with subagent_type: "project-test-runner" for direct framework detection and execution
 
 ## Usage Patterns
 
@@ -31,7 +31,7 @@ Execute the project's test suite using project-specific testing configuration wi
 
 ## Test Command Execution
 
-Use the project-test-runner subagent to:
+Task with subagent_type: "project-test-runner" - pass the project_path argument to:
 
 1. **Detect if project-specific test command exists**
 2. **If exists**: Execute the generated project-specific test workflow

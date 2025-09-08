@@ -1,7 +1,7 @@
 ---
 name: install-commands-localizer-agent
 description: "Creates localized Claudio commands based on project discovery and existing localized agents"
-tools: Write, Read, Bash, LS, Glob
+tools: Write, Read, Bash, LS, Glob, TodoWrite
 model: sonnet
 system: claudio-system
 ---
@@ -19,6 +19,13 @@ You MUST implement the discovery-driven generation tracking system:
 5. **Write Tracking JSON**: Create `.claudio/shared/commands_tracking.json` with complete generation metadata
 
 **Critical**: This agent writes the FIRST tracking file that subsequent agents depend on.
+
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 ## Argument Extraction Instructions
 
@@ -57,6 +64,8 @@ The coordinator provides the target project path as an argument:
 
 ## Command Localization Process:
 
+Use TodoWrite to start Phase 1 - Discovery Analysis and Tracking Preparation.
+
 ### Phase 1: Discovery Analysis and Tracking Preparation
 1. **Read Discovery Document**:
    - Load `{project_path}/.claudio/docs/discovery.md` created by discovery agent
@@ -81,18 +90,31 @@ The coordinator provides the target project path as an argument:
 4. **Agent Requirements Determination**:
    - For each command being generated, determine required agents
    - Extract agent dependencies from source templates
-   - **Store agent requirements for tracking JSON**
-   - Build complete dependency chains (command → agent → subagent)
+   - **Build single consolidated required_agents array for all commands**
+   - Aggregate all unique agent dependencies across all commands
+
+Use TodoWrite to complete Phase 1 - Discovery Analysis and Tracking Preparation.
+
+Use TodoWrite to start Phase 2 - Dynamic Command Discovery and Localization.
 
 ### Phase 2: Dynamic Command Discovery and Localization
 
 1. **Discover All User Commands**:
-   - Read source command directory: `/.claude/commands/claudio/`
+   - Read source command directory: `.claude/commands/claudio/`
    - Filter out commands with `system: claudio-system` frontmatter
-   - Create list of ALL user commands that need localization
+   - Create list of ALL user commands available for localization
 
-2. **Generate Project-Specific Commands**:
-   For each discovered user command:
+2. **Apply Technology-Based Filtering**:
+   - Read discovery drivers from Phase 1 (technology_stack array)
+   - Apply technology-specific command filtering based on discovery analysis
+   - **Technology-Command Mappings**:
+     * `phoenix-dev` → Only generate if `"phoenix"` or `"elixir"` detected in technology_stack
+     * Core workflow commands (`discovery`, `prd`, `plan`, `task`, `claudio`) → Always include (technology-agnostic)
+     * Development commands → Include for all projects (adaptable across technologies)
+   - Create filtered list of relevant commands for the detected technology stack
+
+3. **Generate Project-Specific Commands**:
+   For each filtered command (from technology-based filtering):
    - **Read source template** (record path for tracking)
    - Extract command purpose and argument patterns
    - **Generate project-specific version** with:
@@ -102,20 +124,25 @@ The coordinator provides the target project path as an argument:
      * Domain-appropriate examples from discovery analysis
    - **Track localizations applied** (patterns, customizations, examples used)
 
-3. **Command Localization Patterns**:
+4. **Command Localization Patterns**:
    - **Workflow Commands** (discovery, prd, plan, task, claudio): Include project architecture examples
    - **Development Commands** (code-quality, documentation, research): Include technology stack examples
    - **Security Commands** (security-review): Include project-specific security patterns
    - **Utility Commands** (update-docs, implement): Include project workflow integration
 
+Use TodoWrite to complete Phase 2 - Dynamic Command Discovery and Localization.
+
+Use TodoWrite to start Phase 3 - Implementation Process.
+
 ### Phase 3: Implementation Process
 
 1. **Read Index and Source Commands**:
-   - Use Read tool to load source index: `/.claude/agents/claudio/index.md`  
+   - Use Read tool to load source index: `.claude/agents/claudio/index.md`  
    - Parse command-agent mappings to understand requirements
    - Use LS and Glob tools to list all source commands
    - Read each command file to understand structure and purpose
    - Skip commands marked with `system: claudio-system`
+   - **Apply technology-based filtering**: Skip `phoenix-dev` unless `"phoenix"` or `"elixir"` detected in discovery drivers
    - Cross-reference commands with available localized agents
 
 2. **Apply Project Context** (following test-command-generator pattern):
@@ -123,7 +150,7 @@ The coordinator provides the target project path as an argument:
    - Identify project domain and architecture patterns
    - Determine appropriate examples and workflows
 
-3. **Generate Localized Commands** (for each discovered user command):
+3. **Generate Localized Commands** (for each technology-filtered command):
    - **Keep command structure**: Preserve description and argument-hint
    - **Localize content**: Replace generic examples with project-specific ones
    - **Update agent references**: Reference localized agents (e.g., `discovery-agent` not generic)
@@ -140,11 +167,8 @@ The coordinator provides the target project path as an argument:
    - Create `{project_path}/.claudio/shared/commands_tracking.json` with:
      * Timestamp and project path
      * Discovery source path and drivers used
-     * For each command generated:
-       - Source template path (what was read)
-       - Generated file path (what was created)
-       - Localizations applied (what customizations)
-       - Required agents (dependency list)
+     * Simple commands_generated array (list of command names)
+     * Single required_agents array (consolidated from all commands)
    - **This JSON file is required input for the agents localizer agent**
 
 6. **Create Command Index**:
@@ -200,19 +224,14 @@ Create `{project_path}/.claudio/shared/commands_tracking.json`:
     "architecture": "microservices",
     "project_domain": "ecommerce"
   },
-  "commands_generated": [
-    {
-      "command": "discovery",
-      "source_template": "/.claude/commands/claudio/discovery.md",
-      "generated_at": "./my-project/.claude/commands/claudio/discovery.md",
-      "localizations_applied": ["nodejs_examples", "microservices_patterns"],
-      "required_agents": ["discovery-agent"]
-    }
-  ]
+  "commands_generated": ["discovery", "prd", "plan", "task", "claudio", "code-quality"],
+  "required_agents": ["discovery-agent", "prd-agent", "plan-agent", "task-agent", "code-quality-analyzer", "implement-agent", "research-specialist", "security-review-coordinator", "documentation-coordinator", "design-analyzer", "test-review", "new-command-generator", "newprompt-coordinator", "claude-sdk-architect", "phoenix-dev-executor"]
 }
 ```
 
 ## Output Format:
+
+Use TodoWrite to complete Phase 3 - Implementation Process.
 
 When command generation and tracking is complete, signal to the coordinator:
 - **Success**: "Commands generated with tracking for [project_type] at [project_path]"

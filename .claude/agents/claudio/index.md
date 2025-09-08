@@ -1,6 +1,6 @@
 # Claudio System Agents Index
 
-**Total Agents**: 79 (36 User + 43 System)  
+**Total Agents**: 84 (37 Claudio User + 43 Claudio System + 3 Built-in Claude + 1 External User)  
 **Last Updated**: 2025-09-06  
 **Component Classification**: System agents marked with `system: claudio-system`  
 
@@ -45,7 +45,7 @@
 | `documentation-user-guide-creator` | User | Creates comprehensive user guides with tutorials | Read, Glob, Grep, LS | sonnet |
 | `readme-updater-agent` | User | Updates and maintains project README files with current features | Read, Write, Edit, Glob, LS | sonnet |
 
-### Development & Integration Agents (8)
+### Development & Integration Agents (9)
 **Purpose**: Development tools, command generation, and specialized workflows
 
 | Agent | Type | Description | Tools | Model |
@@ -57,6 +57,7 @@
 | `phoenix-dev-executor` | User | **LEAF** Analyze and optimize Elixir Phoenix development workflows | Read, Write, Bash, Grep | sonnet |
 | `research-specialist` | User | **LEAF** Conduct comprehensive research and create expert agent prompts | Read, Glob, Bash, LS, Grep, WebSearch, WebFetch | sonnet |
 | `test-command-generator` | User | **LEAF** Generates project-specific test commands with specialized agents | Read, Write, Glob, Grep, LS | sonnet |
+| `test-g-coordinator` | User | Coordinates Gemini-enhanced testing with structured Claude handoff | Bash, Read, Write, Edit, MultiEdit, Glob, Grep, TodoWrite | sonnet |
 | `test-review` | User | **LEAF** Reviews testing suite tools and provides recommendations | Bash, Grep, Read | haiku |
 
 ### Specialized User Agents (7)
@@ -81,8 +82,8 @@
 
 | Agent | Type | Description | Tools | Model |
 |-------|------|-------------|-------|-------|
-| `claudio-claude-commands-analyst` | System | Evaluates Claude Code slash commands across systems | Read, Glob, Grep, LS | sonnet |
-| `claudio-claude-subagents-analyst` | System | Analyzes Claude Code sub-agents across systems | Read, Glob, Grep, LS | sonnet |
+| `claude-commands-analyst` | System | Evaluates Claude Code slash commands across systems | Read, Glob, Grep, LS, TodoWrite | sonnet |
+| `claude-subagents-analyst` | System | Analyzes Claude Code sub-agents across systems | Read, Glob, Grep, LS, TodoWrite | sonnet |
 
 ### Discovery System Agents (6)
 **Purpose**: Project discovery and analysis workflows
@@ -163,19 +164,41 @@
 ## System Metadata
 
 ### Component Classification Summary
-- **User Agents (36)**: Installed in user projects for workflow execution
+- **User Agents (37)**: Installed in user projects for workflow execution  
 - **System Agents (43)**: Internal operations, excluded from user installations
 - **System Marker**: `system: claudio-system` in frontmatter excludes from user installs
 
 ### Model Distribution
 - **Haiku (11 agents)**: Simple validation, file operations, fast processing
-- **Sonnet (58 agents)**: Complex reasoning, analysis, generation tasks
+- **Sonnet (59 agents)**: Complex reasoning, analysis, generation tasks
 - **Opus (8 agents)**: Multi-agent coordination, orchestration workflows
 
 ### Installation Impact
 - **Commands-Only Mode**: Installs user agents required by commands
 - **Full Workflow Mode**: Installs all user agents + workflow documentation
 - **System Operations**: System agents remain in main Claudio directory
+
+## External Agents (Not Part of Claudio)
+
+### Built-in Claude Agents (3) - Always Available
+**Purpose**: Core Claude Code functionality provided by Anthropic
+**Location**: Built into Claude Code system (not file-based)
+
+| Agent | Model | Description |
+|-------|-------|-------------|
+| `general-purpose` | sonnet | General-purpose agent for researching complex questions and executing multi-step tasks |
+| `statusline-setup` | sonnet | Configures Claude Code status line settings |
+| `output-style-setup` | sonnet | Creates Claude Code output styles |
+
+### User-Level Agents (1) - External Installation
+**Purpose**: User-installed agents outside Claudio project
+**Location**: `/Users/vinnie/.claude/agents`
+
+| Agent | Model | Description |
+|-------|-------|-------------|
+| `code-review-orchestrator` | sonnet | Comprehensive code review with multi-perspective analysis |
+
+*Note: External user agents may override Claudio agents when names conflict*
 
 ## Maintenance Notes
 

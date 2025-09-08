@@ -35,5 +35,5 @@ When you reference research (e.g., "use research on security"), the PRD automati
 **Output:**
 Creates `.claudio/docs/prd.md` with comprehensive requirements that can be used by the plan command to generate actionable implementation structures.
 
-Use the prd-agent subagent to create comprehensive Product Requirements Documents with business objectives, functional requirements, and success criteria enhanced by research integration.
+Task with subagent_type: "prd-agent" - pass the project_path argument for comprehensive Product Requirements Document creation with business objectives, functional requirements, and success criteria enhanced by research integration.
 

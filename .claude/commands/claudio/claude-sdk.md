@@ -7,7 +7,7 @@ Invoke the claudio-claude-sdk-architect specialist agent to:
 
 - Create new Claude Code slash commands with proper sub-agent integration
 - Set up and configure sub-agents with extended context
-- Conduct cross-system analysis using parallel evaluation (claudio-claude-commands-analyst + claudio-claude-subagents-analyst)
+- Conduct cross-system analysis using parallel evaluation (claude-commands-analyst + claude-subagents-analyst)
 - Troubleshoot command-agent integration issues
 - Provide architectural guidance for Claude Code implementations
 
@@ -32,7 +32,7 @@ Invoke the claudio-claude-sdk-architect specialist agent to:
 
 ## Key Features
 
-**Parallel Analysis by Default**: The architect automatically coordinates both specialized analysts (claudio-claude-commands-analyst and claudio-claude-subagents-analyst) for comprehensive evaluation.
+**Parallel Analysis by Default**: The architect automatically coordinates both specialized analysts (claude-commands-analyst and claude-subagents-analyst) for comprehensive evaluation.
 
 **Command-Agent Integration**: Creates seamless workflows between custom commands and their corresponding sub-agents with proper extended context integration.
 

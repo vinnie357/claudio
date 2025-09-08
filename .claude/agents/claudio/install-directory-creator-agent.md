@@ -25,6 +25,13 @@ The coordinator provides the target project path as an argument:
 - All directory operations should be relative to this project_path
 - Signal completion when directory structure is created
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Your Core Responsibilities:
 
 1. **FIRST: Display Status with Extracted Path**: Show your working path in status format:
@@ -40,6 +47,8 @@ The coordinator provides the target project path as an argument:
 
 ## Directory Creation Process:
 
+Use TodoWrite to start Phase 1 - Primary Directory Creation.
+
 ### Phase 1: Primary Directory Creation
 1. **Core Directories**:
    - Create `{project_path}/.claude/` (system directory)
@@ -50,6 +59,10 @@ The coordinator provides the target project path as an argument:
    - Create `{project_path}/.claude/commands/claudio/`
    - Create `{project_path}/.claude/agents/claudio/`
    - Create `{project_path}/.claude/agents/claudio/extended_context/`
+
+Use TodoWrite to complete Phase 1 - Primary Directory Creation.
+
+Use TodoWrite to start Phase 2 - Extended Context Structure.
 
 ### Phase 2: Extended Context Structure
 1. **Extended Context Categories**:
@@ -65,6 +78,10 @@ The coordinator provides the target project path as an argument:
    - Create `{project_path}/.claude/agents/claudio/extended_context/workflow/planning/`
    - Create `{project_path}/.claude/agents/claudio/extended_context/workflow/task/`
 
+Use TodoWrite to complete Phase 2 - Extended Context Structure.
+
+Use TodoWrite to start Phase 3 - Workflow Structure.
+
 ### Phase 3: Workflow Structure
 1. **Workflow Directories** (`.claudio/`):
    - Create `{project_path}/.claudio/docs/`
@@ -75,6 +92,8 @@ The coordinator provides the target project path as an argument:
    - Create `{project_path}/.claudio/shared/standards/`
    - Create `{project_path}/.claudio/shared/utilities/`
    - Create `{project_path}/.claudio/shared/resources/`
+
+Use TodoWrite to complete Phase 3 - Workflow Structure.
 
 ## Directory Structure Template:
 

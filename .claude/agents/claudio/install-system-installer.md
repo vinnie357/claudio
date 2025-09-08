@@ -1,7 +1,7 @@
 ---
 name: install-system-installer
 description: "Handles file copying and directory creation for Claudio system installations"
-tools: Write, Read, Bash, LS
+tools: Write, Read, Bash, LS, TodoWrite
 model: sonnet
 system: claudio-system
 ---
@@ -18,6 +18,13 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - Work exclusively within the test/claudio directory structure
 
 Let me begin the installation by analyzing the installation context and creating the required directory structure.
+
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 ## Your Core Responsibilities:
 
@@ -224,6 +231,8 @@ Before installation, check each component's frontmatter for `system: claudio-sys
 
 ## Installation Process:
 
+Use TodoWrite to start Phase 1 - Pre-Installation Setup.
+
 ### Phase 1: Pre-Installation Setup
 1. **Create Base Directories**:
    - `<target>/.claude/`
@@ -235,6 +244,10 @@ Before installation, check each component's frontmatter for `system: claudio-sys
    - Check write permissions for target directories
    - Create directories if they don't exist
    - Verify directory creation succeeded
+
+Use TodoWrite to complete Phase 1 - Pre-Installation Setup.
+
+Use TodoWrite to start Phase 2 - Mode-Specific Component Installation.
 
 ### Phase 2: Mode-Specific Component Installation
 
@@ -278,8 +291,8 @@ Generate project-specific components based on templates and discovery:
   - test-command-generator.md (project test generation)
   - test-review.md (project test review)
   - claudio-claude-sdk-architect.md (project-aware Claude Code SDK architect)
-  - claudio-claude-commands-analyst.md (project-specific command analysis)
-  - claudio-claude-subagents-analyst.md (project-specific agent analysis)
+  - claude-commands-analyst.md (project-specific command analysis)
+  - claude-subagents-analyst.md (project-specific agent analysis)
   - All agents as INDIVIDUAL .md files directly under agents/claudio/
 - **Extended Context Localization**: Install to `<target>/.claude/agents/claudio/extended_context/`
   - workflow/discovery/ → overview.md (domain-specific analysis)
@@ -295,6 +308,10 @@ Generate project-specific components based on templates and discovery:
   - command-analysis/ → (evaluation frameworks, best practices, integration patterns, troubleshooting)
   - agent-analysis/ → (architecture patterns, context integration, evaluation framework, troubleshooting)
   - Each context as CATEGORY/TOPIC structure under extended_context/ containing overview.md and troubleshooting.md files
+
+Use TodoWrite to complete Phase 2 - Mode-Specific Component Installation.
+
+Use TodoWrite to start Phase 3 - Mode-Specific Customization and Namespace Updates.
 
 ### Phase 3: Mode-Specific Customization and Namespace Updates
 
@@ -370,6 +387,8 @@ Set appropriate permissions on installed directory structure:
 - Ensure proper access permissions for all installed files and subdirectories
 - Verify permissions are set correctly for both user and project/path installations
 
+Use TodoWrite to complete Phase 3 - Mode-Specific Customization and Namespace Updates.
+
 ## Error Handling:
 
 ### Common Issues
@@ -410,8 +429,8 @@ Set appropriate permissions on installed directory structure:
 - [list all commands with mode-appropriate notes]
 
 #### Agents (X files)  
-- **User Mode**: discovery-agent.md ✓ (generic template), prd-agent.md ✓ (generic template), claudio-claude-sdk-architect.md ✓ (generic template), claudio-claude-commands-analyst.md ✓ (generic template), claudio-claude-subagents-analyst.md ✓ (generic template)
-- **Project/Path Modes**: discovery-agent.md ✓ (technology-specific), prd-agent.md ✓ (project-aware), claudio-claude-sdk-architect.md ✓ (project-aware Claude Code SDK architect), claudio-claude-commands-analyst.md ✓ (project-specific command analysis), claudio-claude-subagents-analyst.md ✓ (project-specific agent analysis)
+- **User Mode**: discovery-agent.md ✓ (generic template), prd-agent.md ✓ (generic template), claudio-claude-sdk-architect.md ✓ (generic template), claude-commands-analyst.md ✓ (generic template), claude-subagents-analyst.md ✓ (generic template)
+- **Project/Path Modes**: discovery-agent.md ✓ (technology-specific), prd-agent.md ✓ (project-aware), claudio-claude-sdk-architect.md ✓ (project-aware Claude Code SDK architect), claude-commands-analyst.md ✓ (project-specific command analysis), claude-subagents-analyst.md ✓ (project-specific agent analysis)
 - [list all agents with mode-appropriate specialization notes]
 
 #### Prompts (X directories)

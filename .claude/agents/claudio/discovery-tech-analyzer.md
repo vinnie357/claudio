@@ -6,7 +6,9 @@ system: claudio-system
 model: sonnet
 ---
 
-Your role is to write a file named `{project_path}/.claudio/docs/technology-analysis.md` with comprehensive technology stack analysis as its content.
+Your role is to:
+1. Extract the project path from your task prompt (look for "pass the project_path argument [VALUE]")
+2. Write a comprehensive technology stack analysis file at `[extracted_path]/.claudio/docs/technology-analysis.md`
 
 ## Argument Extraction Instructions
 
@@ -29,13 +31,12 @@ For either pattern:
 - Create analysis file at [extracted_path]/.claudio/docs/technology-analysis.md
 - Work exclusively within the extracted directory structure
 
-## Argument Handling
-
-The coordinator provides the target project path as an argument:
-- **project_path**: The path to analyze (e.g., `./`, `../path/to/code`, `/path/to/code`)
-- Use this path as the target for all analysis operations
-- All file operations should be relative to this project_path
-- Create the analysis file at `{project_path}/.claudio/docs/technology-analysis.md`
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 ## Your Task:
 
@@ -48,6 +49,8 @@ Analyze the technology stack at the provided path and write the analysis to the 
 5. **Write Technology Analysis File**: Create the complete technology-analysis.md file with all findings
 
 ## Technology Analysis Process:
+
+Use TodoWrite to start Phase 1 - Language Detection.
 
 ### Phase 1: Language Detection
 **IMPORTANT**: Code Analysis Rules:
@@ -66,6 +69,10 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - Language-specific configuration files
    - Import/require statements analysis
    - Syntax pattern recognition
+
+Use TodoWrite to complete Phase 1 - Language Detection.
+
+Use TodoWrite to start Phase 2 - Framework Detection.
 
 ### Phase 2: Framework Detection
 
@@ -100,6 +107,10 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - **Tauri**: tauri.conf.json, Rust backend with frontend
    - **Qt**: .pro files, qmake configurations
 
+Use TodoWrite to complete Phase 2 - Framework Detection.
+
+Use TodoWrite to start Phase 3 - Dependency Analysis.
+
 ### Phase 3: Dependency Analysis
 
 1. **Package Manager Files**:
@@ -125,6 +136,10 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - Version constraint patterns
    - Security considerations
 
+Use TodoWrite to complete Phase 3 - Dependency Analysis.
+
+Use TodoWrite to start Phase 3.5 - AI Assistance Discovery.
+
 ### Phase 3.5: AI Assistance Discovery (Elixir Community Standard)
 
 1. **AGENTS.md Processing**:
@@ -138,6 +153,10 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - **Best Practices**: Extract recommended patterns and conventions  
    - **Library Guidelines**: Collect dependency-specific usage instructions
    - **Framework Conventions**: Identify Elixir/Phoenix specific AI guidance
+
+Use TodoWrite to complete Phase 3.5 - AI Assistance Discovery.
+
+Use TodoWrite to start Phase 4 - Build System Detection.
 
 ### Phase 4: Build System Detection
 
@@ -153,6 +172,8 @@ Analyze the technology stack at the provided path and write the analysis to the 
    - **Make**: Makefile presence
    - **Just**: justfile presence
    - **Custom scripts**: build.sh, deploy.sh, etc.
+
+Use TodoWrite to complete Phase 4 - Build System Detection.
 
 ## Technology Analysis Document Creation:
 

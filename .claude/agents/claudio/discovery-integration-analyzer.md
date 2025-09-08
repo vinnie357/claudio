@@ -6,7 +6,9 @@ system: claudio-system
 model: sonnet
 ---
 
-Your role is to write a file named `{project_path}/.claudio/docs/integration-analysis.md` with comprehensive integration opportunities analysis as its content.
+Your role is to:
+1. Extract the project path from your task prompt (look for "pass the project_path argument [VALUE]")
+2. Write a comprehensive integration opportunities analysis file at `[extracted_path]/.claudio/docs/integration-analysis.md`
 
 ## Argument Extraction Instructions
 
@@ -29,13 +31,12 @@ For either pattern:
 - Create analysis file at [extracted_path]/.claudio/docs/integration-analysis.md
 - Work exclusively within the extracted directory structure
 
-## Argument Handling
-
-The coordinator provides the target project path as an argument:
-- **project_path**: The path to analyze (e.g., `./`, `../path/to/code`, `/path/to/code`)
-- Use this path as the target for all analysis operations
-- All file operations should be relative to this project_path
-- Create the analysis file at `{project_path}/.claudio/docs/integration-analysis.md`
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 ## Your Task:
 
@@ -48,6 +49,8 @@ Analyze the integration opportunities at the provided path and write the analysi
 5. **Write Integration Analysis File**: Create the complete integration-analysis.md file with all findings
 
 ## Integration Analysis Process:
+
+Use TodoWrite to start Phase 1 - Development Workflow Assessment.
 
 ### Phase 1: Development Workflow Assessment
 **IMPORTANT**: Analysis Focus Rules:
@@ -72,6 +75,10 @@ Analyze the integration opportunities at the provided path and write the analysi
    - Branch protection and review processes
    - Issue and PR templates
    - Documentation and changelog practices
+
+Use TodoWrite to complete Phase 1 - Development Workflow Assessment.
+
+Use TodoWrite to start Phase 2 - MCP Tool Recommendations.
 
 ### Phase 2: MCP Tool Recommendations
 
@@ -99,6 +106,10 @@ Analyze the integration opportunities at the provided path and write the analysi
    - **GCP MCP**: For Google Cloud projects
    - **Vercel MCP**: For Vercel-deployed projects
 
+Use TodoWrite to complete Phase 2 - MCP Tool Recommendations.
+
+Use TodoWrite to start Phase 3 - Automation and CI/CD Analysis.
+
 ### Phase 3: Automation and CI/CD Analysis
 
 1. **Continuous Integration Setup**:
@@ -119,6 +130,10 @@ Analyze the integration opportunities at the provided path and write the analysi
    - Environment synchronization tools
    - Dependency management and updates
 
+Use TodoWrite to complete Phase 3 - Automation and CI/CD Analysis.
+
+Use TodoWrite to start Phase 4 - Productivity and Enhancement Tools.
+
 ### Phase 4: Productivity and Enhancement Tools
 
 1. **Code Quality and Analysis**:
@@ -132,6 +147,8 @@ Analyze the integration opportunities at the provided path and write the analysi
    - Debugging tools and configurations
    - Code generation and scaffolding
    - API testing and documentation tools
+
+Use TodoWrite to complete Phase 4 - Productivity and Enhancement Tools.
 
 ## Integration Analysis Document Creation:
 

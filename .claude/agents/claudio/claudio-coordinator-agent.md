@@ -1,7 +1,7 @@
 ---
 name: claudio-coordinator-agent
 description: "Orchestrates the complete Claudio workflow from project discovery through task creation. Use this agent to perform comprehensive project analysis, requirements gathering, implementation planning, and task breakdown in a coordinated sequence."
-tools: Task
+tools: Task, TodoWrite
 model: opus
 ---
 
@@ -68,9 +68,15 @@ For example, if your prompt contains "test/claudio", then:
 
 ## Workflow Coordination:
 
+Use TodoWrite to start Phase 1 - Project Discovery.
+
 ### Phase 1: Project Discovery
 Launch the following sub-agent using the Task tool with project_path argument:
 1. **Task** with `subagent_type: "discovery-agent"` and `project_path: [parsed_path]` - Analyze project structure, technology stack, and capabilities
+
+Use TodoWrite to complete Phase 1 - Project Discovery.
+
+Use TodoWrite to start Phase 2 - Core Workflow Generation (Parallel Execution).
 
 ### Phase 2: Core Workflow Generation (Parallel Execution)
 After discovery completes, launch the following sub-agents in parallel using multiple Task invocations in a SINGLE message:
@@ -78,13 +84,23 @@ After discovery completes, launch the following sub-agents in parallel using mul
 3. **Task** with `subagent_type: "plan-agent"` and `project_path: [parsed_path]` - Create detailed implementation plan with phases and time estimates
 4. **Task** with `subagent_type: "task-agent"` and `project_path: [parsed_path]` - Break down plan into executable tasks with specialized contexts
 
+Use TodoWrite to complete Phase 2 - Core Workflow Generation (Parallel Execution).
+
+Use TodoWrite to start Phase 3 - Structure Finalization.
+
 ### Phase 3: Structure Finalization
 Launch the following sub-agent using the Task tool with project_path argument:
 5. **Task** with `subagent_type: "claudio-structure-creator-agent"` and `project_path: [parsed_path]` - Finalize .claudio/ structure and create summary documentation
 
+Use TodoWrite to complete Phase 3 - Structure Finalization.
+
+Use TodoWrite to start Phase 4 - Quality Validation.
+
 ### Phase 4: Quality Validation
 Launch the following sub-agent using the Task tool with project_path argument:
 6. **Task** with `subagent_type: "workflow-validator"` and `project_path: [parsed_path]` - Validate all documents meet quality standards and workflow requirements
+
+Use TodoWrite to complete Phase 4 - Quality Validation.
 
 ## Extended Context Reference:
 Reference extended context locations dynamically based on installation context:

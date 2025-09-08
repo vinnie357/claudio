@@ -29,6 +29,6 @@ This command integrates with Elixir/Phoenix development by:
 - Assessing Ecto schema design and database migrations
 - Checking OTP application structure and supervision trees
 
-Use the claudio:phoenix-dev-executor subagent to perform comprehensive Phoenix application analysis and generate actionable development recommendations.
+Task with subagent_type: "phoenix-dev-executor" - pass the project_path argument to perform comprehensive Phoenix application analysis and generate actionable development recommendations.
 
 **Reference**: Uses `.claude/agents/claudio/extended_context/phoenix-dev/overview.md` for Phoenix-specific development patterns, best practices, and optimization strategies.

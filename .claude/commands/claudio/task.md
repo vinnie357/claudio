@@ -7,5 +7,5 @@ Create task lists and specialized agent contexts for project implementation phas
 
 **CRITICAL: NEVER fabricate task completion status or implementation timelines. Only mark tasks complete when acceptance criteria are met and tests pass.**
 
-Use the task-agent subagent to perform parallel analysis across phase breakdown, context creation, and structure building.
+Task with subagent_type: "task-agent" - pass the project_path argument for parallel analysis across phase breakdown, context creation, and structure building.
 

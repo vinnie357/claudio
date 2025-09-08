@@ -22,6 +22,13 @@ For example, if your prompt contains "pass the project_path argument test/claudi
 - NEVER create or use `claudio/` directory - it's the source, not the target  
 - Target is ALWAYS the extracted project_path: `{project_path}/.claude/` and `{project_path}/.claudio/`
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Installation Execution
 
 I immediately create the directory structure in the extracted project path:

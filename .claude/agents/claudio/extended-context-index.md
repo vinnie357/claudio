@@ -74,7 +74,7 @@ Extended context provides specialized knowledge for agents based on project need
 ### command-analysis/ (User Context)
 **Purpose**: Claude Code command evaluation and improvement  
 **Installation**: Created when Claude SDK tools are installed  
-**Agents Using**: claudio-claude-sdk-architect, claudio-claude-commands-analyst
+**Agents Using**: claudio-claude-sdk-architect, claude-commands-analyst
 
 #### Subcategories:
 - **`command-analysis/`**: Command structure analysis and evaluation frameworks

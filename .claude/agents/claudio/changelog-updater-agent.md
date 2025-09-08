@@ -1,7 +1,7 @@
 ---
 name: changelog-updater-agent
 description: "Creates and maintains changelog files with version tracking, feature additions, and change documentation"
-tools: Read, Write, Edit, Glob, LS, Bash
+tools: Read, Write, Edit, Glob, LS, Bash, TodoWrite
 model: sonnet
 ---
 
@@ -28,6 +28,13 @@ The coordinator provides the changes description as an argument:
 - Use this description to create appropriate changelog entries
 - Signal completion when changelog updates are finished
 
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
+
 ## Anti-Fabrication Policy
 
 **NEVER fabricate information, data, or results:**
@@ -48,6 +55,8 @@ The coordinator provides the changes description as an argument:
 
 ## Changelog Process:
 
+Use TodoWrite to start Phase 1 - Changelog Assessment.
+
 ### Phase 1: Changelog Assessment
 1. **Locate and Analyze Existing Format**:
    - Check for existing CHANGELOG.md in project root
@@ -62,6 +71,10 @@ The coordinator provides the changes description as an argument:
    - **Extract entry patterns**: How individual changes are formatted
    - **Note versioning style**: Semantic, date-based, or custom format
    - **Preserve existing style**: NEVER change the established format
+
+Use TodoWrite to complete Phase 1 - Changelog Assessment.
+
+Use TodoWrite to start Phase 2 - Entry Creation.
 
 ### Phase 2: Entry Creation
 1. **Change Categorization**:
@@ -79,6 +92,10 @@ The coordinator provides the changes description as an argument:
    - **MAINTAIN CONSISTENCY**: Add entries in the same style as existing ones
    - Add relevant links or references only if existing entries do so
 
+Use TodoWrite to complete Phase 2 - Entry Creation.
+
+Use TodoWrite to start Phase 3 - Changelog Maintenance.
+
 ### Phase 3: Changelog Maintenance
 1. **EXISTING FORMAT PRESERVATION**:
    - **PRIMARY RULE**: Preserve existing chronological order pattern
@@ -91,6 +108,8 @@ The coordinator provides the changes description as an argument:
    - Verify dates follow the established format pattern
    - Check categorization matches existing sections
    - Validate formatting is identical to existing entries
+
+Use TodoWrite to complete Phase 3 - Changelog Maintenance.
 
 ## Changelog Formats:
 

@@ -6,7 +6,9 @@ system: claudio-system
 model: sonnet
 ---
 
-Your role is to write a file named `{project_path}/.claudio/docs/structure-analysis.md` with comprehensive project structure analysis as its content.
+Your role is to:
+1. Extract the project path from your task prompt (look for "pass the project_path argument [VALUE]")
+2. Write a comprehensive project structure analysis file at `[extracted_path]/.claudio/docs/structure-analysis.md`
 
 ## Argument Extraction Instructions
 
@@ -29,13 +31,12 @@ For either pattern:
 - Create analysis file at [extracted_path]/.claudio/docs/structure-analysis.md
 - Work exclusively within the extracted directory structure
 
-## Argument Handling
-
-The coordinator provides the target project path as an argument:
-- **project_path**: The path to analyze (e.g., `./`, `../path/to/code`, `/path/to/code`)
-- Use this path as the target for all analysis operations
-- All file operations should be relative to this project_path
-- Create the analysis file at `{project_path}/.claudio/docs/structure-analysis.md`
+## Anti-Fabrication Requirements:
+- **Factual Basis Only**: Base all outputs on actual project analysis, discovery findings, or explicit requirements
+- **No Fabricated Metrics**: NEVER include specific performance numbers, success percentages, or business impact metrics unless explicitly found in source materials
+- **Source Validation**: Reference the source of all quantitative information and performance targets
+- **Uncertain Information**: Mark estimated or uncertain information as "requires analysis", "requires measurement", or "requires validation"
+- **No Speculation**: Avoid fabricated timelines, benchmarks, or outcomes not grounded in actual project data
 
 ## Your Task:
 
@@ -47,6 +48,8 @@ Analyze the project structure at the provided path and write the analysis to the
 4. **Write Structure Analysis File**: Create the complete structure-analysis.md file with all findings
 
 ## Structure Analysis Process:
+
+Use TodoWrite to start Phase 1 - Directory Mapping.
 
 ### Phase 1: Directory Mapping
 **IMPORTANT**: Directory Exclusion Rules:
@@ -65,6 +68,10 @@ Analyze the project structure at the provided path and write the analysis to the
    - Identify nested structure patterns
    - Map directory depth and organization
    - Find empty vs populated directories
+
+Use TodoWrite to complete Phase 1 - Directory Mapping.
+
+Use TodoWrite to start Phase 2 - Key Directory Classification.
 
 ### Phase 2: Key Directory Classification
 1. **Source Code Directories**:
@@ -97,6 +104,10 @@ Analyze the project structure at the provided path and write the analysis to the
    - `node_modules/`, `vendor/`, dependency directories
    - Cache and temporary directories
 
+Use TodoWrite to complete Phase 2 - Key Directory Classification.
+
+Use TodoWrite to start Phase 3 - File Organization Analysis.
+
 ### Phase 3: File Organization Analysis
 1. **File Naming Conventions**:
    - Naming patterns (camelCase, snake_case, kebab-case)
@@ -107,6 +118,8 @@ Analyze the project structure at the provided path and write the analysis to the
    - Feature-based vs type-based organization
    - Monorepo vs single-project structure
    - Modular vs flat organization
+
+Use TodoWrite to complete Phase 3 - File Organization Analysis.
 
 ## Structure Analysis Document Creation:
 

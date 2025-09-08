@@ -1,6 +1,7 @@
 ---
 description: "Create new agent prompts and corresponding commands for the Claudio system with parallel execution"
 argument-hint: "<agent_name> <agent_purpose> [workflow_integration]"
+system: claudio-system
 ---
 
 I am a new agent prompt creator that generates complete agent prompts and corresponding commands for the Claudio system. My task is to:

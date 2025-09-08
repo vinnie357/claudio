@@ -1,22 +1,44 @@
 ---
-description: "Analyze project structure and technology stack with TaskFlow specialization"
-argument-hint: "[target_path]"
-version: "upgraded-2025-08-12"
+description: "Comprehensive TaskFlow productivity app analysis with parallel discovery components"
+argument-hint: "[directory_path]"
 ---
 
-Analyze project structure, technology stack, architecture patterns, and development requirements to create comprehensive discovery documentation. This command provides deep project understanding for development planning and technology decisions, with specialized analysis for TaskFlow Productivity App and cross-platform development.
+I am a comprehensive TaskFlow productivity app analysis command that coordinates discovery through parallel specialized agents. My task is to:
 
-**CRITICAL**: Use the discovery-agent subagent to perform comprehensive project analysis including technology detection, architecture evaluation, and development workflow recommendations.
+1. Parse user arguments for target directory path
+2. Use TodoWrite to manage discovery workflow phases  
+3. Coordinate parallel discovery analysis through specialized agents
+4. Validate and consolidate discovery outputs
+5. Create comprehensive TaskFlow project discovery report
 
-**Path Resolution**: Supports multiple ways to specify discovery target:
-- **Direct Path**: `/claudio:discovery /path/to/project` (analyzes specified path)
-- **Current Directory**: `/claudio:discovery` (analyzes current working directory)
+## Implementation
 
-**TaskFlow Specialization**: This command includes enhanced analysis capabilities for:
-- **React Native**: Mobile app structure, platform-specific code, native modules
-- **Node.js**: Express.js APIs, middleware patterns, database integration
-- **Cross-Platform**: Code sharing strategies, synchronized development workflows
-- **Productivity Applications**: Task management systems, real-time synchronization
-- **Multi-Database**: PostgreSQL and MongoDB integration patterns
+I will use TodoWrite to track progress through managed phases:
 
-This command creates detailed project analysis documentation optimized for TaskFlow's technology stack and cross-platform architecture to inform development decisions and project planning.
+Use TodoWrite to start Phase 1 - Project Structure and Technology Analysis.
+
+**Parallel Discovery Analysis** (Run multiple Task invocations in SINGLE message):
+- Task with subagent_type: "discovery-structure-analyzer" - pass the directory_path argument for structure analysis
+- Task with subagent_type: "discovery-tech-analyzer" - pass the directory_path argument for technology analysis
+- Task with subagent_type: "discovery-architecture-analyzer" - pass the directory_path argument for architecture analysis  
+- Task with subagent_type: "discovery-integration-analyzer" - pass the directory_path argument for integration analysis
+
+Use TodoWrite to complete Phase 1 - Project Structure and Technology Analysis.
+
+Use TodoWrite to start Phase 2 - Discovery Consolidation.
+
+**Sequential Consolidation**:
+- Task with subagent_type: "discovery-consolidator" - pass the directory_path argument for consolidating all discovery analyses into comprehensive TaskFlow discovery document
+
+Use TodoWrite to complete Phase 2 - Discovery Consolidation.
+
+**TaskFlow-Specific Analysis Focus:**
+- **Mobile Architecture**: React Native app structure, platform-specific implementations, cross-platform components
+- **Backend Services**: Node.js microservices, Express.js APIs, database integration patterns
+- **Real-time Systems**: WebSocket implementation, synchronization mechanisms, event-driven architecture
+- **AI Integration**: Machine learning services, task prediction models, productivity analytics
+- **Data Management**: PostgreSQL schemas, MongoDB collections, data synchronization patterns
+
+**CRITICAL: NEVER fabricate TaskFlow project details or capabilities. Only report findings from actual file and code examination.**
+
+This demonstrates parallel discovery analysis with proper TodoWrite phase management and validation optimized for TaskFlow productivity app architecture.

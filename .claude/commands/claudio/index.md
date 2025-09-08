@@ -1,6 +1,6 @@
 # Claudio System Commands Index
 
-**Total Commands**: 23 (18 User + 5 System)  
+**Total Commands**: 23 (16 User + 7 System)  
 **Last Updated**: 2025-09-06  
 **Component Classification**: System commands marked with `system: claudio-system`  
 
@@ -17,17 +17,19 @@
 | `plan` | User | Create implementation plans | `<requirements_context> [timeline]` | plan-agent |
 | `task` | User | Break down plans into executable tasks | `<plan_context> [phase]` | task-agent |
 
-### System Commands (5)
+### System Commands (7)
 **Purpose**: Internal system operations (excluded from user installations)
 **System Marker**: `system: claudio-system`
 
 | Command | Type | Description | Arguments | Agent |
 |---------|------|-------------|-----------|-------|
-| `install` | System | Install Claudio system with project integration | `[target_path] [mode]` | Direct coordination (14 agents) |
+| `install` | System | Install Claudio system with project integration | `[target_path] [mode]` | install-path-validator-agent, install-directory-creator-agent, discovery analyzers (4), install-commands-localizer-agent, install-agents-localizer-agent, install-extended-context-generator-agent, claude-md-generator-agent, install-validator |
 | `install-commands` | System | Install commands-only version | `[target_path]` | install-commands-coordinator-agent |
-| `upgrade` | System | Parallel upgrade system using 7 specialized subagents | `[target_path] [--check\|--force]` | Direct coordination (7 agents) |
+| `upgrade` | System | Parallel upgrade system using 7 specialized subagents | `[target_path] [--check\|--force]` | upgrade-discovery-analyzer, upgrade-legacy-cleaner, upgrade-template-analyzer, upgrade-backup-manager, security-review-coordinator, generation-tracking-validator, upgrade-installation-validator |
 | `test` | System | Execute project test suite with intelligent analysis and optional fixes | `[test_pattern] [--fix]` | project-test-runner |
 | `generate-test-commands` | System | Generate project-specific test commands | `[target_path]` | test-command-generator |
+| `new-command` | System | Generate custom commands with sub-agents and extended context | `<command_name> [description]` | research-specialist, new-command-generator, new-command-validator |
+| `newprompt` | System | Create comprehensive agent prompts following Claudio conventions | `<agent_name> [purpose]` | newprompt-agent-creator, newprompt-command-creator, newprompt-integration-planner |
 
 ### Analysis & Quality (3)
 **Purpose**: Code quality, security, and design analysis
@@ -35,7 +37,7 @@
 | Command | Type | Description | Arguments | Agent |
 |---------|------|-------------|-----------|-------|
 | `code-quality` | User | Analyze code quality and generate improvement recommendations | `[target_path] [--fix]` | code-quality-analyzer |
-| `security-review` | User | Comprehensive security analysis using STRIDE methodology with Mermaid visualization | `<target_path_or_instruction> [security_framework]` | Direct coordination (1 agent) |
+| `security-review` | User | Comprehensive security analysis using STRIDE methodology with Mermaid visualization | `<target_path_or_instruction> [security_framework]` | security-review-coordinator |
 | `design` | User | Analyze UX/UI design systems and accessibility compliance | `[target_path] [--components]` | design-analyzer |
 
 ### Development Tools (5)
@@ -45,19 +47,17 @@
 |---------|------|-------------|-----------|-------|
 | `documentation` | User | Create comprehensive project documentation | `[target_path] [--type=all\|api\|user]` | documentation-coordinator |
 | `test-review` | User | Review testing suite tools and provide recommendations | `[target_path]` | test-review |
-| `update-docs` | User | Updates project documentation including README, CLAUDE.md, and changelogs | `[changes-description]` | Direct coordination (3 agents) |
+| `update-docs` | User | Updates project documentation including README, CLAUDE.md, and changelogs | `[changes-description]` | readme-updater-agent, claude-md-updater-agent, changelog-updater-agent |
 | `research` | User | Create research documentation with overview and troubleshooting guides | `<category> <topic> [--complexity=level]` | research-specialist |
 | `phoenix-dev` | User | Analyze and optimize Elixir Phoenix development workflows | `[target_path]` | phoenix-dev-executor |
 
-### System & SDK (5)  
+### System & SDK (3)  
 **Purpose**: Claude Code integration, command generation, and system tools
 
 | Command | Type | Description | Arguments | Agent |
 |---------|------|-------------|-----------|-------|
 | `claude-sdk` | User | Comprehensive Claude Code SDK architect for command creation, agent setup, and cross-system analysis | `[--analyze-commands] [--analyze-agents] [--cross-system] [--create-command <name>] [--setup-agent <name>]` | claudio-claude-sdk-architect |
-| `new-command` | User | Generate custom commands with sub-agents and extended context | `<command_name> [description]` | Direct coordination (3 agents) |
-| `newprompt` | User | Create comprehensive agent prompts following Claudio conventions | `<agent_name> [purpose]` | Direct coordination (3 agents) |
-| `implement` | User | Execute implementation plans with systematic task coordination | `[target_path] [--phase=N]` | Direct coordination (1 agent) |
+| `implement` | User | Execute implementation plans with systematic task coordination | `[target_path] [--phase=N]` | implement-agent |
 | `gcms` | User | Generate brief conventional commit message suggestions | `` | git-commit-message |
 
 ## System Metadata
@@ -69,8 +69,8 @@
 - **User**: Workflow execution, installed in user projects for development workflows
 
 #### Component Counts
-- **System Commands (5)**: Installation, upgrade, testing, and system management operations
-- **User Commands (18)**: Project analysis, development tools, documentation, and workflow execution
+- **System Commands (7)**: Installation, upgrade, testing, command generation, and system management operations
+- **User Commands (16)**: Project analysis, development tools, documentation, and workflow execution
 - **System Agents (43)**: Installation, validation, upgrade, and testing agents (excluded from user installations)  
 - **User Agents (36)**: Workflow execution agents (included in user installations)
 
@@ -147,7 +147,7 @@
 - install, install-commands, upgrade
 
 ### Commands Requiring `command-analysis/` & `agent-analysis/`
-- claude-sdk, new-command, newprompt
+- claude-sdk (User), new-command (System), newprompt (System)
 
 ### Commands Requiring `phoenix-dev/`
 - phoenix-dev

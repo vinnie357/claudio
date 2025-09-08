@@ -1,0 +1,34 @@
+{
+  "timestamp": "2025-09-08T05:30:00Z",
+  "project_path": "test/upgrade",
+  "input_source": ".claudio/shared/agents_tracking.json (not found - generated comprehensive context)",
+  "discovery_source": ".claudio/docs/discovery.md",
+  "discovery_drivers": {
+    "technology_stack": ["react_native", "nodejs", "express", "postgresql", "mongodb", "tensorflow"],
+    "architecture": "microservices",
+    "project_domain": "productivity_app",
+    "key_features": ["cross_platform_mobile", "real_time_sync", "ai_integration", "offline_capabilities"],
+    "development_tools": ["typescript", "jest", "pytest", "github_actions"]
+  },
+  "contexts_generated": [
+    ".claude/agents/claudio/extended_context/workflow/discovery/overview.md",
+    ".claude/agents/claudio/extended_context/workflow/discovery/troubleshooting.md",
+    ".claude/agents/claudio/extended_context/development/react_native/overview.md",
+    ".claude/agents/claudio/extended_context/development/react_native/troubleshooting.md",
+    ".claude/agents/claudio/extended_context/infrastructure/microservices/overview.md",
+    ".claude/agents/claudio/extended_context/infrastructure/microservices/troubleshooting.md",
+    ".claude/agents/claudio/extended_context/development/testing/overview.md",
+    ".claude/agents/claudio/extended_context/development/testing/troubleshooting.md",
+    ".claude/agents/claudio/extended_context/development/nodejs/overview.md",
+    ".claude/agents/claudio/extended_context/development/nodejs/troubleshooting.md"
+  ],
+  "customizations_applied": {
+    "react_native_patterns": "Cross-platform development, offline capabilities, platform-specific optimizations",
+    "microservices_architecture": "Service decomposition, event-driven patterns, API gateway integration",
+    "database_integration": "PostgreSQL and MongoDB dual-database patterns",
+    "ai_ml_integration": "TensorFlow service patterns, productivity analytics",
+    "testing_strategies": "Jest for frontend, pytest for AI services, cross-platform testing",
+    "development_workflow": "GitHub Actions CI/CD, mobile deployment automation"
+  },
+  "content_focus": "TaskFlow productivity app with React Native mobile development, Node.js microservices, and AI-powered features"
+}

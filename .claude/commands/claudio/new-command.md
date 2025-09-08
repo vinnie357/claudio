@@ -1,6 +1,7 @@
 ---
 description: "Generate custom commands with sub-agents and extended context from research sources"
 argument-hint: "<name> \"<purpose>\" <source> [--claudio \"<workflow_position>\"]"
+system: claudio-system
 ---
 
 I am a custom command generator that creates complete command systems (command + sub-agent + extended context) based on user specifications and research sources. My task is to:

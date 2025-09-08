@@ -43,6 +43,7 @@ Use TodoWrite to start Phase 3 - Component Update and Completion.
 **Sequential Component Update with Generation Tracking**:
 When resources need regeneration, execute the sequential generation chain:
 - Task with subagent_type: "install-commands-localizer-agent" - pass the project_path argument for commands regeneration with updated tracking
+- Task with subagent_type: "test-command-generator" - pass the project_path argument for test command generation
 - Task with subagent_type: "install-agents-localizer-agent" - pass the project_path argument for agents regeneration based on updated commands tracking  
 - Task with subagent_type: "install-extended-context-generator-agent" - pass the project_path argument for context regeneration based on updated agents tracking
 - Task with subagent_type: "claude-md-generator-agent" - pass the project_path argument for CLAUDE.md refresh

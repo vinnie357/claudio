@@ -1,6 +1,7 @@
 ---
 description: "Comprehensive project analysis with parallel discovery components"
 argument-hint: "[directory_path]"
+system: claudio-system
 ---
 
 I am a comprehensive project analysis command that coordinates discovery through parallel specialized agents. My task is to:

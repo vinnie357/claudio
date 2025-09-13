@@ -1,17 +1,16 @@
 # Claudio System Agents Index
 
-**Total Agents**: 84 (37 Claudio User + 43 Claudio System + 3 Built-in Claude + 1 External User)  
+**Total Agents**: 83 (36 Claudio User + 43 Claudio System + 3 Built-in Claude + 1 External User)  
 **Last Updated**: 2025-09-06  
 **Component Classification**: System agents marked with `system: claudio-system`  
 
 ## Agent Categories
 
-### Core Workflow Agents (6)
+### Core Workflow Agents (5)
 **Purpose**: Essential project analysis and planning workflows
 
 | Agent | Type | Description | Tools | Model | Extended Context |
 |-------|------|-------------|-------|-------|----------------|
-| `claudio-coordinator-agent` | User | *(Deprecated)* Orchestrates complete Claudio workflow | Task, TodoWrite | opus | workflow/discovery, workflow/prd, workflow/planning, workflow/task |
 | `claudio-structure-creator-agent` | User | Finalizes .claudio directory structure and creates summary docs | Write, Read, LS, Bash, TodoWrite | sonnet | templates/workflows, infrastructure/installation |
 | `discovery-agent` | User | **CORE** Project analysis and technology discovery specialist | Read, Glob, Bash, LS, Grep, TodoWrite | sonnet | workflow/discovery, templates/workflows |
 | `plan-agent` | User | **CORE** Creates detailed implementation plans with phases and time estimates | Read, Write, TodoWrite | sonnet | workflow/planning, templates/workflows |
@@ -164,14 +163,14 @@
 ## System Metadata
 
 ### Component Classification Summary
-- **User Agents (37)**: Installed in user projects for workflow execution  
+- **User Agents (36)**: Installed in user projects for workflow execution
 - **System Agents (43)**: Internal operations, excluded from user installations
 - **System Marker**: `system: claudio-system` in frontmatter excludes from user installs
 
 ### Model Distribution
 - **Haiku (11 agents)**: Simple validation, file operations, fast processing
-- **Sonnet (59 agents)**: Complex reasoning, analysis, generation tasks
-- **Opus (8 agents)**: Multi-agent coordination, orchestration workflows
+- **Sonnet (58 agents)**: Complex reasoning, analysis, generation tasks
+- **Opus (7 agents)**: Multi-agent coordination, orchestration workflows
 
 ### Installation Impact
 - **Commands-Only Mode**: Installs user agents required by commands

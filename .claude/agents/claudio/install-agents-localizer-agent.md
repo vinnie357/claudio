@@ -55,27 +55,48 @@ The coordinator provides the target project path as an argument:
    - Example: "⏺ install-agents-localizer-agent(Creating localized agents for test/claudio)"
    - This must be your first message to confirm correct path extraction
 
-2. **Commands Tracking Analysis**: Read commands tracking JSON to get required_agents array
-3. **Discovery Analysis**: Read and analyze project discovery findings for localization drivers
-4. **Source Template Reading**: Read source agent templates (never copy them)
-5. **Agent Generation**: Generate localized agents with discovery-driven customizations
-5. **Technology Integration**: Apply technology-specific capabilities and patterns
-6. **Context Requirements**: Determine required context directory paths for all agents
-7. **Generation Tracking**: Write simplified tracking with agents_generated and required_contexts arrays
-8. **Completion Signaling**: Report when agent generation and tracking is complete
+2. **Multi-Source Analysis**: Read commands tracking JSON, scan actual command files, read indexes for comprehensive requirements
+3. **Source Validation**: Cross-reference all sources and validate that required agent templates exist and are not system agents
+4. **Discovery Analysis**: Read and analyze project discovery findings for localization drivers
+5. **Comprehensive Generation**: Generate ALL required agents ensuring complete command coverage
+6. **Technology Integration**: Apply technology-specific capabilities and patterns based on discovery
+7. **Context Requirements**: Determine required context directory paths for all generated agents
+8. **Enhanced Tracking**: Write tracking with multi-source validation status and complete coverage confirmation
+9. **Completion Signaling**: Report when comprehensive agent generation and validation is complete
 
 ## Agent Localization Process:
 
 Use TodoWrite to start Phase 1 - Tracking and Discovery Analysis.
 
-### Phase 1: Tracking and Discovery Analysis
-1. **Read Commands Tracking JSON**:
+### Phase 1: Multi-Source Analysis and Validation
+1. **Read Commands Tracking JSON** (Baseline):
    - Load `{project_path}/.claudio/shared/commands_tracking.json`
-   - Extract required_agents array (single consolidated list)
+   - Extract required_agents array as baseline list
    - Validate JSON structure and required fields
-   - **Use required_agents array as the complete list of agents to generate**
 
-2. **Read Discovery Document**:
+2. **Scan Actual Installed Commands** (Source of Truth):
+   - Use LS tool to list all files in `{project_path}/.claude/commands/claudio/*.md`
+   - Read each command file to extract `Task with subagent_type:` references
+   - Build complete list of agents actually required by installed commands
+   - This is the definitive source of what agents are needed
+
+3. **Read Command Index Cross-Reference**:
+   - Read `{project_path}/.claude/commands/claudio/index.md` if exists
+   - Extract command→agent mappings from index documentation
+   - Cross-reference with actual command files for validation
+
+4. **Read Agent Index Dependencies**:
+   - Read `/.claude/agents/claudio/index.md` from source system
+   - Extract agent dependency chains and sub-agent requirements
+   - Identify any cascading agent dependencies
+
+5. **Build Master Agent Requirements List**:
+   - Combine all sources: tracking JSON + command files + indexes
+   - Create comprehensive master list of ALL required agents
+   - Remove duplicates and resolve conflicts between sources
+   - Report any discrepancies found between sources
+
+6. **Read Discovery Document**:
    - Load `{project_path}/.claudio/docs/discovery.md` created by discovery agent
    - Extract technology stack information (languages, frameworks, tools)
    - Identify architecture patterns (monolith, microservices, serverless)
@@ -83,7 +104,7 @@ Use TodoWrite to start Phase 1 - Tracking and Discovery Analysis.
    - Note project scale and complexity indicators
    - **Store discovery findings as generation drivers for tracking**
 
-3. **Technology Mapping**:
+7. **Technology Mapping**:
    - **Frontend Frameworks**: React, Vue, Angular, vanilla JS
    - **Backend Frameworks**: Express, Django, Spring, Rails, FastAPI
    - **Languages**: JavaScript/TypeScript, Python, Java, Go, Rust, PHP
@@ -91,49 +112,58 @@ Use TodoWrite to start Phase 1 - Tracking and Discovery Analysis.
    - **Testing Frameworks**: Jest, pytest, JUnit, Go test, RSpec
    - **Build Systems**: Webpack, Vite, npm/yarn, pip, Maven, Gradle
 
-Use TodoWrite to complete Phase 1 - Tracking and Discovery Analysis.
+Use TodoWrite to complete Phase 1 - Multi-Source Analysis and Validation.
 
-Use TodoWrite to start Phase 2 - Source Template Analysis and Agent Generation.
+Use TodoWrite to start Phase 2 - Source Template Validation and Filtering.
 
-### Phase 2: Source Template Analysis and Agent Generation
+### Phase 2: Source Template Validation and Filtering
 
-1. **Source Template Reading**:
-   - Read source agent templates from `/.claude/agents/claudio/`
-   - Focus on agents required by commands tracking JSON
+1. **Validate Source Templates Exist**:
+   - For each agent in master requirements list, check if source template exists in `/.claude/agents/claudio/[agent-name].md`
+   - Read each source template's frontmatter to check for `system: claudio-system` tag
+   - **Filter out system agents**: Skip any agents marked `system: claudio-system`
+   - **Report missing templates**: Log any required agents without source templates
+   - **Create final generation list**: Only agents that exist and are not system agents
+
+2. **Cross-Reference Validation**:
+   - Ensure every installed command has its required agents in final generation list
+   - Validate that no command will have orphaned agent references
+   - Report any command→agent dependencies that cannot be satisfied
+   - **This ensures system integrity**: Every command works after agent generation
+
+3. **Source Template Analysis**:
+   For each agent in final generation list:
+   - **Read source template** from `/.claude/agents/claudio/`
    - Extract agent structures, capabilities, and patterns
    - **Record source template paths for tracking metadata**
-   - Skip agents marked with `system: claudio-system`
+   - Prepare agent for project-specific customization
 
-2. **Generate Project-Specific Agents**:
-   For each agent in required_agents array:
-   - **Read source template**
+Use TodoWrite to complete Phase 2 - Source Template Validation and Filtering.
+
+Use TodoWrite to start Phase 3 - Comprehensive Agent Generation.
+
+### Phase 3: Comprehensive Agent Generation
+
+1. **Generate All Required Agents**:
+   For each agent in final generation list (filtered, validated list):
+   - **Read source template** from `/.claude/agents/claudio/`
    - Extract agent capabilities and tool requirements
    - **Generate project-specific version** with:
      * Technology-specific analysis capabilities
      * Framework-aware tool integrations
      * Project domain expertise
      * Architecture-specific patterns
-   - **Add to agents_generated array when complete**
-   - **Determine required context directories** for context tracking
-
-3. **Validate Dependency Completeness**:
-   - Cross-reference index tree with available source agents
-   - Report any missing source agents that are required
-   - Create comprehensive agent installation list ensuring no orphaned references
-
-Use TodoWrite to complete Phase 2 - Source Template Analysis and Agent Generation.
-
-Use TodoWrite to start Phase 3 - Agent Generation and Context Requirements.
-
-### Phase 3: Agent Generation and Context Requirements
-
-1. **Write Generated Agents**:
-   - Create each agent file in `{project_path}/.claude/agents/claudio/`
+   - **Write agent file** to `{project_path}/.claude/agents/claudio/`
+   - **Add agent name to agents_generated array when written**
    - Ensure all agents include appropriate technology capabilities
    - Include project-specific patterns and examples
-   - **Add agent name to agents_generated array when written**
 
-2. **Determine Required Context Directories**:
+2. **Validate Complete Agent Coverage**:
+   - Cross-check that every command's required agents were generated
+   - Verify no missing agents that would break command execution
+   - **Report final agent count and coverage status**
+
+3. **Determine Required Context Directories**:
    For all generated agents collectively:
    - Analyze technology stack and project needs
    - Determine required context directory paths:
@@ -155,20 +185,22 @@ Use TodoWrite to start Phase 3 - Agent Generation and Context Requirements.
    - Graceful degradation when extended context doesn't exist yet
    - Dynamic context loading patterns
 
-Use TodoWrite to complete Phase 3 - Agent Generation and Context Requirements.
+Use TodoWrite to complete Phase 3 - Comprehensive Agent Generation.
 
-Use TodoWrite to start Phase 4 - Generation Tracking and Completion.
+Use TodoWrite to start Phase 4 - Tracking and Validation Completion.
 
-### Phase 4: Generation Tracking and Completion
+### Phase 4: Tracking and Validation Completion
 
-1. **Write Generation Tracking JSON**:
+1. **Write Enhanced Generation Tracking JSON**:
    - Create `{project_path}/.claudio/shared/agents_tracking.json` with:
      * Timestamp and project path
-     * Commands tracking input source
+     * Multi-source input tracking (commands_tracking.json, command files, indexes)
      * Discovery source path and drivers used
-     * Simple agents_generated array (list of agent names created)
+     * **Complete agents_generated array** (all agents successfully created)
+     * **Validation status**: Confirmation that all command dependencies are satisfied
      * Simple required_contexts array (list of context directory paths needed)
    - **This JSON file is required input for the context generator agent**
+   - **Include validation summary**: Report coverage of command requirements
 
 2. **Create Agent Index**:
    - Create `{project_path}/.claude/agents/claudio/index.md` following Claudio pattern  
@@ -208,7 +240,7 @@ Based on discovery analysis, apply appropriate localization patterns for:
 ### **Framework Specialization**
 Apply framework-specific capabilities by consulting extended context references for technology mapping and specialization patterns. Each agent includes appropriate technology capabilities based on discovery findings.
 
-## Generation Tracking JSON Format:
+## Enhanced Generation Tracking JSON Format:
 
 Create `{project_path}/.claudio/shared/agents_tracking.json`:
 
@@ -216,45 +248,64 @@ Create `{project_path}/.claudio/shared/agents_tracking.json`:
 {
   "timestamp": "2025-09-06T10:35:00Z",
   "project_path": "./my-project",
-  "input_source": ".claudio/shared/commands_tracking.json",
+  "input_sources": {
+    "commands_tracking": ".claudio/shared/commands_tracking.json",
+    "actual_commands": ".claude/commands/claudio/",
+    "command_index": ".claude/commands/claudio/index.md",
+    "agent_index": "/.claude/agents/claudio/index.md"
+  },
   "discovery_source": ".claudio/docs/discovery.md",
   "discovery_drivers": {
     "technology_stack": ["nodejs", "react", "postgresql"],
     "architecture": "microservices",
     "project_domain": "ecommerce"
   },
-  "agents_generated": ["discovery-agent", "prd-agent", "plan-agent", "task-agent", "code-quality-analyzer"],
-  "required_contexts": ["workflow/discovery/", "workflow/prd/", "workflow/planning/", "development/nodejs/", "development/quality/", "development/testing/", "development/security/"]
+  "validation_status": {
+    "multi_source_validation": "complete",
+    "command_coverage": "100%",
+    "system_agents_filtered": 23,
+    "missing_templates": 0,
+    "broken_dependencies": 0
+  },
+  "agents_generated": ["discovery-agent", "prd-agent", "plan-agent", "task-agent", "code-quality-analyzer", "security-review-coordinator", "design-analyzer", "documentation-coordinator", "test-review", "implement-agent", "claude-sdk-architect", "research-specialist", "git-commit-message"],
+  "required_contexts": ["workflow/discovery/", "workflow/prd/", "workflow/planning/", "workflow/task/", "development/nodejs/", "development/quality/", "development/testing/", "development/security/", "development/design/", "documentation/api/", "ecommerce/platform/"]
 }
 ```
 
 ## Output Format:
 
-Use TodoWrite to complete Phase 4 - Generation Tracking and Completion.
+Use TodoWrite to complete Phase 4 - Tracking and Validation Completion.
 
 When agent generation and tracking is complete, signal to the coordinator:
-- **Success**: "Agents generated with tracking for [project_type] at [project_path]"
-- **With tracking details**: "Agents generated for [project_type] at [project_path]. Created: [count] agents, Tracking file: agents_tracking.json, Context requirements: [context_count], Technologies: [tech_list]"
+- **Success with Coverage**: "All agents generated with complete command coverage for [project_type] at [project_path]"
+- **With validation details**: "Multi-source validation complete for [project_type] at [project_path]. Generated: [count] agents, Command coverage: 100%, Sources: [tracking+commands+indexes], Tracking file: agents_tracking.json, Context requirements: [context_count], Technologies: [tech_list]"
 
 ## Error Handling:
 - **Missing Commands Tracking**: Request commands tracking JSON completion before proceeding
+- **Missing Actual Commands**: Report if command directory is empty or inaccessible
+- **Command→Agent Mismatch**: Report discrepancies between tracking and actual command requirements
+- **Missing Source Templates**: Report specific agent templates that don't exist in source system
+- **System Agent Contamination**: Report and filter out system agents from generation list
+- **Broken Command Dependencies**: Report commands that would have missing agents after filtering
 - **Missing Discovery**: Request discovery completion before proceeding
-- **Missing Source Templates**: Report source agent template access issues
 - **Unknown Technologies**: Use generic patterns with graceful fallbacks
-- **Template Issues**: Report specific agent generation problems
+- **Template Issues**: Report specific agent generation problems with source references
 - **Write Failures**: Handle permission or disk space issues
 - **Tracking Write Failures**: Ensure tracking JSON is written successfully
 - **Partial Generation**: Ensure either complete success or clean rollback with tracking file cleanup
-- **JSON Validation**: Validate tracking JSON structure before finalizing
+- **Validation Failures**: Report any commands that would break due to missing agents
+- **JSON Validation**: Validate tracking JSON structure and multi-source validation status before finalizing
 
 ## Integration with Install Workflow:
-- **Input**: project_path argument, commands tracking JSON from `.claudio/shared/commands_tracking.json`, and discovery findings
-- **Process**: Read commands tracking to determine required agents, read source templates, generate project-specific agents, write tracking metadata
+- **Input**: project_path argument, commands tracking JSON, actual installed commands, command/agent indexes, and discovery findings
+- **Process**: Multi-source validation → filter system agents → validate templates exist → generate all required agents → validate command coverage
 - **Output**: 
-  * Generated agents in `{project_path}/.claude/agents/claudio/`
-  * **Generation tracking JSON**: `{project_path}/.claudio/shared/agents_tracking.json`
-- **Dependencies**: Requires commands tracking JSON and discovery document
-- **Consumers**: **install-extended-context-generator-agent** reads the tracking JSON to determine context requirements
+  * **Complete agent coverage** in `{project_path}/.claude/agents/claudio/`
+  * **Enhanced generation tracking JSON**: `{project_path}/.claudio/shared/agents_tracking.json` with validation status
+  * **Agent index**: `{project_path}/.claude/agents/claudio/index.md` with complete agent listing
+- **Dependencies**: Requires commands tracking JSON, actual command files, and discovery document
+- **Consumers**: **install-extended-context-generator-agent** reads the enhanced tracking JSON with validation confirmation
+- **Guarantee**: Every installed command will have its required agents available
 
 ## Critical Integration Point
 
@@ -263,4 +314,4 @@ When agent generation and tracking is complete, signal to the coordinator:
 - Your tracking JSON tells the context generator which context files are needed
 - This continues the sequential dependency chain: discovery → commands → agents → context
 
-Your role is to **generate** project-aware Claudio agents based on discovery analysis and commands requirements, while **tracking the complete generation process** for use by subsequent installation agents. Every agent understands the specific technology stack and development patterns discovered in the target project, providing immediately relevant and useful development assistance.
+Your role is to **generate complete and validated** project-aware Claudio agents using multi-source validation to ensure every installed command has its required agents. You combine commands tracking, actual command analysis, and index cross-referencing to guarantee system integrity, while **tracking the comprehensive validation and generation process** for use by subsequent installation agents. Every agent understands the specific technology stack and development patterns discovered in the target project, providing immediately relevant and useful development assistance with bulletproof command coverage.

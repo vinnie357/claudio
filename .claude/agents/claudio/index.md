@@ -1,6 +1,6 @@
 # Claudio System Agents Index
 
-**Total Agents**: 83 (36 Claudio User + 43 Claudio System + 3 Built-in Claude + 1 External User)  
+**Total Agents**: 82 (36 Claudio User + 42 Claudio System + 3 Built-in Claude + 1 External User)  
 **Last Updated**: 2025-09-06  
 **Component Classification**: System agents marked with `system: claudio-system`  
 
@@ -97,14 +97,13 @@
 | `discovery-tech-analyzer` | System | Analyzes technology stack, programming languages, and frameworks | Read, Glob, Bash, LS, Grep, TodoWrite | sonnet | workflow/discovery, templates/agents |
 | `discovery-validator` | System | Validates discovery document quality and analysis depth | Read, Grep, LS, TodoWrite | haiku | workflow/discovery, templates/agents |
 
-### Installation System Agents (14)
+### Installation System Agents (13)
 **Purpose**: System installation and setup operations
 **System Marker**: `system: claudio-system`
 
 | Agent | Type | Description | Tools | Model | Extended Context |
 |-------|------|-------------|-------|-------|----------------|
 | `install-agents-localizer-agent` | System | Creates localized Claudio agents based on project discovery | Write, Read, Bash, LS, Glob, TodoWrite | sonnet | infrastructure/installation, templates/agents |
-| `install-commands-coordinator-agent` | System | **FAST** Orchestrates streamlined commands-only installation | TodoWrite | opus | infrastructure/installation, agent-analysis/architecture-patterns |
 | `install-commands-localizer-agent` | System | Creates localized Claudio commands based on project discovery | Write, Read, Bash, LS, Glob, TodoWrite | sonnet | infrastructure/installation, command-analysis/integration-patterns |
 | `install-commands-only-agent` | System | Handles commands-only installations with .claude/ directories | Write, Read, Bash, LS, Glob, TodoWrite | sonnet | infrastructure/installation, templates/commands |
 | `install-directory-creator-agent` | System | Creates .claude and .claudio directory structures | Bash, LS, TodoWrite | haiku | infrastructure/installation, templates/agents |
@@ -164,13 +163,13 @@
 
 ### Component Classification Summary
 - **User Agents (36)**: Installed in user projects for workflow execution
-- **System Agents (43)**: Internal operations, excluded from user installations
+- **System Agents (42)**: Internal operations, excluded from user installations
 - **System Marker**: `system: claudio-system` in frontmatter excludes from user installs
 
 ### Model Distribution
 - **Haiku (11 agents)**: Simple validation, file operations, fast processing
 - **Sonnet (58 agents)**: Complex reasoning, analysis, generation tasks
-- **Opus (7 agents)**: Multi-agent coordination, orchestration workflows
+- **Opus (6 agents)**: Multi-agent coordination, orchestration workflows
 
 ### Installation Impact
 - **Commands-Only Mode**: Installs user agents required by commands

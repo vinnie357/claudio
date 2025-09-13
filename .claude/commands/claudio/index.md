@@ -24,7 +24,7 @@
 | Command | Type | Description | Arguments | Agent |
 |---------|------|-------------|-----------|-------|
 | `install` | System | Install Claudio system with project integration | `[target_path] [mode]` | install-path-validator-agent, install-directory-creator-agent, discovery analyzers (4), install-commands-localizer-agent, install-agents-localizer-agent, install-extended-context-generator-agent, claude-md-generator-agent, install-validator |
-| `install-commands` | System | Install commands-only version | `[target_path]` | install-commands-coordinator-agent |
+| `install-commands` | System | Install commands-only version | `[target_path]` | discovery-agent, install-system-installer, install-validator, install-summary-agent |
 | `upgrade` | System | Parallel upgrade system using 7 specialized subagents | `[target_path] [--check\|--force]` | upgrade-discovery-analyzer, upgrade-legacy-cleaner, upgrade-template-analyzer, upgrade-backup-manager, security-review-coordinator, generation-tracking-validator, upgrade-installation-validator |
 | `test` | System | Execute project test suite with intelligent analysis and optional fixes | `[test_pattern] [--fix]` | project-test-runner |
 | `generate-test-commands` | System | Generate project-specific test commands | `[target_path]` | test-command-generator |
@@ -90,6 +90,7 @@
 **Proven pattern for performance and reliability** (no coordinator agents):
 - `claudio` - 20+ conditional agents with smart workflow
 - `install` - 14 agents with mixed parallel/sequential execution
+- `install-commands` - 4 agents with streamlined workflow
 - `upgrade` - 7 agents in parallel batches
 - `update-docs` - 3 parallel agents (system)
 - `security-review` - 1 agent with internal coordination
@@ -97,11 +98,10 @@
 - `new-command` - 3 parallel agents
 - `implement` - 1 agent
 
-### Remaining Coordinator Pattern Commands  
+### Remaining Coordinator Pattern Commands
 **Specialized requirements** (maintain coordinator pattern):
 - `documentation` → documentation-coordinator (4 parallel sub-agents)
 - `claude-sdk` → claudio-claude-sdk-architect (sequential analysis)
-- `install-commands` → install-commands-coordinator-agent (streamlined)
 
 ## Usage Examples
 

@@ -47,10 +47,18 @@ Use TodoWrite to start Phase 1 - Project Analysis.
    - **Elixir Projects**: Check for AGENTS.md or usage-rules.md files
    - **Usage Rules Processing**: Extract AI-specific guidance from discovered AGENTS.md files
 
-2. **Agent Inventory Analysis**:
-   - Scan `.claude/agents/claudio/` for available agents
-   - Categorize agents by workflow, analysis, and specialization
+2. **Read Installed Agents**:
+   - Load `{project_path}/.claudio/shared/agents_tracking.json`
+   - Extract list of installed user agents (exclude system agents)
+   - Verify agent files exist in `.claude/agents/claudio/` directory
+   - Categorize agents by their purpose and specialization
+
+3. **Agent Inventory Analysis**:
+   - Parse the agents_tracking.json data to categorize agents
+   - Only include agents that are actually installed in the project (no system agents)
+   - Group agents by workflow, analysis, and specialization
    - Identify project-specific agents (e.g., test runners)
+   - **User Agents Only**: List only user project agents that are installed, not Claudio system agents
 
 Use TodoWrite to complete Phase 1 - Project Analysis.
 
@@ -81,26 +89,24 @@ Use TodoWrite to complete Phase 2 - AI Context Generation.
 
 ## Available Agents
 
-### Workflow Agents
-- **discovery-agent**: [Project-specific discovery capabilities]
-- **prd-agent**: [Requirements generation with domain focus]
-- **plan-agent**: [Implementation planning for technology stack]
-- **task-agent**: [Task breakdown with project patterns]
+### Available Agents
+[List only agents found in {project_path}/.claudio/shared/agents_tracking.json]
 
-### Specialized Analysis Agents
-- **code-quality-analyzer**: [Technology-specific quality patterns]
-- **security-review-coordinator**: [Domain security requirements]
-- **design-analyzer**: [UI/UX patterns for project type]
+**Note**: This section should be populated based on the actual installed agents from agents_tracking.json, categorized by their purpose:
+- **Workflow Agents**: Core development workflow agents (discovery, prd, plan, task)
+- **Analysis Agents**: Code quality, security review, design analysis agents
+- **Development Agents**: Implementation, testing, and specialized development agents
+- **Documentation Agents**: Documentation generation and maintenance agents
+- **Project-Specific Agents**: Custom agents created for this specific project
 
-### Project-Specific Agents
-- **[project]-test-runner**: [Custom test execution for detected frameworks]
-- **[project]-test-gemini**: [AI-enhanced testing for project domain]
+**Agent Descriptions**: Each agent should include its project-specific capabilities based on the technology stack and domain discovered during project analysis.
 
 ## Extended Context Structure
-- **workflow/**: Core development patterns for [technology stack]
-- **development/**: Code quality, testing, and design patterns
-- **research/**: [Domain] knowledge and best practices
-- **infrastructure/**: [Deployment platform] and architecture patterns
+- **workflow/**: Discovery analysis, requirements definition, implementation planning, task breakdown
+- **development/**: Code quality patterns, security frameworks, testing strategies
+- **documentation/**: Generation templates and structured documentation patterns
+- **research/**: Research methodology for [domain-specific] investigation
+- **templates/**: Agent architecture and workflow integration patterns
 
 ## AI Assistant Guidance
 
@@ -139,11 +145,16 @@ When AI-focused CLAUDE.md generation is complete, signal to the coordinator:
 - **Unknown Technologies**: Create generic CLAUDE.md with basic agent listings
 
 ## Anti-Fabrication Requirements:
-- **Factual Basis Only**: Base all content on actual discovery document analysis
+- **Factual Basis Only**: Base all content on actual discovery document analysis using Read tool execution
+- **File Validation**: Use Read or LS tools to verify file existence before referencing in CLAUDE.md
+- **Agent Verification**: Only list agents that are tracked in {project_path}/.claudio/shared/agents_tracking.json (installed user agents)
 - **No Fabricated Metrics**: NEVER include performance targets, success metrics, or business impact numbers unless explicitly found in discovery documentation
-- **Uncertain Information**: Mark any uncertain or assumed information as "requires analysis"
+- **No Time Estimates**: Never provide implementation timelines, effort estimates, or completion schedules without actual measurement
+- **Technology Verification**: Only claim framework/technology presence after actual detection through tool analysis
+- **Uncertain Information**: Mark any uncertain or assumed information as "requires analysis" or "needs validation"
 - **Discovery Validation**: All project characteristics must be sourced from {project_path}/.claudio/docs/discovery.md
-- **No Speculation**: Avoid fabricated timelines, performance benchmarks, or business outcomes
+- **Prohibited Language**: Avoid superlatives like "excellent", "comprehensive", "advanced", "optimal" without factual basis
+- **Evidence-Based Claims**: Support all capability statements with specific discovery findings or tool-verified analysis
 
 ## AI Context Requirements:
 - **Line Limit**: Target <100 lines maximum

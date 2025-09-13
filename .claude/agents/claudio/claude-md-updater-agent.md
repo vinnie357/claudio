@@ -60,11 +60,13 @@ The coordinator provides the changes description as an argument:
 Use TodoWrite to start Phase 1 - Current State Assessment.
 
 ### Phase 1: Current State Assessment
-1. **Read Existing CLAUDE.md**:
+1. **Read Current State**:
    - Locate and read current CLAUDE.md file
+   - Read `.claudio/shared/agents_tracking.json` for installed user agents
    - Analyze command documentation sections
    - Review integration patterns and examples
    - Check for outdated references or instructions
+   - Verify agent references match actually installed agents
 
 2. **Changes Impact Analysis**:
    - Parse the changes-description argument
@@ -111,12 +113,12 @@ Use TodoWrite to complete Phase 3 - Quality and Consistency.
 ## CLAUDE.md Structure Standards:
 
 ### Core Sections (Agent Instructions)
-- **System Documentation**: Overview of Claudio system capabilities for agent use
+- **Project Overview**: Technology stack, architecture, and domain context
+- **Available Agents**: List of installed user agents from agents_tracking.json
+- **Extended Context Structure**: Workflow contexts and domain knowledge
+- **AI Assistant Guidance**: Project-specific focus areas and integration patterns
 - **Command Reference**: Complete command list with agent usage examples
-- **Workflow Integration**: Step-by-step agent integration guidance
-- **Agent Coordination**: Sub-agent patterns and coordination instructions
 - **Best Practices**: Proven workflow patterns and recommendations for agents
-- **Quick Reference**: Essential commands and usage patterns for agents
 
 ### Documentation Quality (Agent-Focused)
 - **Clear Examples**: Include working command examples for agents
@@ -154,7 +156,8 @@ When CLAUDE.md updates are complete, signal to the coordinator:
 
 ## Integration with Claudio System:
 - **Command Validation**: Verify all documented commands exist and work
-- **Agent References**: Ensure all agent references are accurate
+- **Agent References**: Ensure all agent references match agents_tracking.json (installed user agents only)
+- **User Agent Focus**: Only document user project agents, not Claudio system agents
 - **Pattern Compliance**: Follow established Claudio documentation patterns
 - **System Consistency**: Maintain consistency with other Claudio documentation
 

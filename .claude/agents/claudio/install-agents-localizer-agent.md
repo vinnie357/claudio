@@ -153,6 +153,7 @@ Use TodoWrite to start Phase 3 - Comprehensive Agent Generation.
      * Framework-aware tool integrations
      * Project domain expertise
      * Architecture-specific patterns
+     * **MANDATORY Anti-Fabrication Requirements section**
    - **Write agent file** to `{project_path}/.claude/agents/claudio/`
    - **Add agent name to agents_generated array when written**
    - Ensure all agents include appropriate technology capabilities
@@ -161,6 +162,7 @@ Use TodoWrite to start Phase 3 - Comprehensive Agent Generation.
 2. **Validate Complete Agent Coverage**:
    - Cross-check that every command's required agents were generated
    - Verify no missing agents that would break command execution
+   - **Validate Anti-Fabrication Integration**: Ensure every generated agent includes the mandatory anti-fabrication requirements section
    - **Report final agent count and coverage status**
 
 3. **Determine Required Context Directories**:
@@ -179,7 +181,24 @@ Use TodoWrite to start Phase 3 - Comprehensive Agent Generation.
    - **Documentation Agents** (documentation-coordinator, etc.): Include API documentation patterns
    - **Utility Agents** (git-commit-message, updater agents): Include project workflow integration
 
-4. **Extended Context Awareness**:
+4. **Mandatory Anti-Fabrication Integration**:
+   **EVERY AGENT GENERATED MUST INCLUDE** the following anti-fabrication section:
+
+   ```markdown
+   ## Anti-Fabrication Requirements
+   - **Factual Basis Only**: Base all outputs on actual tool execution and file analysis
+   - **File Validation**: Use Read, Glob, or LS tools to verify file existence before referencing
+   - **Technology Verification**: Only claim framework/technology presence after actual detection through tool analysis
+   - **No Fabricated Metrics**: NEVER include performance targets, success rates, or business impact numbers without actual measurement
+   - **No Time Estimates**: Never provide implementation timelines or effort estimates without actual analysis
+   - **Uncertain Information**: Mark any uncertain or assumed information as "requires analysis" or "needs validation"
+   - **Prohibited Language**: Avoid superlatives like "excellent", "comprehensive", "advanced", "optimal" without factual basis
+   - **Evidence-Based Claims**: Support all capability statements with specific discovery findings or tool-verified analysis
+   - **Test Validation**: Execute tests before reporting results and mark tasks complete only after actual validation
+   - **Source Attribution**: Reference actual files, tools, or analysis results when making technical claims
+   ```
+
+5. **Extended Context Awareness**:
    - All agents include fallback logic for missing extended context
    - Agents can utilize extended context when available
    - Graceful degradation when extended context doesn't exist yet
@@ -294,6 +313,7 @@ When agent generation and tracking is complete, signal to the coordinator:
 - **Tracking Write Failures**: Ensure tracking JSON is written successfully
 - **Partial Generation**: Ensure either complete success or clean rollback with tracking file cleanup
 - **Validation Failures**: Report any commands that would break due to missing agents
+- **Anti-Fabrication Validation**: Verify every generated agent includes the mandatory anti-fabrication requirements
 - **JSON Validation**: Validate tracking JSON structure and multi-source validation status before finalizing
 
 ## Integration with Install Workflow:
@@ -305,7 +325,7 @@ When agent generation and tracking is complete, signal to the coordinator:
   * **Agent index**: `{project_path}/.claude/agents/claudio/index.md` with complete agent listing
 - **Dependencies**: Requires commands tracking JSON, actual command files, and discovery document
 - **Consumers**: **install-extended-context-generator-agent** reads the enhanced tracking JSON with validation confirmation
-- **Guarantee**: Every installed command will have its required agents available
+- **Guarantee**: Every installed command will have its required agents available, and every generated agent includes mandatory anti-fabrication requirements
 
 ## Critical Integration Point
 

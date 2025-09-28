@@ -1,0 +1,166 @@
+# Task Manager - Sample Elixir Application
+
+A simple task management web application built with Phoenix LiveView for testing the Claudio workflow system.
+
+## Features
+
+- ✅ Add new tasks with real-time updates
+- ✅ Mark tasks as complete/incomplete
+- ✅ Delete tasks
+- ✅ View task statistics (total, completed, pending)
+- ✅ REST API endpoints for external integration
+- ✅ Phoenix LiveView for interactive UI
+- ✅ In-memory task storage with GenServer
+
+## Technology Stack
+
+- **Language**: Elixir 1.14+
+- **Framework**: Phoenix 1.7
+- **Frontend**: Phoenix LiveView with Tailwind CSS
+- **State Management**: GenServer-based in-memory store
+- **Testing**: ExUnit
+- **Build Tools**: Mix, Esbuild, Tailwind
+
+## Architecture
+
+```
+lib/
+├── task_app/
+│   ├── application.ex          # Application supervisor
+│   ├── task.ex                # Task data structure and operations
+│   └── task_store.ex          # GenServer-based state management
+└── task_app_web/
+    ├── controllers/
+    │   └── task_controller.ex  # REST API endpoints
+    ├── live/
+    │   └── task_live/
+    │       └── index.ex        # LiveView for interactive UI
+    ├── endpoint.ex             # Phoenix endpoint configuration
+    └── router.ex              # Route definitions
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Elixir 1.14 or later
+- Erlang/OTP 25 or later
+- Node.js (for asset compilation)
+
+### Installation
+
+```bash
+# Install dependencies
+mix deps.get
+
+# Setup assets
+mix assets.setup
+
+# Run the server
+mix phx.server
+```
+
+The application will be available at `http://localhost:4000`.
+
+### Development
+
+```bash
+# Run tests
+mix test
+
+# Build assets
+mix assets.build
+
+# Interactive Elixir shell with app loaded
+iex -S mix
+```
+
+## API Endpoints
+
+### REST API
+
+- `GET /api/tasks` - List all tasks
+- `POST /api/tasks` - Create a new task
+- `GET /api/tasks/:id` - Get a specific task
+- `PUT /api/tasks/:id/complete` - Mark task as complete
+- `DELETE /api/tasks/:id` - Delete a task
+- `GET /api/stats` - Get task statistics
+
+### Example API Usage
+
+```bash
+# Create a task
+curl -X POST http://localhost:4000/api/tasks \
+  -H "Content-Type: application/json" \
+  -d '{"task": {"title": "Buy groceries"}}'
+
+# List tasks
+curl http://localhost:4000/api/tasks
+
+# Complete a task
+curl -X PUT http://localhost:4000/api/tasks/TASK_ID/complete
+
+# Get statistics
+curl http://localhost:4000/api/stats
+```
+
+## Project Structure for Claudio Testing
+
+This application is designed to test various Claudio workflow capabilities:
+
+### Discovery Analysis Targets
+- **Technology Stack**: Phoenix/Elixir detection
+- **Architecture Patterns**: GenServer state management, LiveView real-time updates
+- **API Design**: RESTful endpoints with JSON responses
+- **Testing Strategy**: ExUnit with async test cases
+
+### Potential Enhancement Features
+- **User Authentication**: Login/registration system
+- **Dark Mode**: Theme switching functionality
+- **Task Categories**: Organize tasks by category
+- **Due Dates**: Add scheduling capabilities
+- **Data Persistence**: Database integration
+- **Real-time Sync**: Multi-user collaboration
+- **Export Features**: CSV/JSON task export
+- **Search & Filter**: Advanced task filtering
+
+### Architectural Decisions
+- **State Management**: In-memory GenServer for simplicity
+- **Real-time Updates**: Phoenix LiveView for reactive UI
+- **API Design**: RESTful endpoints for external integration
+- **Testing**: Comprehensive unit tests for business logic
+
+## Testing Commands
+
+```bash
+# Run all tests
+mix test
+
+# Run tests with coverage
+mix test --cover
+
+# Run specific test file
+mix test test/task_app/task_test.exs
+
+# Run tests in watch mode (with entr or similar)
+find . -name "*.ex*" | entr -c mix test
+```
+
+## Potential Issues & Solutions
+
+### Common Development Challenges
+- **Port conflicts**: Change port in `config/dev.exs`
+- **Asset compilation**: Ensure Node.js is installed
+- **LiveView socket errors**: Check browser console for WebSocket issues
+- **GenServer crashes**: Monitor error logs for state management issues
+
+### Production Considerations
+- Add database for persistence
+- Implement proper error handling
+- Add input validation and sanitization
+- Configure proper logging and monitoring
+- Add rate limiting for API endpoints
+
+---
+
+This sample application provides a realistic codebase for testing Claudio's discovery, analysis, and planning capabilities across multiple domains including backend architecture, frontend development, API design, and testing strategies.

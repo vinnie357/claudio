@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable]" id="app-root">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title suffix=" · Phoenix Framework">
+      <%= assigns[:page_title] || "Task App" %>
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+    <script>
+      // Enhanced theme switching functionality
+      window.themeManager = {
+        // Theme state
+        currentTheme: null,
+        transitionsEnabled: true,
+        
+        // Initialize theme system
+        init() {
+          this.initializeTheme();
+          this.setupSystemPreferenceListener();
+          this.setupEventListeners();
+        },
+
+        // Initialize theme on page load
+        initializeTheme() {
+          const savedTheme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const shouldUseDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+          
+          this.currentTheme = shouldUseDark ? 'dark' : 'light';
+          this.applyTheme(this.currentTheme, false);
+        },
+
+        // Apply theme with optional transition control
+        applyTheme(theme, withTransition = true) {
+          const html = document.documentElement;
+          
+          if (theme === 'dark') {
+            html.classList.add('dark');
+          } else {
+            html.classList.remove('dark');
+          }
+          
+          // Store preference
+          localStorage.setItem('theme', theme);
+          this.currentTheme = theme;
+          
+          // Manage transitions
+          if (!withTransition || !this.transitionsEnabled) {
+            this.disableTransitionsTemporarily();
+          }
+        },
+
+        // Temporarily disable transitions for instant theme switching
+        disableTransitionsTemporarily() {
+          const css = document.createElement('style');
+          css.type = 'text/css';
+          css.appendChild(document.createTextNode(
+            `* {
+               -webkit-transition: none !important;
+               -moz-transition: none !important;
+               -o-transition: none !important;
+               -ms-transition: none !important;
+               transition: none !important;
+            }`
+          ));
+          document.head.appendChild(css);
+          
+          // Re-enable transitions after a short delay
+          setTimeout(() => {
+            document.head.removeChild(css);
+          }, 50);
+        },
+
+        // Setup system preference change listener
+        setupSystemPreferenceListener() {
+          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+          
+          mediaQuery.addListener((e) => {
+            // Only auto-switch if user hasn't manually set a preference
+            if (!localStorage.getItem('theme')) {
+              const newTheme = e.matches ? 'dark' : 'light';
+              this.applyTheme(newTheme);
+              
+              // Notify LiveView of the change
+              if (window.liveSocket && window.liveSocket.isConnected()) {
+                this.notifyLiveView(newTheme === 'dark');
+              }
+            }
+          });
+        },
+
+        // Setup Phoenix LiveView event listeners
+        setupEventListeners() {
+          // Listen for theme updates from LiveView
+          window.addEventListener('phx:update_theme', (e) => {
+            const { dark_mode, persist, transition } = e.detail;
+            const newTheme = dark_mode ? 'dark' : 'light';
+            
+            if (persist !== false) {
+              this.applyTheme(newTheme, transition);
+            } else {
+              // Just apply without persistence (for temporary changes)
+              this.currentTheme = newTheme;
+              if (newTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            }
+          });
+
+          // Listen for transition toggle events
+          window.addEventListener('phx:update_transitions', (e) => {
+            this.transitionsEnabled = e.detail.enabled;
+          });
+        },
+
+        // Notify LiveView of theme changes
+        notifyLiveView(isDark) {
+          if (window.liveSocket && window.liveSocket.isConnected()) {
+            // Find the live view element and push event
+            const liveViewElement = document.querySelector('[data-phx-main]');
+            if (liveViewElement && liveViewElement._liveView) {
+              liveViewElement._liveView.pushEvent('client_theme_change', {
+                dark_mode: isDark
+              });
+            }
+          }
+        },
+
+        // Utility methods
+        getCurrentTheme() {
+          return this.currentTheme;
+        },
+
+        toggleTheme() {
+          const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+          this.applyTheme(newTheme);
+          this.notifyLiveView(newTheme === 'dark');
+        },
+
+        // For debugging
+        debug() {
+          return {
+            currentTheme: this.currentTheme,
+            transitionsEnabled: this.transitionsEnabled,
+            savedTheme: localStorage.getItem('theme'),
+            systemPrefersDark: window.matchMedia('(prefers-color-scheme: dark)').matches
+          };
+        }
+      };
+
+      // Initialize when DOM is ready
+      document.addEventListener('DOMContentLoaded', () => {
+        window.themeManager.init();
+      });
+
+      // Also initialize immediately if DOM is already ready
+      if (document.readyState !== 'loading') {
+        window.themeManager.init();
+      }
+
+      // Expose theme manager globally for debugging
+      window.theme = window.themeManager;
+    </script>
+    
+    <!-- Performance optimization: Prevent flash of unstyled content -->
+    <style>
+      /* Prevent flash during theme initialization */
+      .theme-loading * {
+        transition: none !important;
+      }
+      
+      /* Smooth scrollbar color transitions */
+      ::-webkit-scrollbar {
+        transition: background-color 0.2s ease;
+      }
+      
+      ::-webkit-scrollbar-track {
+        transition: background-color 0.2s ease;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        transition: background-color 0.2s ease;
+      }
+      
+      /* Dark mode scrollbar */
+      .dark ::-webkit-scrollbar {
+        background-color: #1f2937;
+      }
+      
+      .dark ::-webkit-scrollbar-track {
+        background-color: #111827;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb {
+        background-color: #374151;
+      }
+      
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background-color: #4b5563;
+      }
+    </style>
+  </head>
+  <body class="bg-white dark:bg-gray-900 antialiased transition-colors duration-200">
+    <%= @inner_content %>
+  </body>
+</html>

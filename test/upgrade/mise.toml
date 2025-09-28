@@ -1,0 +1,13 @@
+# Upgrade Test Project
+# Test project for Claudio upgrade workflow
+
+[tools]
+# No specific tools required for this test project
+
+[tasks.check]
+description = "Check project structure"
+run = [
+  "echo 'Checking upgrade test structure...'",
+  "test -f README.md",
+  "echo 'Project structure validated'",
+]

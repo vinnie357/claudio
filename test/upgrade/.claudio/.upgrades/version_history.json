@@ -1,0 +1,50 @@
+{
+  "version_history": [
+    {
+      "timestamp": "2025-08-12T01:13:45Z",
+      "version": "upgraded-2025-08-12T01-13-45",
+      "upgrade_type": "full",
+      "previous_version": "initial",
+      "backup_location": "backups/2025-08-12T01-13-45-full-upgrade/",
+      "changelog": "changelogs/2025-08-12T01-13-45-upgrade-complete.md",
+      "rollback_script": "rollback_scripts/2025-08-12T01-13-45-rollback.sh",
+      "status": "completed",
+      "components_updated": [
+        "discovery command",
+        "discovery agent",
+        "extended context (workflow/discovery)",
+        "legacy cleanup",
+        "TaskFlow localization"
+      ],
+      "upgrade_notes": "Initial upgrade with parallel batch execution, 3x performance improvement"
+    },
+    {
+      "timestamp": "2025-08-24T01:07:28Z",
+      "version": "backup-management-2025-08-24T01-07-28",
+      "upgrade_type": "backup_system_implementation",
+      "previous_version": "upgraded-2025-08-12T01-13-45",
+      "backup_location": "backups/2025-08-24T01-07-28-full-upgrade/",
+      "changelog": "changelogs/2025-08-24T01-07-28-backup-system.md",
+      "rollback_script": "rollback_scripts/2025-08-24T01-07-28-rollback.sh",
+      "status": "completed",
+      "components_updated": [
+        "backup management system",
+        "version history tracking",
+        "changelog generation",
+        "rollback script automation"
+      ],
+      "upgrade_notes": "Implementation of comprehensive backup and version management system with enterprise-grade safety features"
+    }
+  ],
+  "retention_policy": {
+    "max_versions": 10,
+    "max_age_days": 90,
+    "cleanup_strategy": "oldest_first"
+  },
+  "system_metadata": {
+    "created": "2025-08-24T01:07:28Z",
+    "last_updated": "2025-08-24T01:07:28Z",
+    "total_upgrades": 2,
+    "system_path": "/Users/vinnie/github/claudio/test/upgrade"
+  }
+}

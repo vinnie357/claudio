@@ -1,0 +1,49 @@
+{
+  "allowedCommands": [
+    "mix",
+    "mix deps.get",
+    "mix deps.compile", 
+    "mix compile",
+    "mix test",
+    "mix test.watch",
+    "mix phx.server",
+    "mix phx.gen.*",
+    "mix ecto.*",
+    "mix format",
+    "mix credo",
+    "mix credo --strict",
+    "mix dialyzer",
+    "mix clean",
+    "mix deps.clean",
+    "mix deps.update",
+    "mix hex.*",
+    "mix phx.new",
+    "mix phx.digest",
+    "mix release",
+    "mix coveralls",
+    "mix coveralls.html",
+    "mix coveralls.json",
+    "mix sobelow",
+    "mix gettext.extract",
+    "mix gettext.merge",
+    "iex",
+    "iex -S mix",
+    "iex -S mix phx.server",
+    "elixir",
+    "elixir -S mix",
+    "erl"
+  ],
+  "allowedCommandPatterns": [
+    "^mix [a-zA-Z0-9._-]+$",
+    "^mix [a-zA-Z0-9._-]+ --[a-zA-Z0-9-]+(=[a-zA-Z0-9._/-]*)?$",
+    "^iex -S mix [a-zA-Z0-9._-]+$",
+    "^elixir -S mix [a-zA-Z0-9._-]+$"
+  ],
+  "environment": {
+    "MIX_ENV": "dev",
+    "PHX_SERVER": "true",
+    "ELIXIR_ERL_OPTIONS": "+fnu"
+  },
+  "workingDirectory": "/Users/vinnie/github/claudio/test/claudio-agents",
+  "description": "Phoenix LiveView Task Management Application - Elixir development environment with full mix command support"
+}

@@ -1,0 +1,48 @@
+# Elixir/Phoenix specific
+_build/
+deps/
+*.ez
+*.beam
+*.plt
+*.lock
+erl_crash.dump
+
+# Phoenix specific
+priv/static/assets/
+priv/static/cache_manifest.json
+
+# Node.js (for assets)
+assets/node_modules/
+assets/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Development files
+.elixir_ls/
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test artifacts
+cover/
+doc/
+.dialyzer_plt
+.dialyzer_core_plt
+
+# Runtime files
+*.pid
+*.log
+.env
+.env.local
+
+# Claudio workflow outputs (optional - you may want to track these)
+# .claudio/

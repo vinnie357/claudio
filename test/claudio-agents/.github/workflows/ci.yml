@@ -1,0 +1,138 @@
+name: TaskApp CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  MIX_ENV: test
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        elixir: ['1.15.7', '1.16.2']
+        otp: ['25.3', '26.2']
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Elixir and Erlang
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: ${{ matrix.elixir }}
+        otp-version: ${{ matrix.otp }}
+
+    - name: Cache dependencies
+      id: cache-deps
+      uses: actions/cache@v3
+      with:
+        path: |
+          deps
+          _build
+        key: deps-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('**/mix.lock') }}
+        restore-keys: |
+          deps-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}
+
+    - name: Install dependencies
+      run: mix deps.get
+
+    - name: Compile dependencies
+      run: mix deps.compile
+
+    - name: Compile application
+      run: mix compile --warnings-as-errors
+
+    - name: Check code formatting
+      run: mix format --check-formatted
+
+    - name: Run Credo for code analysis
+      run: mix credo --strict
+
+    - name: Run tests with coverage
+      run: mix test --cover
+
+    - name: Generate coverage report
+      run: mix coveralls.html
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./cover/excoveralls.json
+        fail_ci_if_error: false
+
+  dialyzer:
+    name: Static Analysis (Dialyzer)
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Elixir and Erlang
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: '1.16.2'
+        otp-version: '26.2'
+
+    - name: Cache PLT files
+      id: cache-plt
+      uses: actions/cache@v3
+      with:
+        path: priv/plts
+        key: plt-${{ runner.os }}-${{ hashFiles('**/mix.lock') }}
+        restore-keys: |
+          plt-${{ runner.os }}
+
+    - name: Install dependencies
+      run: mix deps.get
+
+    - name: Run Dialyzer
+      run: mix dialyzer
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Elixir and Erlang
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: '1.16.2'
+        otp-version: '26.2'
+
+    - name: Install dependencies
+      run: mix deps.get
+
+    - name: Check for unused dependencies
+      run: mix deps.unlock --check-unused
+
+    - name: Audit dependencies
+      run: mix deps.audit
+
+  performance:
+    name: Performance Tests
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Elixir and Erlang
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: '1.16.2'
+        otp-version: '26.2'
+
+    - name: Install dependencies
+      run: mix deps.get
+
+    - name: Run performance tests
+      run: |
+        mix test test/task_app/task_store_integration_test.exs --only performance
+        mix test test/task_app_web/controllers/task_controller_test.exs --only performance

@@ -1,291 +1,399 @@
-# Claudio System Documentation
+# Claudio Agent Control Specifications
 
-Claudio is a comprehensive project analysis and planning system that transforms any codebase into an organized, trackable development process. This system orchestrates discovery, requirements, planning, and task organization through specialized AI agents.
+## Navigation
+- **Agent Index**: `.claude/agents/claudio/index.md` - Complete agent catalog
+- **Command Index**: `.claude/commands/index.md` - Command specifications
+- **Extended Context**: `.claude/agents/claudio/extended_context/` - Workflow contexts
+- **Research Documents**: `.claudio/research/` - Project analysis
+- **System Documentation**: `docs/` - Technical details
+- **Templates**: `.claude/agents/claudio/extended_context/meta/claude/commands/templates/` - Exact formatting templates
 
-## System Overview
+## Documentation Structure
 
-Claudio provides both individual commands for specific tasks and a comprehensive workflow that creates complete project roadmaps. The system consists of specialized agent prompts and corresponding commands that work together to analyze projects and generate actionable implementation plans.
+### Core Documentation
+- **Usage Guide**: `docs/usage-guide.md` - Complete command reference, workflow examples, and practical usage patterns
+- **System Architecture**: `docs/system-architecture.md` - Extended context structure, agent integration, and technical implementation details
+- **Specialized Features**: `docs/specialized-features.md` - Research system, Claude SDK capabilities, and advanced features
+- **Best Practices**: `docs/best-practices.md` - Development workflows, context management, and integration guidance
+- **Changelog Management**: `docs/changelog-management.md` - Maintenance protocol and update procedures
 
-## Core Components
+### Extended Context Reference
+- **Command Development**: `.claude/agents/claudio/extended_context/meta/claude/commands/templates/command-development-template.md`
+- **Agent Architecture**: `.claude/agents/claudio/extended_context/agent-analysis/architecture-patterns.md`
+- **Integration Patterns**: `.claude/agents/claudio/extended_context/command-analysis/integration-patterns.md`
+- **Sub-agent Coordination**: `.claude/agents/claudio/extended_context/meta/claude/commands/templates/subagent-invocation-patterns.md`
+- **Discovery Workflows**: `.claude/agents/claudio/extended_context/workflow/discovery/overview.md`
 
-### Agent Prompts (`prompts/`)
-Specialized AI agent contexts that define expertise and behavior:
+## Critical Execution Patterns
 
-- **`prompts/research/claude.md`**: Research agent for topic-specific expert prompts
-- **`prompts/discovery/claude.md`**: Project discovery and technology analysis
-- **`prompts/documentation/claude.md`**: Documentation generation and standards
-- **`prompts/prd/claude.md`**: Product Requirements Document creation
-- **`prompts/plan/claude.md`**: Implementation planning with time estimates
-- **`prompts/task/claude.md`**: Task breakdown and context creation
-- **`prompts/claudio/claude.md`**: Master orchestration agent
-
-### Commands (`.claude/commands/`)
-Executable commands that leverage the agent prompts:
-
-- **`/research`**: Generate specialized research on topics
-- **`/discovery`**: Analyze project structure and capabilities
-- **`/documentation`**: Create comprehensive project documentation
-- **`/prd`**: Generate Product Requirements Documents
-- **`/plan`**: Create detailed implementation plans
-- **`/task`**: Break down plans into executable tasks
-- **`/claudio`**: Complete project analysis workflow
-
-## Usage Patterns
-
-### Standalone Commands
-Commands can be used individually for specific tasks:
-
-```bash
-# Research a specific topic
-/research development docker-nodejs
-
-# Analyze a project's structure
-/discovery ./my-project
-
-# Generate documentation
-/documentation readme ./my-project
-
-# Create a PRD for a feature
-/prd feature user-authentication
-
-# Plan implementation
-/plan project user-management-system "12 weeks"
-
-# Break down plan into tasks
-/task plan/documents/user_auth_implementation_plan.md
+### Task Invocation
+```
+Task with subagent_type: "agent-name" - pass arguments
 ```
 
-### Comprehensive Claudio Workflow
-The master command orchestrates all agents for complete analysis:
-
-```bash
-# Analyze any project and create complete roadmap
-/claudio ../my-react-app
+### Parallel Execution
+```
+Run multiple Task invocations in a SINGLE message
 ```
 
-**What this means**: When a user says "use claudio on ../my-project", they want you to:
-
-1. **Analyze the target project** at the specified path (../my-project)
-2. **Run the complete Claudio workflow** using the `/claudio` command
-3. **Generate a comprehensive `.claudio/` folder** inside the target project
-4. **Create actionable project roadmap** with discovery, requirements, planning, and tasks
-
-This creates a `.claudio/` folder inside the target project with:
-- Complete project analysis and technology assessment
-- Business requirements and success criteria
-- Phased implementation plan with time estimates
-- Task breakdown with specialized agent contexts
-- Progress tracking and status management system
-
-## Output Locations
-
-### Standalone Command Output
-- **Research**: `research/<category>/<topic>.md`
-- **Discovery**: `discovery/reports/<project_name>_discovery.md`
-- **Documentation**: `docs/` directory
-- **PRD**: `prd/documents/<project_name>_prd.md`
-- **Plan**: `plan/documents/<project_name>_implementation_plan.md`
-- **Task**: Current working directory structure
-
-### Claudio Workflow Output
-All outputs are organized in the target project's `.claudio/` folder:
-
+### TodoWrite Integration
 ```
-target_project/
-└── .claudio/
-    ├── summary.md              # Executive overview
-    ├── discovery.md            # Technology analysis
-    ├── prd.md                  # Requirements document
-    ├── plan.md                 # Implementation plan
-    ├── status.md               # Progress tracking
-    ├── research/               # Topic research
-    │   └── <category>/
-    │       └── <topic>.md
-    ├── docs/                   # Generated documentation
-    │   ├── readme.md
-    │   ├── api.md
-    │   └── user_guide.md
-    ├── phase1/                 # Implementation phases
-    │   ├── tasks.md
-    │   ├── task1/
-    │   │   ├── claude.md      # Task-specific context
-    │   │   └── status.md      # Task progress
-    │   └── phase_status.md
-    └── shared/                 # Common resources
-        ├── standards/
-        └── utilities/
+Use TodoWrite to start Phase N - Phase Name
+[Task execution steps]
+Use TodoWrite to complete Phase N - Phase Name
 ```
 
-## Agent Integration
+### Naming Convention
+**ALWAYS lowercase-hyphen**: `agent-name`, `command-name` (NOT `agent_name`)
 
-### Context References
-Agents reference each other's contexts when needed:
+## System Architecture
 
-- **PRD Agent** can reference `prompts/documentation/claude.md` for documentation standards
-- **Claudio Agent** orchestrates all other agents through their prompt contexts
-- **Task Agent** creates specialized contexts that reference phase-level coordination
+### Commands → Agents → Extended Context
+- `/claudio:discovery` → `discovery-agent` → `extended_context/workflow/discovery/`
+- `/claudio:prd` → `prd-agent` → `extended_context/workflow/prd/`
+- `/claudio:plan` → `plan-agent` → `extended_context/workflow/planning/`
+- `/claudio:task` → `task-agent` → `extended_context/workflow/task/`
+- `/claudio:claudio` → `claudio-coordinator-agent` → Multiple contexts
+- `/claudio:research` → `research-specialist` → `extended_context/research/`
+- `/claudio:code-quality` → `code-quality-analyzer` → `extended_context/development/quality/`
+- `/claudio:security-review` → `security-review-coordinator` → Security contexts
+- `/claudio:test` → `project-test-runner` → Testing contexts
 
-### Data Flow
-1. **Discovery** → analyzes project structure and capabilities
-2. **PRD** → transforms discovery into requirements (uses discovery output)
-3. **Plan** → converts requirements into implementation plan (uses PRD output)
-4. **Task** → breaks plan into executable tasks (uses plan output)
-5. **Documentation** → can be generated at any stage based on project analysis
+### Extended Context Structure
+- `extended_context/workflow/` - Core workflow contexts
+- `extended_context/development/` - Development contexts
+- `extended_context/infrastructure/` - System contexts
+- `extended_context/documentation/` - Documentation contexts
+- `extended_context/research/` - Research contexts
 
-## Specialized Features
+## Component Classification
 
-### Research System
-- Generates topic-specific expert agent prompts
-- Organizes research by category and topic
-- Integrates with Claudio workflow for project-specific research
-- Creates specialized troubleshooting and example content
+### System vs User Component Filtering
 
-### Progress Tracking
-- Project-level status dashboard
-- Phase-level progress monitoring
-- Individual task status tracking
-- Milestone and dependency management
+**Installation Rule**: Check frontmatter `system: claudio-system` field to distinguish between system maintenance components and user project components.
 
-### Context Management
-- **Simple phases (≤2 tasks)**: Single phase context
-- **Complex phases (>2 tasks)**: Phase context + individual task contexts
-- **Shared resources**: Common utilities and standards
-- **Cross-references**: Proper linking between contexts
+**Component Categories:**
+- **System components**: Tagged with `system: claudio-system` - used for Claudio framework maintenance, excluded from user installations
+- **User components**: No system tag - designed for user projects, included in standard installations
 
-## Example Workflows
-
-### New Project Analysis
-```bash
-# Complete analysis of existing project
-/claudio ../existing-app
-
-# Results in ../existing-app/.claudio/ with:
-# - Technology stack analysis
-# - Improvement recommendations
-# - Implementation roadmap
-# - Task breakdown with contexts
-```
-
-### Understanding User Intent
-When a user says **"use claudio on ../my-project"**, they are requesting:
-
-1. **Execute**: `/claudio ../my-project`
-2. **Expected Result**: A complete `.claudio/` folder created inside `../my-project/`
-3. **Deliverables**: 
-   - Project discovery and analysis
-   - Requirements documentation (PRD)
-   - Implementation plan with phases and time estimates
-   - Task breakdown with execution contexts
-   - Progress tracking system
-   - Research topics relevant to the project
-   - Documentation templates and guides
-
-The user wants a **comprehensive project transformation** from an existing codebase into an organized, trackable development process with clear next steps.
-
-### Feature Development
-```bash
-# Research the technology
-/research frontend react-hooks
-
-# Create requirements
-/prd feature real-time-chat
-
-# Plan implementation  
-/plan feature real-time-chat "6 weeks"
-
-# Break into tasks
-/task plan/documents/real-time-chat_implementation_plan.md
-```
-
-### Documentation Generation
-```bash
-# Generate complete documentation suite
-/documentation full ./my-api
-
-# Or specific documentation types
-/documentation api ./my-api
-/documentation user ./my-frontend
-```
-
-## Best Practices
-
-### Using Individual Commands
-- Use for specific, focused tasks
-- Good for iterative development and refinement
-- Allows fine-grained control over each step
-
-### Using Claudio Workflow
-- Use for comprehensive project analysis
-- Creates complete, integrated documentation
-- Establishes systematic development approach
-- Provides progress tracking from day one
-
-### Context Management
-- Each agent context is self-contained but aware of others
-- Reference related contexts when integration is needed
-- Maintain consistency across all generated documents
-
-### Progress Tracking
-- Update status files regularly during implementation
-- Use the established milestone and dependency structure
-- Maintain task completion records for project visibility
-
-## Integration with Development Workflow
-
-The Claudio system is designed to integrate with existing development practices:
-
-- **Version Control**: All `.claudio/` content can be committed to git
-- **Team Collaboration**: Shared context enables consistent development approach
-- **Project Management**: Status tracking provides visibility into progress
-- **Documentation**: Generated docs stay synchronized with implementation
-- **Quality Assurance**: Task contexts include testing and review requirements
-
-This system transforms ad-hoc development into systematic, trackable, and collaborative project execution.
-
-## Changelog Management
-
-**IMPORTANT**: Always maintain the changelog when working on the Claudio system.
-
-### Changelog Protocol
-1. **Check Today's Date**: Look for `changelog/YYYY-MM-DD.md` file for today
-2. **If File Exists**: Update the existing changelog with new changes, additions, or modifications
-3. **If File Doesn't Exist**: Create a new changelog file for today with the date format `changelog/YYYY-MM-DD.md`
-4. **Update Frequency**: Update the changelog for ANY changes to:
-   - Agent prompts (`prompts/` directory)
-   - Commands (`.claude/commands/` directory)
-   - System documentation (`README.md`, `CLAUDE.md`)
-   - Project structure or organization
-   - New features or bug fixes
-   - User experience improvements
-
-### Changelog Structure
-Each changelog entry should include:
+**Filtering Logic** (for installation agents):
 ```markdown
-# Changelog - [Month] [Day], [Year]
-
-## Overview
-Brief description of the day's work
-
-## [Section Name] (e.g., Agent Prompts, Commands, Documentation)
-### [Specific Change/Addition]
-- Detailed description of what was changed
-- Why the change was made
-- Impact on users or system functionality
-
-## Updates During Session
-### [Real-time updates as work progresses]
-- Live updates as changes are made
-- Keep this section current throughout the working session
-
-## Next Steps Identified
-- Future improvements or features to implement
+1. Read component file frontmatter using Read tool
+2. Check for `system: claudio-system` field presence
+3. If system tag present, skip during user installations (component is for Claudio system maintenance)
+4. If no system tag, include in user installations (component is for user projects)
+5. Apply filtering during `/claudio:install` operations to prevent system component leakage
 ```
 
-### Example Update Process
-When making any change:
-1. Make the change to the relevant files
-2. Immediately update today's changelog file
-3. Add specific details about what was changed and why
-4. Include any user-facing impact or new capabilities
+**System Component Examples:**
+- `install-path-validator-agent.md` - Internal validation for Claudio installations
+- `upgrade-*-agent.md` - Claudio system upgrade components
+- Framework test and validation agents
 
-This ensures complete traceability of the Claudio system's evolution and helps users understand what features are available and how they've developed over time.
+**User Component Examples:**
+- `discovery-agent.md` - Project analysis for user codebases
+- `prd-agent.md` - Requirements generation for user projects
+- `task-agent.md` - Task breakdown for user development
+
+## Model Assignments
+
+### Agent Model Distribution
+Total agents: 77+ across the Claudio framework
+- **Haiku**: Simple validation, file operations, basic path checking
+- **Sonnet 4**: Complex reasoning, analysis, specialized domain expertise  
+- **Opus 4.1**: Multi-agent coordination, workflow orchestration
+
+**Model Selection Criteria:**
+- **Haiku**: Used for focused, single-purpose operations with minimal complexity
+- **Sonnet 4**: Used for domain-specific analysis requiring reasoning and context understanding
+- **Opus 4.1**: Used for agents that coordinate multiple sub-agents or manage complex workflows
+
+### Model Assignment Implementation
+```yaml
+---
+name: agent-name
+model: haiku    # or sonnet, or opus
+---
+```
+
+## Command Development Standards
+
+**For complete templates with examples, see**: `.claude/agents/claudio/extended_context/meta/claude/commands/templates/command-development-template.md`
+
+### Mandatory Pattern
+```markdown
+---
+description: "Command purpose"
+argument-hint: "[input]"
+---
+
+I am a [purpose] that [description]. My task is to:
+
+1. Setup todo tracking for workflow
+2. Invoke specialized agents using parallel Task calls with proper argument extraction
+3. Read and validate outputs using actual tool execution
+4. Create comprehensive report based on validated data
+
+## Anti-Fabrication Requirements
+- Base all outputs on actual tool execution and file analysis
+- Execute Read, Glob, or validation tools before making claims
+- Mark uncertain information as "requires analysis" or "needs validation"
+- Use factual language without superlatives or unsubstantiated performance claims
+- Never provide time estimates without actual measurement
+
+## Implementation
+
+I will use TodoWrite to track progress, then make parallel Task calls:
+- Task with subagent_type: "agent1" - pass the [argument_type] argument [value] for [purpose]
+- Task with subagent_type: "agent2" - pass the [argument_type] argument [value] for [purpose]
+
+Then read and validate actual outputs using tool execution, and create complete factual report.
+```
+
+### Required Elements
+- **TodoWrite first**: Always setup todo tracking before Task calls
+- **Argument passing**: Include proper argument extraction patterns for sub-agents
+- **Parallel Task calls**: Multiple agents with specific custom arguments
+- **Tool validation**: Use Read, Glob, or other tools to validate claims
+- **Output validation**: Read and validate actual outputs, never assume
+- **Factual reporting**: Base reports only on verified data and tool execution
+- **Complete report**: Centralized result compilation with source attribution
+
+## Anti-Patterns (NEVER USE)
+- Coordinator agents that call other agents
+- Sequential execution when parallel is possible
+- Missing TodoWrite progress tracking
+- Generic arguments or no argument passing without proper extraction patterns
+- Assuming outputs without validation through tool execution
+- Incorrect subagent_type references
+- Inconsistent agent naming (must use lowercase-hyphen)
+- **Anti-Fabrication Violations**:
+  - Fabricating performance metrics or success percentages
+  - Making unsubstantiated claims about system capabilities
+  - Using superlative language ("excellent", "comprehensive", "advanced")
+  - Providing time estimates without measurement or analysis
+  - Claiming file existence without Read or Glob verification
+  - Reporting test results without actual execution
+
+## Critical Requirements
+
+### File Validation (MANDATORY)
+```markdown
+Use Read or LS tools to validate file existence before referencing
+If file does not exist, use research-specialist subagent to create required documentation
+```
+
+
+### Sub-Agent Invocation Patterns
+
+**For detailed patterns and examples, see**: `.claude/agents/claudio/extended_context/meta/claude/commands/templates/subagent-invocation-patterns.md`
+
+**Commands use Task tool pattern:**
+```
+Task with subagent_type: "target-agent" - pass arguments
+```
+
+**Sub-agents use natural language pattern:**
+```
+Use the target-agent-name subagent to [action] [context]
+```
+
+### Anti-Fabrication Rules
+All agents MUST adhere to strict anti-fabrication requirements to ensure factual, measurable outputs.
+
+**Core Principles:**
+- Base all outputs on actual analysis of real project data using tool execution
+- Execute Read, Glob, Bash, or other validation tools before making claims
+- Mark uncertain information as "requires analysis", "needs validation", or "requires investigation"
+- Use precise, factual language without superlatives or unsubstantiated performance claims
+- Execute tests before marking tasks complete and report actual results
+- Validate integration recommendations through actual framework detection using tool analysis
+
+**Prohibited Language and Claims:**
+- **Superlatives**: Avoid "excellent", "comprehensive", "advanced", "optimal", "perfect"
+- **Unsubstantiated Metrics**: Never fabricate percentages, success rates, or performance numbers
+- **Assumed Capabilities**: Don't claim features exist without tool verification
+- **Generic Claims**: Replace vague statements with specific, measurable observations
+- **Fabricated Testing**: Never report test results without actual execution
+
+**Time and Effort Estimation Rule:**
+- Never provide time estimates, effort estimates, or completion timelines without actual measurement or analysis
+- If estimates are requested, execute tools to analyze scope (e.g., count files, measure complexity, assess dependencies) before providing data-backed estimates
+- When estimates cannot be measured, explicitly state "timeline requires analysis of [specific factors]"
+- Avoid fabricated scheduling language like "15 minutes", "2 hours", "quick task" without factual basis
+
+**Validation Requirements:**
+- **File Claims**: Use Read or Glob tools before claiming files exist or contain specific content
+- **System Integration**: Use Bash or appropriate tools to verify system capabilities
+- **Framework Detection**: Execute actual detection logic before claiming framework presence
+- **Test Results**: Only report test outcomes after actual execution with tool verification
+- **Performance Claims**: Base any performance statements on actual measurement or analysis
+
+## Workflow Dependencies
+
+### Sequential vs Parallel Execution Rules
+**Sequential Prerequisites** (must complete before others):
+- Discovery analysis must complete before PRD creation
+- PRD must complete before planning
+- Planning must complete before task breakdown
+
+**Parallel Execution** (after prerequisites):
+- Documentation generation, security analysis, and code quality can run in parallel
+- Multiple analysis agents can execute simultaneously when dependencies are met
+
+**Reference**: `.claude/agents/claudio/extended_context/command-analysis/integration-patterns.md`
+
+## System Reliability Requirements
+
+### Error Handling Pattern
+**When extended_context is missing:**
+- Provide graceful degradation 
+- Use research-specialist subagent fallback for missing documentation
+- Never assume files exist without verification
+
+### Extended Context Integration
+**Template Loading**: Templates are loaded on-demand only when:
+- Creating new commands with `/claudio:new-command`
+- Creating new agents with `/claudio:newprompt`
+- Installing system components with `/claudio:install`
+- Research agents creating missing context
+
+**Memory Efficiency**: Templates are not loaded during normal command execution
+
+## Changelog Maintenance
+
+**When working on Claudio system**, check for `changelog/YYYY-MM-DD.md` and update for changes to:
+- Agent contexts (`extended_context/` directory)
+- Commands (`.claude/commands/` directory)
+- System documentation (`README.md`, `CLAUDE.md`, `docs/` directory)
+
+**Reference**: `docs/changelog-management.md`
+
+## TodoWrite Pattern Requirements
+
+**For detailed templates with exact formatting, see**: `.claude/agents/claudio/extended_context/templates/`
+
+### Template System Reference
+
+**Template Locations:**
+- `.claude/agents/claudio/extended_context/templates/` - Template library
+- `.claude/agents/claudio/extended_context/templates/commands/` - Command development templates
+- `.claude/agents/claudio/extended_context/templates/agents/` - Agent architecture templates
+- `.claude/agents/claudio/extended_context/templates/workflows/` - Workflow integration examples
+- `.claude/agents/claudio/extended_context/templates/integration/` - Agent coordination patterns
+- `.claude/agents/claudio/extended_context/command-analysis/` - Integration patterns
+- `.claude/agents/claudio/extended_context/agent-analysis/` - Architecture patterns
+
+**Available Template Types:**
+- **Command Templates**: `basic-command-template.md`, `orchestrator-command-template.md`, `parallel-execution-template.md`
+- **Agent Templates**: `analysis-agent-template.md`, `orchestrator-agent-template.md`, `specialist-agent-template.md`
+- **Integration Templates**: `command-agent-integration-examples.md`, `agent-coordination-examples.md`
+- **Workflow Templates**: `discovery-workflow-examples.md`, `development-workflow-examples.md`
+
+### Command and Agent Responsibilities
+
+**Commands:**
+- Parse user arguments before starting TodoWrite phases
+- Use TodoWrite for primary workflow control loop
+- Coordinate focused specialized agents
+- Wrap all Task tool calls in TodoWrite phases
+- NEVER reference non-existent subagents
+
+**Agents:**
+- Use TodoWrite for internal multi-step task management
+- Remain focused and specialized in domain expertise
+- Report completion through TodoWrite phase management
+- Validate file existence before referencing documents
+- Use research-specialist subagent to create missing extended_context
+- NEVER reference non-existent sub-agents
+
+## Extended Context Integration Patterns
+
+### Pseudocode Migration Strategy
+**All implementation examples must be moved to extended_context documents**
+
+**Agent Documentation Pattern:**
+```markdown
+Generate outputs using patterns referenced in extended_context/[category]/[specific-templates.md]. 
+Validate file existence before referencing extended_context documents using Read or LS tools. 
+If template files do not exist, use research-specialist subagent to create required documentation.
+```
+
+**Extended Context Structure for Implementation Examples:**
+- `extended_context/installation/` - Installation-related examples and bash commands
+- `extended_context/testing/` - Test command templates and framework patterns  
+- `extended_context/upgrade/` - Upgrade workflow examples and procedures
+- `extended_context/generation/` - Generation templates and prompt patterns
+- `extended_context/documentation/` - Documentation templates and structures
+
+
+### Extended Context Content Standards
+- **Natural Language Focus**: Agent documentation uses natural language only
+- **Implementation Separation**: All code examples, templates, and pseudocode moved to extended_context
+- **Reference Integrity**: Agents reference specific extended_context files with existence validation
+- **Graceful Degradation**: Agents handle missing extended_context with research-specialist fallback
+
+## Critical Sub-Agent Path Handling Protocol
+
+### Universal Argument Extraction Requirement
+ALL sub-agents invoked by commands MUST implement argument extraction logic for proper context isolation and path handling.
+
+**Standard Argument Extraction Instructions** (Add to every sub-agent):
+```markdown
+## Argument Extraction Instructions
+
+When the coordinator invokes you, look for the phrase "pass the [argument_name] argument" followed by a value in your task prompt. Extract this value and use it throughout your operations.
+
+### Common Argument Patterns:
+
+**Project Path Argument:**
+If your prompt contains "pass the project_path argument test/claudio for [purpose]", then:
+- Extract "test/claudio" as your working project path
+- Read discovery from test/claudio/.claudio/docs/discovery.md
+- Create files in test/claudio/.claude/ and test/claudio/.claudio/
+- Work exclusively within the test/claudio directory structure
+
+**Changes Description Argument:**
+If your prompt contains "pass the changes-description argument 'added new features' for [purpose]", then:
+- Extract "added new features" as your change description
+- Use this description to determine what documentation sections need updates
+- Focus updates on areas affected by these specific changes
+
+**Status Reporting:** When you start working, display your extracted arguments in status messages:
+- Format: "⏺ agent-name(Working with: [extracted_argument])"
+- Example: "⏺ claude-md-updater-agent(Updating CLAUDE.md for: added new command patterns)"
+```
+
+### Command Invocation Patterns
+Commands MUST use these exact patterns for all Task invocations:
+
+**Project Path Pattern:**
+```
+Task with subagent_type: "agent-name" - pass the project_path argument [DYNAMIC_PATH] for [purpose]
+```
+
+**Changes Description Pattern:**
+```
+Task with subagent_type: "agent-name" - pass the changes-description argument '[DESCRIPTION]' for [purpose]
+```
+
+**Multiple Arguments Pattern:**
+```
+Task with subagent_type: "agent-name" - pass the project_path argument [PATH] and changes-description argument '[DESCRIPTION]' for [purpose]
+```
+
+### Argument Extraction Implementation
+Sub-agents implement extraction using this pattern:
+1. **Parse Task Prompt**: Look for "pass the [argument] argument [value]" phrases
+2. **Extract Values**: Capture the value following the argument phrase
+3. **Status Display**: Show extracted arguments in status messages
+4. **Context Application**: Use extracted values throughout operations
+5. **Path Validation**: Verify extracted paths exist before operations
+
+### Why This Is Critical
+- Sub-agents receive isolated context (clean slate) without command argument context
+- They only see the Task prompt content, not the invoking command's full context
+- Without extraction logic, agents default to working directory or system paths
+- This causes contamination of main system files and incorrect installations
+- Proper extraction ensures agents work within specified project boundaries
+- Status reporting provides transparency of argument handling to coordinators

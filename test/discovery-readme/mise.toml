@@ -1,0 +1,13 @@
+# Documentation Test Project
+# Simple test project for README discovery
+
+[tools]
+# No specific tools required for this documentation-only project
+
+[tasks.check]
+description = "Check documentation quality"
+run = [
+  "echo 'Checking README.md...'",
+  "test -f README.md",
+  "wc -l README.md",
+]

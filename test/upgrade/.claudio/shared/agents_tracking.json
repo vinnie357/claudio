@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-01-08T05:24:00Z",
+  "project_path": "test/upgrade",
+  "input_source": "commands_tracking.json (not found - determined from existing commands)",
+  "discovery_source": ".claudio/docs/discovery.md",
+  "discovery_drivers": {
+    "technology_stack": ["react-native", "nodejs", "python", "typescript", "postgresql", "mongodb"],
+    "architecture": "microservices",
+    "project_domain": "productivity-app",
+    "mobile_platforms": ["ios", "android"],
+    "ai_integration": "tensorflow",
+    "real_time": "websocket",
+    "project_version": "v2.5"
+  },
+  "agents_generated": [
+    "discovery-agent",
+    "prd-agent", 
+    "plan-agent",
+    "task-agent",
+    "code-quality-analyzer",
+    "taskflow-test-runner",
+    "implement-agent"
+  ],
+  "required_contexts": [
+    "workflow/discovery/",
+    "workflow/prd/", 
+    "workflow/planning/",
+    "workflow/task/",
+    "workflow/implementation/",
+    "development/nodejs/",
+    "development/react-native/",
+    "development/quality/",
+    "development/testing/",
+    "development/security/",
+    "development/ai-ml/"
+  ]
+}

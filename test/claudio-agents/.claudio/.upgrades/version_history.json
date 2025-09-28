@@ -1,0 +1,46 @@
+{
+  "version_history": [
+    {
+      "timestamp": "2025-08-09T23:36:46Z",
+      "version": "legacy-cleanup",
+      "upgrade_type": "cleanup",
+      "previous_version": "initial-installation",
+      "backup_location": "backups/2025-08-09T23-36-46-legacy-cleanup/",
+      "changelog": "changelogs/2025-08-09T23-36-46-cleanup.md",
+      "rollback_script": "rollback_scripts/2025-08-09T23-36-46-legacy-rollback.sh",
+      "status": "completed",
+      "components_updated": ["legacy-pattern-cleanup"],
+      "description": "Legacy cleanup and pattern modernization"
+    },
+    {
+      "timestamp": "2025-08-10T03:40:11Z",
+      "version": "comprehensive-backup-system",
+      "upgrade_type": "backup-infrastructure",
+      "previous_version": "legacy-cleanup",
+      "backup_location": "backups/2025-08-10T03-40-11-comprehensive-backup/",
+      "changelog": "changelogs/2025-08-10T03-40-11-backup-preparation.md",
+      "rollback_script": "rollback_scripts/2025-08-10T03-40-11-comprehensive-rollback.sh",
+      "status": "completed",
+      "components_updated": [
+        "backup-infrastructure",
+        "version-history-system", 
+        "rollback-automation",
+        "integrity-validation",
+        "upgrade-coordination"
+      ],
+      "description": "Complete backup and version management system for safe upgrade operations"
+    }
+  ],
+  "retention_policy": {
+    "max_versions": 10,
+    "cleanup_threshold": 15,
+    "auto_cleanup": true
+  },
+  "system_metadata": {
+    "installation_path": "/Users/vinnie/github/claudio/test/claudio-agents/.claudio",
+    "backup_manager_version": "1.0.0",
+    "last_updated": "2025-08-10T03:40:11Z",
+    "total_backups": 2,
+    "backup_coordinator": "active"
+  }
+}

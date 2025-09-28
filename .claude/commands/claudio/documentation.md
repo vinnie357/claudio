@@ -12,4 +12,4 @@ Analyze a project and generate clear, comprehensive documentation including READ
 - `developer`: Developer setup and architecture guide
 - `full`: Complete documentation suite
 
-Use the claudio:documentation-coordinator subagent to orchestrate parallel documentation creation by specialized sub-agents.
+Task with subagent_type: "documentation-coordinator" - pass the project_path argument to orchestrate parallel documentation creation by specialized sub-agents.

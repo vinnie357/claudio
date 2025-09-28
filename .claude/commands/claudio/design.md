@@ -15,4 +15,4 @@ Analyze existing UX/UI design systems and create comprehensive design specificat
 
 **Design Standards**: material, apple-hig, bootstrap, custom
 
-Use the claudio:design-analyzer subagent to conduct systematic design analysis and create comprehensive design specifications following established design system methodologies.
+Task with subagent_type: "design-analyzer" - pass the project_path argument to conduct systematic design analysis and create comprehensive design specifications following established design system methodologies.

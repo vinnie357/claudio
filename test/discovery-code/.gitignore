@@ -1,0 +1,34 @@
+# Elixir specific
+_build/
+deps/
+*.ez
+*.beam
+*.plt
+erl_crash.dump
+
+# Development files
+.elixir_ls/
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test artifacts
+cover/
+doc/
+.dialyzer_plt
+
+# Runtime files
+*.pid
+*.log
+.env
+
+# Claudio workflow outputs (optional)
+# .claudio/

@@ -1,36 +1,14 @@
 # Claudio
 
-A comprehensive project analysis, planning, and implementation system for Claude Code that transforms any codebase into an organized, trackable development process through intelligent project localization and discovery-based workflows.
+A project analysis and planning system that transforms any codebase into an organized, trackable development process through specialized AI agents and project localization.
 
 ## What is Claudio?
 
 <img src="docs/images/claudio.png" alt="Claudio System" width="600" height="auto">
 
-Claudio is a comprehensive project analysis system built on specialized AI agents that work together to **discover, plan, and implement** project solutions through intelligent localization and parallel workflow execution. The system uses an **agent-based architecture** where specialized agents are **automatically customized for each project** based on comprehensive discovery analysis of technology stack, architecture patterns, and project requirements. 
+Claudio orchestrates discovery, requirements, planning, and task organization through 77+ specialized AI agents with standardized coordination patterns that work together to **analyze, plan, and implement** project solutions. The system uses a **mature agent-based architecture** with universal argument extraction where components are **intelligently customized for each project** based on comprehensive discovery analysis of technology stack, architecture patterns, and project requirements.
 
-**Key Features:**
-- **Parallel Execution**: Multiple agents work simultaneously for faster analysis
-- **Intelligent Localization**: Components adapt to your specific project context
-- **Discovery-Driven Customization**: System behavior changes based on what it finds in your codebase
-- **Flexible Installation**: Project-specific, global user, or direct analysis modes
-- **Comprehensive Output**: Creates complete `.claudio/` analysis structure
-
-The default workflow combines **discovery and planning** into a unified process with optional **parallel implementation execution**.
-
-## Agent-Based Architecture
-
-Claudio employs specialized AI agents that orchestrate different aspects of project analysis:
-
-- **Discovery Agent**: Analyzes project structure, technology stack, and existing capabilities
-- **PRD Agent**: Transforms discovery findings into clear business requirements and success criteria
-- **Planning Agent**: Creates phased implementation roadmaps with time estimates and dependencies
-- **Task Agent**: Breaks down plans into executable tasks with specialized execution contexts
-- **Documentation Agent**: Generates comprehensive documentation (README, API docs, user guides)
-- **Security Agent**: Performs STRIDE-based security analysis with visual threat modeling
-- **Research Agent**: Conducts topic-specific research and creates expert knowledge bases
-- **Implementation Agent**: Executes plans through coordinated task processing
-
-Each agent is self-contained but works cooperatively, referencing other agents' outputs to create comprehensive, integrated project analysis and implementation plans. When installed in project/path modes, agents are automatically localized for the specific project context.
+The system transforms ad-hoc development into systematic, trackable, and collaborative project execution through intelligent project localization, anti-fabrication policies, and comprehensive workflow automation.
 
 ## Requirements
 
@@ -38,210 +16,159 @@ Each agent is self-contained but works cooperatively, referencing other agents' 
 - The Claude Code CLI provides the runtime environment and tools that Claudio agents use
 - No additional installations required - Claudio works within your existing Claude Code setup
 
+## Documentation
+
+### Core Documentation
+- **[Usage Guide](docs/usage-guide.md)** - Complete command reference, workflow examples, and practical usage patterns
+- **[System Architecture](docs/system-architecture.md)** - Extended context structure, agent integration, and technical implementation details
+- **[Specialized Features](docs/specialized-features.md)** - Research system, Claude SDK capabilities, and advanced features
+- **[Best Practices](docs/best-practices.md)** - Development workflows, context management, and integration guidance
+- **[Changelog Management](docs/changelog-management.md)** - Maintenance protocol and update procedures
+
+**Table of Contents:** [What is Claudio?](#what-is-claudio) | [Documentation](#documentation) | [Requirements](#requirements) | [Quick Start](#quick-start) | [Key Features](#key-features) | [Commands](#commands) | [Installation](#installation) | [Project Structure](#project-structure) | [Document Types](#document-types-in-claudio) | [Advanced Features](#advanced-features) | [Development](#development) | [Troubleshooting](#troubleshooting)
+
 ## Quick Start
 
-### Option 1: Direct Analysis (Recommended for Individual Use)
-Analyze projects directly with the Claudio source repository:
+*Note: Where you start your Claude session determines automatic project memory loading from CLAUDE.md files. We take advantage of this behavior until Claude supports alternative methods for project context loading.*
 
+### Setup Phase
 ```bash
 # 1. Clone Claudio
 git clone <this-repo>
 cd claudio
 
-# 2. Start Claude with directory access
+# 2. Start Claude with directory access to your project  
 claude --add-dir /path/to/my-code
-# or with relative paths:
-claude --add-dir ../my-code
 
-# 3. Analyze the external project
+# 3. Run Claudio system command
 /claudio:claudio /path/to/my-code
+# Optional: Use install-only command instead
+/claudio:install /path/to/my-code
 
-# 4. Optional: Execute implementation when ready
-/claudio:implement /path/to/my-code
+# 4. Exit Claude session
+exit
 ```
 
-**Why use --add-dir?** This flag allows Claude Code to access and analyze projects outside the Claudio directory while keeping Claudio's system files separate from your project code.
-
-### Option 2: Install Claudio to Your Project (Recommended for Teams)
-Install project-localized Claudio directly into your project for team consistency:
-
+### Usage Phase
 ```bash
-# 1. Clone Claudio
-git clone <this-repo>
+# 1. Navigate to your project
+cd /path/to/my-code
+
+# 2. Start Claude session (loads project CLAUDE.md automatically)
+claude
+
+# 3. Use project commands
+# Optional: Create additional plans
+/claudio:plan feature "my new feature, add to project phases"
+/claudio:implement  # Follows plans created by claudio workflow or install
+/claudio:test
+# Natural language: "use the claudio workflow to add my new feature to the phased planning documents"
+```
+
+### Upgrade Phase
+```bash
+# 1. Update Claudio (choose one method)
+# From your project directory:
+git submodule update --remote
+# OR from the claudio directory:
+cd claudio && git pull
+
+# 2. Navigate to Claudio directory
 cd claudio
+# Note: Use `pwd` to verify your current directory
 
-# 2. Start Claude from Claudio directory
-claude
+# 3. Start Claude with directory access to your project
+claude --add-dir /path/to/my-code
 
-# 3. Install localized Claudio to your project
-/claudio:install /path/to/your-project
+# 4. Run Claudio upgrade command
+/claudio:upgrade /path/to/my-code
 
-# 4. Navigate to your project and use localized Claudio
-cd /path/to/your-project
-claude
-
-# 5. Use project-customized commands
-/claudio:claudio
-/claudio:implement  # When ready to execute
+# 5. Exit Claude session
+exit
 ```
 
-### Option 3: Global User Installation
-Install generic Claudio templates globally for system-wide access:
+## Key Features
 
-```bash
-# 1. From Claudio directory
-/claudio:install commands user
+### Agent Coordination System
+- **Universal Argument Extraction**: All 77+ agents implement standardized argument extraction logic for consistent project path handling and cross-agent communication
+- **Anti-Fabrication Standards**: System-wide policies ensure outputs are based on actual project analysis with factual, measurable results
+- **Template System**: Comprehensive template library in extended_context/templates/ provides consistent patterns for agent and command development
+- **Project Path Isolation**: Robust path handling prevents system contamination during multi-project workflows
 
-# 2. Use from any project directory (commands will localize for each project)
-cd /any/project
-claude
-/claudio:claudio  # Performs discovery and localization for this specific project
-```
+### Discovery System
+- **Parallel Analysis Architecture**: 5 specialized agents analyze project structure, technology stack, architecture patterns, integration opportunities, and consolidate findings simultaneously
+- **Technology Stack Detection**: Automatic framework identification, dependency analysis, and build system assessment
+- **Architecture Analysis**: Design patterns, component relationships, and structural analysis with integration recommendations
+- **Project Classification**: Smart categorization with localization recommendations for optimal workflow customization
 
-**Benefits of Project Installation (Options 1 & 2)**:
-- Keep Claudio updated with project-specific localization via `/claudio:upgrade`
-- Share project-customized analysis system with your team
-- Version control your localized Claudio setup alongside your project
-- Maintain consistency in project-specific analysis across your organization
-- Components automatically adapt to your technology stack and architecture patterns
+### Project Localization
+- **Component Customization**: Agents and commands adapt to specific project context through discovery analysis
+- **Technology-Aware Workflows**: Framework-specific procedures and commands tailored to detected technology stack
+- **Generated Test Integration**: Project-specific test commands created during installation based on detected testing frameworks
+- **System vs User Components**: Smart filtering ensures only workflow-relevant components are installed to user projects
 
-**Benefits of Global User Installation (Option 3)**:
-- Use generic Claudio tools across multiple projects
-- Commands automatically localize when executed on target projects
-- No need to install Claudio in each project directory
-- Ideal for individual users working on multiple projects
+### Documentation & Research
+- **Project-Specific Documentation**: README and CLAUDE.md generation with technology stack-aware content and integration guidance
+- **Research System**: Topic research with complexity assessment, adaptive thinking modes (Think/Ultrathink), and authoritative source integration
+- **Parallel Documentation Updates**: Coordinated maintenance through specialized agents (readme-updater, claude-md-updater, changelog-updater)
+- **Quality Documentation**: Discovery-driven documentation generation with validation and accuracy checks
 
-This will create a comprehensive `.claudio/` folder in your target project with:
-- **Discovery Report**: Technology stack and capability analysis
-- **Requirements Document**: Clear project objectives and success criteria  
-- **Implementation Plan**: Phased roadmap with time estimates
-- **Task Breakdown**: Executable tasks with specialized contexts
-- **Progress Tracking**: Status monitoring at project, phase, and task levels
+### Quality Assurance & Security
+- **Comprehensive Validation**: Quality assurance framework with specialized validators for discovery, workflow, installation, and command generation
+- **Security Analysis**: STRIDE-based security review with visual threat modeling and technology-specific assessments
+- **Code Quality Assessment**: Language and framework-specific analysis with detailed reporting and remediation suggestions
+- **Testing Integration**: Intelligent test execution with failure analysis, fix capabilities, and project-specific test command generation
 
-**Note**: The default `/claudio:claudio` command focuses on **discovery and planning**. Implementation is handled separately with the optional `/claudio:implement` command.
+### System Management & Development
+- **Parallel Upgrade System**: 7 specialized agents handle discovery analysis, legacy cleanup, template analysis, backup management, component localization, and validation
+- **Custom Command Generation**: Complete command system creation (command + sub-agent + context) from research sources with Claudio integration
+- **Claude SDK Development**: Analysis and improvement of Claude Code implementations with cross-system comparison capabilities
+- **Git Integration**: Intelligent commit message generation following project conventions and change analysis
 
-## How New Users Can Get Started
-
-### Complete Workflow (Recommended)
-1. **Clone and setup**: `git clone <repo> && cd claudio`
-2. **Start Claude with access**: `claude --add-dir /path/to/your/project`
-3. **Discovery & Planning**: `/claudio:claudio /path/to/your/project` (combines project analysis and implementation planning)
-4. **Review the plans**: Check the generated `.claudio/` folder in your project
-5. **Optional Implementation**: `/claudio:implement /path/to/your/project` (when ready to execute)
-6. **Keep system updated**: `/claudio:upgrade --check` periodically
-
-### Team/Organization Setup
-1. **Install localized system**: `/claudio:install /path/to/team/project` (runs discovery and localizes components)
-2. **Team members use**: Navigate to project, start Claude, use project-customized `/claudio:claudio`
-3. **Stay updated**: Use `/claudio:upgrade` to keep localized installation current
-4. **Version control**: Commit `.claude/` folder for team consistency with project-specific customizations
-
-### For Individual Tasks
-Use specific commands for focused work:
-```bash
-/claudio:discovery ./my-app          # Analyze project structure
-/claudio:security-review ./my-app    # STRIDE security analysis
-/claudio:documentation readme ./my-app   # Generate README
-/claudio:prd feature user-auth       # Create requirements doc
-/claudio:plan project my-app "8 weeks"   # Create implementation plan
-/claudio:test-review                 # Analyze testing patterns
-/claudio:gcms                       # Generate commit messages
-```
-
-### Understanding the Output
-After running Claudio on a project, you'll find:
-
-```
-your-project/
-└── .claudio/
-    ├── summary.md          # Executive overview
-    ├── discovery.md        # Technology analysis  
-    ├── prd.md             # Requirements
-    ├── plan.md            # Implementation roadmap
-    ├── status.md          # Progress tracking
-    ├── research/          # Topic-specific research
-    ├── docs/              # Generated documentation
-    │   └── security/      # Security analysis with STRIDE methodology
-    └── phase1/, phase2/   # Task breakdown with contexts
-```
-
-## Task Execution Model
-
-### How Task Contexts Work
-Claudio's task system has been designed for efficient, focused execution:
-
-**Agent-Driven Task Execution**: Each task context (`.claudio/phase*/task*/claude.md`) contains specialized agent instructions that produce actionable next steps rather than work summaries.
-
-**Coordinated Processing**: Task agents work through the Task orchestrator system, updating status files for progress tracking while maintaining focused execution.
-
-**Comprehensive Status Tracking**: All progress information, work summaries, and coordination updates are maintained in dedicated status files that provide visibility across the entire project:
-
-```
-project/.claudio/
-├── status.md                    # Project-level progress
-├── phase1/
-│   ├── phase_status.md         # Phase-level progress
-│   ├── task1/
-│   │   ├── claude.md           # Task context (produces next action)
-│   │   └── status.md           # Task progress and updates
-│   └── task2/
-│       ├── claude.md           # Task context (produces next action)
-│       └── status.md           # Task progress and updates
-└── shared/status/
-    └── global_status.md        # Cross-phase status tracking
-```
-
-### Finding Progress Information
-- **Current Task Status**: Check `phase*/task*/status.md` for detailed progress
-- **Phase Overview**: Review `phase*/phase_status.md` for phase-level progress  
-- **Project Status**: View `.claudio/status.md` for overall project tracking
-- **Next Actions**: Task contexts suggest the next recommended prompt to execute
-
-## Available Commands
+## Commands
 
 ### Core Workflow Commands
-| Command | Purpose | Example | Localization |
-|---------|---------|---------|-------------|
-| `/claudio:claudio` | Complete discovery & planning | `/claudio:claudio ../my-app` | Full project localization based on discovery |
-| `/claudio:discovery` | Analyze project structure | `/claudio:discovery ./backend` | Technology stack-specific analysis |
-| `/claudio:documentation` | Generate docs | `/claudio:documentation api ./my-api` | Project-specific documentation patterns |
-| `/claudio:prd` | Create requirements | `/claudio:prd feature chat-system` | Domain and architecture-aware requirements |
-| `/claudio:plan` | Implementation planning | `/claudio:plan project app "12 weeks"` | Technology-specific development patterns |
-| `/claudio:task` | Break down into tasks* | `/claudio:task plan.md my-project` | Project structure-aware task contexts |
-| `/claudio:research` | Topic research | `/claudio:research security oauth2` | Project context-aware research |
-| `/claudio:design` | UX/UI analysis & specs | `/claudio:design audit ./my-app material` | Framework and architecture-specific design analysis |
-| `/claudio:security-review` | STRIDE security analysis with Mermaid diagrams | `/claudio:security-review ./my-app` | Technology stack-specific security patterns |
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `/claudio:claudio` | Project discovery & planning | `/claudio:claudio ../my-app` |
+| `/claudio:discovery` | Parallel project analysis using 5 agents | `/claudio:discovery ./backend` |
+| `/claudio:documentation` | Generate docs | `/claudio:documentation api ./my-api` |
+| `/claudio:prd` | Create requirements | `/claudio:prd feature chat-system` |
+| `/claudio:plan` | Implementation planning | `/claudio:plan project app "12 weeks"` |
+| `/claudio:task` | Break down into tasks | `/claudio:task plan.md my-project` |
+| `/claudio:research` | Topic research with complexity assessment | `/claudio:research security oauth2` |
+| `/claudio:update-docs` | Update project documentation | `/claudio:update-docs "enhanced features"` |
+| `/claudio:design` | UX/UI analysis & specs | `/claudio:design audit ./my-app material` |
+| `/claudio:security-review` | STRIDE security analysis | `/claudio:security-review ./my-app` |
 
 ### Implementation & Execution
-| Command | Purpose | Example | Localization |
-|---------|---------|---------|-------------|
-| `/claudio:implement` | Execute implementation plans** | `/claudio:implement ../my-project` | Project-specific execution with localized contexts |
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `/claudio:implement` | Execute implementation plans | `/claudio:implement ../my-project` |
+| `/claudio:test` | Run project tests with analysis | `/claudio:test` or `/claudio:test --fix` |
+| `/claudio:test-g` | Gemini-enhanced testing with coordinator workflow | `/claudio:test-g` |
 
 ### System Management
-| Command | Purpose | Example | Localization |
-|---------|---------|---------|-------------|
-| `/claudio:install` | Install Claudio components | `/claudio:install` or `/claudio:install commands user` | Project/path modes: localization via discovery; User mode: direct template copying |
-| `/claudio:upgrade` | Upgrade with re-localization | `/claudio:upgrade` or `/claudio:upgrade /path/to/project` | Re-localizes components based on current project state |
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `/claudio:install` | Install Claudio components | `/claudio:install` or `/claudio:install commands user` |
+| `/claudio:upgrade` | Parallel upgrade system | `/claudio:upgrade` or `/claudio:upgrade /path/to/project` |
 
 ### Utilities
-| Command | Purpose | Example | Localization |
-|---------|---------|---------|-------------|
-| `/claudio:newprompt` | Create new agent prompts | `/claudio:newprompt security-review "vulnerability analysis" standard` | Template-based with project integration patterns |
-| `/claudio:test-review` | Analyze testing patterns and frameworks | `/claudio:test-review` | Technology stack-specific testing analysis |
-| `/claudio:gcms` | Generate conventional git commit messages | `/claudio:gcms` | Project convention-aware commit messages |
-| `/claudio:code-quality` | Code quality assessment*** | `/claudio:code-quality full ./my-project` | Language and framework-specific quality analysis |
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `/claudio:new-command` | Generate custom commands | `/claudio:new-command my-tool "analyzes dependencies" https://docs.npmjs.com` |
+| `/claudio:newprompt` | Create new agent prompts | `/claudio:newprompt security-review "vulnerability analysis" standard` |
+| `/claudio:test-review` | Analyze testing patterns | `/claudio:test-review` |
+| `/claudio:gcms` | Generate git commit messages | `/claudio:gcms` |
+| `/claudio:code-quality` | Code quality assessment | `/claudio:code-quality full ./my-project` |
+| `/claudio:claude-sdk` | Claude Code implementation analysis | `/claudio:claude-sdk command_name` |
 
-*Task command creates contexts that produce next actions and tracks progress in status.md files
-
-**Implementation command is optional and invoked separately when ready to execute plans
-
-***Optional command - see [Optional Commands](#optional-commands) for installation
-
-## Installation and System Management
+## Installation
 
 ### Installing Claudio Components
 
-Claudio supports multiple installation modes to fit different workflows:
+Claudio provides mature installation workflows with standardized component management and intelligent project localization:
 
 #### Installation Modes
 
@@ -253,14 +180,14 @@ Claudio supports multiple installation modes to fit different workflows:
 # Install localized commands only in current project  
 /claudio:install commands
 ```
-Creates `.claude/` folder in current directory with project-localized Claudio system based on discovery analysis.
+Creates `.claude/` folder in current directory with project-localized Claudio system featuring technology-aware customization through discovery analysis.
 
 **User Mode** (Global Installation):
 ```bash
 # Install generic commands globally for user
 /claudio:install commands user
 ```
-Installs generic Claudio templates to `~/.claude/` for system-wide access. Uses direct copying of templates - localization occurs when commands are executed on target projects.
+Installs standardized Claudio templates to `~/.claude/` for system-wide access across all projects.
 
 **Custom Path Mode**:
 ```bash
@@ -268,15 +195,7 @@ Installs generic Claudio templates to `~/.claude/` for system-wide access. Uses 
 /claudio:install /path/to/project
 /claudio:install commands /path/to/custom/location
 ```
-Installs project-localized Claudio system to any specified directory after discovery analysis.
-
-#### What Gets Installed
-- **Project/Path Modes**: Project-localized commands, agents, prompts, and all system components customized for your codebase
-- **User Mode**: Generic template files that enable localization workflows on target projects
-- **Automatic Discovery**: Installation system runs project discovery in project/path modes to customize components
-- **Mode-Specific Behavior**: 
-  - **Project/Path**: Intelligent localization based on project analysis
-  - **User**: Direct copying of generic templates for use across multiple projects
+Installs fully customized Claudio system to any specified directory with comprehensive discovery analysis and technology-specific localization.
 
 ### Upgrading Claudio
 
@@ -289,12 +208,9 @@ Keep your Claudio installation current with the upgrade system:
 
 # Check specific project installation
 /claudio:upgrade /path/to/project --check
-
-# Show current installation status
-/claudio:upgrade --status
 ```
 
-#### Perform Localized Upgrades
+#### Perform Upgrades
 ```bash
 # Upgrade current directory with re-localization
 /claudio:upgrade
@@ -302,379 +218,29 @@ Keep your Claudio installation current with the upgrade system:
 # Upgrade specific project with localization refresh
 /claudio:upgrade /path/to/project
 
-# Upgrade specific components with localization
-/claudio:upgrade --commands
-/claudio:upgrade /path/to/project --agents
-
 # Force complete re-discovery and re-localization
 /claudio:upgrade --force
-
-# Force re-discovery even if current
-/claudio:upgrade --force-discovery
-
-# Preserve existing contexts during upgrade
-/claudio:upgrade --preserve-contexts
 ```
 
 #### Safety Features
-- **Automatic Backups**: Complete backup created before any localization changes
-- **Changelog Generation**: Detailed record of all modifications and re-localizations
-- **Rollback Support**: Easy reversion to previous localized versions
-- **No-Change Detection**: Clear notification when localization is current
-- **Context Preservation**: Existing project contexts (tasks, phases) are maintained during upgrades
-
-#### Version Management
-```bash
-# List upgrade history for current directory
-/claudio:upgrade --list-versions
-
-# List versions for specific project
-/claudio:upgrade /path/to/project --list-versions
-
-# View specific changelog
-/claudio:upgrade --changelog 2025-08-02_14-30-15
-
-# Rollback current directory to previous version
-/claudio:upgrade --rollback 2025-08-02_14-30-15
-
-# Rollback specific project
-/claudio:upgrade /path/to/project --rollback 2025-08-02_14-30-15
-```
-
-### System Maintenance
-
-#### Validation and Health Checks
-```bash
-# Validate current directory installation
-/claudio:upgrade --validate
-
-# Validate specific project installation
-/claudio:upgrade /path/to/project --validate
-
-# Show installation information
-/claudio:upgrade --status
-```
-
-The upgrade system maintains complete version history in `.claude/.upgrades/` with:
-- Timestamped backups for safe rollback
-- Detailed changelogs for transparency
-- Automated rollback scripts for easy recovery
-- Git-independent version management
-
-## Implementation Execution
-
-Beyond planning, Claudio can execute your implementation plans through a separate, optional command:
-
-### Three-Phase Workflow
-Claudio is designed around **three core phases** for comprehensive project management:
-
-1. **Discovery**: Project analysis, technology assessment, and capability mapping
-2. **Planning**: Requirements documentation and implementation roadmap creation  
-3. **Implementation**: Optional code execution and task completion
-
-### Combined Default Workflow
-The **default workflow combines discovery and planning** into a single command:
-
-- **Combined Phase**: Discovery + Planning with `/claudio:claudio`
-- **Optional Phase**: Implementation with `/claudio:implement`
-
-**Benefits of This Approach**:
-- **Discovery + Planning Together**: Complete project understanding and roadmap in one step
-- **Implementation Separation**: Review plans before execution, share with team, execute when ready
-- **Flexible Timing**: Run discovery/planning frequently, implement only when needed
-- **Team Collaboration**: Plans can be reviewed and refined before implementation begins
-
-After creating plans with `/claudio:claudio`, optionally execute them:
-
-```bash
-# Default workflow: discovery and planning combined
-/claudio:claudio ../my-project
-
-# Optional: execute implementation when ready
-/claudio:implement ../my-project
-```
-
-### Implementation Features
-- **Parallel Task Processing**: Execute independent tasks simultaneously
-- **Progress Tracking**: Real-time status updates and completion monitoring
-- **Error Handling**: Graceful failure handling with rollback capabilities
-- **Selective Execution**: Run specific phases or tasks as needed
-
-### Implementation Modes
-```bash
-# Execute complete implementation plan
-/claudio:implement
-
-# Execute specific phase
-/claudio:implement --phase phase1
-
-# Execute specific task
-/claudio:implement --task phase1.task2
-
-# Resume interrupted execution
-/claudio:implement --resume
-
-# Control parallel execution
-/claudio:implement --parallel 4
-
-# Preview execution plan (dry run)
-/claudio:implement --dry-run
-
-# Check implementation status
-/claudio:implement --status
-```
-
-Implementation integrates with existing agents:
-- **Code Quality**: Automatic quality checks during implementation
-- **Documentation**: Live documentation updates as code is implemented
-- **Testing**: Coordinated test execution and validation
-
-## Adding New Prompts and Commands
-
-### Quick Method: Use the NewPrompt Command
-```bash
-# Create a new agent and command automatically
-/claudio:newprompt security-review "Comprehensive security analysis with vulnerability assessment" standard
-```
-
-The `/claudio:newprompt` command will:
-- Create the agent prompt and command files
-- Determine workflow integration (standard/optional/conditional)
-- Generate integration instructions for existing files
-- Update documentation and folder structures
-
-### Manual Method: Step-by-Step
-Want to add a security review prompt manually? Here's how:
-
-### 1. Create the Agent Prompt
-```bash
-mkdir -p .claude/agents/claudio/prompts/security-review
-```
-
-Create `.claude/agents/claudio/prompts/security-review/claude.md`:
-```markdown
-# Security Review Agent
-
-You are a specialized security review agent that analyzes codebases for security vulnerabilities, best practices, and compliance requirements.
-
-## Your Core Responsibilities:
-1. **Vulnerability Assessment**: Identify potential security risks
-2. **Best Practices Review**: Evaluate security implementations
-3. **Compliance Checking**: Verify regulatory compliance
-4. **Remediation Planning**: Provide actionable security improvements
-
-## Analysis Areas:
-- Authentication and authorization
-- Data protection and encryption
-- Input validation and sanitization
-- API security and rate limiting
-- Dependency vulnerabilities
-- Infrastructure security
-
-[Include detailed methodology and templates...]
-```
-
-### 2. Create the Command
-Create `.claude/commands/claudio/security-review.md`:
-```markdown
-# Security Review Command
-
-## Description
-Perform comprehensive security analysis of codebases with vulnerability assessment and remediation recommendations.
-
-## Usage
-/claudio:security-review <target_path> [security_standard]
-
-## Parameters
-- `target_path`: Path to code/project to review
-- `security_standard`: Optional standard (OWASP, SOC2, etc.)
-
-## Context
-Use the security review agent prompt from `.claude/agents/claudio/prompts/security-review/claude.md`.
-
-## Instructions
-1. Analyze code for security vulnerabilities
-2. Review authentication and authorization
-3. Check for common security anti-patterns
-4. Generate remediation recommendations
-5. **Direct Command**: Save to `security-reviews/<project>_security_review.md`
-6. **Within Claudio**: Save to `<target>/.claudio/security-review.md`
-```
-
-### 3. Integration with Claudio
-To integrate with the main Claudio workflow, update `.claude/agents/claudio/prompts/claudio/claude.md` to include security review as an optional phase.
-
-## Simple Usage Examples
-
-### Complete Project Workflow
-```bash
-# 1. Clone Claudio
-git clone <this-repo>
-cd claudio
-
-# 2. Start Claude with directory access
-claude --add-dir ../my-react-app
-
-# 3. In Claude Code session - complete workflow:
-/claudio:claudio ../my-react-app
-/claudio:implement ../my-react-app  # When ready to execute
-
-# 4. Keep system updated
-/claudio:upgrade --check
-```
-
-### Team Installation Workflow
-```bash
-# 1. Install localized system to team project
-/install /path/to/team/project
-
-# 2. Team members navigate and use project-customized Claudio
-cd /path/to/team/project
-claude
-/claudio:claudio  # Uses project-specific localized components
-/claudio:implement  # When ready
-
-# 3. Keep localized installation current
-/claudio:upgrade  # Re-localizes based on current project state
-```
-
-### Specific Analysis Tasks
-```bash
-# Individual command usage (automatically localizes for each project)
-/claudio:discovery /path/to/my-api    # Analyze project structure with tech-specific analysis
-/claudio:security-review /path/to/my-api  # Security analysis with STRIDE and tech-specific patterns
-/claudio:documentation readme ./frontend  # Generate README with project-specific patterns
-/claudio:prd feature real-time-chat   # Create requirements doc with domain awareness
-/claudio:test-review                  # Analyze testing setup with framework-specific insights
-/claudio:gcms                        # Generate commit messages following project conventions
-```
-
-### System Management
-```bash
-# Installation management with mode-appropriate behavior
-/claudio:install                    # Install localized system to current project
-/claudio:install commands user      # Install generic templates globally (no localization)
-/claudio:install /custom/path      # Install localized system to specific location
-
-# Upgrade management with re-localization
-/claudio:upgrade --check   # Preview available updates and re-localization needs
-/claudio:upgrade           # Apply upgrades with re-localization to current directory
-/claudio:upgrade /path/to/project  # Upgrade specific project with localization refresh
-/claudio:upgrade --force-discovery  # Force project re-analysis and re-localization
-/claudio:upgrade --rollback 2025-08-02_14-30-15  # Rollback if needed
-```
-
-### Following Up and Progress Tracking
-```bash
-# Check progress via status files
-"Show me the current status from /my-project/.claudio/status.md"
-"What's the progress on phase 1 tasks?"
-
-# Implementation execution and monitoring
-/claudio:implement --status           # Check implementation progress
-/claudio:implement --phase phase1     # Execute specific phase
-/claudio:implement --dry-run          # Preview execution plan
-
-# Execute next recommended actions
-"What does the task context suggest as the next step?"
-"Update the implementation plan to include the new requirements"
-"Generate additional research on GraphQL best practices"
-```
-
-## Optional Commands
-
-Some commands are available as optional installations that users can add to their own projects:
-
-### Code Quality Assessment
-
-The `/code-quality` command provides comprehensive code quality assessment including linting, formatting, testing, coverage analysis, and cyclomatic complexity evaluation.
-
-**Installation Options:**
-1. **Copy to Project**: Copy the command files to your project's `.claude/commands/claudio/` directory
-2. **Symlink**: Create symlinks to stay updated with Claudio improvements
-3. **Git Submodule**: Automatic availability when using Claudio as a submodule
-
-**Usage Examples:**
-```bash
-# Full quality assessment
-/claudio:code-quality full ./my-project
-
-# Quick CI/CD check  
-/claudio:code-quality quick . json
-
-# Focus on test coverage
-/claudio:code-quality coverage ./project detailed
-```
-
-**Supported Languages:** JavaScript/TypeScript, Python, Rust, Go, Elixir, Java, C#, PHP, Ruby
-
-**Project Localization:** Commands are automatically customized for your project's technology stack and patterns.
-
-For detailed installation instructions and tool requirements, see the [code-quality documentation](./.claude/agents/claudio/prompts/code-quality/README.md).
+- **Automatic Backups**: Complete backup created before any changes
+- **Changelog Generation**: Detailed record of all modifications
+- **Rollback Support**: Easy reversion to previous versions
+- **Context Preservation**: Existing project contexts maintained during upgrades
 
 ## Project Structure
 
 ```
 claudio/
-├── README.md              # This file  
-├── CLAUDE.md             # Detailed system documentation
-├── .claude/              # Claudio system implementation
-│   ├── commands/claudio/ # All executable commands with namespace
-│   │   ├── claudio.md    # Master project analysis
-│   │   ├── discovery.md  # Project structure analysis  
-│   │   ├── prd.md        # Requirements documentation
-│   │   ├── plan.md       # Implementation planning
-│   │   ├── task.md       # Task breakdown
-│   │   ├── implement.md  # Implementation execution
-│   │   ├── research.md   # Topic research
-│   │   ├── documentation.md # Documentation generation
-│   │   ├── design.md     # UX/UI analysis
-│   │   ├── newprompt.md  # Agent creation system
-│   │   ├── install.md    # Installation management
-│   │   ├── upgrade.md    # Upgrade management
-│   │   ├── test-review.md # Testing analysis
-│   │   ├── gcms.md       # Git commit messages
-│   │   ├── security-review.md # Security analysis with STRIDE
-│   │   └── code-quality.md # Code quality assessment
-│   └── agents/claudio/   # Agent implementations
-│       ├── claudio-coordinator.md # Master orchestration
-│       ├── claudio-discovery-orchestrator.md # Discovery coordination
-│       ├── claudio-prd-orchestrator.md # PRD creation
-│       ├── claudio-plan-orchestrator.md # Planning coordination
-│       ├── claudio-task-orchestrator.md # Task breakdown
-│       ├── implement-orchestrator.md # Implementation execution
-│       ├── install-coordinator.md # Installation management
-│       ├── upgrade-orchestrator.md # Upgrade coordination
-│       ├── documentation-coordinator.md # Documentation coordination
-│       ├── newprompt-coordinator.md # Agent creation
-│       ├── code-quality-analyzer.md # Quality assessment
-│       ├── design-analyzer.md # UX/UI analysis
-│       ├── research-specialist.md # Research coordination
-│       ├── git-commit-message.md # Commit message generation
-│       ├── test-review.md # Testing analysis
-│       ├── security-review-coordinator.md # Security analysis coordination
-│       ├── security-threat-modeler.md # STRIDE threat modeling
-│       ├── security-diagram-generator.md # Security Mermaid diagrams
-│       ├── vulnerability-assessment-specialist.md # Vulnerability analysis
-│       ├── security-architecture-analyst.md # Security architecture review
-│       └── prompts/      # Extended agent contexts
-│           ├── claudio/  # Master orchestration context
-│           ├── discovery/ # Project analysis context
-│           ├── prd/      # Requirements context
-│           ├── plan/     # Planning context
-│           ├── task/     # Task breakdown context
-│           ├── implement/ # Implementation context
-│           ├── research/ # Research context
-│           ├── documentation/ # Documentation context
-│           ├── design/   # Design analysis context
-│           ├── newprompt/ # Agent creation context
-│           ├── install/  # Installation context
-│           ├── upgrade/  # Upgrade context
-│           └── security-review/ # Security analysis context
-├── examples/            # Sample projects for testing
-│   ├── web-app/        # Deno.js task manager SPA with full Claudio analysis
-│   └── rust-game/      # Bevy chess game
-└── [generated folders]  # Created when using standalone commands
+├── .claude/
+│   ├── commands/claudio/     # All executable commands
+│   └── agents/claudio/       # Agent implementations  
+│       └── extended_context/ # Knowledge contexts by category
+└── .claudio/                 # Generated project analysis
+    ├── discovery.md          # Project analysis
+    ├── prd.md               # Requirements  
+    ├── plan.md              # Implementation roadmap
+    └── phase*/              # Task breakdown
 ```
 
 ### Generated Project Structure
@@ -688,171 +254,200 @@ your-project/
     ├── prd.md             # Requirements
     ├── plan.md            # Implementation roadmap
     ├── status.md          # Progress tracking
-    ├── .upgrades/         # Upgrade management (when using installed Claudio)
-    │   ├── backups/       # Version backups
-    │   ├── changelogs/    # Upgrade changelogs
-    │   └── version_history.json # Version tracking
     ├── research/          # Topic-specific research
     ├── docs/              # Generated documentation
-    │   ├── readme.md      # Project documentation
-    │   ├── api.md         # API documentation
-    │   ├── user_guide.md  # User guide
     │   └── security/      # Security analysis
-    │       ├── stride_analysis.md
-    │       ├── threat_model.md
-    │       ├── vulnerability_report.md
-    │       ├── remediation_plan.md
-    │       └── diagrams/
-    │           ├── data_flow.mermaid
-    │           ├── attack_trees.mermaid
-    │           ├── threat_model.mermaid
-    │           └── security_architecture.mermaid
-    ├── design/            # Design specifications
     └── phase1/, phase2/   # Task breakdown with contexts
 ```
 
-## Development and Testing
+## Document Types in Claudio
 
-### Contributing to Claudio
+### **Research Documents** 📚
+**Purpose**: Topic-specific knowledge created when understanding technologies or methodologies  
+**Location**: `.claudio/research/[category]/[topic]/`  
+**Creation**: Generated by `/claudio:research` when knowledge gaps are identified  
+**Content**: Overview documentation, troubleshooting guides, best practices, implementation patterns  
+**Example**: PostgreSQL optimization techniques, React testing strategies, security best practices  
 
-Claudio includes a comprehensive test suite to validate all workflows and ensure system reliability across different project types and complexity levels.
+### **Implementation Plans** 📋
+**Purpose**: Detailed implementation roadmaps created from project requirements  
+**Location**: `.claudio/plan.md`  
+**Creation**: Generated by `/claudio:plan` after requirements analysis (PRD)  
+**Content**: Implementation phases, task breakdown, dependencies, resource needs - **based on actual project analysis**  
+**Example**: User authentication system implementation with phases derived from your codebase discovery  
+**Note**: Plans use real analysis data, never fabricated timelines or metrics
 
-#### Test Suite Structure
+### **Phase Documents** ✅
+**Purpose**: Executable tasks broken down from implementation plans  
+**Location**: `.claudio/phase1/`, `.claudio/phase2/` directories  
+**Creation**: Generated by `/claudio:task` after you have a plan  
+**Content**: Specific tasks with acceptance criteria, implementation contexts, progress tracking  
+**Example**: Individual tasks like "Create JWT middleware" with detailed acceptance criteria  
 
-The `test/` directory contains generated example projects specifically designed to test Claudio workflows:
+### **Extended Context** 🧠
+**Purpose**: Specialized knowledge that enhances Claudio agent capabilities  
+**Location**: `.claude/agents/claudio/extended_context/[category]/[topic]/`  
+**Creation**: Created during system setup to provide agents with domain expertise  
+**Content**: Agent instruction enhancements, methodology guides, evaluation frameworks  
+**Example**: Planning agent context that helps create better implementation strategies  
 
+### **Document Flow**
 ```
-test/
-├── README.md              # Comprehensive test documentation
-├── claudio-ci-test.sh     # Automated CI test script
-├── install/               # Tests claudio:install (full system)
-│   └── README.md         # E-commerce platform project
-├── install-commands/      # Tests claudio:install commands
-│   └── README.md         # DevOps automation project  
-├── upgrade/               # Tests claudio:upgrade workflow
-│   ├── README.md         # TaskFlow productivity app
-│   └── .claude/          # Mock existing installation
-├── discovery-readme/      # Tests claudio:discovery (simple)
-│   └── README.md         # FitTracker mobile app
-└── discovery-code/        # Tests claudio:discovery (complex)
-    ├── README.md         # WeatherAPI Elixir service
-    ├── mix.exs           # Phoenix project structure
-    ├── lib/              # Sample Elixir code
-    └── config/           # Configuration files
+Research (knowledge) → Plans (roadmaps) → Phase Docs (executable tasks)
+                ↗
+        Extended Context (enables agents at each step)
 ```
 
-#### Test Project Characteristics
+**Workflow**: Research informs plan creation from requirements. Plans get broken down into executable phase documents. Extended context provides agents the expertise to perform each step effectively.
 
-Each test project represents different scenarios:
+## Advanced Features
 
-- **Technology Diversity**: Node.js, Python, Elixir, mobile development
-- **Architecture Patterns**: Microservices, functional programming, real-time systems
-- **Complexity Levels**: Simple README-only to complex multi-service applications
-- **Domain Coverage**: E-commerce, DevOps, productivity, health, weather services
+### Custom Command Generation
 
-#### Running Tests
+Generate complete command systems (command + sub-agent + context) from research sources:
 
-**Individual Workflow Testing:**
 ```bash
-# Test commands-only installation
-cd test/install-commands && /claudio:install commands
+# Create from URL research
+/claudio:new-command dependency-analyzer "analyzes project dependencies" https://docs.npmjs.com/cli/v8/commands/npm-audit
 
-# Test discovery on simple project
-cd test/discovery-readme && /claudio:discovery
+# Create from local documentation
+/claudio:new-command api-validator "validates API endpoints" ./api-spec.md
 
-# Test discovery on code project  
-cd test/discovery-code && /claudio:discovery
-
-# Test system upgrade
-cd test/upgrade && /claudio:upgrade
-
-# Test full installation
-cd test/install && /claudio:install
+# Integrate with Claudio workflow
+/claudio:new-command security-scan "performs security analysis" https://owasp.org/www-project-top-ten/ --claudio "after discovery workflow"
 ```
 
-**Automated CI Testing:**
+### Project-Specific Testing
+
+Claudio automatically generates customized test commands for each project:
+
+- **Framework Detection**: Detection of testing frameworks (Jest, pytest, ExUnit, Go test, etc.)
+- **Test Reporting**: Test result analysis and failure diagnosis
+- **Fix Capabilities**: Failure analysis and repair suggestions with `--fix` flag
+- **Project-Specific Commands**: Generated test commands during installation based on discovery analysis
+
+### Research System
+
+Create structured documentation with complexity-aware analysis:
+
 ```bash
-# Run complete test suite
-./test/claudio-ci-test.sh
-
-# Individual test validation
-cd test/install && /claudio:install
-# Verify .claudio/summary.md, .claudio/discovery.md, .claudio/prd.md exist
+/claudio:research development react-testing  # Create research documentation
 ```
 
-#### Development Workflow
+**Features**:
+- **Complexity Assessment**: Evaluation with Think/Ultrathink modes for topics
+- **Quality Standards**: Includes sources, practical examples, and analysis depth
+- **Context Detection**: Determines proper file placement for direct vs subagent usage
 
-1. **Clone and Setup**: `git clone <repo> && cd claudio`
-2. **Test Changes**: Run `./test/claudio-ci-test.sh` to validate all workflows
-3. **Add New Features**: Update test projects if new capabilities are added
-4. **Validate Installation Modes**: Test project, user, and path installation modes
-5. **Check Localization**: Ensure components adapt correctly to different technology stacks
+### Template System
 
-#### CI/CD Integration
+Comprehensive template library provides consistent patterns for system development:
 
-The test suite is designed for continuous integration:
-
-```yaml
-# Example GitHub Actions integration
-- name: Test Claudio Workflows
-  run: |
-    chmod +x test/claudio-ci-test.sh
-    ./test/claudio-ci-test.sh
+```
+.claude/agents/claudio/extended_context/templates/
+├── agents/                          # Agent development templates
+│   ├── analysis-agent-template.md   # Analysis specialist patterns
+│   ├── orchestrator-agent-template.md # Coordinator patterns
+│   ├── specialist-agent-template.md # Domain specialist patterns
+│   └── validation-agent-template.md # Quality assurance patterns
+├── commands/                        # Command development templates
+│   └── test-g-command-template.md   # Test command patterns
+└── meta/                           # Meta-development templates
+    └── claude/commands/templates/   # Complete command system templates
 ```
 
-**Test Validation Criteria:**
-- Commands-only installation creates `.claude/commands/` and `.claude/agents/`
-- Discovery tests generate discovery reports in `discovery/reports/`
-- Upgrade tests create changelog and backup files
-- Full installation produces complete `.claudio/` structure
-- All tests complete without errors across different project types
+**Template Features**:
+- **Standardized Patterns**: Consistent structure across all agents and commands
+- **Anti-Fabrication Integration**: Built-in factual output requirements
+- **Argument Extraction**: Universal argument handling patterns
+- **Quality Standards**: Comprehensive validation and reporting templates
 
-#### Adding New Test Scenarios
+### Implementation Execution
 
-When adding new Claudio features:
+Beyond planning, Claudio can execute your implementation plans:
 
-1. **Create Test Project**: Add new directory in `test/` with representative project
-2. **Update CI Script**: Add validation steps to `claudio-ci-test.sh`
-3. **Document Test**: Update `test/README.md` with new test scenario
-4. **Validate Localization**: Ensure new features work across different technology stacks
+```bash
+# Default workflow: discovery and planning combined
+/claudio:claudio ../my-project
 
-The test projects are **generated examples** designed specifically for validation - they are not live projects but carefully crafted scenarios that exercise all Claudio capabilities.
+# Optional: execute implementation when ready
+/claudio:implement ../my-project
+```
 
-## Benefits
+**Implementation Modes**:
+- Execute complete implementation plan
+- Execute specific phases or tasks
+- Resume interrupted execution
+- Preview execution plan (dry run)
+- Control parallel execution
 
-- **Instant Project Understanding**: Get comprehensive discovery and analysis of any codebase
-- **Project-Specific Optimization**: Components automatically adapt to your technology stack and architecture
-- **Clear Implementation Path**: Receive actionable plans with time estimates
-- **Organized Development**: Transform ad-hoc coding into systematic progress
-- **Flexible Implementation**: Choose when to execute plans - implementation is optional
-- **Progress Visibility**: Track work at project, phase, and task levels
-- **Team Collaboration**: Shared project-localized contexts enable consistent development approach
-- **Security Analysis**: Comprehensive STRIDE-based security review with technology-specific threat modeling
-- **Quality Assurance**: Built-in review and testing requirements tailored to your project
-- **Multi-Mode Flexibility**: Use globally for multiple projects or install project-specific versions
+## Development
 
-## Getting Help
+### Agent-Based Architecture
+
+Claudio employs a comprehensive system of 77+ specialized AI agents with standardized coordination patterns and universal argument extraction for reliable project analysis:
+
+#### Standardized Agent Patterns
+- **Universal Argument Extraction**: All agents implement consistent argument parsing for project path handling
+- **Anti-Fabrication Compliance**: Agents produce factual outputs based on actual project analysis
+- **Template Integration**: Agents reference comprehensive template library in extended_context/templates/
+- **Model Optimization**: Strategic model distribution across Haiku (11), Sonnet 4 (58), and Opus 4.1 (8) agents
+
+#### Discovery System (Parallel Architecture)
+- **discovery-agent**: Orchestrates parallel project analysis using 5 specialized analyzers
+- **discovery-structure-analyzer**: Project organization, file patterns, hierarchy mapping
+- **discovery-tech-analyzer**: Technology stack detection, framework identification
+- **discovery-architecture-analyzer**: Design patterns, architectural style, component relationships
+- **discovery-integration-analyzer**: Tool integration opportunities, API analysis
+- **discovery-consolidator**: Analysis integration and report generation
+
+#### Quality Assurance & Security
+- **security-review-coordinator**: STRIDE-based security analysis with visual threat modeling
+- **code-quality-analyzer**: Code quality assessment with reporting
+- **discovery-validator**: Validates discovery document quality and analysis depth
+- **workflow-validator**: Validates workflow output and document completeness
+
+#### Documentation & Research
+- **documentation-coordinator**: Generates documentation (README, API docs, user guides)
+- **user-readme-generator-agent**: Creates project-specific README documentation with technology stack-aware content
+- **claude-md-generator-agent**: Generates technology stack-aware project-specific CLAUDE.md
+- **research-specialist**: Conducts topic research with complexity assessment and adaptive thinking modes
+
+#### System Management
+- **install-full-workflow-agent**: Manages Claudio installation with project-specific customization
+- **Parallel Upgrade System**: 7 specialized agents for discovery analysis, legacy cleanup, template analysis, backup management, localization, and validation
+
+### Validation System
+
+Claudio includes a quality assurance framework:
+
+- **Discovery Validator**: Validates discovery document quality and analysis depth
+- **Workflow Validator**: Validates Claudio workflow output quality
+- **Install Validator**: Validates installation completeness and functionality
+- **New Command Validator**: Validates custom command generation quality
+
+Each validator generates reports with pass/fail status, findings, recommendations, and quality metrics.
+
+## Troubleshooting
+
+### Common Issues
+
+#### Node.js Memory Issues
+If Claude Code crashes with "JavaScript heap out of memory" errors:
+
+```bash
+# Quick fix
+export NODE_OPTIONS="--max-old-space-size=8192" && claude-code
+
+# Permanent solution (add to ~/.zshrc or ~/.bashrc)
+export NODE_OPTIONS="--max-old-space-size=8192"
+```
+
+### Getting Help
 
 - **System Documentation**: Read `CLAUDE.md` for detailed system documentation
 - **Sample Projects**: Explore `examples/` for sample projects to analyze
-- **Agent Contexts**: Check `.claude/agents/claudio/prompts/` to understand how agents work
-- **Available Commands**: Review `.claude/commands/claudio/` to see all available commands
-- **Installation Help**: Use `/claudio:install --help` or `/claudio:upgrade --help` for system management
+- **Installation Help**: Use `/claudio:install --help` or `/claudio:upgrade --help`
 - **Status Checking**: Use `/claudio:upgrade --status` to verify your installation
 
-### Quick Start Commands
-```bash
-# Discovery and planning (default)
-/claudio:claudio /path/to/my/project
-
-# With optional implementation
-/claudio:claudio /path/to/my/project
-/claudio:implement /path/to/my/project
-
-# System management
-/claudio:install                    # Install to current project
-/claudio:upgrade --check    # Check for updates
-/claudio:upgrade /path/to/project  # Upgrade specific project
-```
-
-Start by simply telling Claude: **"Please use claudio:claudio on /path/to/my/project"** and see what happens!
+Start by telling Claude: **"Please use claudio:claudio on /path/to/my/project"** and use the parallel specialist agent discovery system with project understanding!

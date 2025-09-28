@@ -1,0 +1,62 @@
+{
+  "backup_timestamp": "2025-08-12T01:13:45Z",
+  "backup_type": "full",
+  "installation_path": "/Users/vinnie/github/claudio/test/upgrade/.claude",
+  "project_path": "/Users/vinnie/github/claudio/test/upgrade/.claudio",
+  "backup_files": {
+    "total_files": 7,
+    "total_size": "estimated 45KB",
+    "by_category": {
+      "claude_installation": {
+        "commands": {"count": 2, "description": "install.md, discovery.md"},
+        "agents": {"count": 1, "description": "discovery-orchestrator.md"},
+        "configuration": {"count": 1, "description": "settings.local.json"},
+        "version": {"count": 1, "description": "version.txt"}
+      },
+      "claudio_project": {
+        "project_content": {"count": 1, "description": "discovery.md"},
+        "documentation": {"count": 1, "description": "TaskFlow analysis"}
+      }
+    }
+  },
+  "installation_analysis": {
+    "current_version": "2.2.1",
+    "installation_date": "2024-01-15",
+    "last_modified": "2024-02-28",
+    "installation_mode": "project",
+    "legacy_patterns_detected": true,
+    "legacy_issues": [
+      "prompts/ directory structure instead of extended_context/",
+      "discovery-orchestrator naming instead of discovery-agent",
+      "old command integration patterns"
+    ]
+  },
+  "project_analysis": {
+    "project_name": "TaskFlow Productivity App",
+    "technology_stack": ["React Native", "Node.js", "TypeScript", "PostgreSQL", "MongoDB"],
+    "architecture": "Monolithic API with frontend separation",
+    "discovery_current": true,
+    "last_discovery": "2024-02-28"
+  },
+  "checksums": {
+    "sha256_manifest": "checksums.sha256",
+    "verification_status": "validated",
+    "checksum_count": 8
+  },
+  "rollback_information": {
+    "rollback_script": "../rollback_scripts/2025-08-12T01-13-45-rollback.sh",
+    "rollback_complexity": "moderate",
+    "manual_steps_required": ["User confirmation for legacy pattern cleanup"],
+    "estimated_rollback_time": "45 seconds"
+  },
+  "upgrade_context": {
+    "upgrade_type": "full_with_legacy_cleanup",
+    "parallel_operations": ["template_analysis", "backup_creation"],
+    "expected_changes": [
+      "Legacy pattern cleanup (prompts/ to extended_context/)",
+      "Agent renaming (discovery-orchestrator to discovery-agent)",
+      "Command integration pattern updates",
+      "Project localization for TaskFlow technology stack"
+    ]
+  }
+}

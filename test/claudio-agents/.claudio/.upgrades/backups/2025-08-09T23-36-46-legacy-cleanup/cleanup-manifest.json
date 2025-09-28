@@ -1,0 +1,76 @@
+{
+  "cleanup_timestamp": "2025-08-09T23:36:46Z",
+  "operation_type": "dual_installation_consolidation",
+  "cleanup_plan": {
+    "consolidation_strategy": "merge .claude customizations into .claudio structure",
+    "target_structure": ".claudio (modern centralized namespace)",
+    "source_structure": ".claude (legacy dual installation)"
+  },
+  "content_analysis": {
+    "user_customizations_claude": [
+      ".claude/agents/claudio/phoenix-liveview-executor.md",
+      ".claude/commands/claudio/phoenix-liveview.md", 
+      ".claude/agents/claudio/extended_context/liveview-development/overview.md",
+      ".claude/settings.local.json"
+    ],
+    "user_content_claudio": [
+      ".claudio/discovery.md",
+      ".claudio/prd.md", 
+      ".claudio/plan.md",
+      ".claudio/status.md",
+      ".claudio/phase1/",
+      ".claudio/phase2/",
+      ".claudio/phase3/",
+      ".claudio/phases/",
+      ".claudio/docs/",
+      ".claudio/shared/",
+      ".claudio/design/",
+      ".claudio/quality/",
+      ".claudio/research/"
+    ],
+    "generated_content_claude": [
+      ".claude/tasks/upgrade-*.md"
+    ]
+  },
+  "consolidation_operations": [
+    {
+      "operation": "merge_phoenix_customizations",
+      "source": ".claude/agents/claudio/phoenix-liveview-executor.md",
+      "target": ".claudio/agents/claudio/phoenix-liveview-executor.md",
+      "action": "copy_preserve"
+    },
+    {
+      "operation": "merge_phoenix_command",
+      "source": ".claude/commands/claudio/phoenix-liveview.md",
+      "target": ".claudio/commands/claudio/phoenix-liveview.md", 
+      "action": "copy_preserve"
+    },
+    {
+      "operation": "merge_extended_context",
+      "source": ".claude/agents/claudio/extended_context/liveview-development/",
+      "target": ".claudio/agents/claudio/extended_context/liveview-development/",
+      "action": "copy_preserve"
+    },
+    {
+      "operation": "merge_settings",
+      "source": ".claude/settings.local.json",
+      "target": ".claudio/settings.local.json",
+      "action": "merge_configurations"
+    },
+    {
+      "operation": "remove_legacy_structure",
+      "target": ".claude/",
+      "action": "remove_after_consolidation"
+    }
+  ],
+  "safety_validations": [
+    "verify_all_user_content_preserved",
+    "validate_merged_configurations",
+    "confirm_phoenix_customizations_intact",
+    "test_consolidated_structure_integrity"
+  ],
+  "rollback_capability": {
+    "backup_location": ".claudio/.upgrades/backups/2025-08-09T23-36-46-legacy-cleanup/",
+    "rollback_script": ".claudio/.upgrades/rollback_scripts/2025-08-09T23-36-46-cleanup-rollback.sh"
+  }
+}

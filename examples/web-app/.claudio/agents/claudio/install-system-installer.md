@@ -213,8 +213,8 @@ chmod -R 755 <target>/.claude/
 - [list all commands with mode-appropriate notes]
 
 #### Agents (X files)  
-- **User Mode**: install-coordinator.md ✓ (generic template), discovery-agent.md ✓ (generic template)
-- **Project/Path Modes**: install-coordinator.md ✓ (project-aware), discovery-agent.md ✓ (technology-specific)
+- **User Mode**: install-full-workflow-agent.md ✓ (generic template), discovery-agent.md ✓ (generic template)
+- **Project/Path Modes**: install-full-workflow-agent.md ✓ (project-aware), discovery-agent.md ✓ (technology-specific)
 - [list all agents with mode-appropriate specialization notes]
 
 #### Prompts (X directories)

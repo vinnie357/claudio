@@ -12,4 +12,4 @@ Install Claudio system components through intelligent project localization to di
 - `/install /path/to/code` - path mode, full workflow
 - `/install commands /path/to/code` - path mode, commands only
 
-Use the claudio:install-coordinator subagent to orchestrate the installation process with project discovery, component localization, and parallel validation.
+Use the claudio:install-full-workflow subagent to implement the complete installation process with project discovery, component localization, and full workflow generation.

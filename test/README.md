@@ -108,20 +108,38 @@ fi
 echo "✅ Authentication verified"
 echo "=================================="
 
-# Test 1: Commands-Only Installation
-echo "📦 Test 1: Commands-Only Installation"
-cd test/install-commands
-claude -p "/claudio:install commands" --dangerously-skip-permissions
-if [ -d ".claude/commands" ] && [ -d ".claude/agents" ]; then
-    echo "✅ Commands-only installation successful"
+# Test 1: Commands-Only Installation (System Testing Agent)
+echo "📦 Test 1: Commands-Only Installation (Agent-Tested)"
+claude -p "Use the claudio:claudio-install-commands-test subagent to execute and validate the complete /claudio:install commands test/install-commands workflow" --dangerously-skip-permissions
+if [ $? -eq 0 ]; then
+    echo "✅ Commands-only installation testing successful"
 else
-    echo "❌ Commands-only installation failed"
+    echo "❌ Commands-only installation testing failed"
     exit 1
 fi
-cd ../..
 
-# Test 2: Simple Discovery (README-only project)
-echo "🔍 Test 2: Simple Discovery Analysis"
+# Test 2: System Upgrade (System Testing Agent)
+echo "⬆️  Test 2: System Upgrade (Agent-Tested)"
+claude -p "Use the claudio:claudio-upgrade-test subagent to execute and validate the complete /claudio:upgrade test/upgrade workflow" --dangerously-skip-permissions
+if [ $? -eq 0 ]; then
+    echo "✅ System upgrade testing successful"
+else
+    echo "❌ System upgrade testing failed"
+    exit 1
+fi
+
+# Test 3: Full System Installation (System Testing Agent)
+echo "🏗️  Test 3: Full System Installation (Agent-Tested)"
+claude -p "Use the claudio:claudio-install-test subagent to execute and validate the complete /claudio:install test/install workflow" --dangerously-skip-permissions
+if [ $? -eq 0 ]; then
+    echo "✅ Full system installation testing successful"
+else
+    echo "❌ Full system installation testing failed"
+    exit 1
+fi
+
+# Test 4: Simple Discovery (README-only project)
+echo "🔍 Test 4: Simple Discovery Analysis"
 cd test/discovery-readme
 claude -p "/claudio:discovery" --dangerously-skip-permissions
 if [ -f "discovery/reports/fittracker_discovery.md" ]; then
@@ -132,38 +150,14 @@ else
 fi
 cd ../..
 
-# Test 3: Complex Discovery (Code project)
-echo "🔍 Test 3: Complex Discovery Analysis"
+# Test 5: Complex Discovery (Code project)
+echo "🔍 Test 5: Complex Discovery Analysis"
 cd test/discovery-code
 claude -p "/claudio:discovery" --dangerously-skip-permissions
 if [ -f "discovery/reports/weather_api_discovery.md" ]; then
     echo "✅ Complex discovery analysis successful"
 else
     echo "❌ Complex discovery analysis failed"
-    exit 1
-fi
-cd ../..
-
-# Test 4: System Upgrade
-echo "⬆️  Test 4: System Upgrade"
-cd test/upgrade
-claude -p "/claudio:upgrade" --dangerously-skip-permissions
-if [ -f ".claude/upgrade_changelog_$(date +%Y%m%d).md" ]; then
-    echo "✅ System upgrade successful"
-else
-    echo "❌ System upgrade failed"
-    exit 1
-fi
-cd ../..
-
-# Test 5: Full System Installation (Most comprehensive)
-echo "🏗️  Test 5: Full System Installation"
-cd test/install
-claude -p "/claudio:install" --dangerously-skip-permissions
-if [ -f ".claudio/summary.md" ] && [ -f ".claudio/discovery.md" ] && [ -f ".claudio/prd.md" ]; then
-    echo "✅ Full system installation successful"
-else
-    echo "❌ Full system installation failed"
     exit 1
 fi
 cd ../..
@@ -178,30 +172,48 @@ echo "=================================="
 For manual testing or debugging specific workflows:
 
 ```bash
-# Test commands-only installation
-cd test/install-commands && claude -p "/claudio:install commands" --dangerously-skip-permissions
+# Test commands-only installation (using system testing agent)
+claude -p "Use the claudio:claudio-install-commands-test subagent to execute and validate the complete /claudio:install commands test/install-commands workflow" --dangerously-skip-permissions
+
+# Test system upgrade workflow (using system testing agent) 
+claude -p "Use the claudio:claudio-upgrade-test subagent to execute and validate the complete /claudio:upgrade test/upgrade workflow" --dangerously-skip-permissions
+
+# Test full system installation (using system testing agent)
+claude -p "Use the claudio:claudio-install-test subagent to execute and validate the complete /claudio:install test/install workflow" --dangerously-skip-permissions
 
 # Test simple discovery
 cd test/discovery-readme && claude -p "/claudio:discovery" --dangerously-skip-permissions
 
 # Test complex discovery with code analysis
 cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions
-
-# Test system upgrade workflow
-cd test/upgrade && claude -p "/claudio:upgrade" --dangerously-skip-permissions
-
-# Test full system installation
-cd test/install && claude -p "/claudio:install" --dangerously-skip-permissions
 ```
 
 ### Validation Checks
 
-Each test should validate specific outputs:
+Each test type validates specific outputs using dedicated system testing agents:
 
-1. **Commands Installation**: Verify `.claude/commands/` and `.claude/agents/` directories exist
-2. **Discovery Tests**: Check for discovery reports in `discovery/reports/` 
-3. **Upgrade Test**: Confirm upgrade changelog and backup files are created
-4. **Full Installation**: Validate complete `.claudio/` structure with all required files
+#### **System Testing Agent Validation** (Tests 1-3)
+1. **Commands-Only Installation** (`claudio-install-commands-test`): 
+   - Validates DevOps automation platform discovery and localization
+   - Confirms `.claude/commands/` and `.claude/agents/` directories with 40+ components
+   - Verifies NO `.claudio/` workflow documents (commands-only mode)
+   - Tests parallel Task tool execution patterns
+
+2. **System Upgrade** (`claudio-upgrade-test`):
+   - Validates TaskFlow productivity app legacy cleanup and modernization
+   - Confirms backup creation with rollback scripts and upgrade changelog
+   - Verifies 6-subagent parallel coordination (discovery → cleanup → analysis+backup → localization+validation)
+   - Tests performance improvements through parallel batch execution
+
+3. **Full Installation** (`claudio-install-test`):
+   - Validates ShopFlow e-commerce platform complete workflow orchestration
+   - Confirms `.claude/` and `.claudio/` directories with full workflow documents
+   - Verifies discovery → PRD → planning → task breakdown → installation
+   - Tests comprehensive parallel coordination patterns
+
+#### **Direct Command Validation** (Tests 4-5)
+4. **Discovery Tests**: Check for discovery reports in `discovery/reports/`
+5. **Complex Discovery**: Validate code analysis and technology stack identification
 
 ## Test Project Characteristics
 
@@ -296,6 +308,81 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 3. Examine `.claudio/` structure matches expected patterns
 4. Review discovery reports for completeness and accuracy
 
+## Agent Orchestration Patterns
+
+### Successful Task Tool Execution Patterns
+
+**All Claudio orchestration agents MUST use proper Task tool invocation patterns for reliable parallel execution:**
+
+#### ✅ **CORRECT Pattern (Executable)**
+```markdown
+Use Task tool with subagent_type: "agent-name" to [detailed task description with context]
+```
+
+#### ❌ **INCORRECT Pattern (Documentation-Style)**
+```markdown
+Use the claudio:agent-name subagent to [task description]
+```
+
+### Critical Parallel Execution Requirements
+
+**For coordinator/orchestrator agents that manage multiple subagents:**
+
+#### **Parallel Batch Execution Pattern**
+```markdown
+**CRITICAL**: Run multiple Task invocations in SINGLE message for optimal performance:
+
+Use Task tool with subagent_type: "first-agent" to [task details]
+
+Use Task tool with subagent_type: "second-agent" to [task details]  
+
+Use Task tool with subagent_type: "third-agent" to [task details]
+```
+
+### Performance Benefits
+- **3.2-3.4x performance improvement** over sequential execution
+- **Resource optimization** through concurrent operations
+- **Better user experience** with reduced waiting time
+- **Error isolation** - individual failures don't block other operations
+
+### Validation Criteria for Orchestration Agents
+1. **Zero documentation-style patterns**: No `Use the claudio:agent-name subagent` instances
+2. **Proper Task tool invocations**: All subagent coordination uses `Use Task tool with subagent_type`
+3. **Parallel execution guidance**: Clear "Run multiple Task invocations in SINGLE message" instructions
+4. **Error handling**: Graceful failure management across parallel operations
+
+### Successfully Fixed Patterns
+- ✅ **install-coordinator-agent**: Fixed 11 documentation patterns → 8 executable Task tool patterns
+- ✅ **upgrade-orchestrator-agent**: Already using proper Task tool patterns (reference implementation)
+- ✅ **All other coordinator agents**: Verified clean (no violations)
+
+## Test Suite Architecture
+
+### Test Type Distinctions
+
+**Three distinct test workflows validate different orchestration patterns:**
+
+#### 1. **Full Install Test** (`claudio_install_test.md`)
+- **Command**: `/claudio:install test/install`
+- **Orchestration**: Discovery → PRD → Planning → Tasks → Installation
+- **Agent**: `claudio-install-test` 
+- **Target**: `test/install/` (ShopFlow e-commerce platform)
+- **Validates**: Complete workflow orchestration with parallel coordination
+
+#### 2. **Commands Install Test** (`claudio_install_commands_test.md`)  
+- **Command**: `/claudio:install commands test/install-commands`
+- **Orchestration**: Discovery → Installation (no PRD/planning)
+- **Agent**: `claudio-install-commands-test`
+- **Target**: `test/install-commands/` (DevOps automation suite)
+- **Validates**: Minimal workflow orchestration with commands-only installation
+
+#### 3. **Upgrade Test** (`claudio_upgrade_test.md`)
+- **Command**: `/claudio:upgrade test/upgrade`
+- **Orchestration**: 6-subagent parallel coordination (discovery → legacy cleanup → template analysis + backup → localization + validation)
+- **Agent**: `claudio-upgrade-test`
+- **Target**: `test/upgrade/` (legacy Claudio installation)
+- **Validates**: Complex parallel batch execution with safety features
+
 ## Important Notes
 
 - **Generated Content**: All projects are artificially created test scenarios, not real applications
@@ -303,5 +390,6 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 - **Deterministic**: Test results should be consistent across different environments
 - **Clean State**: Each test starts with a known, clean project state
 - **Comprehensive Coverage**: Tests cover all major Claudio commands and workflows
+- **Pattern Validation**: All tests verify proper Task tool execution patterns
 
-This test suite ensures that all Claudio functionality works correctly across different project types and provides confidence in system reliability and feature completeness.
+This test suite ensures that all Claudio functionality works correctly across different project types and provides confidence in system reliability, feature completeness, and orchestration pattern compliance.

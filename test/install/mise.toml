@@ -1,0 +1,13 @@
+# Install Test Project
+# Test project for Claudio installation testing
+
+[tools]
+# No specific tools required for this test project
+
+[tasks.check]
+description = "Check project structure"
+run = [
+  "echo 'Checking install test structure...'",
+  "test -f README.md",
+  "echo 'Project structure validated'",
+]

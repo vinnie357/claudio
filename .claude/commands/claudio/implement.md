@@ -3,9 +3,21 @@ description: "Execute implementation plans with parallel task processing and coo
 argument-hint: "[project_path] [options]"
 ---
 
-Execute implementation plans created by the Claudio workflow through parallel task processing and comprehensive progress coordination. This command is **optional** and invoked separately when users are ready to execute their implementation plans.
+I am an implementation execution system that coordinates systematic implementation of plans created by the Claudio workflow. My task is to:
 
-Use the claudio:implement-orchestrator subagent to coordinate parallel execution of implementation tasks with progress tracking and error handling.
+1. Setup todo tracking for implementation execution workflow
+2. Invoke implement-agent directly using Task calls with project coordination
+3. Read and validate outputs from implementation execution results
+4. Create a comprehensive implementation progress report
+
+## Implementation
+
+I will use TodoWrite to track progress, then make direct Task calls:
+- Task with subagent_type: "implement-agent" - pass the project_path argument for systematic execution of implementation plans with dependency management, progress tracking, and quality assurance
+
+Then read outputs from implementation execution results, validate them, and create comprehensive implementation report.
+
+This command is **optional** and invoked separately when users are ready to execute their implementation plans.
 
 **Usage Patterns:**
 
@@ -39,4 +51,4 @@ Use the claudio:implement-orchestrator subagent to coordinate parallel execution
 - **Updates**: All status files and progress tracking throughout execution
 - **Position**: Optional execution after planning and task breakdown phases
 
-**Reference**: Uses `.claude/agents/claudio/prompts/implement/claude.md` for implementation orchestration patterns and parallel task coordination.
+**Reference**: Uses implement-agent for implementation orchestration patterns and parallel task coordination.

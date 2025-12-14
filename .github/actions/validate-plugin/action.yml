@@ -1,5 +1,5 @@
 name: 'Validate Claudio Plugin'
-description: 'Validates plugin.json and all referenced paths using mise and Nushell'
+description: 'Validates plugin.json with Claude CLI and Nushell path validation'
 runs:
   using: 'composite'
   steps:
@@ -25,13 +25,16 @@ runs:
       shell: bash
       run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
+    - name: Install Claude Code
+      shell: bash
+      run: npm install -g @anthropic-ai/claude-code
+
     - name: Install tools via mise
       shell: bash
       run: |
         mise trust
         mise install
 
-    - name: Run plugin validation
+    - name: Run all validations
       shell: bash
-      run: |
-        mise run test:plugin
+      run: mise run test

@@ -1,0 +1,15 @@
+# mise configuration for claudio plugin
+
+[tools]
+"ubi:nushell/nushell" = { version = "latest", exe = "nu" }
+
+[tasks."test:plugin"]
+description = "Validate plugin.json"
+run = """
+#!/usr/bin/env bash
+set -e
+
+cd "$(git rev-parse --show-toplevel)"
+echo "🔍 Validating claudio plugin..."
+nu .github/scripts/validate-plugin.nu .claude-plugin/plugin.json --verbose
+"""

@@ -1,0 +1,21 @@
+name: Validate Plugin
+
+on:
+  pull_request:
+    branches:
+      - '**'
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate plugin.json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate plugin
+        uses: ./.github/actions/validate-plugin

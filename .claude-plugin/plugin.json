@@ -1,0 +1,68 @@
+{
+  "name": "claudio",
+  "version": "2.0.0",
+  "description": "Project discovery, planning, and quality analysis system with parallel agents",
+  "author": {
+    "name": "vinnie357"
+  },
+  "repository": "https://github.com/vinnie357/claudio",
+  "homepage": "https://github.com/vinnie357/claudio",
+  "license": "MIT",
+  "keywords": [
+    "project-analysis",
+    "planning",
+    "discovery",
+    "prd",
+    "security",
+    "code-quality",
+    "documentation",
+    "workflow"
+  ],
+  "commands": [
+    "./.claude/commands/claudio/discovery.md",
+    "./.claude/commands/claudio/prd.md",
+    "./.claude/commands/claudio/plan.md",
+    "./.claude/commands/claudio/task.md",
+    "./.claude/commands/claudio/implement.md",
+    "./.claude/commands/claudio/security-review.md",
+    "./.claude/commands/claudio/research.md",
+    "./.claude/commands/claudio/code-quality.md",
+    "./.claude/commands/claudio/documentation.md"
+  ],
+  "agents": [
+    "./.claude/agents/claudio/discovery-agent.md",
+    "./.claude/agents/claudio/discovery-structure-analyzer.md",
+    "./.claude/agents/claudio/discovery-tech-analyzer.md",
+    "./.claude/agents/claudio/discovery-architecture-analyzer.md",
+    "./.claude/agents/claudio/discovery-integration-analyzer.md",
+    "./.claude/agents/claudio/discovery-consolidator.md",
+    "./.claude/agents/claudio/prd-agent.md",
+    "./.claude/agents/claudio/plan-agent.md",
+    "./.claude/agents/claudio/task-agent.md",
+    "./.claude/agents/claudio/implement-agent.md",
+    "./.claude/agents/claudio/security-review-coordinator.md",
+    "./.claude/agents/claudio/security-threat-modeler.md",
+    "./.claude/agents/claudio/security-architecture-analyst.md",
+    "./.claude/agents/claudio/vulnerability-assessment-specialist.md",
+    "./.claude/agents/claudio/security-diagram-generator.md",
+    "./.claude/agents/claudio/code-quality-analyzer.md",
+    "./.claude/agents/claudio/research-specialist.md",
+    "./.claude/agents/claudio/documentation-coordinator.md",
+    "./.claude/agents/claudio/documentation-readme-creator.md",
+    "./.claude/agents/claudio/documentation-api-creator.md",
+    "./.claude/agents/claudio/documentation-developer-guide-creator.md",
+    "./.claude/agents/claudio/documentation-user-guide-creator.md"
+  ],
+  "skills": [
+    "./skills/project-discovery",
+    "./skills/requirements",
+    "./skills/planning",
+    "./skills/task-breakdown",
+    "./skills/research-methodology",
+    "./skills/documentation",
+    "./skills/code-quality",
+    "./skills/security-stride",
+    "./skills/command-patterns",
+    "./skills/agent-patterns"
+  ]
+}

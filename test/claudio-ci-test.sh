@@ -42,7 +42,7 @@ echo "=================================="
 # Test 1: Commands-Only Installation
 echo "📦 Test 1: Commands-Only Installation"
 cd test/install-commands
-claude -p "/claudio:install commands" --dangerously-skip-permissions
+claude -p "/claudio:install commands" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -d ".claude/commands" ] && [ -d ".claude/agents" ]; then
     echo "✅ Commands-only installation successful"
 else
@@ -54,7 +54,7 @@ cd ../..
 # Test 2: Simple Discovery (README-only project)
 echo "🔍 Test 2: Simple Discovery Analysis"
 cd test/discovery-readme
-claude -p "/claudio:discovery" --dangerously-skip-permissions
+claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f "discovery/reports/fittracker_discovery.md" ]; then
     echo "✅ Simple discovery analysis successful"
 else
@@ -66,7 +66,7 @@ cd ../..
 # Test 3: Complex Discovery (Code project)
 echo "🔍 Test 3: Complex Discovery Analysis"
 cd test/discovery-code
-claude -p "/claudio:discovery" --dangerously-skip-permissions
+claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f "discovery/reports/weather_api_discovery.md" ]; then
     echo "✅ Complex discovery analysis successful"
 else
@@ -78,7 +78,7 @@ cd ../..
 # Test 4: System Upgrade
 echo "⬆️  Test 4: System Upgrade"
 cd test/upgrade
-claude -p "/claudio:upgrade" --dangerously-skip-permissions
+claude -p "/claudio:upgrade" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f ".claude/upgrade_changelog_$(date +%Y%m%d).md" ]; then
     echo "✅ System upgrade successful"
 else
@@ -90,7 +90,7 @@ cd ../..
 # Test 5: Full System Installation (Most comprehensive)
 echo "🏗️  Test 5: Full System Installation"
 cd test/install
-claude -p "/claudio:install" --dangerously-skip-permissions
+claude -p "/claudio:install" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f ".claudio/summary.md" ] && [ -f ".claudio/discovery.md" ] && [ -f ".claudio/prd.md" ]; then
     echo "✅ Full system installation successful"
 else

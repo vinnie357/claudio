@@ -63,9 +63,9 @@ This directory contains example projects specifically generated to test the comp
    - `ANTHROPIC_API_KEY` environment variable (recommended for CI)
    - Authenticated Claude CLI session (`claude auth`)
 
-3. **Permissions Flag**: All CI tests use the `--dangerously-skip-permissions` flag to avoid permission checks that can interfere with automated testing environments.
+3. **Permissions Flag**: All CI tests use the `--dangerously-skip-permissions --allow-dangerously-skip-permissions` dual-flag pattern. `--dangerously-skip-permissions` skips permission checks; `--allow-dangerously-skip-permissions` suppresses the interactive confirmation dialog that blocks non-TTY environments.
 
-**Command Format**: `claude -p "/claudio:command" --dangerously-skip-permissions`
+**Command Format**: `claude -p "/claudio:command" --dangerously-skip-permissions --allow-dangerously-skip-permissions`
 
 ### Automated Test Sequence
 
@@ -111,7 +111,7 @@ echo "=================================="
 # Test 1: Commands-Only Installation
 echo "📦 Test 1: Commands-Only Installation"
 cd test/install-commands
-claude -p "/claudio:install commands" --dangerously-skip-permissions
+claude -p "/claudio:install commands" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -d ".claude/commands" ] && [ -d ".claude/agents" ]; then
     echo "✅ Commands-only installation successful"
 else
@@ -123,7 +123,7 @@ cd ../..
 # Test 2: Simple Discovery (README-only project)
 echo "🔍 Test 2: Simple Discovery Analysis"
 cd test/discovery-readme
-claude -p "/claudio:discovery" --dangerously-skip-permissions
+claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f "discovery/reports/fittracker_discovery.md" ]; then
     echo "✅ Simple discovery analysis successful"
 else
@@ -135,7 +135,7 @@ cd ../..
 # Test 3: Complex Discovery (Code project)
 echo "🔍 Test 3: Complex Discovery Analysis"
 cd test/discovery-code
-claude -p "/claudio:discovery" --dangerously-skip-permissions
+claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f "discovery/reports/weather_api_discovery.md" ]; then
     echo "✅ Complex discovery analysis successful"
 else
@@ -147,7 +147,7 @@ cd ../..
 # Test 4: System Upgrade
 echo "⬆️  Test 4: System Upgrade"
 cd test/upgrade
-claude -p "/claudio:upgrade" --dangerously-skip-permissions
+claude -p "/claudio:upgrade" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f ".claude/upgrade_changelog_$(date +%Y%m%d).md" ]; then
     echo "✅ System upgrade successful"
 else
@@ -159,7 +159,7 @@ cd ../..
 # Test 5: Full System Installation (Most comprehensive)
 echo "🏗️  Test 5: Full System Installation"
 cd test/install
-claude -p "/claudio:install" --dangerously-skip-permissions
+claude -p "/claudio:install" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 if [ -f ".claudio/summary.md" ] && [ -f ".claudio/discovery.md" ] && [ -f ".claudio/prd.md" ]; then
     echo "✅ Full system installation successful"
 else
@@ -179,19 +179,19 @@ For manual testing or debugging specific workflows:
 
 ```bash
 # Test commands-only installation
-cd test/install-commands && claude -p "/claudio:install commands" --dangerously-skip-permissions
+cd test/install-commands && claude -p "/claudio:install commands" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 
 # Test simple discovery
-cd test/discovery-readme && claude -p "/claudio:discovery" --dangerously-skip-permissions
+cd test/discovery-readme && claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 
 # Test complex discovery with code analysis
-cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions
+cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 
 # Test system upgrade workflow
-cd test/upgrade && claude -p "/claudio:upgrade" --dangerously-skip-permissions
+cd test/upgrade && claude -p "/claudio:upgrade" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 
 # Test full system installation
-cd test/install && claude -p "/claudio:install" --dangerously-skip-permissions
+cd test/install && claude -p "/claudio:install" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 ```
 
 ### Validation Checks
@@ -232,7 +232,7 @@ Each test should validate specific outputs:
 ./test/claudio-ci-test.sh
 
 # Test specific workflow (with permissions flag for CI compatibility)
-cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions
+cd test/discovery-code && claude -p "/claudio:discovery" --dangerously-skip-permissions --allow-dangerously-skip-permissions
 ```
 
 ### CI/CD Integration
